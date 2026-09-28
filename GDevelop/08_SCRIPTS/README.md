@@ -1,0 +1,11 @@
+# Scripts
+- 00_CHECK_ENV: entorno
+- 01_FETCH_ALL_REFERENCES: repos fijados
+- 02_INSTALL_MCP_DEPENDENCIES: npm explícito
+- 03_GENERATE_MCP_CONFIG: snippets
+- 04_UPDATE_REFERENCES: latest
+- 05_RESTORE_PINNED: lock
+- 06_VERIFY_KIT: estructura/commits
+- 07_NEW_PROJECT: plantilla
+- 08_SEARCH_REFERENCES: búsqueda local
+- 09_INSTALL_LOCAL_SKILLS: skills en proyecto

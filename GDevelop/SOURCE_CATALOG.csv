@@ -1,0 +1,9 @@
+﻿id,trust,repo,branch,commit,target,purpose
+gdevelop-examples,official,GDevelopApp/GDevelop-examples,main,b4031112255dd710db4c176e3bc607e275c1e586,04_OFFICIAL_REFERENCES/GDevelop-examples,"Ejemplos y starters oficiales; referencias de estructura, theme slots y gameplay tests."
+gdevelop-extensions,official,GDevelopApp/GDevelop-extensions,main,ac9a7e8aee11d8a1c056bf7b529439949d198649,04_OFFICIAL_REFERENCES/GDevelop-extensions,Extensiones oficiales y experimentales revisadas.
+gdevelop-documentation,official,GDevelopApp/GDevelop-documentation,main,2aa743f3a4d7290396967bd96fb4d33b4d1b5936,04_OFFICIAL_REFERENCES/GDevelop-documentation,Documentación oficial en Markdown/MkDocs para consulta local.
+gdevelop-tutorials,official,GDevelopApp/GDevelop-tutorials,main,b65cee06311d0bbdaf3750251ce92d486a094e28,04_OFFICIAL_REFERENCES/GDevelop-tutorials,Tutoriales oficiales in-app y plantillas asociadas.
+gdevelop-community-list,official-index-community-content,GDevelopApp/GDevelop-community-list,main,c59659fb3862c791295b77ccfa8029b66ccbe3c6,04_OFFICIAL_REFERENCES/GDevelop-community-list,Índice oficial de extensiones comunitarias; el contenido enlazado requiere revisión.
+gdevelop-engine-source,official,4ian/GDevelop,master,ec1f2e3f4f6879168cdc70462418ddaa6a55e6c8,04_OFFICIAL_REFERENCES/GDevelop-engine-source,Fuente del motor/editor. Necesario como raíz para la integración MCP local.
+gdevelop-reference-skill,external-reviewed-by-kit,adamboothuk/gdevelop-reference,main,463a7594b609364ad4d9f346ed8b08596434041f,02_SKILLS/upstream/gdevelop-reference,Skill externa para evitar inventar identificadores/campos JSON de GDevelop.
+gdevelop-mcp-server,external-experimental,982945902/gdevelop-mcp-server,main,96ed51ea081beedd7f6948b5516083c5f8fb3c63,03_MCP/gdevelop-mcp-server,"MCP no oficial para autoría, guardado y preview local de proyectos GDevelop."

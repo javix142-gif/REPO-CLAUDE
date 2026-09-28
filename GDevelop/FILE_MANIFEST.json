@@ -1,0 +1,455 @@
+{
+  "generated_at": "2026-09-28",
+  "files": [
+    {
+      "path": ".gitignore",
+      "size": 47,
+      "sha256": "40e051d30466865f28469de2e90ec38ff6e111e7e7d412fabc2246545f6fec55"
+    },
+    {
+      "path": "00_START_HERE/00_LEEME_PRIMERO.md",
+      "size": 787,
+      "sha256": "f98b7fe00cbfab1c3e6e9e94ff298ad510b5ac8ce484863752bb15133f103a81"
+    },
+    {
+      "path": "00_START_HERE/01_ARQUITECTURA_MAESTRA.md",
+      "size": 1158,
+      "sha256": "a2d5290e1386fd00ccd9309edd3ce80178a477ddeb1372d1b1e8c0267bac2ab1"
+    },
+    {
+      "path": "00_START_HERE/02_FLUJO_DE_TRABAJO.md",
+      "size": 716,
+      "sha256": "93d711671953ee454fa159587d77bad35805ed47bc02e17d2382f80de699112c"
+    },
+    {
+      "path": "00_START_HERE/03_ORDEN_DE_CONFIANZA.md",
+      "size": 442,
+      "sha256": "c3928e7beb0843317b9f588f8b490b94061018a7235e9afcb3c8892c810c57d9"
+    },
+    {
+      "path": "00_START_HERE/04_QUICKSTART_WINDOWS.md",
+      "size": 573,
+      "sha256": "39e244f4f128b9dfa398789d6cefe72735288f592173720ae0579edd4d0a2cff"
+    },
+    {
+      "path": "00_START_HERE/05_MAPA_RECURSOS.md",
+      "size": 728,
+      "sha256": "1622b0f02225edb3da01defe8f39c55a2476987465e8e14ffa953094baaf2530"
+    },
+    {
+      "path": "01_AI_CONTROL/ACCEPTANCE_GATES.md",
+      "size": 490,
+      "sha256": "49251122256b912ff64fd96e64a0add8cd1f1f2fcd6d85878553a3ff07a28e6f"
+    },
+    {
+      "path": "01_AI_CONTROL/AGENTS.md",
+      "size": 1159,
+      "sha256": "f9583515a389444ba4cebc2199a566d8abc3cd9cdf2c3edfa1abd3b559b936fa"
+    },
+    {
+      "path": "01_AI_CONTROL/ASSET_CONTRACT.md",
+      "size": 461,
+      "sha256": "972c254ccafb6b67a4503a641c391df280a948895c6855e428e690384d642b3a"
+    },
+    {
+      "path": "01_AI_CONTROL/CLAUDE.md",
+      "size": 310,
+      "sha256": "9adc6110041c2a4e2bc62fa7cb29fa0b591dbcff1defab7d4ed043e65ef95cac"
+    },
+    {
+      "path": "01_AI_CONTROL/GAME_SPEC.md",
+      "size": 467,
+      "sha256": "66e07295f3580c04b0b05c41648128d80ede971cce5bd7b6740cbdadec6c27d9"
+    },
+    {
+      "path": "01_AI_CONTROL/PROJECT_STATE.md",
+      "size": 390,
+      "sha256": "71a04fcba20b14854ddd06f6c55c89dbae450cb7b7ca2ab7ccf9e3fc19e732ea"
+    },
+    {
+      "path": "01_AI_CONTROL/PROMPT_AUDITOR.md",
+      "size": 321,
+      "sha256": "921890f4d736d2f0c64156e57beb694f1b4e2930e52ff685ef51a04efaf7cee0"
+    },
+    {
+      "path": "01_AI_CONTROL/PROMPT_CODER.md",
+      "size": 368,
+      "sha256": "c317d8837833873e0033c0ac8725ffb20f967c7c2da04c2c417def93841add46"
+    },
+    {
+      "path": "01_AI_CONTROL/PROMPT_PLANNER.md",
+      "size": 301,
+      "sha256": "f429c6043fb77e53d3114d94d8a86a174cdf25696bf5e215d14539fda23d4978"
+    },
+    {
+      "path": "01_AI_CONTROL/SESSION_SUMMARY.md",
+      "size": 280,
+      "sha256": "4891ca38e6b5f31da4a04d1cfebf656a1f536ec73b53de4576054a604c5d17c9"
+    },
+    {
+      "path": "01_AI_CONTROL/TASK_SPEC.md",
+      "size": 308,
+      "sha256": "d0e8d16540c78e4e9930b3cffa19754cbf456b8d696b32afafc5e0a069268640"
+    },
+    {
+      "path": "01_AI_CONTROL/VISUAL_CONTRACT.md",
+      "size": 493,
+      "sha256": "4a45d336d5355a4c2f3fa7b7b4c41c3903f383b8c17acaf7d01c830dda1955c0"
+    },
+    {
+      "path": "02_SKILLS/README.md",
+      "size": 272,
+      "sha256": "03594edaba3171a73bb3ee4b16d8f8cfb16ed0f5cc5818a49a6a476ec36721b4"
+    },
+    {
+      "path": "02_SKILLS/local/gdevelop-asset-contract/SKILL.md",
+      "size": 471,
+      "sha256": "5dc111610a4fdd5b0259f7717a1d486fa5509dafff87e2a365d62b7f7e1ca8ac"
+    },
+    {
+      "path": "02_SKILLS/local/gdevelop-gameplay-tests/SKILL.md",
+      "size": 532,
+      "sha256": "93889d164e986e179ffb3177f19f5fe21040a533bd13c9029733dcd8d27014f0"
+    },
+    {
+      "path": "02_SKILLS/local/gdevelop-mobile-release-gate/SKILL.md",
+      "size": 470,
+      "sha256": "f00fb40381af17065988e6680fe0c3939f5042e533f0911703e3af1094f47d46"
+    },
+    {
+      "path": "02_SKILLS/local/gdevelop-project-orchestrator/SKILL.md",
+      "size": 685,
+      "sha256": "dfcc4b9b175b5ab4b0a6119a52a2a70fa8f9f40420893e89eae45369cae60dd8"
+    },
+    {
+      "path": "02_SKILLS/local/gdevelop-visual-audit/SKILL.md",
+      "size": 554,
+      "sha256": "00f321b5488fcd78a2b33b66dbdc6dfc2993b996f15e0bed8f0db71d00065a2c"
+    },
+    {
+      "path": "02_SKILLS/upstream/gdevelop-reference/UPSTREAM_REQUIRED.md",
+      "size": 226,
+      "sha256": "93e1b2ac1e5466f0aedbf7965d024f88b7d84bd3425b2ee1d237b363dc08cae6"
+    },
+    {
+      "path": "03_MCP/README.md",
+      "size": 242,
+      "sha256": "04b1866a9db50daf8955598dba62a5331af9490465eb1197cb37e6a7ff7ead11"
+    },
+    {
+      "path": "03_MCP/SECURITY_REVIEW.md",
+      "size": 428,
+      "sha256": "56819b619736303d6ae9aa28268c72582f34ed43e18a45ee503fdf8b2e6fc972"
+    },
+    {
+      "path": "03_MCP/gdevelop-mcp-server/UPSTREAM_REQUIRED.md",
+      "size": 159,
+      "sha256": "98db9719596cbb5af9584842f43adf436c5e086a2fc4755c790f2ab8f10cc01b"
+    },
+    {
+      "path": "04_OFFICIAL_REFERENCES/GDevelop-community-list/UPSTREAM_REQUIRED.md",
+      "size": 174,
+      "sha256": "96653f157eec753ab90fa0669d98fbfdf41d83a8d8fe9d597e2248a5b57afb88"
+    },
+    {
+      "path": "04_OFFICIAL_REFERENCES/GDevelop-documentation/UPSTREAM_REQUIRED.md",
+      "size": 145,
+      "sha256": "d787252ff9233f9f486153bba47f2ee5e6da0031e0a95f722f24a3de002751db"
+    },
+    {
+      "path": "04_OFFICIAL_REFERENCES/GDevelop-engine-source/UPSTREAM_REQUIRED.md",
+      "size": 157,
+      "sha256": "beef5bd25ba63a23c2503600f9253889d3715b6e548f648299a43c22d26e6fcb"
+    },
+    {
+      "path": "04_OFFICIAL_REFERENCES/GDevelop-examples/UPSTREAM_REQUIRED.md",
+      "size": 169,
+      "sha256": "bb316ae9e29bcb135856e44ab5d350e611b904517690a00da98482561ddcb714"
+    },
+    {
+      "path": "04_OFFICIAL_REFERENCES/GDevelop-extensions/UPSTREAM_REQUIRED.md",
+      "size": 160,
+      "sha256": "acdd218c17ee464bd517a9286d8361aab090ec51d630fe7c54e8c4b20753aad8"
+    },
+    {
+      "path": "04_OFFICIAL_REFERENCES/GDevelop-tutorials/UPSTREAM_REQUIRED.md",
+      "size": 140,
+      "sha256": "ecebf13eda2665592dab9d7749ab22034987274898b45273e0edb3517094f46a"
+    },
+    {
+      "path": "04_OFFICIAL_REFERENCES/README.md",
+      "size": 270,
+      "sha256": "60558e585c666a491907839e8576c5e08ea32fa57d73f3be346332983bbd43f3"
+    },
+    {
+      "path": "05_COMMUNITY/README.md",
+      "size": 174,
+      "sha256": "bfcc7d6329c43dcd400ab6c86724c946ea018928150a203e341c6e3adceeb2ad"
+    },
+    {
+      "path": "05_COMMUNITY/RECURSOS.md",
+      "size": 264,
+      "sha256": "a04208c4e26519b2f7a863f8b996fcc00e8603b1ee6d234e4f579a2be03d8763"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/.gitignore",
+      "size": 94,
+      "sha256": "29e194a83681b5b9ee319f2878b711f7949c7f2cbe85643a88ce12603435f50e"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/ACCEPTANCE_GATES.md",
+      "size": 490,
+      "sha256": "49251122256b912ff64fd96e64a0add8cd1f1f2fcd6d85878553a3ff07a28e6f"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/AGENTS.md",
+      "size": 1159,
+      "sha256": "f9583515a389444ba4cebc2199a566d8abc3cd9cdf2c3edfa1abd3b559b936fa"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/ASSET_CONTRACT.md",
+      "size": 461,
+      "sha256": "972c254ccafb6b67a4503a641c391df280a948895c6855e428e690384d642b3a"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/ASSET_MANIFEST.json",
+      "size": 193,
+      "sha256": "19c6398c24a10d35863fc2fa85e717e3aaa9241cfab0389f0118efa403105d15"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/GAME_SPEC.md",
+      "size": 467,
+      "sha256": "66e07295f3580c04b0b05c41648128d80ede971cce5bd7b6740cbdadec6c27d9"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/GATE_STATUS.json",
+      "size": 193,
+      "sha256": "509817d8b8016c6505a25034c7ff538cea77ee787e6522c5aa4a4035607fa1fc"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/PROJECT_STATE.md",
+      "size": 390,
+      "sha256": "71a04fcba20b14854ddd06f6c55c89dbae450cb7b7ca2ab7ccf9e3fc19e732ea"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/README.md",
+      "size": 177,
+      "sha256": "b74ea2875dde7768fde6a590d44ed1b91d71a5a22651c661a6ef8b07f19870fd"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/SESSION_SUMMARY.md",
+      "size": 280,
+      "sha256": "4891ca38e6b5f31da4a04d1cfebf656a1f536ec73b53de4576054a604c5d17c9"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/TASK_SPEC.md",
+      "size": 308,
+      "sha256": "d0e8d16540c78e4e9930b3cffa19754cbf456b8d696b32afafc5e0a069268640"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/VISUAL_CONTRACT.md",
+      "size": 493,
+      "sha256": "4a45d336d5355a4c2f3fa7b7b4c41c3903f383b8c17acaf7d01c830dda1955c0"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/assets/.gitkeep",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/builds/.gitkeep",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/design/reference/.gitkeep",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/evidence/gameplay-tests/.gitkeep",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/evidence/screenshots/.gitkeep",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/logs/.gitkeep",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "06_PROJECT_TEMPLATES/GDEVELOP_PROJECT_AI_TEMPLATE/source/README_PLACE_PROJECT_HERE.md",
+      "size": 146,
+      "sha256": "d43bcc02d4a82b0d4971d31a9811ffa2e8107e2377ffa1a4bc95e4c31af9da46"
+    },
+    {
+      "path": "07_TESTING_GATES/GAMEPLAY_TESTS.md",
+      "size": 232,
+      "sha256": "31748ca0ad9e1a9093546e9ad599fd719cef12fd72f8e2c012f650f2c59815f6"
+    },
+    {
+      "path": "07_TESTING_GATES/MOBILE_GATE.md",
+      "size": 173,
+      "sha256": "baa9f4ed8ca1a24c01b38fcfb2e0634ebf92b626e4fd97423cc6c8a0fcf97fe9"
+    },
+    {
+      "path": "07_TESTING_GATES/PERFORMANCE_GATE.md",
+      "size": 161,
+      "sha256": "cdd1b0b1f5b99fda5d95ab1f86faa40ffd0f103ed06232bdb7821cbbc93aeff2"
+    },
+    {
+      "path": "07_TESTING_GATES/RELEASE_GATE.md",
+      "size": 158,
+      "sha256": "6d7c8b4dfa074f1b75e1f72e0b48079a23e7f777542864f75aed0896b9ab462b"
+    },
+    {
+      "path": "07_TESTING_GATES/VISUAL_GATE.md",
+      "size": 206,
+      "sha256": "317850c2818c155c924a717a9c9df829268214bbfb5640e2e3744c8fc5176d7d"
+    },
+    {
+      "path": "08_SCRIPTS/00_CHECK_ENV.ps1",
+      "size": 486,
+      "sha256": "9f89defa63bad09a8520c0fdbb50da54d00d2a04259d1867fa19941f7ad24559"
+    },
+    {
+      "path": "08_SCRIPTS/01_FETCH_ALL_REFERENCES.ps1",
+      "size": 1799,
+      "sha256": "241cc8426a71160e4e1827c56a5c1d3c1611e2e4be65f11bd9e0a353c5710bae"
+    },
+    {
+      "path": "08_SCRIPTS/02_INSTALL_MCP_DEPENDENCIES.ps1",
+      "size": 696,
+      "sha256": "6a9e365f2c442aa632bd4097235dce5810ef361c30a5d9431e128f5260949525"
+    },
+    {
+      "path": "08_SCRIPTS/03_GENERATE_MCP_CONFIG.ps1",
+      "size": 829,
+      "sha256": "43da97d54f8e19feb4adf3bf1e1295cce468467664c633ff403a3ebb290325d1"
+    },
+    {
+      "path": "08_SCRIPTS/04_UPDATE_REFERENCES.ps1",
+      "size": 706,
+      "sha256": "5c25a35b7697b8c1cd145f7136654d82025cd1ef5a4d6372ba65bec471195a57"
+    },
+    {
+      "path": "08_SCRIPTS/05_RESTORE_PINNED.ps1",
+      "size": 444,
+      "sha256": "230836bf0201dbbaa506c51e6fbc3d92635e40e44b8ed57b44a2f15bf48fbf4a"
+    },
+    {
+      "path": "08_SCRIPTS/06_VERIFY_KIT.ps1",
+      "size": 759,
+      "sha256": "a65884f8ae31b934911b6c024c66422094cd2cbe525e38ed8ebf96c5baff5dfb"
+    },
+    {
+      "path": "08_SCRIPTS/07_NEW_PROJECT.ps1",
+      "size": 747,
+      "sha256": "8ba1e6d96aa5dc8d36236eeef6c24f746567503ef89297e0ccb8170863490548"
+    },
+    {
+      "path": "08_SCRIPTS/08_SEARCH_REFERENCES.ps1",
+      "size": 696,
+      "sha256": "bc9473310813a23103067b6027a29d6d0282858f66557a744d514f93235ba1fe"
+    },
+    {
+      "path": "08_SCRIPTS/09_INSTALL_LOCAL_SKILLS.ps1",
+      "size": 739,
+      "sha256": "b295104191b593f8e090233ffae62c458ed0f0f8ad4aac32be9f7794e266e905"
+    },
+    {
+      "path": "08_SCRIPTS/README.md",
+      "size": 363,
+      "sha256": "8b3214dc2892049a28da24a54364cc51c07934416a061d8a3aa212f099d8faae"
+    },
+    {
+      "path": "09_RESEARCH/RESEARCH_SYNTHESIS.md",
+      "size": 510,
+      "sha256": "d4fad8e471585ca4988c6edda0bbe5b9f45724375969d2c3d196675a87caa515"
+    },
+    {
+      "path": "09_RESEARCH/SOURCES_2026-09-28.md",
+      "size": 641,
+      "sha256": "f92caa8e0a963fb63b3a94dbe2b904063c4f946dfd711df765d24badf938bf83"
+    },
+    {
+      "path": "09_RESEARCH/deep-research-report.md",
+      "size": 20298,
+      "sha256": "3e5d64935e17fd9cb7e028f2c34ab9751a3c1732a5f55f800bdcdd63202c150d"
+    },
+    {
+      "path": "10_LICENSES/LICENSE_POLICY.md",
+      "size": 239,
+      "sha256": "7e88335683611f216f43f6a67cb43d440be4a42a8abcdd0fefee4e0fe808d7fa"
+    },
+    {
+      "path": "10_LICENSES/NOTICE.md",
+      "size": 194,
+      "sha256": "827f2b6c63a311084e7e2bf11b93aee4a5e98c6292d7f23e4958c52d5b747050"
+    },
+    {
+      "path": "11_OPTIONAL/EXPERIMENTAL_RESOURCES.md",
+      "size": 290,
+      "sha256": "d9dedc85ab5d2879a6aeb21567d9be5a95f9b0f3a313f980fc117cf8defbf9e7"
+    },
+    {
+      "path": "12_CODEX_PLUGIN_TEMPLATE/.codex-plugin/plugin.json",
+      "size": 183,
+      "sha256": "b0ce19cfd1880a4963cba3c9091d898d276ea0fc668e430dd8fadf26a08887fe"
+    },
+    {
+      "path": "12_CODEX_PLUGIN_TEMPLATE/README.md",
+      "size": 238,
+      "sha256": "735884200ce958b0145e0d6e8365783b6fb3b15853ed9c7a734ef4c774f95b51"
+    },
+    {
+      "path": "12_CODEX_PLUGIN_TEMPLATE/skills/gdevelop-asset-contract/SKILL.md",
+      "size": 471,
+      "sha256": "5dc111610a4fdd5b0259f7717a1d486fa5509dafff87e2a365d62b7f7e1ca8ac"
+    },
+    {
+      "path": "12_CODEX_PLUGIN_TEMPLATE/skills/gdevelop-gameplay-tests/SKILL.md",
+      "size": 532,
+      "sha256": "93889d164e986e179ffb3177f19f5fe21040a533bd13c9029733dcd8d27014f0"
+    },
+    {
+      "path": "12_CODEX_PLUGIN_TEMPLATE/skills/gdevelop-mobile-release-gate/SKILL.md",
+      "size": 470,
+      "sha256": "f00fb40381af17065988e6680fe0c3939f5042e533f0911703e3af1094f47d46"
+    },
+    {
+      "path": "12_CODEX_PLUGIN_TEMPLATE/skills/gdevelop-project-orchestrator/SKILL.md",
+      "size": 685,
+      "sha256": "dfcc4b9b175b5ab4b0a6119a52a2a70fa8f9f40420893e89eae45369cae60dd8"
+    },
+    {
+      "path": "12_CODEX_PLUGIN_TEMPLATE/skills/gdevelop-visual-audit/SKILL.md",
+      "size": 554,
+      "sha256": "00f321b5488fcd78a2b33b66dbdc6dfc2993b996f15e0bed8f0db71d00065a2c"
+    },
+    {
+      "path": "BUNDLE_STATUS.md",
+      "size": 305,
+      "sha256": "5bfbf398f260a235adbc7cd84d5cfcf6d6f93012c07fbee979915febe8c86d93"
+    },
+    {
+      "path": "README.md",
+      "size": 1030,
+      "sha256": "f4dcef06f579e1a281533d094627226bbf56358bce9f450c8f7f57c8b296cabc"
+    },
+    {
+      "path": "REPOS.lock.json",
+      "size": 3877,
+      "sha256": "8ae7ad88eafb88cb9b129c07dbec909309cacc2a995d27a28f9d44a7a84e5b44"
+    },
+    {
+      "path": "SOURCE_CATALOG.csv",
+      "size": 1867,
+      "sha256": "8aa1540bff7dcef87c4c333497b81d6066666f24aae63bd7951c48be167a6ea4"
+    }
+  ]
+}

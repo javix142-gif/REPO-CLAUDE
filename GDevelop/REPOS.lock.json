@@ -1,0 +1,98 @@
+{
+  "generated_at": "2026-09-28",
+  "gdevelop_release_verified": {
+    "version": "5.6.282",
+    "release_date": "2026-09-11",
+    "source": "https://github.com/4ian/GDevelop/releases"
+  },
+  "repositories": [
+    {
+      "id": "gdevelop-examples",
+      "trust": "official",
+      "required": true,
+      "repo": "GDevelopApp/GDevelop-examples",
+      "branch": "main",
+      "commit": "b4031112255dd710db4c176e3bc607e275c1e586",
+      "url": "https://github.com/GDevelopApp/GDevelop-examples.git",
+      "target": "04_OFFICIAL_REFERENCES/GDevelop-examples",
+      "purpose": "Ejemplos y starters oficiales; referencias de estructura, theme slots y gameplay tests."
+    },
+    {
+      "id": "gdevelop-extensions",
+      "trust": "official",
+      "required": true,
+      "repo": "GDevelopApp/GDevelop-extensions",
+      "branch": "main",
+      "commit": "ac9a7e8aee11d8a1c056bf7b529439949d198649",
+      "url": "https://github.com/GDevelopApp/GDevelop-extensions.git",
+      "target": "04_OFFICIAL_REFERENCES/GDevelop-extensions",
+      "purpose": "Extensiones oficiales y experimentales revisadas."
+    },
+    {
+      "id": "gdevelop-documentation",
+      "trust": "official",
+      "required": true,
+      "repo": "GDevelopApp/GDevelop-documentation",
+      "branch": "main",
+      "commit": "2aa743f3a4d7290396967bd96fb4d33b4d1b5936",
+      "url": "https://github.com/GDevelopApp/GDevelop-documentation.git",
+      "target": "04_OFFICIAL_REFERENCES/GDevelop-documentation",
+      "purpose": "Documentación oficial en Markdown/MkDocs para consulta local."
+    },
+    {
+      "id": "gdevelop-tutorials",
+      "trust": "official",
+      "required": true,
+      "repo": "GDevelopApp/GDevelop-tutorials",
+      "branch": "main",
+      "commit": "b65cee06311d0bbdaf3750251ce92d486a094e28",
+      "url": "https://github.com/GDevelopApp/GDevelop-tutorials.git",
+      "target": "04_OFFICIAL_REFERENCES/GDevelop-tutorials",
+      "purpose": "Tutoriales oficiales in-app y plantillas asociadas."
+    },
+    {
+      "id": "gdevelop-community-list",
+      "trust": "official-index-community-content",
+      "required": true,
+      "repo": "GDevelopApp/GDevelop-community-list",
+      "branch": "main",
+      "commit": "c59659fb3862c791295b77ccfa8029b66ccbe3c6",
+      "url": "https://github.com/GDevelopApp/GDevelop-community-list.git",
+      "target": "04_OFFICIAL_REFERENCES/GDevelop-community-list",
+      "purpose": "Índice oficial de extensiones comunitarias; el contenido enlazado requiere revisión."
+    },
+    {
+      "id": "gdevelop-engine-source",
+      "trust": "official",
+      "required": true,
+      "repo": "4ian/GDevelop",
+      "branch": "master",
+      "commit": "ec1f2e3f4f6879168cdc70462418ddaa6a55e6c8",
+      "url": "https://github.com/4ian/GDevelop.git",
+      "target": "04_OFFICIAL_REFERENCES/GDevelop-engine-source",
+      "purpose": "Fuente del motor/editor. Necesario como raíz para la integración MCP local."
+    },
+    {
+      "id": "gdevelop-reference-skill",
+      "trust": "external-reviewed-by-kit",
+      "required": true,
+      "repo": "adamboothuk/gdevelop-reference",
+      "branch": "main",
+      "commit": "463a7594b609364ad4d9f346ed8b08596434041f",
+      "url": "https://github.com/adamboothuk/gdevelop-reference.git",
+      "target": "02_SKILLS/upstream/gdevelop-reference",
+      "purpose": "Skill externa para evitar inventar identificadores/campos JSON de GDevelop."
+    },
+    {
+      "id": "gdevelop-mcp-server",
+      "trust": "external-experimental",
+      "required": true,
+      "repo": "982945902/gdevelop-mcp-server",
+      "branch": "main",
+      "commit": "96ed51ea081beedd7f6948b5516083c5f8fb3c63",
+      "url": "https://github.com/982945902/gdevelop-mcp-server.git",
+      "target": "03_MCP/gdevelop-mcp-server",
+      "purpose": "MCP no oficial para autoría, guardado y preview local de proyectos GDevelop."
+    }
+  ]
+}
