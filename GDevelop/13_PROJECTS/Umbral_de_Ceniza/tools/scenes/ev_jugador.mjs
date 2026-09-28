@@ -188,16 +188,20 @@ function attackEvents() {
 }
 
 function skillEvents() {
-  const start = (n) => E([IFN(`In.S${n}`, "=", 1), OIFN(J, `Cd${n}`, "<=", 0), est("libre"), CMP("Jugador.MP", ">=", `Stat.Costo${n}`)], [
+  // Input buffer: a skill pressed while attacking or stunned is cast as soon as the hero is free (0.35 s window).
+  const buffer = (n) => E([IFN(`In.S${n}`, "=", 1)], [SET("BufHab", "=", n), SET("BufT", "=", 0.35)]);
+  const start = (n) => E([IFN("BufHab", "=", n), IFN("BufT", ">", 0), OIFN(J, `Cd${n}`, "<=", 0), est("libre"), CMP("Jugador.MP", ">=", `Stat.Costo${n}`)], [
     OSET(J, "MP", "-", `Stat.Costo${n}`), OSET(J, `Cd${n}`, "=", `Stat.Cd${n}Max`), OSETS(J, "Estado", "=", q("hab")),
     OSETS(J, "Hab", "=", `Save.Clase + ToString(${n})`), OSET(J, "Accion", "=", 0), OSET(J, "Paso", "=", 0),
-    OSET(J, "Golpeo", "=", 0), SET("Stats.Habilidades", "+", 1),
+    OSET(J, "Golpeo", "=", 0), SET("Stats.Habilidades", "+", 1), SET("BufHab", "=", 0),
   ]);
   const init = (acts, subs = []) => E([OIFN(J, "Golpeo", "=", 0)], [OSET(J, "Golpeo", "=", 1), ...acts], subs);
   const endOnAnim = () => E([ANIM_END(J)], backToFree());
 
   return GROUP("Habilidades", [
     COMMENT("Cada clase tiene 3 habilidades (Estado = \"hab\", Hab = Clase + número). Coste de maná y enfriamiento en Stat.*"),
+    buffer(1), buffer(2), buffer(3),
+    E([], [SET("BufT", "=", "max(0, BufT - TimeDelta())")]),
     start(1), start(2), start(3),
     // ---------------- Guerrero
     E([est("hab"), hab("Guerrero1")], [], [

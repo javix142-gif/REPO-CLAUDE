@@ -37,11 +37,11 @@ export const gameplaySceneVariables = () => [
   vstruct("In", [vnum("Atk"), vnum("S1"), vnum("S2"), vnum("S3"), vnum("Pot"), vnum("Acc")]),
   vnum("RecalcStats", 1), vnum("Guardar", 0), vstr("Menu", ""), vnum("Temblor", 0), vnum("FuerzaTemblor", 0),
   vnum("SueloY", SUELO), vnum("NextId", 1), vnum("CdPot", 0), vnum("CamMin", 0), vnum("CamMax", 0),
-  vnum("MundoAncho", 4200), vnum("CurarTodo", 0), vnum("Vivos", 0), vnum("Mult", 1), vnum("Etapa", 1),
+  vnum("MundoAncho", 4200), vnum("CurarTodo", 1), vnum("Vivos", 0), vnum("Mult", 1), vnum("Etapa", 1),
   vstruct("Tmp", [vnum("Dano"), vnum("Crit"), vnum("Buff"), vnum("DanoJ"), vstr("Json"), vnum("Rareza"), vnum("Valor"),
     vnum("Oro"), vnum("Ang"), vnum("N"), vstr("Nombre"), vstr("Tipo"), vnum("X"), vnum("Y"), vnum("R"), vnum("Cuantos"),
     vnum("Coste"), vstr("Clase")]),
-  vstr("Accion", ""), vstr("MenuAbrir", ""), vnum("MenuFrames", 0),
+  vstr("Accion", ""), vstr("MenuAbrir", ""), vnum("MenuFrames", 0), vnum("BufHab", 0), vnum("BufT", 0),
   vstruct("Stats", [vnum("Golpes"), vnum("Muertes"), vnum("DanoTotal"), vnum("Oro"), vnum("DanoRecibido"), vnum("Botin"),
     vnum("Exp"), vnum("Habilidades"), vnum("Pociones")]),
 ];
@@ -68,7 +68,7 @@ export function globalObjects(m) {
       behaviors: [platformer("Plataformero", { ignoreDefaultControls: true, maxSpeed: 110, acceleration: 900, deceleration: 1500,
         jumpSpeed: 500 })],
       variables: [vstr("Tipo", "Esqueleto"), vnum("Init"), vnum("HP", 50), vnum("HPMax", 50), vnum("Atq", 5), vnum("Def"),
-        vnum("Vel", 100), vstr("Estado", "aparecer"), vnum("Golpeo"), vnum("UltimoGolpe", -1), vnum("Congelado"), vnum("Destello"),
+        vnum("Vel", 100), vstr("Estado", "aparecer"), vnum("Golpeo"), vstr("Golpes", ","), vnum("Congelado"), vnum("Destello"),
         vnum("Exp", 5), vnum("OroMin", 1), vnum("OroMax", 3), vnum("Sala"), vnum("TX"), vnum("TY"), vnum("Lado", 1), vnum("Fase"),
         vnum("Accion"), vnum("Cd"), vnum("CdAtk", 1.5), vnum("Rango", 80), vnum("Windup", 0.25), vnum("DanoPend"), vnum("KBDir"),
         vnum("CongelaPend"), vnum("KB"), vnum("Invoc"), vnum("Furia"), vnum("ProbBotin", 0.1)],
@@ -90,7 +90,7 @@ export function globalObjects(m) {
     sprite(m, "BarraMana", { behaviors: [anchor(1, 1)] }),
     sprite(m, "BarraExp", { behaviors: [anchor(1, 1)] }),
     sprite(m, "Retrato", { behaviors: [anchor(1, 1)] }),
-    text("TextoNivel", { size: 26, color: [255, 224, 140], behaviors: [anchor(1, 1)] }),
+    text("TextoNivel", { size: 26, color: [255, 224, 140] }),
     text("TextoVida", { size: 18, behaviors: [anchor(1, 1)] }),
     text("TextoOro", { size: 26, color: [255, 214, 90], behaviors: [anchor(2, 1)] }),
     sprite(m, "IconoMoneda", { behaviors: [anchor(2, 1)] }),
@@ -112,7 +112,7 @@ export function globalObjects(m) {
     panel("BotonMenu", "assets/ui/boton_menu.png", 15, 480, 58, { variables: [vstr("Accion", ""), vnum("Slot", 1)] }),
     text("TextoBoton", { size: 28, variables: [vnum("Slot", 1), vnum("CX", 640)] }),
     text("TextoTitulo", { size: 52, font: FONT_TITLE, color: [255, 214, 120], outline: [40, 12, 8], variables: [vnum("CX", 640)] }),
-    text("TextoMenu", { size: 24, color: [230, 225, 215], variables: [vnum("CX", -1)] }),
+    text("TextoMenu", { size: 23, color: [230, 225, 215], variables: [vnum("CX", -1)] }),
     sprite(m, "BotonCerrar"),
     sprite(m, "Flecha", { variables: [vnum("Paso", 1)] }),
   ];
@@ -133,7 +133,7 @@ export function hudInstances() {
     inst("IconoMoneda", R(250), 46, { ...L, z: 2 }),
     inst("TextoOro", R(222), 30, { ...L, z: 2 }),
     inst("BotonPausa", R(70), 52, { ...L, z: 3 }),
-    inst("Joystick", 60, 440, { ...L, z: 3 }),
+    inst("Joystick", 176, 548, { ...L, z: 3 }),
     inst("BotonAtaque", 1110, 590, { ...L, z: 3 }),
     inst("BotonHab1", 960, 642, { ...L, z: 3 }),
     inst("BotonHab2", 975, 492, { ...L, z: 3 }),
@@ -153,14 +153,14 @@ export function hudInstances() {
 export function menuInstances() {
   const L = { layer: "Menu" };
   const out = [
-    inst("Panel", 300, 110, { ...L, z: 1, w: 680, h: 500 }),
-    inst("TextoTitulo", 640, 124, { ...L, z: 2 }),
-    inst("TextoMenu", 350, 200, { ...L, z: 2 }),
-    inst("BotonCerrar", 944, 146, { ...L, z: 3 }),
-    inst("Flecha", 372, 300, { ...L, z: 3, vars: [vnum("Paso", -1)] }),
-    inst("Flecha", 908, 300, { ...L, z: 3, vars: [vnum("Paso", 1)] }),
+    inst("Panel", 290, 70, { ...L, z: 1, w: 700, h: 590 }),
+    inst("TextoTitulo", 640, 84, { ...L, z: 2 }),
+    inst("TextoMenu", 350, 158, { ...L, z: 2 }),
+    inst("BotonCerrar", 950, 108, { ...L, z: 3 }),
+    inst("Flecha", 360, 250, { ...L, z: 3, vars: [vnum("Paso", -1)] }),
+    inst("Flecha", 920, 250, { ...L, z: 3, vars: [vnum("Paso", 1)] }),
   ];
-  [400, 470, 540].forEach((y, i) => {
+  [448, 516, 584].forEach((y, i) => {
     out.push(inst("BotonMenu", 400, y, { ...L, z: 3, w: 480, h: 58, vars: [vnum("Slot", i + 1)] }));
     out.push(inst("TextoBoton", 640, y + 11, { ...L, z: 4, vars: [vnum("Slot", i + 1)] }));
   });

@@ -1,0 +1,101 @@
+# Gameplay tests — 2026-09-28T22:07:04.412Z
+
+Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headless (Playwright)
+
+**8/8 PASS**
+
+## ✅ 01 flujo título → clase → pueblo → tiendas → portal (22s)
+
+- PASS arranca en la escena Titulo
+- PASS la clase elegida se guarda en Save.Clase
+- PASS vida inicial completa (160/160)
+- PASS animación de reposo por clase (Guerrero_Idle)
+- PASS el jugador se desplaza a la derecha (480 → 607)
+- PASS el maniquí recibe un golpe por tajo (3 golpes en 1,3 s)
+- PASS aparecen números de daño
+- PASS cerca del alquimista aparece la interacción
+- PASS el botón táctil de acción se muestra
+- PASS tocar el botón de acción abre la tienda
+- PASS comprar poción descuenta 30 de oro y suma 1 poción
+- PASS el botón X cierra el menú
+- PASS la herrería se abre con la tecla E
+- PASS sin oro no se puede forjar ("No tienes suficiente oro")
+- PASS forjar sube Forja a 1 y ATQ de 12 a 15
+- PASS el portal abre el selector de etapa
+- PASS se entra a la etapa 1
+- PASS no JavaScript errors in the page ()
+
+## ✅ 02 Guerrero completa la etapa 1 (bot): salas, puertas, jefe, botín, victoria, guardado (92s)
+
+- INFO t=0s sala 1 (nivel 1)
+- INFO t=9s sala 2 (nivel 1)
+- INFO t=25s sala 3 (nivel 2)
+- INFO t=46s sala 4 (nivel 2)
+- INFO t=59s sala 5 (nivel 3)
+- PASS la etapa termina con el menú de victoria (menú="victoria", estado=libre)
+- PASS enemigos derrotados: 25
+- PASS se desbloquea la etapa 2 (Save.EtapaMax = 2)
+- PASS el personaje sube de nivel (nivel 4)
+- PASS se obtiene oro (205)
+- PASS las 4 puertas de sala se abrieron
+- PASS al volver, el jugador aparece junto al portal
+- PASS la partida está guardada en localStorage (GDJS_UmbralSave: clase Guerrero, nivel 4, etapa máx. 2)
+- PASS tras recargar, el título ofrece "CONTINUAR  (Guerrero nv. 4)"
+- PASS no JavaScript errors in the page ()
+
+## ✅ 03 Maga: bola de fuego, nova (congela), meteoro (explosión) y barrera (15s)
+
+- PASS el ataque básico lanza una bola de fuego
+- PASS la bola de fuego impacta al esqueleto
+- PASS se ve el anillo de escarcha
+- PASS la nova de escarcha congela al enemigo
+- PASS el meteoro cae del cielo
+- PASS el meteoro explota al tocar el suelo
+- PASS la explosión del meteoro hace daño en área
+- PASS la barrera arcana activa el escudo 6 s
+- PASS se ve el efecto de escudo
+- PASS no JavaScript errors in the page ()
+
+## ✅ 04 Arquera: flecha, disparo triple, lluvia de flechas y paso sombrío (14s)
+
+- PASS el ataque básico dispara una flecha
+- PASS la flecha impacta al bruto
+- PASS el disparo triple lanza 3 flechas (3)
+- PASS las 3 flechas salen en abanico (velocidades verticales distintas)
+- PASS la lluvia de flechas genera flechas desde el cielo (3 en vuelo)
+- PASS el paso sombrío retrocede 237 px con invulnerabilidad
+- PASS no JavaScript errors in the page ()
+
+## ✅ 05 Controles táctiles multitouch (joystick + botones a la vez) (13s)
+
+- PASS arrastrar el joystick a la derecha mueve al jugador (220 → 402)
+- PASS con el joystick pulsado, un segundo dedo en ATACAR ataca (estado="ataque")
+- PASS el botón de habilidad 1 lanza Torbellino y muestra el enfriamiento (cd 4.5 s, máscara 14/16)
+- PASS el botón de salto hace saltar (600 → 500)
+- PASS no JavaScript errors in the page ()
+
+## ✅ 06 Pausa, derrota y reintento (15s)
+
+- PASS el botón de pausa abre el menú de pausa
+- PASS el juego queda detenido (escala de tiempo 0)
+- PASS Continuar reanuda el juego
+- PASS al morir aparece el menú de derrota
+- PASS se reproduce la animación de muerte
+- PASS Reintentar reinicia la etapa con vida completa
+- PASS no JavaScript errors in the page ()
+
+## ✅ 07 Jefe: Caballero de Ceniza (barra de vida, ataques y furia) (24s)
+
+- PASS aparece la barra de vida del jefe
+- INFO t=0s sala 5 (nivel 1)
+- PASS el jefe usa sus ataques (mover, carga, tajo, golpe, muerto)
+- PASS derrotar al jefe y entrar al portal lleva a la victoria
+- PASS no JavaScript errors in the page ()
+
+## ✅ 08 Pantalla 19.5:9 (1560×720): HUD anclado y capítulo 2 (12s)
+
+- PASS la resolución se adapta al ancho (1560×720)
+- PASS el botón de ataque sigue anclado a la derecha (x=1390)
+- PASS el botón de pausa sigue anclado a la derecha (x=1490)
+- PASS la etapa 6 usa el capítulo Fortaleza Carmesí
+- PASS no JavaScript errors in the page ()

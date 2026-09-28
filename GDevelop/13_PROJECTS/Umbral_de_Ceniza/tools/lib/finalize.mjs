@@ -4,6 +4,8 @@
 
 const OBJECT_PARAM_TYPES = new Set(["object", "objectList", "objectPtr", "objectListOrEmptyIfJustDeclared",
   "objectListOrEmptyWithoutPicking"]);
+const RESOURCE_PARAM_TYPES = new Set(["imageResource", "soundfile", "musicfile", "fontResource", "audioResource", "jsonResource",
+  "videoResource", "bitmapFontResource", "tilemapResource", "tilesetResource", "model3DResource", "atlasResource", "spineResource"]);
 const CAPABILITY_BEHAVIORS = new Set(["Animation", "Flippable", "Opacity", "Resizable", "Scale", "Text", "Effect"]);
 
 export class Finalizer {
@@ -72,6 +74,9 @@ export class Finalizer {
       const v = params[i];
       if (pm.isCodeOnly()) continue;
       if (OBJECT_PARAM_TYPES.has(t) && v !== "" && !this.hasObject(ctx, v)) this.err(ctx, path, `${type}: unknown object "${v}"`);
+      if (RESOURCE_PARAM_TYPES.has(t) && v !== "" && ctx.resources && !ctx.resources.has(v)) {
+        this.err(ctx, path, `${type}: "${v}" is not a declared resource (resource parameters take the plain name, without quotes)`);
+      }
       if (t === "behavior" && v !== "" && !CAPABILITY_BEHAVIORS.has(v)) {
         const objs = this.objectInfo(ctx, params[0]);
         const required = pm.getExtraInfo();
@@ -92,7 +97,8 @@ export class Finalizer {
         if (!ctx.vars.has(root)) this.err(ctx, path, `${type}: undeclared variable "${root}"`);
       }
     }
-    ins.parameters = params;
+    // GDevelop string literals do not support "\n": rewrite it as a NewLine() call (checked against the engine).
+    ins.parameters = params.map((p) => p.replace(/\\n/g, '" + NewLine() + "'));
     delete ins._up;
     delete ins._kind;
     if (ins.subInstructions) ins.subInstructions.forEach((s, j) => this.instr(s, isCond, ctx, `${path}.sub[${j}]`));

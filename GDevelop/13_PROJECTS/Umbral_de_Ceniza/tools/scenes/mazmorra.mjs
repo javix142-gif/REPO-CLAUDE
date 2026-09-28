@@ -100,8 +100,6 @@ function flow() {
 
   return GROUP("Salas, oleadas y jefe", [
     E([], [SET("SalaIni", "=", "Sala * AnchoSala")]),
-    E([], [SET("Vivos", "=", 0)]),
-    E([OIFS("Enemigo", "Estado", "!=", q("muerto"))], [SET("Vivos", "=", "Count(Enemigo)")]),
     COMMENT("Entrar en una sala la cierra y empieza el combate."),
     E([IFS("SalaEstado", "=", q("espera")), CMP("Jugador.X()", ">", "SalaIni + 300")], [SETS("SalaEstado", "=", q("combate")), SET("Oleada", "=", 1)], [
       E([CMP("Sala", "<", "NumSalas - 1")], [SET("SpawnPend", "=", 1), SET("OleadasSala", "=", 2)], [
@@ -116,6 +114,9 @@ function flow() {
       ]),
     ]),
     spawnWave(),
+    COMMENT("Recuento de enemigos vivos DESPUÉS de generar la oleada (si no, la sala se daría por limpia en el mismo frame)."),
+    E([], [SET("Vivos", "=", 0)]),
+    E([OIFS("Enemigo", "Estado", "!=", q("muerto"))], [SET("Vivos", "=", "Count(Enemigo)")]),
     E([IFS("SalaEstado", "=", q("combate")), IFN("Vivos", "=", 0), IFN("SpawnPend", "=", 0), IFN("JefeVivo", "=", 0), IFN("EsperaOleada", "<=", 0)], [], [
       E([CMP("Oleada", "<", "OleadasSala")], [SET("Oleada", "+", 1), SET("EsperaOleada", "=", 1.1),
         ...toast(q("¡Otra oleada!"), q("255;190;120"), 1.2)]),
@@ -178,12 +179,13 @@ function cameraEvents() {
 
 function startEvents() {
   const theme = (tex) => [
-    A("TiledSpriteObject::SetImageFromResource", "FondoLejano", q(`assets/entorno/fondo_${tex}_lejos.png`)),
-    A("TiledSpriteObject::SetImageFromResource", "FondoMedio", q(`assets/entorno/fondo_${tex}_medio.png`)),
-    A("TiledSpriteObject::SetImageFromResource", "Suelo", q(`assets/entorno/suelo_${tex}.png`)),
-    A("TiledSpriteObject::SetImageFromResource", "Relleno", q(`assets/entorno/relleno_${tex}.png`)),
-    A("TiledSpriteObject::SetImageFromResource", "Plataforma", q(`assets/entorno/plataforma_${tex}.png`)),
-    A("TiledSpriteObject::SetImageFromResource", "Muro", q(`assets/entorno/muro_${tex}.png`)),
+    // imageResource parameters take the plain resource name (no quotes)
+    A("TiledSpriteObject::SetImageFromResource", "FondoLejano", `assets/entorno/fondo_${tex}_lejos.png`),
+    A("TiledSpriteObject::SetImageFromResource", "FondoMedio", `assets/entorno/fondo_${tex}_medio.png`),
+    A("TiledSpriteObject::SetImageFromResource", "Suelo", `assets/entorno/suelo_${tex}.png`),
+    A("TiledSpriteObject::SetImageFromResource", "Relleno", `assets/entorno/relleno_${tex}.png`),
+    A("TiledSpriteObject::SetImageFromResource", "Plataforma", `assets/entorno/plataforma_${tex}.png`),
+    A("TiledSpriteObject::SetImageFromResource", "Muro", `assets/entorno/muro_${tex}.png`),
   ];
   return GROUP("Inicio de la etapa", [
     E([JUST_BEGINS()], [

@@ -53,25 +53,32 @@ function AND_PUERTA(o) {
 }
 
 function hitsOnEnemies() {
-  const accumulate = (src) => [
+  // Each enemy remembers the ids of the hitboxes/projectiles that already hit it (string ",12,15,"),
+  // so a hitbox or a piercing arrow never hits the same enemy twice, even when several overlap.
+  const notHitYet = (src) => CMP(`StrFind(Enemigo.Golpes, "," + ToString(${src}.Id) + ",")`, "<", 0);
+  const register = (src) => [
     OSET(EN, "DanoPend", "+", `${src}.Dano`),
-    OSET(EN, "UltimoGolpe", "=", `${src}.Id`),
+    OSETS(EN, "Golpes", "=", `Enemigo.Golpes + ToString(${src}.Id) + ","`),
     OSET(EN, "KBDir", "=", "sign(Enemigo.X() - Jugador.X() + 0.01)"),
   ];
+  const trim = (src) => E([CMP("StrLength(Enemigo.Golpes)", ">", 90)], [OSETS(EN, "Golpes", "=", `"," + ToString(${src}.Id) + ","`)]);
   return GROUP("Golpes del jugador sobre enemigos", [
     FOREACH("GolpeJugador", [], [], [
-      E([COLLIDE("GolpeJugador", EN), C("NumberObjectVariable", EN, "UltimoGolpe", "!=", "GolpeJugador.Id"), ...alive()], [
-        ...accumulate("GolpeJugador"),
+      FOREACH(EN, [COLLIDE("GolpeJugador", EN), ...alive(), notHitYet("GolpeJugador")], [
+        ...register("GolpeJugador"),
         OSET(EN, "CongelaPend", "=", "max(Enemigo.CongelaPend, GolpeJugador.Congela)"),
+      ], [trim("GolpeJugador")]),
+    ]),
+    FOREACH("ProyectilJugador", [OIFS("ProyectilJugador", "Tipo", "!=", q("Meteoro")), OIFN("ProyectilJugador", "Borrar", "=", 0)], [], [
+      FOREACH(EN, [COLLIDE("ProyectilJugador", EN), ...alive(), notHitYet("ProyectilJugador")], register("ProyectilJugador"), [
+        trim("ProyectilJugador"),
+        E([OIFN("ProyectilJugador", "Perfora", "=", 0)], [OSET("ProyectilJugador", "Borrar", "=", 1)]),
       ]),
     ]),
-    FOREACH("ProyectilJugador", [OIFS("ProyectilJugador", "Tipo", "!=", q("Meteoro"))], [], [
-      E([COLLIDE("ProyectilJugador", EN), C("NumberObjectVariable", EN, "UltimoGolpe", "!=", "ProyectilJugador.Id"), ...alive()],
-        accumulate("ProyectilJugador"), [
-          E([OIFN("ProyectilJugador", "Perfora", "=", 0)], [OSET("ProyectilJugador", "Borrar", "=", 1)]),
-        ]),
-    ]),
     E([OIFN("ProyectilJugador", "Borrar", "=", 1)], [...fx("Chispa", "ProyectilJugador.X()", "ProyectilJugador.Y()"), DEL("ProyectilJugador")]),
+    COMMENT("Los golpes del jugador duran unas décimas de segundo."),
+    E([], [OSET("GolpeJugador", "Vida", "-", DT)]),
+    E([OIFN("GolpeJugador", "Vida", "<=", 0)], [DEL("GolpeJugador")]),
     COMMENT("Aplicar el daño acumulado: ATQ x multiplicador, ±10%, crítico x1.8, reducido por DEF."),
     FOREACH(EN, [OIFN(EN, "DanoPend", ">", 0)], [SET("Tmp.Crit", "=", 0), SET("Tmp.Buff", "=", 1)], [
       E([CMP("RandomFloat(1)", "<", "Stat.Crit")], [SET("Tmp.Crit", "=", 1)]),

@@ -32,7 +32,7 @@ export function tituloScene() {
       inst("Logo", 640, 190, { z: 3 }),
       inst("TextoLema", 640, 318, { z: 3 }),
       ...btn(1, 420), ...btn(2, 500),
-      inst("TextoVersion", 640, 686, { z: 3 }),
+      inst("TextoVersion", 640, 622, { z: 3 }),
     ],
     events: [
       COMMENT("TÍTULO — carga la partida guardada (almacenamiento 'UmbralSave') y ofrece Continuar / Nueva partida."),
@@ -99,9 +99,9 @@ export function claseScene() {
     I.push(inst("Panel", x, 100, { z: 1, w: 340, h: 560 }));
     I.push(inst("HeroePreview", cx, 380, { z: 3, vars: [vstr("Clase", c)] }));
     I.push(inst("TextoClase", cx, 392, { z: 3, vars: [vstr("Clase", c), vnum("CX", cx)] }));
-    I.push(inst("TextoDesc", cx, 446, { z: 3, vars: [vstr("Clase", c), vnum("CX", cx)] }));
-    I.push(inst("BotonMenu", x + 40, 578, { z: 4, w: 260, h: 58, vars: [vstr("Accion", c), vnum("Slot", i + 1)] }));
-    I.push(inst("TextoBoton", cx, 590, { z: 5, vars: [vnum("Slot", i + 1), vnum("CX", cx)] }));
+    I.push(inst("TextoDesc", cx, 440, { z: 3, vars: [vstr("Clase", c), vnum("CX", cx)] }));
+    I.push(inst("BotonMenu", x + 40, 588, { z: 4, w: 260, h: 58, vars: [vstr("Accion", c), vnum("Slot", i + 1)] }));
+    I.push(inst("TextoBoton", cx, 600, { z: 5, vars: [vnum("Slot", i + 1), vnum("CX", cx)] }));
   });
   const perClass = CLASES.flatMap((c) => [
     E([OIFS("HeroePreview", "Clase", "=", q(c))], [ANIM("HeroePreview", q(`${c}_Idle`))]),

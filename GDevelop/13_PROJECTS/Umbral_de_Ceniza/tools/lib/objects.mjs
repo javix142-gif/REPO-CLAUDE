@@ -117,7 +117,7 @@ export const joystick = (name, border, thumb) => {
   });
   return {
     assetStoreId: "", name, type: "SpriteMultitouchJoystick::SpriteMultitouchJoystick", variant: "",
-    variables: [], effects: [], behaviors: [], content: { DeadZoneRadius: 0.25 },
+    variables: [], effects: [], behaviors: [], content: {},
     childrenContent: { Border: child("Idle", border), Thumb: child("Idle", thumb) },
   };
 };
