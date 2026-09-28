@@ -48,8 +48,35 @@ Toda la lógica son **eventos nativos** editables:
 
 El proyecto ya está configurado para Android (horizontal, `com.umbraldeceniza.juego`, iconos propios).
 
-- **Opción recomendada (sin instalar nada más):** en GDevelop, *Archivo → Exportar → Android* (compilación en la
-  nube de GDevelop; requiere cuenta). Genera APK para probar o AAB para Google Play.
+### APK de prueba (instalar en tu teléfono)
+
+`tools/build_apk.mjs` genera `builds/UmbralDeCeniza-<versión>.apk` (≈4 MB, Android 7.0+) sin Android Studio: una
+actividad a pantalla completa con un WebView que ejecuta el export HTML5 desde dentro del APK, sin usar la red.
+
+1. Copia el APK al teléfono (o descárgalo desde donde te lo hayan enviado) y ábrelo.
+2. Android pedirá permitir **instalar apps desconocidas** para la app con la que lo abriste (Archivos, Chrome…).
+   Si Play Protect dice que no reconoce al desarrollador, elige **Instalar de todas formas**.
+3. El juego va en horizontal y pantalla completa. Botón **Atrás** = pausa (o cerrar el menú abierto); dos veces
+   seguidas = salir. La partida se guarda sola; se pierde si desinstalas la app.
+
+Para generarlo (JDK 11+, Python 3 con Pillow y las build-tools de Android `aapt2`, `zipalign`, `apksigner`, `d8`/`dx`;
+en Ubuntu/Debian: `sudo apt install aapt apksigner zipalign dalvik-exchange`):
+
+```bash
+cd tools
+node export.mjs web
+node build_apk.mjs          # builds/UmbralDeCeniza-1.0.0.apk, firmado con una clave de depuración
+node test/apk_check.mjs     # arranca los archivos del APK en Chromium con el mismo origen que la app
+```
+
+Se firma con `~/.android/umbral-debug.p12` (se crea la primera vez) o con la clave de `APK_KEYSTORE`. Para
+actualizar la app instalada sin desinstalarla hay que firmar con **la misma clave**. Es un APK para probar e
+instalar a mano, no para Google Play.
+
+### Export oficial de GDevelop (Google Play)
+
+- **En GDevelop:** *Archivo → Exportar → Android* (compilación en la nube de GDevelop; requiere cuenta). Genera
+  APK para probar o AAB para Google Play.
 - **Compilación local con Cordova** (requiere Android SDK + JDK 17):
   ```bash
   cd tools && npm ci && node export.mjs cordova
@@ -57,12 +84,12 @@ El proyecto ya está configurado para Android (horizontal, `com.umbraldeceniza.j
   npx cordova@13.0.0 platform add android@14
   npx cordova@13.0.0 build android --debug
   ```
-- **GitHub Actions:** `.github/workflows/android-apk.yml` compila un APK de depuración en los runners de GitHub y
-  lo deja en *Artifacts* del workflow.
+- **GitHub Actions:** `.github/workflows/android-apk.yml` compila un APK de depuración con Cordova en los runners de
+  GitHub y lo deja en *Artifacts* del workflow.
 
-> En el entorno donde se creó el proyecto el SDK de Android no era descargable (host `dl.google.com` bloqueado), así
-> que el APK **no** se compiló allí: se verificó el export Cordova + `cordova platform add android@14` + `cordova prepare`
-> (manifiesto con `screenOrientation="landscape"`, iconos por densidad). Falta probar en un teléfono real.
+> En el entorno donde se creó el proyecto el SDK de Android de Google no era descargable (`dl.google.com`
+> bloqueado): el APK de prueba se hizo con las build-tools de Ubuntu y el `android.jar` de la API 34, y del camino
+> Cordova se verificó hasta `cordova prepare`. Falta probar ambos en un teléfono real.
 
 ## Regenerar y probar (herramientas)
 

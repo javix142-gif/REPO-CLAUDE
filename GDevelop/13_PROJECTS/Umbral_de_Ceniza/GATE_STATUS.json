@@ -3,9 +3,9 @@
   "functional": { "status": "PASS", "evidence": "evidence/gameplay-tests/REPORT.md (pruebas 01-09)" },
   "gameplay_tests": { "status": "PASS", "evidence": "tools/test/run_tests.mjs en Chromium headless; balance en etapas 5 y 10 con AUTO" },
   "visual": { "status": "PASS_WITH_WARNINGS", "evidence": "evidence/screenshots/ (16:9 y 19.5:9, export HTML5 real)", "warning": "sin captura en dispositivo Android" },
-  "mobile": { "status": "PASS_WITH_WARNINGS", "evidence": "multitouch por CDP (joystick + ataque simultáneos), anclajes en 1560x720, manifiesto Android con screenOrientation=landscape", "warning": "DEVICE_PASS pendiente (notch real, rendimiento, pausa al minimizar)" },
+  "mobile": { "status": "PASS_WITH_WARNINGS", "evidence": "multitouch por CDP (joystick + ataque simultáneos), anclajes en 1560x720, manifiesto Android con screenOrientation=landscape; APK de prueba: capa web verificada con el mismo origen que la app (evidence/gameplay-tests/APK_CHECK.md, 20:9)", "warning": "DEVICE_PASS pendiente (notch real, rendimiento, pausa al minimizar)" },
   "performance": { "status": "BLOCKED", "reason": "sin dispositivo de referencia" },
   "diff": { "status": "PASS", "evidence": "cambios limitados a 13_PROJECTS/Umbral_de_Ceniza, .github/workflows y README raíz" },
   "license": { "status": "PASS", "evidence": "source/LICENCIAS.md y ASSET_MANIFEST.json: arte/audio originales generados por código, fuentes OFL 1.1, extensión y runtime MIT" },
-  "release": { "status": "BLOCKED", "reason": "APK/AAB no compilado en este entorno (dl.google.com bloqueado); export Cordova validado hasta cordova prepare; ver README.md > Android" }
+  "release": { "status": "BLOCKED", "reason": "APK de prueba (sideload, clave de depuración) generado con tools/build_apk.mjs y verificado: apksigner v2/v3, zipalign, manifiesto (minSdk 24, targetSdk 34, sensorLandscape) y capa web; faltan prueba en dispositivo y AAB firmado para Google Play (export oficial de GDevelop)" }
 }

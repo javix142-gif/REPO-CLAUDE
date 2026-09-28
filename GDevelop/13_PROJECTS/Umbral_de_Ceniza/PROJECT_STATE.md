@@ -9,8 +9,9 @@ Proyecto generado y validado con **libGD / GDJS 5.6.269** (`gdcore-tools@2.0.0-g
 Abre en GDevelop 5.6.269 o posterior. Extensión incluida: *Multitouch joystick and buttons (sprite)* 1.9.0 (oficial).
 
 ## Estado
-MVP jugable completo en HTML5 (export oficial) y proyecto Cordova para Android generado. APK no compilado en este
-entorno (SDK de Android no descargable). Sin prueba en dispositivo real todavía.
+MVP jugable completo en HTML5 (export oficial). **APK de prueba** instalable generado con `tools/build_apk.mjs`
+(`builds/UmbralDeCeniza-1.0.0.apk`, firmado con clave de depuración) y verificado en su capa web; el proyecto Cordova
+del export oficial también se genera. Sin prueba en dispositivo real todavía.
 
 ## Escenas
 | Escena | Contenido |
@@ -32,7 +33,8 @@ entorno (SDK de Android no descargable). Sin prueba en dispositivo real todavía
 - `source/game.json` — proyecto GDevelop (fuente de verdad a partir de ahora).
 - `source/assets/`, `source/fonts/` — recursos. `source/make_art.py`, `source/make_audio.py` — generadores.
 - `tools/` — generador/validador (`build_project.mjs`), export (`export.mjs`), pruebas (`test/`).
-- `.github/workflows/android-apk.yml` — APK de depuración en GitHub Actions (no ejecutado aún).
+- `tools/build_apk.mjs` + `tools/android/` — APK de prueba (actividad WebView propia) sin Android Studio.
+- `.github/workflows/android-apk.yml` — APK de depuración vía Cordova en GitHub Actions (no ejecutado aún).
 - `evidence/` — capturas reales e informe de pruebas.
 
 ## Decisiones
@@ -41,6 +43,10 @@ entorno (SDK de Android no descargable). Sin prueba en dispositivo real todavía
 - Inventario simplificado para móvil: el equipo mejor se equipa solo y el peor se vende (en lugar de rejilla).
 - Controles: extensión oficial de joystick multitouch (no JS propio); `AUTO` reutiliza las mismas variables de entrada.
 - Resolución 1280×720 con `adaptWidth`; HUD con `AnchorBehavior`; capa `Menu` con cámara centrada.
+- APK de prueba con un envoltorio WebView propio (servidor de assets en `https://appassets.androidplatform.net`,
+  Atrás = Esc, eventos `pause`/`resume` para el audio) porque el SDK de Google no era descargable; `targetSdk 34`
+  para que Android 15 no fuerce el borde a borde bajo la cámara. El export oficial (Cordova) sigue siendo el camino
+  para Google Play.
 
 ## Bugs
 Encontrados y corregidos durante las pruebas: golpes del jugador que no expiraban (daño repetido), sala dada por
@@ -52,14 +58,17 @@ Abiertos: ninguno conocido.
 - Functional: PASS — 9/9 pruebas de gameplay (ver `evidence/gameplay-tests/REPORT.md`).
 - Gameplay: PASS — etapa completa con bot y con AUTO; balance comprobado en etapas 5 y 10 (pruebas `balance`).
 - Visual: PASS_WITH_WARNINGS — capturas reales 16:9 y 19.5:9; falta captura en dispositivo.
-- Mobile: PASS_WITH_WARNINGS — multitouch simulado (CDP), anclajes y orientación verificados; falta DEVICE_PASS.
+- Mobile: PASS_WITH_WARNINGS — multitouch simulado (CDP), anclajes y orientación verificados; APK de prueba
+  verificado en su capa web (`APK_CHECK.md`, 20:9); falta DEVICE_PASS.
 - Performance: BLOCKED — sin dispositivo de referencia (en Chromium headless con render por software funciona fluido a efectos de las pruebas).
-- Release: BLOCKED — APK/AAB no compilado aquí (SDK no descargable); pasos documentados en `README.md`.
+- Release: BLOCKED — hay APK de prueba (sideload, clave de depuración); faltan prueba en dispositivo y AAB firmado
+  para Google Play (export oficial de GDevelop).
 
 ## Evidencia
-`evidence/screenshots/*.png` (26 capturas del juego exportado), `evidence/gameplay-tests/REPORT.md` y `report.json`.
+`evidence/screenshots/*.png` (27 capturas del juego exportado), `evidence/gameplay-tests/REPORT.md`, `report.json` y
+`APK_CHECK.md` (capa web del APK).
 
 ## Próximo paso
-1. Compilar el APK (GDevelop *Exportar → Android* o el workflow de GitHub) e instalarlo en un teléfono.
-2. Validar en dispositivo: tacto, notch, rendimiento (60 FPS en gama media), pausa al minimizar, audio.
+1. Instalar `builds/UmbralDeCeniza-1.0.0.apk` en un teléfono (ver `README.md > Android`).
+2. Validar en dispositivo: tacto, notch, rendimiento (60 FPS en gama media), pausa al minimizar, audio, botón Atrás.
 3. Ajustar balance con jugadores reales; luego contenido (más capítulos, 4.ª clase).

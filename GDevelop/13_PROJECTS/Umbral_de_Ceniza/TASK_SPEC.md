@@ -36,6 +36,7 @@ Imposible compilar APK aquí (SDK bloqueado) → export Cordova validado hasta `
 - [x] Las 3 clases con ataque básico y 3 habilidades verificadas.
 - [x] Controles táctiles multitouch verificados; HUD anclado en 19.5:9.
 - [x] Etapa completa con bot y con AUTO; jefe con sus ataques; guardado persistente.
+- [x] APK de prueba generado, firmado (v2/v3) y verificado en su capa web (`tools/build_apk.mjs`, `test/apk_check.mjs`).
 - [ ] APK instalado y probado en un Android real (pendiente, fuera de este entorno).
 
 ## Pruebas

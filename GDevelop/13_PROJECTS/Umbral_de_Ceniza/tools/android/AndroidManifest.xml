@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Test APK of Umbral de Ceniza: one full-screen activity whose WebView runs GDevelop's HTML5 export
+     (builds/web) from assets/www. Packaged by tools/build_apk.mjs, which passes versionCode/versionName and the
+     SDK versions to aapt2. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.umbraldeceniza.juego">
+
+    <!-- Normal permission (no prompt). The WebView only serves local files and MainActivity blocks every other
+         request, but some WebView versions refuse to load https URLs without it. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Umbral de Ceniza"
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|navigation|uiMode"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="adjustNothing">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

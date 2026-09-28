@@ -14,6 +14,8 @@ Crear con el kit GDevelop un juego 2D para Android muy similar a *Darkrise* (ARP
   con libGD 5.6.269; export HTML5 y Cordova con el exportador oficial.
 - Combate automático (AUTO), búfer de entrada de habilidades, guardado local, 2 capítulos / 10 etapas.
 - Pruebas de gameplay en Chromium (9 + 2 de balance) con capturas y workflow de GitHub para APK.
+- APK de prueba instalable (`tools/build_apk.mjs`: actividad WebView propia, build-tools de Ubuntu, firma v2/v3)
+  y comprobación de su capa web con el mismo origen que la app (`tools/test/apk_check.mjs`, 12/12).
 
 ## Archivos
 `13_PROJECTS/Umbral_de_Ceniza/{source,tools,evidence}/**`, contratos del proyecto, `.github/workflows/android-apk.yml`,
@@ -30,7 +32,8 @@ Crear con el kit GDevelop un juego 2D para Android muy similar a *Darkrise* (ARP
 Ver `PROJECT_STATE.md > Decisiones`.
 
 ## Riesgos
-- APK sin compilar ni probar en dispositivo (bloqueo de red del entorno).
+- APK de prueba compilado pero no probado en un dispositivo real (no hay emulador en el entorno); AAB para Google
+  Play pendiente (export oficial de GDevelop).
 - Si se re-ejecuta `tools/build_project.mjs` tras editar en GDevelop, se pierden los cambios del editor.
 - Balance ajustado con bot/AUTO, no con jugadores.
 
@@ -39,5 +42,5 @@ Abrir `source/game.json` en GDevelop. La lógica compartida está en los eventos
 son globales. `README.md` del proyecto explica controles, Android y pipeline.
 
 ## Próxima instrucción
-"Compila el APK desde GDevelop (Exportar → Android) o con el workflow de GitHub, pruébalo en un Android real y
-reporta tacto/notch/rendimiento para cerrar los gates MOBILE, PERFORMANCE y RELEASE."
+"Instala builds/UmbralDeCeniza-1.0.0.apk en un Android real y reporta tacto/notch/rendimiento/audio/botón Atrás
+para cerrar los gates MOBILE y PERFORMANCE; después, AAB con el export oficial de GDevelop para RELEASE."

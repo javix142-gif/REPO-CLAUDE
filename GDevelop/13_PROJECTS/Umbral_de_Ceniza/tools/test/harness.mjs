@@ -36,20 +36,63 @@ export function serve(dir) {
   return new Promise((resolve) => server.listen(0, "127.0.0.1", () => resolve(server)));
 }
 
-export async function launch(dir, { width = 1280, height = 720 } = {}) {
-  const server = await serve(dir);
-  const browser = await chromium.launch({
-    args: ["--use-gl=swiftshader", "--enable-unsafe-swiftshader", "--autoplay-policy=no-user-gesture-required", "--mute-audio"],
-  });
+const BROWSER_ARGS = ["--use-gl=swiftshader", "--enable-unsafe-swiftshader", "--autoplay-policy=no-user-gesture-required", "--mute-audio"];
+
+async function openPage(browser, url, { width, height }, setup = async () => {}) {
   const context = await browser.newContext({ viewport: { width, height }, hasTouch: true });
+  await setup(context);
   const page = await context.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
   page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text()); });
-  await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);
+  await page.goto(url);
   await page.waitForFunction(() => window.__game && window.__game.getSceneStack().getCurrentScene(), null, { timeout: 60000 });
-  const g = new Game(page, errors);
+  return new Game(page, errors);
+}
+
+export async function launch(dir, { width = 1280, height = 720 } = {}) {
+  const server = await serve(dir);
+  const browser = await chromium.launch({ args: BROWSER_ARGS });
+  const g = await openPage(browser, `http://127.0.0.1:${server.address().port}/index.html`, { width, height });
   g.close = async () => { await browser.close(); server.close(); };
+  return g;
+}
+
+/**
+ * Opens the game the way the Android APK does (tools/android/.../MainActivity.java): the files of `wwwDir` (assets/www
+ * extracted from the APK) served at https://appassets.androidplatform.net/, Range requests answered with 206 and
+ * any other host blocked. `g.net` counts what was served, ranged, blocked and missing.
+ */
+export async function launchAsApk(wwwDir, { width = 1280, height = 720 } = {}) {
+  const HOST = "appassets.androidplatform.net";
+  const net = { served: 0, ranges: 0, blocked: [], missing: [] };
+  const browser = await chromium.launch({ args: BROWSER_ARGS });
+  const g = await openPage(browser, `https://${HOST}/index.html`, { width, height }, (context) => context.route("**/*", (route) => {
+    const req = route.request();
+    const url = new URL(req.url());
+    if (url.host !== HOST) { net.blocked.push(url.host); return route.fulfill({ status: 403, body: "" }); }
+    let p = decodeURIComponent(url.pathname);
+    if (p === "/" || p === "") p = "/index.html";
+    const f = path.join(wwwDir, p);
+    if (!fs.existsSync(f)) { net.missing.push(p); return route.fulfill({ status: 404, body: "" }); }
+    let data = fs.readFileSync(f);
+    if (p === "/index.html") {
+      data = Buffer.from(String(data).replace("var game = new gdjs.RuntimeGame(gdjs.projectData, {});",
+        "var game = new gdjs.RuntimeGame(gdjs.projectData, {}); window.__game = game;"));
+    }
+    const type = TYPES[path.extname(f)] || "application/octet-stream";
+    net.served++;
+    const m = /bytes=(\d*)-(\d*)/.exec(req.headers()["range"] || "");
+    if (!m) return route.fulfill({ status: 200, contentType: type, body: data });
+    net.ranges++;
+    let start = 0;
+    let end = data.length - 1;
+    if (m[1]) { start = Number(m[1]); if (m[2]) end = Math.min(Number(m[2]), data.length - 1); } else if (m[2]) start = Math.max(0, data.length - Number(m[2]));
+    return route.fulfill({ status: 206, contentType: type, body: data.subarray(start, end + 1),
+      headers: { "Accept-Ranges": "bytes", "Content-Range": `bytes ${start}-${end}/${data.length}` } });
+  }));
+  g.net = net;
+  g.close = async () => { await browser.close(); };
   return g;
 }
 

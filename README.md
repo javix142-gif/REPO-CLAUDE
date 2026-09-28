@@ -13,6 +13,7 @@ jefe, botín por rareza, niveles, controles táctiles y combate automático. Art
 | Proyecto GDevelop | `GDevelop/13_PROJECTS/Umbral_de_Ceniza/source/game.json` |
 | Generador / validador / pruebas | `GDevelop/13_PROJECTS/Umbral_de_Ceniza/tools/` |
 | Evidencia (capturas, informe) | `GDevelop/13_PROJECTS/Umbral_de_Ceniza/evidence/` |
+| APK de prueba (sin Android Studio) | `GDevelop/13_PROJECTS/Umbral_de_Ceniza/tools/build_apk.mjs` |
 | APK por GitHub Actions | `.github/workflows/android-apk.yml` |
 
 ## GDevelop AI Master Kit
