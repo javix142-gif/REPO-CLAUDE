@@ -1,8 +1,8 @@
-# Gameplay tests — 2026-09-28T22:07:04.412Z
+# Gameplay tests — 2026-09-28T22:25:39.384Z
 
 Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headless (Playwright)
 
-**8/8 PASS**
+**9/9 PASS**
 
 ## ✅ 01 flujo título → clase → pueblo → tiendas → portal (22s)
 
@@ -10,8 +10,8 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS la clase elegida se guarda en Save.Clase
 - PASS vida inicial completa (160/160)
 - PASS animación de reposo por clase (Guerrero_Idle)
-- PASS el jugador se desplaza a la derecha (480 → 607)
-- PASS el maniquí recibe un golpe por tajo (3 golpes en 1,3 s)
+- PASS el jugador se desplaza a la derecha (480 → 611)
+- PASS el maniquí recibe un golpe por tajo (4 golpes en 1,3 s)
 - PASS aparecen números de daño
 - PASS cerca del alquimista aparece la interacción
 - PASS el botón táctil de acción se muestra
@@ -25,22 +25,23 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS se entra a la etapa 1
 - PASS no JavaScript errors in the page ()
 
-## ✅ 02 Guerrero completa la etapa 1 (bot): salas, puertas, jefe, botín, victoria, guardado (92s)
+## ✅ 02 Guerrero completa la etapa 1 (bot): salas, puertas, jefe, botín, victoria, guardado (128s)
 
 - INFO t=0s sala 1 (nivel 1)
 - INFO t=9s sala 2 (nivel 1)
-- INFO t=25s sala 3 (nivel 2)
-- INFO t=46s sala 4 (nivel 2)
-- INFO t=59s sala 5 (nivel 3)
+- INFO t=41s sala 3 (nivel 2)
+- INFO t=62s sala 4 (nivel 2)
+- INFO t=80s sala 5 (nivel 3)
 - PASS la etapa termina con el menú de victoria (menú="victoria", estado=libre)
-- PASS enemigos derrotados: 25
+- PASS enemigos derrotados: 27
 - PASS se desbloquea la etapa 2 (Save.EtapaMax = 2)
 - PASS el personaje sube de nivel (nivel 4)
-- PASS se obtiene oro (205)
+- PASS se obtiene oro (241)
 - PASS las 4 puertas de sala se abrieron
 - PASS al volver, el jugador aparece junto al portal
 - PASS la partida está guardada en localStorage (GDJS_UmbralSave: clase Guerrero, nivel 4, etapa máx. 2)
 - PASS tras recargar, el título ofrece "CONTINUAR  (Guerrero nv. 4)"
+- PASS Continuar carga la partida guardada en el pueblo
 - PASS no JavaScript errors in the page ()
 
 ## ✅ 03 Maga: bola de fuego, nova (congela), meteoro (explosión) y barrera (15s)
@@ -63,7 +64,7 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS el disparo triple lanza 3 flechas (3)
 - PASS las 3 flechas salen en abanico (velocidades verticales distintas)
 - PASS la lluvia de flechas genera flechas desde el cielo (3 en vuelo)
-- PASS el paso sombrío retrocede 237 px con invulnerabilidad
+- PASS el paso sombrío retrocede 236 px con invulnerabilidad
 - PASS no JavaScript errors in the page ()
 
 ## ✅ 05 Controles táctiles multitouch (joystick + botones a la vez) (13s)
@@ -84,11 +85,11 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS Reintentar reinicia la etapa con vida completa
 - PASS no JavaScript errors in the page ()
 
-## ✅ 07 Jefe: Caballero de Ceniza (barra de vida, ataques y furia) (24s)
+## ✅ 07 Jefe: Caballero de Ceniza (barra de vida, ataques y furia) (33s)
 
 - PASS aparece la barra de vida del jefe
 - INFO t=0s sala 5 (nivel 1)
-- PASS el jefe usa sus ataques (mover, carga, tajo, golpe, muerto)
+- PASS el jefe usa sus ataques (mover, carga, golpe, tajo, muerto)
 - PASS derrotar al jefe y entrar al portal lleva a la victoria
 - PASS no JavaScript errors in the page ()
 
@@ -98,4 +99,17 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS el botón de ataque sigue anclado a la derecha (x=1390)
 - PASS el botón de pausa sigue anclado a la derecha (x=1490)
 - PASS la etapa 6 usa el capítulo Fortaleza Carmesí
+- PASS no JavaScript errors in the page ()
+
+## ✅ 09 Combate automático (AUTO): la Maga completa la etapa 1 sin tocar nada más (92s)
+
+- PASS AUTO empieza desactivado
+- PASS tocar AUTO lo activa (botón dorado)
+- INFO t=0s sala 2 (nivel 1, vida 100/100)
+- INFO t=19s sala 3 (nivel 2, vida 106/111)
+- INFO t=38s sala 4 (nivel 3, vida 122/147)
+- INFO t=53s sala 5 (nivel 3, vida 131/147)
+- PASS AUTO avanza, combate, vence al jefe y entra al portal (menú="victoria")
+- PASS AUTO usa habilidades (19)
+- PASS la etapa 2 queda desbloqueada
 - PASS no JavaScript errors in the page ()

@@ -107,8 +107,8 @@ def icon(kind, cls=None, size=24):
     elif kind == "right":
         c.poly([(6, 3), (size - 5, m), (6, size - 3)], GOLD)
     elif kind == "close":
-        c.line([(5, 5), (size - 6, size - 6)], "#e8e0d0", 3)
-        c.line([(5, size - 6), (size - 6, 5)], "#e8e0d0", 3)
+        c.line([(3, 3), (size - 4, size - 4)], "#e8e0d0", 2)
+        c.line([(3, size - 4), (size - 4, 3)], "#e8e0d0", 2)
     elif kind == "star":
         pts = []
         for i in range(10):
@@ -142,10 +142,10 @@ def skill_button(cls, slot):
     return b.im
 
 
-def simple_button(kind, size=32, accent="#8ae8d0"):
+def simple_button(kind, size=32, accent="#8ae8d0", pad=6):
     b = ring_button(size, accent)
-    ic = icon(kind, size=size - 12)
-    b.paste(ic, 6, 6)
+    ic = icon(kind, size=size - 2 * pad)
+    b.paste(ic, pad, pad)
     return b.im
 
 
@@ -307,3 +307,29 @@ def app_icon(size):
     c.rect(0, 0, 0, 47, GOLD_D)
     c.rect(47, 0, 47, 47, GOLD_D)
     return c.im.resize((size, size), _Image.Resampling.NEAREST)
+
+
+def auto_button(on, font_path):
+    """Pill button 'AUTO' (auto-battle toggle)."""
+    c = Canvas(46, 18)
+    fill = "#3a2c10" if on else "#141a26"
+    border = GOLD if on else "#5a6478"
+    c.rect(2, 0, 43, 17, IRON_D)
+    c.rect(0, 2, 45, 15, IRON_D)
+    c.rect(3, 1, 42, 16, border)
+    c.rect(1, 3, 44, 14, border)
+    c.rect(4, 2, 41, 15, fill)
+    c.rect(2, 4, 43, 13, fill)
+    f = ImageFont.truetype(font_path, 11)
+    d = ImageDraw.Draw(c.im)
+    bb = d.textbbox((0, 0), "AUTO", font=f)
+    x = (46 - (bb[2] - bb[0])) // 2 - bb[0]
+    y = (18 - (bb[3] - bb[1])) // 2 - bb[1]
+    d.text((x, y), "AUTO", font=f, fill=(255, 224, 120, 255) if on else (150, 160, 175, 255))
+    px = c.im.load()
+    for yy in range(c.h):  # hard pixel edges
+        for xx in range(c.w):
+            r, g, b, a = px[xx, yy]
+            if 0 < a < 255:
+                px[xx, yy] = (r, g, b, 255 if a > 110 else 0)
+    return c.im

@@ -1,1 +1,6322 @@
-{"version":1,"assets":[{"asset_id":"example.player","role":"character.player","source_file":"","license":"","size_px":{"width":0,"height":0},"pivot":{"x":0,"y":0},"animations":[],"notes":""}]}
+{
+ "version": 2,
+ "pixel_scale": 3,
+ "note": "Generado por tools/build_project.mjs a partir de source/assets/manifest.json. Rutas relativas a source/.",
+ "assets": [
+  {
+   "asset_id": "Jugador.Guerrero_Idle",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Guerrero_Idle",
+   "files": [
+    "assets/jugador/jugador_guerrero_idle_0.png",
+    "assets/jugador/jugador_guerrero_idle_1.png",
+    "assets/jugador/jugador_guerrero_idle_2.png",
+    "assets/jugador/jugador_guerrero_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Guerrero_Run",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Guerrero_Run",
+   "files": [
+    "assets/jugador/jugador_guerrero_run_0.png",
+    "assets/jugador/jugador_guerrero_run_1.png",
+    "assets/jugador/jugador_guerrero_run_2.png",
+    "assets/jugador/jugador_guerrero_run_3.png",
+    "assets/jugador/jugador_guerrero_run_4.png",
+    "assets/jugador/jugador_guerrero_run_5.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 6,
+   "frame_time_s": 0.08,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Guerrero_Jump",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Guerrero_Jump",
+   "files": [
+    "assets/jugador/jugador_guerrero_jump_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Guerrero_Fall",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Guerrero_Fall",
+   "files": [
+    "assets/jugador/jugador_guerrero_fall_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Guerrero_Attack",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Guerrero_Attack",
+   "files": [
+    "assets/jugador/jugador_guerrero_attack_0.png",
+    "assets/jugador/jugador_guerrero_attack_1.png",
+    "assets/jugador/jugador_guerrero_attack_2.png",
+    "assets/jugador/jugador_guerrero_attack_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Guerrero_Cast",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Guerrero_Cast",
+   "files": [
+    "assets/jugador/jugador_guerrero_cast_0.png",
+    "assets/jugador/jugador_guerrero_cast_1.png",
+    "assets/jugador/jugador_guerrero_cast_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.09,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Guerrero_Hurt",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Guerrero_Hurt",
+   "files": [
+    "assets/jugador/jugador_guerrero_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Guerrero_Dead",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Guerrero_Dead",
+   "files": [
+    "assets/jugador/jugador_guerrero_dead_0.png",
+    "assets/jugador/jugador_guerrero_dead_1.png",
+    "assets/jugador/jugador_guerrero_dead_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.16,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Maga_Idle",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Maga_Idle",
+   "files": [
+    "assets/jugador/jugador_maga_idle_0.png",
+    "assets/jugador/jugador_maga_idle_1.png",
+    "assets/jugador/jugador_maga_idle_2.png",
+    "assets/jugador/jugador_maga_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Maga_Run",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Maga_Run",
+   "files": [
+    "assets/jugador/jugador_maga_run_0.png",
+    "assets/jugador/jugador_maga_run_1.png",
+    "assets/jugador/jugador_maga_run_2.png",
+    "assets/jugador/jugador_maga_run_3.png",
+    "assets/jugador/jugador_maga_run_4.png",
+    "assets/jugador/jugador_maga_run_5.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 6,
+   "frame_time_s": 0.08,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Maga_Jump",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Maga_Jump",
+   "files": [
+    "assets/jugador/jugador_maga_jump_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Maga_Fall",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Maga_Fall",
+   "files": [
+    "assets/jugador/jugador_maga_fall_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Maga_Attack",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Maga_Attack",
+   "files": [
+    "assets/jugador/jugador_maga_attack_0.png",
+    "assets/jugador/jugador_maga_attack_1.png",
+    "assets/jugador/jugador_maga_attack_2.png",
+    "assets/jugador/jugador_maga_attack_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Maga_Cast",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Maga_Cast",
+   "files": [
+    "assets/jugador/jugador_maga_cast_0.png",
+    "assets/jugador/jugador_maga_cast_1.png",
+    "assets/jugador/jugador_maga_cast_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.09,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Maga_Hurt",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Maga_Hurt",
+   "files": [
+    "assets/jugador/jugador_maga_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Maga_Dead",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Maga_Dead",
+   "files": [
+    "assets/jugador/jugador_maga_dead_0.png",
+    "assets/jugador/jugador_maga_dead_1.png",
+    "assets/jugador/jugador_maga_dead_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.16,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Arquera_Idle",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Arquera_Idle",
+   "files": [
+    "assets/jugador/jugador_arquera_idle_0.png",
+    "assets/jugador/jugador_arquera_idle_1.png",
+    "assets/jugador/jugador_arquera_idle_2.png",
+    "assets/jugador/jugador_arquera_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Arquera_Run",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Arquera_Run",
+   "files": [
+    "assets/jugador/jugador_arquera_run_0.png",
+    "assets/jugador/jugador_arquera_run_1.png",
+    "assets/jugador/jugador_arquera_run_2.png",
+    "assets/jugador/jugador_arquera_run_3.png",
+    "assets/jugador/jugador_arquera_run_4.png",
+    "assets/jugador/jugador_arquera_run_5.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 6,
+   "frame_time_s": 0.08,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Arquera_Jump",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Arquera_Jump",
+   "files": [
+    "assets/jugador/jugador_arquera_jump_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Arquera_Fall",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Arquera_Fall",
+   "files": [
+    "assets/jugador/jugador_arquera_fall_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Arquera_Attack",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Arquera_Attack",
+   "files": [
+    "assets/jugador/jugador_arquera_attack_0.png",
+    "assets/jugador/jugador_arquera_attack_1.png",
+    "assets/jugador/jugador_arquera_attack_2.png",
+    "assets/jugador/jugador_arquera_attack_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Arquera_Cast",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Arquera_Cast",
+   "files": [
+    "assets/jugador/jugador_arquera_cast_0.png",
+    "assets/jugador/jugador_arquera_cast_1.png",
+    "assets/jugador/jugador_arquera_cast_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.09,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Arquera_Hurt",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Arquera_Hurt",
+   "files": [
+    "assets/jugador/jugador_arquera_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Arquera_Dead",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Arquera_Dead",
+   "files": [
+    "assets/jugador/jugador_arquera_dead_0.png",
+    "assets/jugador/jugador_arquera_dead_1.png",
+    "assets/jugador/jugador_arquera_dead_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.16,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "HeroePreview.Guerrero_Idle",
+   "role": "ui.class-preview",
+   "object": "HeroePreview",
+   "animation": "Guerrero_Idle",
+   "files": [
+    "assets/jugador/jugador_guerrero_idle_0.png",
+    "assets/jugador/jugador_guerrero_idle_1.png",
+    "assets/jugador/jugador_guerrero_idle_2.png",
+    "assets/jugador/jugador_guerrero_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "HeroePreview.Guerrero_Attack",
+   "role": "ui.class-preview",
+   "object": "HeroePreview",
+   "animation": "Guerrero_Attack",
+   "files": [
+    "assets/jugador/jugador_guerrero_attack_0.png",
+    "assets/jugador/jugador_guerrero_attack_1.png",
+    "assets/jugador/jugador_guerrero_attack_2.png",
+    "assets/jugador/jugador_guerrero_attack_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "HeroePreview.Guerrero_Cast",
+   "role": "ui.class-preview",
+   "object": "HeroePreview",
+   "animation": "Guerrero_Cast",
+   "files": [
+    "assets/jugador/jugador_guerrero_cast_0.png",
+    "assets/jugador/jugador_guerrero_cast_1.png",
+    "assets/jugador/jugador_guerrero_cast_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 3,
+   "frame_time_s": 0.18,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "HeroePreview.Maga_Idle",
+   "role": "ui.class-preview",
+   "object": "HeroePreview",
+   "animation": "Maga_Idle",
+   "files": [
+    "assets/jugador/jugador_maga_idle_0.png",
+    "assets/jugador/jugador_maga_idle_1.png",
+    "assets/jugador/jugador_maga_idle_2.png",
+    "assets/jugador/jugador_maga_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "HeroePreview.Maga_Attack",
+   "role": "ui.class-preview",
+   "object": "HeroePreview",
+   "animation": "Maga_Attack",
+   "files": [
+    "assets/jugador/jugador_maga_attack_0.png",
+    "assets/jugador/jugador_maga_attack_1.png",
+    "assets/jugador/jugador_maga_attack_2.png",
+    "assets/jugador/jugador_maga_attack_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "HeroePreview.Maga_Cast",
+   "role": "ui.class-preview",
+   "object": "HeroePreview",
+   "animation": "Maga_Cast",
+   "files": [
+    "assets/jugador/jugador_maga_cast_0.png",
+    "assets/jugador/jugador_maga_cast_1.png",
+    "assets/jugador/jugador_maga_cast_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 3,
+   "frame_time_s": 0.18,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "HeroePreview.Arquera_Idle",
+   "role": "ui.class-preview",
+   "object": "HeroePreview",
+   "animation": "Arquera_Idle",
+   "files": [
+    "assets/jugador/jugador_arquera_idle_0.png",
+    "assets/jugador/jugador_arquera_idle_1.png",
+    "assets/jugador/jugador_arquera_idle_2.png",
+    "assets/jugador/jugador_arquera_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "HeroePreview.Arquera_Attack",
+   "role": "ui.class-preview",
+   "object": "HeroePreview",
+   "animation": "Arquera_Attack",
+   "files": [
+    "assets/jugador/jugador_arquera_attack_0.png",
+    "assets/jugador/jugador_arquera_attack_1.png",
+    "assets/jugador/jugador_arquera_attack_2.png",
+    "assets/jugador/jugador_arquera_attack_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "HeroePreview.Arquera_Cast",
+   "role": "ui.class-preview",
+   "object": "HeroePreview",
+   "animation": "Arquera_Cast",
+   "files": [
+    "assets/jugador/jugador_arquera_cast_0.png",
+    "assets/jugador/jugador_arquera_cast_1.png",
+    "assets/jugador/jugador_arquera_cast_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 3,
+   "frame_time_s": 0.18,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Retrato.Guerrero",
+   "role": "ui",
+   "object": "Retrato",
+   "animation": "Guerrero",
+   "files": [
+    "assets/ui/retrato_guerrero_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 66,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 33,
+    "y": 33
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Retrato.Maga",
+   "role": "ui",
+   "object": "Retrato",
+   "animation": "Maga",
+   "files": [
+    "assets/ui/retrato_maga_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 66,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 33,
+    "y": 33
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Retrato.Arquera",
+   "role": "ui",
+   "object": "Retrato",
+   "animation": "Arquera",
+   "files": [
+    "assets/ui/retrato_arquera_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 66,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 33,
+    "y": 33
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Esqueleto_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Esqueleto_Idle",
+   "files": [
+    "assets/enemigos/enemigo_esqueleto_idle_0.png",
+    "assets/enemigos/enemigo_esqueleto_idle_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     48,
+     45
+    ],
+    [
+     75,
+     45
+    ],
+    [
+     75,
+     126
+    ],
+    [
+     48,
+     126
+    ]
+   ],
+   "frames": 2,
+   "frame_time_s": 0.3,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Esqueleto_Walk",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Esqueleto_Walk",
+   "files": [
+    "assets/enemigos/enemigo_esqueleto_walk_0.png",
+    "assets/enemigos/enemigo_esqueleto_walk_1.png",
+    "assets/enemigos/enemigo_esqueleto_walk_2.png",
+    "assets/enemigos/enemigo_esqueleto_walk_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     48,
+     45
+    ],
+    [
+     75,
+     45
+    ],
+    [
+     75,
+     126
+    ],
+    [
+     48,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Esqueleto_Attack",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Esqueleto_Attack",
+   "files": [
+    "assets/enemigos/enemigo_esqueleto_attack_0.png",
+    "assets/enemigos/enemigo_esqueleto_attack_1.png",
+    "assets/enemigos/enemigo_esqueleto_attack_2.png",
+    "assets/enemigos/enemigo_esqueleto_attack_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     48,
+     45
+    ],
+    [
+     75,
+     45
+    ],
+    [
+     75,
+     126
+    ],
+    [
+     48,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.11,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Esqueleto_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Esqueleto_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_esqueleto_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     48,
+     45
+    ],
+    [
+     75,
+     45
+    ],
+    [
+     75,
+     126
+    ],
+    [
+     48,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Esqueleto_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Esqueleto_Dead",
+   "files": [
+    "assets/enemigos/enemigo_esqueleto_dead_0.png",
+    "assets/enemigos/enemigo_esqueleto_dead_1.png",
+    "assets/enemigos/enemigo_esqueleto_dead_2.png",
+    "assets/enemigos/enemigo_esqueleto_dead_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     48,
+     45
+    ],
+    [
+     75,
+     45
+    ],
+    [
+     75,
+     126
+    ],
+    [
+     48,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Cultista_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Cultista_Idle",
+   "files": [
+    "assets/enemigos/enemigo_cultista_idle_0.png",
+    "assets/enemigos/enemigo_cultista_idle_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     45,
+     45
+    ],
+    [
+     78,
+     45
+    ],
+    [
+     78,
+     126
+    ],
+    [
+     45,
+     126
+    ]
+   ],
+   "frames": 2,
+   "frame_time_s": 0.3,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Cultista_Walk",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Cultista_Walk",
+   "files": [
+    "assets/enemigos/enemigo_cultista_walk_0.png",
+    "assets/enemigos/enemigo_cultista_walk_1.png",
+    "assets/enemigos/enemigo_cultista_walk_2.png",
+    "assets/enemigos/enemigo_cultista_walk_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     45,
+     45
+    ],
+    [
+     78,
+     45
+    ],
+    [
+     78,
+     126
+    ],
+    [
+     45,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Cultista_Cast",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Cultista_Cast",
+   "files": [
+    "assets/enemigos/enemigo_cultista_cast_0.png",
+    "assets/enemigos/enemigo_cultista_cast_1.png",
+    "assets/enemigos/enemigo_cultista_cast_2.png",
+    "assets/enemigos/enemigo_cultista_cast_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     45,
+     45
+    ],
+    [
+     78,
+     45
+    ],
+    [
+     78,
+     126
+    ],
+    [
+     45,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.13,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Cultista_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Cultista_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_cultista_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     45,
+     45
+    ],
+    [
+     78,
+     45
+    ],
+    [
+     78,
+     126
+    ],
+    [
+     45,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Cultista_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Cultista_Dead",
+   "files": [
+    "assets/enemigos/enemigo_cultista_dead_0.png",
+    "assets/enemigos/enemigo_cultista_dead_1.png",
+    "assets/enemigos/enemigo_cultista_dead_2.png",
+    "assets/enemigos/enemigo_cultista_dead_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     45,
+     45
+    ],
+    [
+     78,
+     45
+    ],
+    [
+     78,
+     126
+    ],
+    [
+     45,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Bruto_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Bruto_Idle",
+   "files": [
+    "assets/enemigos/enemigo_bruto_idle_0.png",
+    "assets/enemigos/enemigo_bruto_idle_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 180,
+    "height": 168
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 90,
+    "y": 162
+   },
+   "collision": [
+    [
+     60,
+     57
+    ],
+    [
+     117,
+     57
+    ],
+    [
+     117,
+     162
+    ],
+    [
+     60,
+     162
+    ]
+   ],
+   "frames": 2,
+   "frame_time_s": 0.3,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Bruto_Walk",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Bruto_Walk",
+   "files": [
+    "assets/enemigos/enemigo_bruto_walk_0.png",
+    "assets/enemigos/enemigo_bruto_walk_1.png",
+    "assets/enemigos/enemigo_bruto_walk_2.png",
+    "assets/enemigos/enemigo_bruto_walk_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 180,
+    "height": 168
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 90,
+    "y": 162
+   },
+   "collision": [
+    [
+     60,
+     57
+    ],
+    [
+     117,
+     57
+    ],
+    [
+     117,
+     162
+    ],
+    [
+     60,
+     162
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Bruto_Attack",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Bruto_Attack",
+   "files": [
+    "assets/enemigos/enemigo_bruto_attack_0.png",
+    "assets/enemigos/enemigo_bruto_attack_1.png",
+    "assets/enemigos/enemigo_bruto_attack_2.png",
+    "assets/enemigos/enemigo_bruto_attack_3.png",
+    "assets/enemigos/enemigo_bruto_attack_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 180,
+    "height": 168
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 90,
+    "y": 162
+   },
+   "collision": [
+    [
+     60,
+     57
+    ],
+    [
+     117,
+     57
+    ],
+    [
+     117,
+     162
+    ],
+    [
+     60,
+     162
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.11,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Bruto_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Bruto_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_bruto_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 180,
+    "height": 168
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 90,
+    "y": 162
+   },
+   "collision": [
+    [
+     60,
+     57
+    ],
+    [
+     117,
+     57
+    ],
+    [
+     117,
+     162
+    ],
+    [
+     60,
+     162
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Bruto_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Bruto_Dead",
+   "files": [
+    "assets/enemigos/enemigo_bruto_dead_0.png",
+    "assets/enemigos/enemigo_bruto_dead_1.png",
+    "assets/enemigos/enemigo_bruto_dead_2.png",
+    "assets/enemigos/enemigo_bruto_dead_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 180,
+    "height": 168
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 90,
+    "y": 162
+   },
+   "collision": [
+    [
+     60,
+     57
+    ],
+    [
+     117,
+     57
+    ],
+    [
+     117,
+     162
+    ],
+    [
+     60,
+     162
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Jefe_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Jefe_Idle",
+   "files": [
+    "assets/enemigos/enemigo_jefe_idle_0.png",
+    "assets/enemigos/enemigo_jefe_idle_1.png",
+    "assets/enemigos/enemigo_jefe_idle_2.png",
+    "assets/enemigos/enemigo_jefe_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.18,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Jefe_Walk",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Jefe_Walk",
+   "files": [
+    "assets/enemigos/enemigo_jefe_walk_0.png",
+    "assets/enemigos/enemigo_jefe_walk_1.png",
+    "assets/enemigos/enemigo_jefe_walk_2.png",
+    "assets/enemigos/enemigo_jefe_walk_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Jefe_Slash",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Jefe_Slash",
+   "files": [
+    "assets/enemigos/enemigo_jefe_slash_0.png",
+    "assets/enemigos/enemigo_jefe_slash_1.png",
+    "assets/enemigos/enemigo_jefe_slash_2.png",
+    "assets/enemigos/enemigo_jefe_slash_3.png",
+    "assets/enemigos/enemigo_jefe_slash_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.1,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Jefe_Charge",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Jefe_Charge",
+   "files": [
+    "assets/enemigos/enemigo_jefe_charge_0.png",
+    "assets/enemigos/enemigo_jefe_charge_1.png",
+    "assets/enemigos/enemigo_jefe_charge_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.07,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Jefe_Slam",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Jefe_Slam",
+   "files": [
+    "assets/enemigos/enemigo_jefe_slam_0.png",
+    "assets/enemigos/enemigo_jefe_slam_1.png",
+    "assets/enemigos/enemigo_jefe_slam_2.png",
+    "assets/enemigos/enemigo_jefe_slam_3.png",
+    "assets/enemigos/enemigo_jefe_slam_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.11,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Jefe_Summon",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Jefe_Summon",
+   "files": [
+    "assets/enemigos/enemigo_jefe_summon_0.png",
+    "assets/enemigos/enemigo_jefe_summon_1.png",
+    "assets/enemigos/enemigo_jefe_summon_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.16,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Jefe_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Jefe_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_jefe_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Jefe_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Jefe_Dead",
+   "files": [
+    "assets/enemigos/enemigo_jefe_dead_0.png",
+    "assets/enemigos/enemigo_jefe_dead_1.png",
+    "assets/enemigos/enemigo_jefe_dead_2.png",
+    "assets/enemigos/enemigo_jefe_dead_3.png",
+    "assets/enemigos/enemigo_jefe_dead_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Murcielago_Fly",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Murcielago_Fly",
+   "files": [
+    "assets/enemigos/enemigo_murcielago_fly_0.png",
+    "assets/enemigos/enemigo_murcielago_fly_1.png",
+    "assets/enemigos/enemigo_murcielago_fly_2.png",
+    "assets/enemigos/enemigo_murcielago_fly_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 84
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 42
+   },
+   "collision": [
+    [
+     27,
+     21
+    ],
+    [
+     81,
+     21
+    ],
+    [
+     81,
+     63
+    ],
+    [
+     27,
+     63
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.08,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Murcielago_Attack",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Murcielago_Attack",
+   "files": [
+    "assets/enemigos/enemigo_murcielago_attack_0.png",
+    "assets/enemigos/enemigo_murcielago_attack_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 84
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 42
+   },
+   "collision": [
+    [
+     27,
+     21
+    ],
+    [
+     81,
+     21
+    ],
+    [
+     81,
+     63
+    ],
+    [
+     27,
+     63
+    ]
+   ],
+   "frames": 2,
+   "frame_time_s": 0.06,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Murcielago_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Murcielago_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_murcielago_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 84
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 42
+   },
+   "collision": [
+    [
+     27,
+     21
+    ],
+    [
+     81,
+     21
+    ],
+    [
+     81,
+     63
+    ],
+    [
+     27,
+     63
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Murcielago_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Murcielago_Dead",
+   "files": [
+    "assets/enemigos/enemigo_murcielago_dead_0.png",
+    "assets/enemigos/enemigo_murcielago_dead_1.png",
+    "assets/enemigos/enemigo_murcielago_dead_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 84
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 42
+   },
+   "collision": [
+    [
+     27,
+     21
+    ],
+    [
+     81,
+     21
+    ],
+    [
+     81,
+     63
+    ],
+    [
+     27,
+     63
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Maniqui_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Maniqui_Idle",
+   "files": [
+    "assets/enemigos/enemigo_maniqui_idle_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 96,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 48,
+    "y": 126
+   },
+   "collision": [
+    [
+     27,
+     36
+    ],
+    [
+     69,
+     36
+    ],
+    [
+     69,
+     126
+    ],
+    [
+     27,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.07,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Maniqui_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Maniqui_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_maniqui_hurt_0.png",
+    "assets/enemigos/enemigo_maniqui_hurt_1.png",
+    "assets/enemigos/enemigo_maniqui_hurt_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 96,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 48,
+    "y": 126
+   },
+   "collision": [
+    [
+     27,
+     36
+    ],
+    [
+     69,
+     36
+    ],
+    [
+     69,
+     126
+    ],
+    [
+     27,
+     126
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.07,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "NPC.Herrera_Idle",
+   "role": "character.npc",
+   "object": "NPC",
+   "animation": "Herrera_Idle",
+   "files": [
+    "assets/npc/npc_herrera_idle_0.png",
+    "assets/npc/npc_herrera_idle_1.png",
+    "assets/npc/npc_herrera_idle_2.png",
+    "assets/npc/npc_herrera_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 132,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 66,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.22,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "NPC.Alquimista_Idle",
+   "role": "character.npc",
+   "object": "NPC",
+   "animation": "Alquimista_Idle",
+   "files": [
+    "assets/npc/npc_alquimista_idle_0.png",
+    "assets/npc/npc_alquimista_idle_1.png",
+    "assets/npc/npc_alquimista_idle_2.png",
+    "assets/npc/npc_alquimista_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 132,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 66,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.35,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "ProyectilJugador.Fuego",
+   "role": "projectile",
+   "object": "ProyectilJugador",
+   "animation": "Fuego",
+   "files": [
+    "assets/proyectiles/proyectiljugador_fuego_0.png",
+    "assets/proyectiles/proyectiljugador_fuego_1.png",
+    "assets/proyectiles/proyectiljugador_fuego_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 66,
+    "height": 42
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 33,
+    "y": 21
+   },
+   "collision": "bounding-box",
+   "frames": 3,
+   "frame_time_s": 0.06,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "ProyectilJugador.Flecha",
+   "role": "projectile",
+   "object": "ProyectilJugador",
+   "animation": "Flecha",
+   "files": [
+    "assets/proyectiles/proyectiljugador_flecha_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 72,
+    "height": 21
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 36,
+    "y": 10
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "ProyectilJugador.Meteoro",
+   "role": "projectile",
+   "object": "ProyectilJugador",
+   "animation": "Meteoro",
+   "files": [
+    "assets/proyectiles/proyectiljugador_meteoro_0.png",
+    "assets/proyectiles/proyectiljugador_meteoro_1.png",
+    "assets/proyectiles/proyectiljugador_meteoro_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 90,
+    "height": 90
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 45,
+    "y": 45
+   },
+   "collision": "bounding-box",
+   "frames": 3,
+   "frame_time_s": 0.06,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "ProyectilJugador.Hielo",
+   "role": "projectile",
+   "object": "ProyectilJugador",
+   "animation": "Hielo",
+   "files": [
+    "assets/proyectiles/proyectiljugador_hielo_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 54,
+    "height": 30
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 27,
+    "y": 15
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "ProyectilEnemigo.Orbe",
+   "role": "projectile",
+   "object": "ProyectilEnemigo",
+   "animation": "Orbe",
+   "files": [
+    "assets/proyectiles/proyectilenemigo_orbe_0.png",
+    "assets/proyectiles/proyectilenemigo_orbe_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 48,
+    "height": 48
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 24,
+    "y": 24
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "ProyectilEnemigo.Onda",
+   "role": "projectile",
+   "object": "ProyectilEnemigo",
+   "animation": "Onda",
+   "files": [
+    "assets/proyectiles/proyectilenemigo_onda_0.png",
+    "assets/proyectiles/proyectilenemigo_onda_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 90,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 45,
+    "y": 33
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.08,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Tajo",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Tajo",
+   "files": [
+    "assets/fx/efecto_tajo_0.png",
+    "assets/fx/efecto_tajo_1.png",
+    "assets/fx/efecto_tajo_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 168,
+    "height": 144
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 84,
+    "y": 72
+   },
+   "collision": "bounding-box",
+   "frames": 3,
+   "frame_time_s": 0.05,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Torbellino",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Torbellino",
+   "files": [
+    "assets/fx/efecto_torbellino_0.png",
+    "assets/fx/efecto_torbellino_1.png",
+    "assets/fx/efecto_torbellino_2.png",
+    "assets/fx/efecto_torbellino_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 252,
+    "height": 156
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 126,
+    "y": 78
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.05,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Nova",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Nova",
+   "files": [
+    "assets/fx/efecto_nova_0.png",
+    "assets/fx/efecto_nova_1.png",
+    "assets/fx/efecto_nova_2.png",
+    "assets/fx/efecto_nova_3.png",
+    "assets/fx/efecto_nova_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 270,
+    "height": 270
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 135,
+    "y": 135
+   },
+   "collision": "bounding-box",
+   "frames": 5,
+   "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Explosion",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Explosion",
+   "files": [
+    "assets/fx/efecto_explosion_0.png",
+    "assets/fx/efecto_explosion_1.png",
+    "assets/fx/efecto_explosion_2.png",
+    "assets/fx/efecto_explosion_3.png",
+    "assets/fx/efecto_explosion_4.png",
+    "assets/fx/efecto_explosion_5.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 168,
+    "height": 168
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 84,
+    "y": 84
+   },
+   "collision": "bounding-box",
+   "frames": 6,
+   "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Impacto",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Impacto",
+   "files": [
+    "assets/fx/efecto_impacto_0.png",
+    "assets/fx/efecto_impacto_1.png",
+    "assets/fx/efecto_impacto_2.png",
+    "assets/fx/efecto_impacto_3.png",
+    "assets/fx/efecto_impacto_4.png",
+    "assets/fx/efecto_impacto_5.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 216,
+    "height": 216
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 108,
+    "y": 108
+   },
+   "collision": "bounding-box",
+   "frames": 6,
+   "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Chispa",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Chispa",
+   "files": [
+    "assets/fx/efecto_chispa_0.png",
+    "assets/fx/efecto_chispa_1.png",
+    "assets/fx/efecto_chispa_2.png",
+    "assets/fx/efecto_chispa_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 66,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 33,
+    "y": 33
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.04,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.ChispaHielo",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "ChispaHielo",
+   "files": [
+    "assets/fx/efecto_chispahielo_0.png",
+    "assets/fx/efecto_chispahielo_1.png",
+    "assets/fx/efecto_chispahielo_2.png",
+    "assets/fx/efecto_chispahielo_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 66,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 33,
+    "y": 33
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.04,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.ChispaRoja",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "ChispaRoja",
+   "files": [
+    "assets/fx/efecto_chisparoja_0.png",
+    "assets/fx/efecto_chisparoja_1.png",
+    "assets/fx/efecto_chisparoja_2.png",
+    "assets/fx/efecto_chisparoja_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 66,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 33,
+    "y": 33
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.04,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Curacion",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Curacion",
+   "files": [
+    "assets/fx/efecto_curacion_0.png",
+    "assets/fx/efecto_curacion_1.png",
+    "assets/fx/efecto_curacion_2.png",
+    "assets/fx/efecto_curacion_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 150
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 75
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Nivel",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Nivel",
+   "files": [
+    "assets/fx/efecto_nivel_0.png",
+    "assets/fx/efecto_nivel_1.png",
+    "assets/fx/efecto_nivel_2.png",
+    "assets/fx/efecto_nivel_3.png",
+    "assets/fx/efecto_nivel_4.png",
+    "assets/fx/efecto_nivel_5.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 150,
+    "height": 252
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 75,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 6,
+   "frame_time_s": 0.1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Escudo",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Escudo",
+   "files": [
+    "assets/fx/efecto_escudo_0.png",
+    "assets/fx/efecto_escudo_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 162,
+    "height": 180
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 81,
+    "y": 90
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.2,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Portal",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Portal",
+   "files": [
+    "assets/fx/efecto_portal_0.png",
+    "assets/fx/efecto_portal_1.png",
+    "assets/fx/efecto_portal_2.png",
+    "assets/fx/efecto_portal_3.png",
+    "assets/fx/efecto_portal_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 132,
+    "height": 168
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 66,
+    "y": 84
+   },
+   "collision": "bounding-box",
+   "frames": 5,
+   "frame_time_s": 0.08,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.PortalFuego",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "PortalFuego",
+   "files": [
+    "assets/fx/efecto_portalfuego_0.png",
+    "assets/fx/efecto_portalfuego_1.png",
+    "assets/fx/efecto_portalfuego_2.png",
+    "assets/fx/efecto_portalfuego_3.png",
+    "assets/fx/efecto_portalfuego_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 132,
+    "height": 168
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 66,
+    "y": 84
+   },
+   "collision": "bounding-box",
+   "frames": 5,
+   "frame_time_s": 0.08,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Polvo",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Polvo",
+   "files": [
+    "assets/fx/efecto_polvo_0.png",
+    "assets/fx/efecto_polvo_1.png",
+    "assets/fx/efecto_polvo_2.png",
+    "assets/fx/efecto_polvo_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 78,
+    "height": 42
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 39,
+    "y": 21
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Humo",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Humo",
+   "files": [
+    "assets/fx/efecto_humo_0.png",
+    "assets/fx/efecto_humo_1.png",
+    "assets/fx/efecto_humo_2.png",
+    "assets/fx/efecto_humo_3.png",
+    "assets/fx/efecto_humo_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 120
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 60
+   },
+   "collision": "bounding-box",
+   "frames": 5,
+   "frame_time_s": 0.08,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Grito",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Grito",
+   "files": [
+    "assets/fx/efecto_grito_0.png",
+    "assets/fx/efecto_grito_1.png",
+    "assets/fx/efecto_grito_2.png",
+    "assets/fx/efecto_grito_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 228,
+    "height": 180
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 114,
+    "y": 90
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.07,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Destello",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Destello",
+   "files": [
+    "assets/fx/efecto_destello_0.png",
+    "assets/fx/efecto_destello_1.png",
+    "assets/fx/efecto_destello_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 60
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 30
+   },
+   "collision": "bounding-box",
+   "frames": 3,
+   "frame_time_s": 0.04,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Moneda.Gira",
+   "role": "pickup",
+   "object": "Moneda",
+   "animation": "Gira",
+   "files": [
+    "assets/botin/moneda_gira_0.png",
+    "assets/botin/moneda_gira_1.png",
+    "assets/botin/moneda_gira_2.png",
+    "assets/botin/moneda_gira_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 36,
+    "height": 36
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 18,
+    "y": 18
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.09,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "OrbeVida.Brilla",
+   "role": "pickup",
+   "object": "OrbeVida",
+   "animation": "Brilla",
+   "files": [
+    "assets/botin/orbevida_brilla_0.png",
+    "assets/botin/orbevida_brilla_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 42,
+    "height": 42
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 21,
+    "y": 21
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.2,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Espada_1",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Espada_1",
+   "files": [
+    "assets/botin/botin_espada_1_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Espada_2",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Espada_2",
+   "files": [
+    "assets/botin/botin_espada_2_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Espada_3",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Espada_3",
+   "files": [
+    "assets/botin/botin_espada_3_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Espada_4",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Espada_4",
+   "files": [
+    "assets/botin/botin_espada_4_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Espada_5",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Espada_5",
+   "files": [
+    "assets/botin/botin_espada_5_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Baculo_1",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Baculo_1",
+   "files": [
+    "assets/botin/botin_baculo_1_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Baculo_2",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Baculo_2",
+   "files": [
+    "assets/botin/botin_baculo_2_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Baculo_3",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Baculo_3",
+   "files": [
+    "assets/botin/botin_baculo_3_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Baculo_4",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Baculo_4",
+   "files": [
+    "assets/botin/botin_baculo_4_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Baculo_5",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Baculo_5",
+   "files": [
+    "assets/botin/botin_baculo_5_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Arco_1",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Arco_1",
+   "files": [
+    "assets/botin/botin_arco_1_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Arco_2",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Arco_2",
+   "files": [
+    "assets/botin/botin_arco_2_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Arco_3",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Arco_3",
+   "files": [
+    "assets/botin/botin_arco_3_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Arco_4",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Arco_4",
+   "files": [
+    "assets/botin/botin_arco_4_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Arco_5",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Arco_5",
+   "files": [
+    "assets/botin/botin_arco_5_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Armadura_1",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Armadura_1",
+   "files": [
+    "assets/botin/botin_armadura_1_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Armadura_2",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Armadura_2",
+   "files": [
+    "assets/botin/botin_armadura_2_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Armadura_3",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Armadura_3",
+   "files": [
+    "assets/botin/botin_armadura_3_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Armadura_4",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Armadura_4",
+   "files": [
+    "assets/botin/botin_armadura_4_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Botin.Armadura_5",
+   "role": "pickup",
+   "object": "Botin",
+   "animation": "Armadura_5",
+   "files": [
+    "assets/botin/botin_armadura_5_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 210
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 30,
+    "y": 210
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Puerta.Cerrada",
+   "role": "environment.prop",
+   "object": "Puerta",
+   "animation": "Cerrada",
+   "files": [
+    "assets/entorno/puerta_cerrada_0.png",
+    "assets/entorno/puerta_cerrada_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 84,
+    "height": 276
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 42,
+    "y": 276
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.25,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Puerta.Abriendo",
+   "role": "environment.prop",
+   "object": "Puerta",
+   "animation": "Abriendo",
+   "files": [
+    "assets/entorno/puerta_abriendo_0.png",
+    "assets/entorno/puerta_abriendo_1.png",
+    "assets/entorno/puerta_abriendo_2.png",
+    "assets/entorno/puerta_abriendo_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 84,
+    "height": 276
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 42,
+    "y": 276
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Puerta.Abierta",
+   "role": "environment.prop",
+   "object": "Puerta",
+   "animation": "Abierta",
+   "files": [
+    "assets/entorno/puerta_abierta_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 84,
+    "height": 276
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 42,
+    "y": 276
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Antorcha.Arde",
+   "role": "environment.prop",
+   "object": "Antorcha",
+   "animation": "Arde",
+   "files": [
+    "assets/entorno/antorcha_arde_0.png",
+    "assets/entorno/antorcha_arde_1.png",
+    "assets/entorno/antorcha_arde_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 144
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 144
+   },
+   "collision": "bounding-box",
+   "frames": 3,
+   "frame_time_s": 0.12,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Estandarte.Ondea",
+   "role": "environment.prop",
+   "object": "Estandarte",
+   "animation": "Ondea",
+   "files": [
+    "assets/entorno/estandarte_ondea_0.png",
+    "assets/entorno/estandarte_ondea_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.45,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Calaveras.Quieto",
+   "role": "environment.prop",
+   "object": "Calaveras",
+   "animation": "Quieto",
+   "files": [
+    "assets/entorno/calaveras_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 78,
+    "height": 42
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Velas.Arde",
+   "role": "environment.prop",
+   "object": "Velas",
+   "animation": "Arde",
+   "files": [
+    "assets/entorno/velas_arde_0.png",
+    "assets/entorno/velas_arde_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 54,
+    "height": 54
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.3,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Barril.Quieto",
+   "role": "environment.prop",
+   "object": "Barril",
+   "animation": "Quieto",
+   "files": [
+    "assets/entorno/barril_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 54,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Caja.Quieto",
+   "role": "environment.prop",
+   "object": "Caja",
+   "animation": "Quieto",
+   "files": [
+    "assets/entorno/caja_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 60,
+    "height": 60
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Farol.Arde",
+   "role": "environment.prop",
+   "object": "Farol",
+   "animation": "Arde",
+   "files": [
+    "assets/entorno/farol_arde_0.png",
+    "assets/entorno/farol_arde_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 192
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.35,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Forja.Arde",
+   "role": "environment.prop",
+   "object": "Forja",
+   "animation": "Arde",
+   "files": [
+    "assets/entorno/forja_arde_0.png",
+    "assets/entorno/forja_arde_1.png",
+    "assets/entorno/forja_arde_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 168,
+    "height": 120
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 3,
+   "frame_time_s": 0.12,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Puesto.Quieto",
+   "role": "environment.prop",
+   "object": "Puesto",
+   "animation": "Quieto",
+   "files": [
+    "assets/entorno/puesto_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 132,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Pozo.Quieto",
+   "role": "environment.prop",
+   "object": "Pozo",
+   "animation": "Quieto",
+   "files": [
+    "assets/entorno/pozo_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 102,
+    "height": 114
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Letrero.Quieto",
+   "role": "environment.prop",
+   "object": "Letrero",
+   "animation": "Quieto",
+   "files": [
+    "assets/entorno/letrero_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 72,
+    "height": 96
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Arbol.Quieto",
+   "role": "environment.prop",
+   "object": "Arbol",
+   "animation": "Quieto",
+   "files": [
+    "assets/entorno/arbol_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 168,
+    "height": 216
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Portal.Mazmorra",
+   "role": "environment.prop",
+   "object": "Portal",
+   "animation": "Mazmorra",
+   "files": [
+    "assets/entorno/portal_mazmorra_0.png",
+    "assets/entorno/portal_mazmorra_1.png",
+    "assets/entorno/portal_mazmorra_2.png",
+    "assets/entorno/portal_mazmorra_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 156,
+    "height": 228
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 78,
+    "y": 228
+   },
+   "collision": [
+    [
+     40,
+     90
+    ],
+    [
+     116,
+     90
+    ],
+    [
+     116,
+     228
+    ],
+    [
+     40,
+     228
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Portal.Salida",
+   "role": "environment.prop",
+   "object": "Portal",
+   "animation": "Salida",
+   "files": [
+    "assets/entorno/portal_salida_0.png",
+    "assets/entorno/portal_salida_1.png",
+    "assets/entorno/portal_salida_2.png",
+    "assets/entorno/portal_salida_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 156,
+    "height": 228
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 78,
+    "y": 228
+   },
+   "collision": [
+    [
+     40,
+     90
+    ],
+    [
+     116,
+     90
+    ],
+    [
+     116,
+     228
+    ],
+    [
+     40,
+     228
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "FondoTitulo.Quieto",
+   "role": "ui.background",
+   "object": "FondoTitulo",
+   "animation": "Quieto",
+   "files": [
+    "assets/entorno/fondotitulo_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 1290,
+    "height": 720
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonAtaque.Guerrero",
+   "role": "ui",
+   "object": "BotonAtaque",
+   "animation": "Guerrero",
+   "files": [
+    "assets/ui/botonataque_guerrero_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 150,
+    "height": 150
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 75,
+    "y": 75
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonAtaque.Maga",
+   "role": "ui",
+   "object": "BotonAtaque",
+   "animation": "Maga",
+   "files": [
+    "assets/ui/botonataque_maga_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 150,
+    "height": 150
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 75,
+    "y": 75
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonAtaque.Arquera",
+   "role": "ui",
+   "object": "BotonAtaque",
+   "animation": "Arquera",
+   "files": [
+    "assets/ui/botonataque_arquera_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 150,
+    "height": 150
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 75,
+    "y": 75
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonHab1.Guerrero",
+   "role": "ui",
+   "object": "BotonHab1",
+   "animation": "Guerrero",
+   "files": [
+    "assets/ui/botonhab1_guerrero_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 54
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonHab1.Maga",
+   "role": "ui",
+   "object": "BotonHab1",
+   "animation": "Maga",
+   "files": [
+    "assets/ui/botonhab1_maga_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 54
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonHab1.Arquera",
+   "role": "ui",
+   "object": "BotonHab1",
+   "animation": "Arquera",
+   "files": [
+    "assets/ui/botonhab1_arquera_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 54
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonHab2.Guerrero",
+   "role": "ui",
+   "object": "BotonHab2",
+   "animation": "Guerrero",
+   "files": [
+    "assets/ui/botonhab2_guerrero_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 54
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonHab2.Maga",
+   "role": "ui",
+   "object": "BotonHab2",
+   "animation": "Maga",
+   "files": [
+    "assets/ui/botonhab2_maga_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 54
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonHab2.Arquera",
+   "role": "ui",
+   "object": "BotonHab2",
+   "animation": "Arquera",
+   "files": [
+    "assets/ui/botonhab2_arquera_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 54
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonHab3.Guerrero",
+   "role": "ui",
+   "object": "BotonHab3",
+   "animation": "Guerrero",
+   "files": [
+    "assets/ui/botonhab3_guerrero_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 54
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonHab3.Maga",
+   "role": "ui",
+   "object": "BotonHab3",
+   "animation": "Maga",
+   "files": [
+    "assets/ui/botonhab3_maga_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 54
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonHab3.Arquera",
+   "role": "ui",
+   "object": "BotonHab3",
+   "animation": "Arquera",
+   "files": [
+    "assets/ui/botonhab3_arquera_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 54
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonSalto.Normal",
+   "role": "ui",
+   "object": "BotonSalto",
+   "animation": "Normal",
+   "files": [
+    "assets/ui/botonsalto_normal_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 96,
+    "height": 96
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 48,
+    "y": 48
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonPocion.Normal",
+   "role": "ui",
+   "object": "BotonPocion",
+   "animation": "Normal",
+   "files": [
+    "assets/ui/botonpocion_normal_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 96,
+    "height": 96
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 48,
+    "y": 48
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonPausa.Normal",
+   "role": "ui",
+   "object": "BotonPausa",
+   "animation": "Normal",
+   "files": [
+    "assets/ui/botonpausa_normal_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 66,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 33,
+    "y": 33
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonAccion.Normal",
+   "role": "ui",
+   "object": "BotonAccion",
+   "animation": "Normal",
+   "files": [
+    "assets/ui/botonaccion_normal_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 96,
+    "height": 96
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 48,
+    "y": 48
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "MascaraCD.Ciclo",
+   "role": "ui",
+   "object": "MascaraCD",
+   "animation": "Ciclo",
+   "files": [
+    "assets/ui/mascaracd_ciclo_0.png",
+    "assets/ui/mascaracd_ciclo_1.png",
+    "assets/ui/mascaracd_ciclo_2.png",
+    "assets/ui/mascaracd_ciclo_3.png",
+    "assets/ui/mascaracd_ciclo_4.png",
+    "assets/ui/mascaracd_ciclo_5.png",
+    "assets/ui/mascaracd_ciclo_6.png",
+    "assets/ui/mascaracd_ciclo_7.png",
+    "assets/ui/mascaracd_ciclo_8.png",
+    "assets/ui/mascaracd_ciclo_9.png",
+    "assets/ui/mascaracd_ciclo_10.png",
+    "assets/ui/mascaracd_ciclo_11.png",
+    "assets/ui/mascaracd_ciclo_12.png",
+    "assets/ui/mascaracd_ciclo_13.png",
+    "assets/ui/mascaracd_ciclo_14.png",
+    "assets/ui/mascaracd_ciclo_15.png",
+    "assets/ui/mascaracd_ciclo_16.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 108,
+    "height": 108
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 54,
+    "y": 54
+   },
+   "collision": "bounding-box",
+   "frames": 17,
+   "frame_time_s": 10,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonAuto.Off",
+   "role": "ui",
+   "object": "BotonAuto",
+   "animation": "Off",
+   "files": [
+    "assets/ui/botonauto_off_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 138,
+    "height": 54
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 69,
+    "y": 27
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonAuto.On",
+   "role": "ui",
+   "object": "BotonAuto",
+   "animation": "On",
+   "files": [
+    "assets/ui/botonauto_on_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 138,
+    "height": 54
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 69,
+    "y": 27
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "MarcoHUD.Quieto",
+   "role": "ui",
+   "object": "MarcoHUD",
+   "animation": "Quieto",
+   "files": [
+    "assets/ui/marcohud_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 402,
+    "height": 96
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BarraVida.Quieto",
+   "role": "ui",
+   "object": "BarraVida",
+   "animation": "Quieto",
+   "files": [
+    "assets/ui/barravida_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 300,
+    "height": 21
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BarraMana.Quieto",
+   "role": "ui",
+   "object": "BarraMana",
+   "animation": "Quieto",
+   "files": [
+    "assets/ui/barramana_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 300,
+    "height": 15
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BarraExp.Quieto",
+   "role": "ui",
+   "object": "BarraExp",
+   "animation": "Quieto",
+   "files": [
+    "assets/ui/barraexp_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 300,
+    "height": 9
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BarraJefeMarco.Quieto",
+   "role": "ui",
+   "object": "BarraJefeMarco",
+   "animation": "Quieto",
+   "files": [
+    "assets/ui/barrajefemarco_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 516,
+    "height": 42
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BarraJefe.Quieto",
+   "role": "ui",
+   "object": "BarraJefe",
+   "animation": "Quieto",
+   "files": [
+    "assets/ui/barrajefe_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 498,
+    "height": 21
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 0,
+    "y": 0
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "IconoMoneda.Quieto",
+   "role": "ui",
+   "object": "IconoMoneda",
+   "animation": "Quieto",
+   "files": [
+    "assets/ui/iconomoneda_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 54,
+    "height": 54
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 27,
+    "y": 27
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "IconoCalavera.Quieto",
+   "role": "ui",
+   "object": "IconoCalavera",
+   "animation": "Quieto",
+   "files": [
+    "assets/ui/iconocalavera_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 54,
+    "height": 54
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 27,
+    "y": 27
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Flecha.Izq",
+   "role": "ui",
+   "object": "Flecha",
+   "animation": "Izq",
+   "files": [
+    "assets/ui/flecha_izq_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 78,
+    "height": 78
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 39,
+    "y": 39
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Flecha.Der",
+   "role": "ui",
+   "object": "Flecha",
+   "animation": "Der",
+   "files": [
+    "assets/ui/flecha_der_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 78,
+    "height": 78
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 39,
+    "y": 39
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "BotonCerrar.Normal",
+   "role": "ui",
+   "object": "BotonCerrar",
+   "animation": "Normal",
+   "files": [
+    "assets/ui/botoncerrar_normal_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 72,
+    "height": 72
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 36,
+    "y": 36
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Logo.Quieto",
+   "role": "ui",
+   "object": "Logo",
+   "animation": "Quieto",
+   "files": [
+    "assets/ui/logo_quieto_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 900,
+    "height": 312
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 450,
+    "y": 156
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.icono_36",
+   "role": "app.icon",
+   "files": [
+    "assets/icono/icono_36.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.icono_48",
+   "role": "app.icon",
+   "files": [
+    "assets/icono/icono_48.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.icono_72",
+   "role": "app.icon",
+   "files": [
+    "assets/icono/icono_72.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.icono_96",
+   "role": "app.icon",
+   "files": [
+    "assets/icono/icono_96.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.icono_144",
+   "role": "app.icon",
+   "files": [
+    "assets/icono/icono_144.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.icono_192",
+   "role": "app.icon",
+   "files": [
+    "assets/icono/icono_192.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.icono_512",
+   "role": "app.icon",
+   "files": [
+    "assets/icono/icono_512.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.fondo_mazmorra_lejos",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/fondo_mazmorra_lejos.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.fondo_mazmorra_medio",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/fondo_mazmorra_medio.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.muro_mazmorra",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/muro_mazmorra.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.fondo_fortaleza_lejos",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/fondo_fortaleza_lejos.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.fondo_fortaleza_medio",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/fondo_fortaleza_medio.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.muro_fortaleza",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/muro_fortaleza.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.suelo_mazmorra",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/suelo_mazmorra.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.relleno_mazmorra",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/relleno_mazmorra.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.plataforma_mazmorra",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/plataforma_mazmorra.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.suelo_fortaleza",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/suelo_fortaleza.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.relleno_fortaleza",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/relleno_fortaleza.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.plataforma_fortaleza",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/plataforma_fortaleza.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.suelo_pueblo",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/suelo_pueblo.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.relleno_pueblo",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/relleno_pueblo.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.plataforma_pueblo",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/plataforma_pueblo.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.cielo_pueblo",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/cielo_pueblo.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.casas_pueblo",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/casas_pueblo.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.joystick_borde",
+   "role": "ui",
+   "files": [
+    "assets/ui/joystick_borde.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.joystick_pulgar",
+   "role": "ui",
+   "files": [
+    "assets/ui/joystick_pulgar.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.panel",
+   "role": "ui",
+   "files": [
+    "assets/ui/panel.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.boton_menu",
+   "role": "ui",
+   "files": [
+    "assets/ui/boton_menu.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "audio.botin",
+   "role": "sfx",
+   "files": [
+    "assets/audio/botin.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.click",
+   "role": "sfx",
+   "files": [
+    "assets/audio/click.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.critico",
+   "role": "sfx",
+   "files": [
+    "assets/audio/critico.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.derrota",
+   "role": "sfx",
+   "files": [
+    "assets/audio/derrota.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.escudo",
+   "role": "sfx",
+   "files": [
+    "assets/audio/escudo.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.explosion",
+   "role": "sfx",
+   "files": [
+    "assets/audio/explosion.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.flecha",
+   "role": "sfx",
+   "files": [
+    "assets/audio/flecha.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.fuego",
+   "role": "sfx",
+   "files": [
+    "assets/audio/fuego.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.golpe",
+   "role": "sfx",
+   "files": [
+    "assets/audio/golpe.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.grito",
+   "role": "sfx",
+   "files": [
+    "assets/audio/grito.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.herido",
+   "role": "sfx",
+   "files": [
+    "assets/audio/herido.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.hielo",
+   "role": "sfx",
+   "files": [
+    "assets/audio/hielo.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.impacto_suelo",
+   "role": "sfx",
+   "files": [
+    "assets/audio/impacto_suelo.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.jefe_rugido",
+   "role": "sfx",
+   "files": [
+    "assets/audio/jefe_rugido.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.moneda",
+   "role": "sfx",
+   "files": [
+    "assets/audio/moneda.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.muerte_enemigo",
+   "role": "sfx",
+   "files": [
+    "assets/audio/muerte_enemigo.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.musica_jefe",
+   "role": "music",
+   "files": [
+    "assets/audio/musica_jefe.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.musica_mazmorra",
+   "role": "music",
+   "files": [
+    "assets/audio/musica_mazmorra.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.musica_pueblo",
+   "role": "music",
+   "files": [
+    "assets/audio/musica_pueblo.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.musica_titulo",
+   "role": "music",
+   "files": [
+    "assets/audio/musica_titulo.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.nivel",
+   "role": "sfx",
+   "files": [
+    "assets/audio/nivel.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.orbe",
+   "role": "sfx",
+   "files": [
+    "assets/audio/orbe.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.pocion",
+   "role": "sfx",
+   "files": [
+    "assets/audio/pocion.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.portal",
+   "role": "sfx",
+   "files": [
+    "assets/audio/portal.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.puerta",
+   "role": "sfx",
+   "files": [
+    "assets/audio/puerta.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.salto",
+   "role": "sfx",
+   "files": [
+    "assets/audio/salto.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.tajo",
+   "role": "sfx",
+   "files": [
+    "assets/audio/tajo.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "audio.victoria",
+   "role": "sfx",
+   "files": [
+    "assets/audio/victoria.wav"
+   ],
+   "type": "wav PCM 16-bit mono 22050 Hz",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_audio.py"
+  },
+  {
+   "asset_id": "fuente.PixelifySans",
+   "role": "font.ui",
+   "files": [
+    "fonts/PixelifySans-SemiBold.ttf"
+   ],
+   "type": "ttf",
+   "license": "SIL Open Font License 1.1 (fonts/OFL-PixelifySans.txt)",
+   "origin": "Pixelify Sans (Google Fonts) vía npm @expo-google-fonts/pixelify-sans 0.4.2"
+  },
+  {
+   "asset_id": "fuente.Jersey10",
+   "role": "font.title",
+   "files": [
+    "fonts/Jersey10-Regular.ttf"
+   ],
+   "type": "ttf",
+   "license": "SIL Open Font License 1.1 (fonts/OFL-Jersey10.txt)",
+   "origin": "Jersey 10 (Google Fonts) vía npm @expo-google-fonts/jersey-10 0.4.1"
+  }
+ ]
+}

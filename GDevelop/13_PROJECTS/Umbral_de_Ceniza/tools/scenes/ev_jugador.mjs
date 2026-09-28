@@ -6,11 +6,11 @@ import { CLASES } from "./common.mjs";
 
 export const CLASS = {
   Guerrero: { vida: [160, 18], mana: [40, 3], atq: [12, 2.5], def: [6, 1], crit: 0.1, regen: 3, cdAtk: 0.4, hitT: 0.06,
-    cd: [5, 6, 14], cost: [12, 14, 20] },
+    cd: [5, 6, 14], cost: [12, 14, 20], autoRango: 85 },
   Maga: { vida: [100, 11], mana: [110, 8], atq: [15, 3], def: [3, 0.6], crit: 0.1, regen: 6, cdAtk: 0.44, hitT: 0.06,
-    cd: [5, 7, 14], cost: [16, 24, 20] },
+    cd: [5, 7, 14], cost: [16, 24, 20], autoRango: 330 },
   Arquera: { vida: [120, 14], mana: [70, 5], atq: [13, 2.8], def: [4, 0.8], crit: 0.18, regen: 4, cdAtk: 0.34, hitT: 0.12,
-    cd: [3.5, 7, 6], cost: [10, 18, 12] },
+    cd: [3.5, 7, 6], cost: [10, 18, 12], autoRango: 380 },
 };
 
 const J = "Jugador";
@@ -66,6 +66,7 @@ function statsEvents() {
       SET("Stat.CdAtk", "=", d.cdAtk), SET("Stat.HitT", "=", d.hitT),
       SET("Stat.Cd1Max", "=", d.cd[0]), SET("Stat.Cd2Max", "=", d.cd[1]), SET("Stat.Cd3Max", "=", d.cd[2]),
       SET("Stat.Costo1", "=", d.cost[0]), SET("Stat.Costo2", "=", d.cost[1]), SET("Stat.Costo3", "=", d.cost[2]),
+      SET("Stat.AutoRango", "=", d.autoRango),
     ]);
   });
   return GROUP("Estadísticas del personaje", [
@@ -333,11 +334,18 @@ function followers() {
   ]);
 }
 
-export function evJugador() {
+/** Stats + input: first external events of Pueblo/Mazmorra, so a scene can add input (e.g. AUTO) before EV_Jugador. */
+export function evEntrada() {
   return [
-    COMMENT("EV_Jugador — eventos compartidos por Pueblo y Mazmorra (enlazados con un evento 'Enlace')."),
+    COMMENT("EV_Entrada — estadísticas y lectura de controles (táctil y teclado). Se enlaza antes de EV_Jugador."),
     statsEvents(),
     inputEvents(),
+  ];
+}
+
+export function evJugador() {
+  return [
+    COMMENT("EV_Jugador — movimiento, ataques, habilidades y poción. Compartido por Pueblo y Mazmorra (evento 'Enlace')."),
     timersAndLook(),
     attackEvents(),
     skillEvents(),

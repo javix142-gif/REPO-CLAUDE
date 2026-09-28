@@ -2,7 +2,7 @@
 import { q, C, A, NOT, OR, AND, E, ELSE, FOREACH, REPEAT, COMMENT, GROUP, LINK, SET, SETS, IFN, IFS, OSET, OSETS, OIFN, OIFS,
   CMP, ANIM, HIDE, SHOW, WIDTH, TEXT, SETX, SETY, XY, SOUND, MUSIC, DT, JUST_BEGINS, KEY_JUST, TAP_ON, GOTO, CREATE, DEL,
   OPACITY, COLLIDE } from "../lib/dsl.mjs";
-import { inst, layer, vnum, vstr, tiled, sprite, text } from "../lib/objects.mjs";
+import { inst, layer, vnum, vstr, vstruct, tiled, sprite, text, anchor } from "../lib/objects.mjs";
 import { gameplaySceneVariables, hudInstances, menuInstances, SUELO, FONT_TITLE } from "./common.mjs";
 import { menuSystem } from "./ev_hud.mjs";
 import { toast } from "./ev_combate.mjs";
@@ -20,6 +20,7 @@ export function mazmorraObjects(m) {
     sprite(m, "BarraJefeMarco"), sprite(m, "BarraJefe"), sprite(m, "IconoCalavera"),
     text("TextoEtapa", { size: 24, color: [230, 220, 200] }),
     text("TextoJefe", { size: 30, font: FONT_TITLE, color: [255, 150, 90], outline: [40, 12, 8] }),
+    sprite(m, "BotonAuto", { behaviors: [anchor(2, 1)] }),
   ];
 }
 
@@ -65,6 +66,7 @@ function layout() {
   I.push(inst("BarraJefe", 391, 112, { layer: "HUD", z: 6 }));
   I.push(inst("IconoCalavera", 360, 121, { layer: "HUD", z: 7 }));
   I.push(inst("TextoJefe", 640, 64, { layer: "HUD", z: 6 }));
+  I.push(inst("BotonAuto", 1100, 52, { layer: "HUD", z: 6 }));
   I.push(...menuInstances());
   return I;
 }
@@ -76,6 +78,7 @@ function sceneVariables() {
     vnum("SpawnPend", 0), vnum("AnchoSala", ANCHO_SALA), vnum("NumSalas", NUM_SALAS), vnum("SalaIni", 0), vnum("JefeVivo", 0),
     vnum("JefeMuerto", 0), vnum("TJefeMuerto", 0), vnum("PEsq", 0.65), vnum("PMur", 1), vnum("PCul", 1), vnum("Victoria", 0),
     vnum("TMuerte", 0), vnum("InvocarPend", 0), vnum("InvX", 0), vstr("Capitulo", ""),
+    vstruct("Auto", [vnum("Hay", 0), vnum("Dx", 0), vnum("Dy", 0)]),
   ];
 }
 
@@ -231,6 +234,46 @@ function menus() {
   ];
 }
 
+function autoBattle() {
+  const J = "Jugador";
+  const EN = "Enemigo";
+  const right = () => A("PlatformBehavior::SimulateRightKey", J, "PlatformerObject");
+  const left = () => A("PlatformBehavior::SimulateLeftKey", J, "PlatformerObject");
+  const toward = (dx) => [E([CMP(dx, ">", 0)], [right()]), ELSE([], [left()])];
+  const away = (dx) => [E([CMP(dx, ">", 0)], [left()]), ELSE([], [right()])];
+  return GROUP("Combate automático (AUTO)", [
+    COMMENT("Como en los ARPG móviles: con AUTO activo el héroe avanza, elige al enemigo más cercano, ataca, usa habilidades y bebe pociones. Sólo escribe en las variables In.* (las mismas que los botones)."),
+    E([OR(AND(...TAP_ON("BotonAuto")), KEY_JUST("t")), IFS("Menu", "=", q(""))], [SET("Save.Auto", "=", "1 - Save.Auto"), SET("Guardar", "=", 1),
+      SOUND("assets/audio/click.wav", 60)], [
+      E([IFN("Save.Auto", "=", 1)], toast(q("Combate automático: ACTIVADO"), q("255;214;90"), 1.4)),
+      ELSE([], toast(q("Combate automático: desactivado"), q("200;200;200"), 1.4)),
+    ]),
+    E([IFN("Save.Auto", "=", 1)], [ANIM("BotonAuto", q("On"))]),
+    ELSE([], [ANIM("BotonAuto", q("Off"))]),
+    E([IFN("Save.Auto", "=", 1), IFS("Menu", "=", q("")), OIFS(J, "Estado", "!=", q("muerto"))], [SET("Auto.Hay", "=", 0)], [
+      E([OIFS(EN, "Estado", "!=", q("muerto")), OIFS(EN, "Estado", "!=", q("aparecer")), C("PickNearest", EN, "Jugador.X()", "Jugador.Y() - 40")], [
+        SET("Auto.Hay", "=", 1), SET("Auto.Dx", "=", "Enemigo.X() - Jugador.X()"), SET("Auto.Dy", "=", "Enemigo.Y() - Jugador.Y()")]),
+      E([CMP("Jugador.HP", "<", "Stat.VidaMax * 0.35")], [SET("In.Pot", "=", 1)]),
+      E([IFN("Auto.Hay", "=", 1)], [], [
+        E([CMP("abs(Auto.Dx)", ">", "Stat.AutoRango")], [], toward("Auto.Dx")),
+        ELSE([], [], [
+          E([CMP("Auto.Dx * Jugador.Dir", "<", 0), OIFS(J, "Estado", "=", q("libre"))], [], toward("Auto.Dx")),
+          E([CMP("abs(Auto.Dy)", "<", 170)], [SET("In.Atk", "=", 1)], [
+            E([OIFN(J, "Cd2", "<=", 0), CMP("Jugador.MP", ">=", "Stat.Costo2")], [SET("In.S2", "=", 1)]),
+            ELSE([OIFN(J, "Cd1", "<=", 0), CMP("Jugador.MP", ">=", "Stat.Costo1")], [SET("In.S1", "=", 1)]),
+            ELSE([OIFN(J, "Cd3", "<=", 0), CMP("Jugador.MP", ">=", "Stat.Costo3"), CMP("Jugador.HP", "<", "Stat.VidaMax * 0.65")], [SET("In.S3", "=", 1)]),
+          ]),
+        ]),
+        E([IFS("Save.Clase", "!=", q("Guerrero")), CMP("abs(Auto.Dx)", "<", 110)], [], away("Auto.Dx")),
+      ]),
+      E([IFN("Auto.Hay", "=", 0)], [], [
+        E([IFN("JefeMuerto", "=", 2), C("Visible", "Portal")], [], toward("Portal.X() - Jugador.X()")),
+        ELSE([IFS("SalaEstado", "!=", q("combate"))], [right()]),
+      ]),
+    ]),
+  ]);
+}
+
 export function mazmorraScene() {
   return {
     name: "Mazmorra",
@@ -241,6 +284,8 @@ export function mazmorraScene() {
     events: [
       COMMENT("MAZMORRA — la lógica compartida está en los eventos externos EV_Jugador, EV_Combate, EV_HUD y EV_Enemigos."),
       startEvents(),
+      LINK("EV_Entrada"),
+      autoBattle(),
       LINK("EV_Jugador"),
       LINK("EV_Enemigos"),
       LINK("EV_Combate"),

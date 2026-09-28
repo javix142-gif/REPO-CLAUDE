@@ -20,7 +20,7 @@ import { fileURLToPath } from "node:url";
 import { Finalizer } from "./lib/finalize.mjs";
 import { resetUuid } from "./lib/objects.mjs";
 import { globalObjects, globalVariables } from "./scenes/common.mjs";
-import { evJugador } from "./scenes/ev_jugador.mjs";
+import { evJugador, evEntrada } from "./scenes/ev_jugador.mjs";
 import { evCombate } from "./scenes/ev_combate.mjs";
 import { evHud } from "./scenes/ev_hud.mjs";
 import { evEnemigos } from "./scenes/ev_enemigos.mjs";
@@ -147,6 +147,7 @@ async function main() {
     { def: mazmorraScene(), objects: mazmorraObjects(manifest) },
   ];
   const external = [
+    { name: "EV_Entrada", associatedLayout: "Mazmorra", events: evEntrada(), usedBy: ["Pueblo", "Mazmorra"] },
     { name: "EV_Jugador", associatedLayout: "Mazmorra", events: evJugador(), usedBy: ["Pueblo", "Mazmorra"] },
     { name: "EV_Combate", associatedLayout: "Mazmorra", events: evCombate(), usedBy: ["Pueblo", "Mazmorra"] },
     { name: "EV_HUD", associatedLayout: "Mazmorra", events: evHud(), usedBy: ["Pueblo", "Mazmorra"] },
@@ -245,4 +246,42 @@ async function main() {
   log(`engine code generation OK (${known.length} known warnings from the official joystick extension)`);
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+// ------------------------------------------------------------------ ASSET_MANIFEST.json (kit asset contract)
+const ROLES = [
+  [/^Jugador$/, "character.player"], [/^HeroePreview$/, "ui.class-preview"], [/^Enemigo$/, "character.enemy"], [/^NPC$/, "character.npc"],
+  [/^Proyectil/, "projectile"], [/^Efecto$/, "fx"], [/^(Moneda|OrbeVida|Botin)$/, "pickup"],
+  [/^(Puerta|Portal|Antorcha|Estandarte|Calaveras|Velas|Barril|Caja|Farol|Forja|Puesto|Pozo|Letrero|Arbol)$/, "environment.prop"],
+  [/^FondoTitulo$/, "ui.background"], [/./, "ui"],
+];
+const ORIGINAL = "Original del proyecto, generado por código (sin assets de terceros).";
+function writeAssetManifest() {
+  const assets = [];
+  for (const [obj, s] of Object.entries(manifest.sprites)) {
+    const role = ROLES.find(([re]) => re.test(obj))[1];
+    for (const a of s.anims) {
+      assets.push({
+        asset_id: `${obj}.${a.name}`, role, object: obj, animation: a.name, files: a.frames, type: "png", size_px: { width: a.size[0], height: a.size[1] },
+        alpha: true, pivot: { x: a.origin[0], y: a.origin[1] }, collision: a.mask || "bounding-box", frames: a.frames.length,
+        frame_time_s: a.dt, loop: a.loop, directions: role.startsWith("character") ? "derecha (FlipX para la izquierda)" : "única",
+        pixel_scale: manifest.scale, variant: "", license: ORIGINAL, origin: "source/make_art.py",
+      });
+    }
+  }
+  for (const [id, file] of Object.entries(manifest.images)) {
+    assets.push({ asset_id: `imagen.${id}`, role: id.startsWith("icono") ? "app.icon" : (/fondo|cielo|casas|suelo|relleno|plataforma|muro/.test(id) ? "environment.tile" : "ui"),
+      files: [file], type: "png", alpha: true, pixel_scale: manifest.scale, license: ORIGINAL, origin: "source/make_art.py" });
+  }
+  for (const f of fs.readdirSync(path.join(SRC, "assets/audio")).filter((x) => x.endsWith(".wav")).sort()) {
+    assets.push({ asset_id: `audio.${f.replace(".wav", "")}`, role: f.startsWith("musica_") ? "music" : "sfx", files: [`assets/audio/${f}`],
+      type: "wav PCM 16-bit mono 22050 Hz", license: ORIGINAL, origin: "source/make_audio.py" });
+  }
+  assets.push({ asset_id: "fuente.PixelifySans", role: "font.ui", files: ["fonts/PixelifySans-SemiBold.ttf"], type: "ttf",
+    license: "SIL Open Font License 1.1 (fonts/OFL-PixelifySans.txt)", origin: "Pixelify Sans (Google Fonts) vía npm @expo-google-fonts/pixelify-sans 0.4.2" });
+  assets.push({ asset_id: "fuente.Jersey10", role: "font.title", files: ["fonts/Jersey10-Regular.ttf"], type: "ttf",
+    license: "SIL Open Font License 1.1 (fonts/OFL-Jersey10.txt)", origin: "Jersey 10 (Google Fonts) vía npm @expo-google-fonts/jersey-10 0.4.1" });
+  fs.writeFileSync(path.join(ROOT, "ASSET_MANIFEST.json"), JSON.stringify({ version: 2, pixel_scale: manifest.scale,
+    note: "Generado por tools/build_project.mjs a partir de source/assets/manifest.json. Rutas relativas a source/.", assets }, null, 1));
+  log(`ASSET_MANIFEST.json: ${assets.length} assets`);
+}
+
+main().then(writeAssetManifest).catch((e) => { console.error(e); process.exit(1); });

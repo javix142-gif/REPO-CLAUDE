@@ -44,6 +44,7 @@ export function evHud() {
  */
 export function menuSystem(menus) {
   const ev = [COMMENT("Sistema de menús: MenuAbrir abre un menú; los botones escriben su acción en la variable Accion.")];
+  ev.push(E([C("SceneJustBegins")], [], [E([OIFN("Flecha", "Paso", "=", 1)], [ANIM("Flecha", q("Der"))])]));
   ev.push(E([], [SETS("Accion", "=", q(""))]));
   for (const [id, m] of Object.entries(menus)) {
     const open = [

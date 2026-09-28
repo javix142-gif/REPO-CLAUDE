@@ -1,1 +1,11 @@
-{"structure":"BLOCKED","functional":"BLOCKED","gameplay_tests":"BLOCKED","visual":"BLOCKED","mobile":"BLOCKED","performance":"BLOCKED","diff":"BLOCKED","license":"BLOCKED","release":"BLOCKED"}
+{
+  "structure": { "status": "PASS", "evidence": "libGD 5.6.269 carga y re-guarda source/game.json; 0 errores de validación (tipos, parámetros, objetos, behaviors, variables, recursos) y 0 errores de generación de código (tools/build_project.mjs)" },
+  "functional": { "status": "PASS", "evidence": "evidence/gameplay-tests/REPORT.md (pruebas 01-09)" },
+  "gameplay_tests": { "status": "PASS", "evidence": "tools/test/run_tests.mjs en Chromium headless; balance en etapas 5 y 10 con AUTO" },
+  "visual": { "status": "PASS_WITH_WARNINGS", "evidence": "evidence/screenshots/ (16:9 y 19.5:9, export HTML5 real)", "warning": "sin captura en dispositivo Android" },
+  "mobile": { "status": "PASS_WITH_WARNINGS", "evidence": "multitouch por CDP (joystick + ataque simultáneos), anclajes en 1560x720, manifiesto Android con screenOrientation=landscape", "warning": "DEVICE_PASS pendiente (notch real, rendimiento, pausa al minimizar)" },
+  "performance": { "status": "BLOCKED", "reason": "sin dispositivo de referencia" },
+  "diff": { "status": "PASS", "evidence": "cambios limitados a 13_PROJECTS/Umbral_de_Ceniza, .github/workflows y README raíz" },
+  "license": { "status": "PASS", "evidence": "source/LICENCIAS.md y ASSET_MANIFEST.json: arte/audio originales generados por código, fuentes OFL 1.1, extensión y runtime MIT" },
+  "release": { "status": "BLOCKED", "reason": "APK/AAB no compilado en este entorno (dl.google.com bloqueado); export Cordova validado hasta cordova prepare; ver README.md > Android" }
+}

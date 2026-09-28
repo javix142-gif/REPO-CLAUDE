@@ -29,6 +29,7 @@ function check(cond, msg, log) {
 
 async function test(name, fn, opts = {}) {
   if (filter && !name.includes(filter)) return;
+  if (!filter && name.startsWith("balance")) return; // slow: run with `node test/run_tests.mjs balance`
   const log = [];
   const t0 = Date.now();
   let g;
@@ -62,7 +63,7 @@ async function clickMenuSlot(g, slot) {
   await g.clickObject("BotonMenu", idx);
 }
 
-async function newGame(g, cls) {
+async function newGame(g, cls, shotName = "") {
   await g.wait(2500);
   await g.setV("Save.Clase", "", true);
   if ((await g.scene()) !== "Titulo") throw new Error("not on title");
@@ -70,6 +71,7 @@ async function newGame(g, cls) {
   const hay = await g.v("Juego.HayPartida", true);
   await clickMenuSlot(g, hay ? 2 : 1);
   await g.waitScene("SeleccionClase");
+  if (shotName) { await g.wait(800); await shot(g, shotName); }
   const idx = ["Guerrero", "Maga", "Arquera"].indexOf(cls);
   await g.clickObject("BotonMenu", idx);
   await g.waitScene("Pueblo");
@@ -188,7 +190,7 @@ await test("01 flujo título → clase → pueblo → tiendas → portal", async
   await g.wait(2500);
   check((await g.scene()) === "Titulo", "arranca en la escena Titulo", log);
   await shot(g, "01_titulo.png");
-  await newGame(g, "Guerrero");
+  await newGame(g, "Guerrero", "02_seleccion_clase.png");
   check((await g.v("Save.Clase", true)) === "Guerrero", "la clase elegida se guarda en Save.Clase", log);
   await g.wait(600);
   const p = await player(g);
@@ -231,6 +233,11 @@ await test("01 flujo título → clase → pueblo → tiendas → portal", async
   check((await g.v("Save.Forja", true)) === 1 && (await g.v("Stat.Atq", true)) === 15, "forjar sube Forja a 1 y ATQ de 12 a 15", log);
   await shot(g, "06_herreria.png");
   await g.tap("Escape"); await g.wait(300);
+  // character sheet (tap the portrait / key C)
+  await g.tap("c"); await g.wait(400);
+  check((await g.v("Menu")) === "personaje", "la ficha del personaje se abre (retrato / tecla C)", log);
+  await shot(g, "06b_ficha_personaje.png");
+  await g.tap("Escape"); await g.wait(300);
   // portal
   await g.setPos("Jugador", 3440); await g.wait(500);
   await g.tap("e"); await g.wait(500);
@@ -260,9 +267,20 @@ await test("02 Guerrero completa la etapa 1 (bot): salas, puertas, jefe, botín,
   check((await g.v("Stats.Oro")) > 0, `se obtiene oro (${await g.v("Stats.Oro")})`, log);
   const puertas = await g.objects("Puerta");
   check(puertas.every((p) => p.vars.Abierta === 1), "las 4 puertas de sala se abrieron", log);
+  const botin = await g.v("Stats.Botin");
+  const equipo = (await g.v("Save.ArmaBonus", true)) + (await g.v("Save.ArmaduraBonus", true));
+  check(botin === 0 || equipo > 0, `el botín recogido se equipa (${botin} objetos; bonus de equipo ${equipo})`, log);
   await clickMenuSlot(g, 2);
   await g.waitScene("Pueblo");
   check((await player(g)).x > 3000, "al volver, el jugador aparece junto al portal", log);
+  await g.tap("e"); await g.wait(500);
+  const flechas = await g.objects("Flecha");
+  const der = flechas.findIndex((f) => f.vars.Paso === 1);
+  check(flechas[der].anim === "Der", "la flecha derecha del portal apunta a la derecha", log);
+  await g.clickObject("Flecha", der); await g.wait(300);
+  check((await g.v("Save.EtapaSel", true)) === 2, "con la etapa 2 desbloqueada, la flecha selecciona la etapa 2", log);
+  await shot(g, "12b_portal_etapa2.png");
+  await g.tap("Escape"); await g.wait(300);
   // GDevelop storage: localStorage["GDJS_UmbralSave"] = {"datos":{"str":"<ToJSON(Save)>"}}
   const saved = await g.page.evaluate(() => { const raw = localStorage.getItem("GDJS_UmbralSave"); return raw ? JSON.parse(JSON.parse(raw).datos.str) : null; });
   check(saved && saved.EtapaMax === 2 && saved.Clase === "Guerrero" && saved.Nivel >= 2,
@@ -272,6 +290,9 @@ await test("02 Guerrero completa la etapa 1 (bot): salas, puertas, jefe, botín,
   await g.wait(3000);
   const label = (await g.objects("TextoBoton")).find((t) => t.vars.Slot === 1).text;
   check(/CONTINUAR\s+\(Guerrero nv\. \d+\)/.test(label), `tras recargar, el título ofrece "${label}"`, log);
+  await clickMenuSlot(g, 1);
+  await g.waitScene("Pueblo");
+  check((await g.v("Save.EtapaMax", true)) === 2 && (await g.v("Save.Clase", true)) === "Guerrero", "Continuar carga la partida guardada en el pueblo", log);
 });
 
 /** Deterministic target: create an Enemigo of a given type at x (the game's own init events give it its stats). */
@@ -472,6 +493,49 @@ await test("08 Pantalla 19.5:9 (1560×720): HUD anclado y capítulo 2", async (g
   await g.wait(1500);
   await shot(g, "23_fortaleza_19-5x9.png");
 }, { width: 1560, height: 720 });
+
+/** Waits (without any input) until a menu opens or the hero dies; logs room progress. */
+async function watchAuto(g, log, timeoutS) {
+  const t0 = Date.now();
+  let lastSala = -1;
+  while ((Date.now() - t0) / 1000 < timeoutS) {
+    const s = await state(g);
+    if (s.sala !== lastSala) { lastSala = s.sala; log.push(`INFO t=${Math.round((Date.now() - t0) / 1000)}s sala ${s.sala + 1} (nivel ${s.nivel}, vida ${Math.round(s.hp)}/${s.vidaMax})`); }
+    if (s.menu !== "") return s;
+    await g.wait(500);
+  }
+  throw new Error(`AUTO no terminó la etapa en ${timeoutS}s`);
+}
+
+await test("09 Combate automático (AUTO): la Maga completa la etapa 1 sin tocar nada más", async (g, log) => {
+  await newGame(g, "Maga");
+  await enterDungeon(g, 1);
+  check((await g.objects("BotonAuto"))[0].anim === "Off", "AUTO empieza desactivado", log);
+  await g.clickObject("BotonAuto");
+  await g.wait(300);
+  check((await g.v("Save.Auto", true)) === 1 && (await g.objects("BotonAuto"))[0].anim === "On", "tocar AUTO lo activa (botón dorado)", log);
+  await g.wait(12000);
+  await shot(g, "24_auto_combate.png");
+  const s = await watchAuto(g, log, 420);
+  check(s.menu === "victoria", `AUTO avanza, combate, vence al jefe y entra al portal (menú="${s.menu}")`, log);
+  check((await g.v("Stats.Habilidades")) > 5, `AUTO usa habilidades (${await g.v("Stats.Habilidades")})`, log);
+  check((await g.v("Save.EtapaMax", true)) === 2, "la etapa 2 queda desbloqueada", log);
+});
+
+for (const [cls, etapa, nivel] of [["Guerrero", 5, 9], ["Arquera", 10, 19]]) {
+  await test(`balance ${cls} nivel ${nivel} en etapa ${etapa} (AUTO)`, async (g, log) => {
+    await newGame(g, cls);
+    // equipment roughly expected at that point: forge/reinforce levels and rare gear of the previous stage
+    const arma = Math.round((3 + 2.6 * (etapa - 1)) * 1.9); const armadura = Math.round((10 + 8 * (etapa - 1)) * 1.9);
+    for (const [k, v] of [["Save.Nivel", nivel], ["Save.ArmaBonus", arma], ["Save.ArmaduraBonus", armadura], ["Save.Forja", Math.floor(etapa / 2)],
+      ["Save.Refuerzo", Math.floor(etapa / 2)], ["Save.Pociones", 8], ["Save.Auto", 1]]) await g.setV(k, v, true);
+    await enterDungeon(g, etapa);
+    log.push(`INFO arma +${arma} ATQ, armadura +${armadura} VIDA, forja/refuerzo ${Math.floor(etapa / 2)}`);
+    const s = await watchAuto(g, log, 600);
+    log.push(`INFO resultado: menú="${s.menu}", vida ${Math.round(s.hp)}/${s.vidaMax}, pociones restantes ${s.pociones}`);
+    check(s.menu === "victoria", `el personaje del nivel recomendado supera la etapa ${etapa}`, log);
+  });
+}
 
 // ------------------------------------------------------------------ report
 const pass = results.filter((r) => r.status === "PASS").length;

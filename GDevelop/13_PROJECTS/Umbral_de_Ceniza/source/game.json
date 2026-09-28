@@ -2839,22 +2839,6 @@
         "userAdded": false
       },
       {
-        "file": "assets/ui/boton_menu_rojo.png",
-        "kind": "image",
-        "metadata": "",
-        "name": "assets/ui/boton_menu_rojo.png",
-        "smoothed": false,
-        "userAdded": false
-      },
-      {
-        "file": "assets/ui/boton_menu_verde.png",
-        "kind": "image",
-        "metadata": "",
-        "name": "assets/ui/boton_menu_verde.png",
-        "smoothed": false,
-        "userAdded": false
-      },
-      {
         "file": "assets/ui/botonaccion_normal_0.png",
         "kind": "image",
         "metadata": "",
@@ -2883,6 +2867,22 @@
         "kind": "image",
         "metadata": "",
         "name": "assets/ui/botonataque_maga_0.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/ui/botonauto_off_0.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/ui/botonauto_off_0.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/ui/botonauto_on_0.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/ui/botonauto_on_0.png",
         "smoothed": false,
         "userAdded": false
       },
@@ -3015,34 +3015,10 @@
         "userAdded": false
       },
       {
-        "file": "assets/ui/iconocandado_quieto_0.png",
-        "kind": "image",
-        "metadata": "",
-        "name": "assets/ui/iconocandado_quieto_0.png",
-        "smoothed": false,
-        "userAdded": false
-      },
-      {
-        "file": "assets/ui/iconoestrella_quieto_0.png",
-        "kind": "image",
-        "metadata": "",
-        "name": "assets/ui/iconoestrella_quieto_0.png",
-        "smoothed": false,
-        "userAdded": false
-      },
-      {
         "file": "assets/ui/iconomoneda_quieto_0.png",
         "kind": "image",
         "metadata": "",
         "name": "assets/ui/iconomoneda_quieto_0.png",
-        "smoothed": false,
-        "userAdded": false
-      },
-      {
-        "file": "assets/ui/iconopocion_quieto_0.png",
-        "kind": "image",
-        "metadata": "",
-        "name": "assets/ui/iconopocion_quieto_0.png",
         "smoothed": false,
         "userAdded": false
       },
@@ -15731,8 +15707,8 @@
                   "points": [],
                   "originPoint": {
                     "name": "origine",
-                    "x": 33,
-                    "y": 33
+                    "x": 36,
+                    "y": 36
                   },
                   "centerPoint": {
                     "automatic": true,
@@ -16043,6 +16019,11 @@
           "value": 0
         },
         {
+          "name": "Auto",
+          "type": "number",
+          "value": 0
+        },
+        {
           "name": "Clase",
           "type": "string",
           "value": ""
@@ -16102,6 +16083,11 @@
           "name": "Atq",
           "type": "number",
           "value": 10
+        },
+        {
+          "name": "AutoRango",
+          "type": "number",
+          "value": 85
         },
         {
           "name": "Cd1Max",
@@ -17109,6 +17095,37 @@
                 "Accion",
                 "=",
                 "\"\""
+              ]
+            },
+            {
+              "type": {
+                "value": "ScalableCapability::ScalableBehavior::SetValue"
+              },
+              "parameters": [
+                "FondoTitulo",
+                "Scale",
+                "=",
+                "max(1, (CameraWidth() + 8) / 1290)"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetX"
+              },
+              "parameters": [
+                "FondoTitulo",
+                "=",
+                "CameraX() - FondoTitulo.Width() / 2"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetY"
+              },
+              "parameters": [
+                "FondoTitulo",
+                "=",
+                "CameraY() - FondoTitulo.Height() / 2"
               ]
             },
             {
@@ -19146,6 +19163,37 @@
             },
             {
               "type": {
+                "value": "ScalableCapability::ScalableBehavior::SetValue"
+              },
+              "parameters": [
+                "FondoTitulo",
+                "Scale",
+                "=",
+                "max(1, (CameraWidth() + 8) / 1290)"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetX"
+              },
+              "parameters": [
+                "FondoTitulo",
+                "=",
+                "CameraX() - FondoTitulo.Width() / 2"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetY"
+              },
+              "parameters": [
+                "FondoTitulo",
+                "=",
+                "CameraY() - FondoTitulo.Height() / 2"
+              ]
+            },
+            {
+              "type": {
                 "value": "SetX"
               },
               "parameters": [
@@ -21111,9 +21159,9 @@
           "keepRatio": true,
           "layer": "HUD",
           "name": "IconoMoneda",
-          "persistentUuid": "0548b0fd-6ba8-4146-a353-ea90353b6b63",
+          "persistentUuid": "e4e86efb-d48e-4a9d-a192-fa24d4762e12",
           "width": 0,
-          "x": 1030,
+          "x": 908,
           "y": 46,
           "zOrder": 2,
           "numberProperties": [],
@@ -21127,9 +21175,9 @@
           "keepRatio": true,
           "layer": "HUD",
           "name": "TextoOro",
-          "persistentUuid": "28ffda23-9f9b-48c2-a6b0-e36dd7a350b2",
+          "persistentUuid": "9861e3b0-2e7d-4746-af43-a8e702de6a22",
           "width": 0,
-          "x": 1058,
+          "x": 934,
           "y": 30,
           "zOrder": 2,
           "numberProperties": [],
@@ -22456,6 +22504,36 @@
                     "=",
                     "1"
                   ]
+                },
+                {
+                  "type": {
+                    "value": "TiledSpriteObject::SetImageFromResource"
+                  },
+                  "parameters": [
+                    "Suelo",
+                    "assets/entorno/suelo_pueblo.png",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "TiledSpriteObject::SetImageFromResource"
+                  },
+                  "parameters": [
+                    "Relleno",
+                    "assets/entorno/relleno_pueblo.png",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "TiledSpriteObject::SetImageFromResource"
+                  },
+                  "parameters": [
+                    "Plataforma",
+                    "assets/entorno/plataforma_pueblo.png",
+                    ""
+                  ]
                 }
               ],
               "events": [
@@ -22879,6 +22957,13 @@
             }
           ],
           "parameters": []
+        },
+        {
+          "type": "BuiltinCommonInstructions::Link",
+          "include": {
+            "includeConfig": 0
+          },
+          "target": "EV_Entrada"
         },
         {
           "type": "BuiltinCommonInstructions::Link",
@@ -23531,6 +23616,51 @@
                     "textR": 0
                   },
                   "comment": "Sistema de menús: MenuAbrir abre un menú; los botones escriben su acción en la variable Accion."
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "SceneJustBegins"
+                      },
+                      "parameters": [
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "NumberObjectVariable"
+                          },
+                          "parameters": [
+                            "Flecha",
+                            "Paso",
+                            "=",
+                            "1"
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                          },
+                          "parameters": [
+                            "Flecha",
+                            "Animation",
+                            "=",
+                            "\"Der\""
+                          ]
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "type": "BuiltinCommonInstructions::Standard",
@@ -26684,6 +26814,27 @@
           "name": "Capitulo",
           "type": "string",
           "value": ""
+        },
+        {
+          "name": "Auto",
+          "type": "structure",
+          "children": [
+            {
+              "name": "Dx",
+              "type": "number",
+              "value": 0
+            },
+            {
+              "name": "Dy",
+              "type": "number",
+              "value": 0
+            },
+            {
+              "name": "Hay",
+              "type": "number",
+              "value": 0
+            }
+          ]
         }
       ],
       "instances": [
@@ -27806,9 +27957,9 @@
           "keepRatio": true,
           "layer": "HUD",
           "name": "IconoMoneda",
-          "persistentUuid": "fe9df01d-5998-4ac3-a034-597877ceb1cf",
+          "persistentUuid": "ba004032-eb18-40e4-aec4-c11107e340b8",
           "width": 0,
-          "x": 1030,
+          "x": 908,
           "y": 46,
           "zOrder": 2,
           "numberProperties": [],
@@ -27822,9 +27973,9 @@
           "keepRatio": true,
           "layer": "HUD",
           "name": "TextoOro",
-          "persistentUuid": "b0f3f59a-c799-47f5-a542-14e9d3542967",
+          "persistentUuid": "3815d6c1-43bc-46dd-afbd-f62e7bc72f63",
           "width": 0,
-          "x": 1058,
+          "x": 934,
           "y": 30,
           "zOrder": 2,
           "numberProperties": [],
@@ -28205,12 +28356,28 @@
         },
         {
           "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "HUD",
+          "name": "BotonAuto",
+          "persistentUuid": "6896a0fd-b16e-4775-a694-1e680c6cbf18",
+          "width": 0,
+          "x": 1100,
+          "y": 52,
+          "zOrder": 6,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
+        },
+        {
+          "angle": 0,
           "customSize": true,
           "height": 590,
           "keepRatio": true,
           "layer": "Menu",
           "name": "Panel",
-          "persistentUuid": "77a44c8a-bf85-4399-a797-28513cc8a9bd",
+          "persistentUuid": "f32a1049-fcc3-442a-a5ee-368d8c75ce0b",
           "width": 700,
           "x": 290,
           "y": 70,
@@ -28226,7 +28393,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "TextoTitulo",
-          "persistentUuid": "5874972b-f4a7-44a8-a723-917e11f90c81",
+          "persistentUuid": "5d824c30-a96c-438b-a3a9-fc8d1456d94c",
           "width": 0,
           "x": 640,
           "y": 84,
@@ -28242,7 +28409,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "TextoMenu",
-          "persistentUuid": "4db53f92-4c8b-47c7-ae43-52df0e73e580",
+          "persistentUuid": "880e6def-019f-47cd-acb2-d6d125fa987f",
           "width": 0,
           "x": 350,
           "y": 158,
@@ -28258,7 +28425,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "BotonCerrar",
-          "persistentUuid": "fd16b372-f328-4abc-ad3a-bc11df8af8ff",
+          "persistentUuid": "d851f6a5-c519-4628-a50d-bbaac2a85dd9",
           "width": 0,
           "x": 950,
           "y": 108,
@@ -28274,7 +28441,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "Flecha",
-          "persistentUuid": "c686d586-5407-46cc-a604-b0b0802bd6a9",
+          "persistentUuid": "1eda0009-4ac1-4857-a2b8-53dcf016bfb5",
           "width": 0,
           "x": 360,
           "y": 250,
@@ -28296,7 +28463,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "Flecha",
-          "persistentUuid": "ce0a76bd-c9d7-4f43-a7e7-f8a8769d6fae",
+          "persistentUuid": "f3dda17a-be14-46c5-a53e-29628ac53071",
           "width": 0,
           "x": 920,
           "y": 250,
@@ -28318,7 +28485,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "BotonMenu",
-          "persistentUuid": "421e73b3-dfd2-41fd-ac07-60bb83e998f8",
+          "persistentUuid": "e9707bf4-3156-4621-a08f-88e281627163",
           "width": 480,
           "x": 400,
           "y": 448,
@@ -28340,7 +28507,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "TextoBoton",
-          "persistentUuid": "5bc75286-35c1-4bbc-a00b-f874dc5ac713",
+          "persistentUuid": "203604f8-cac4-4a43-aa94-6b23b1ba0b24",
           "width": 0,
           "x": 640,
           "y": 459,
@@ -28362,7 +28529,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "BotonMenu",
-          "persistentUuid": "3261e3f1-6629-4077-ab00-35f8dba0d082",
+          "persistentUuid": "77f0586a-f162-47df-a1e4-d73eebcba70f",
           "width": 480,
           "x": 400,
           "y": 516,
@@ -28384,7 +28551,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "TextoBoton",
-          "persistentUuid": "1a3bbe4e-f487-44c2-a525-16317ab9feeb",
+          "persistentUuid": "6c435b84-4f8a-44c9-aaf3-93a6599a7d27",
           "width": 0,
           "x": 640,
           "y": 527,
@@ -28406,7 +28573,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "BotonMenu",
-          "persistentUuid": "98339c0c-de01-4176-a30d-4aad0a8c6079",
+          "persistentUuid": "ba0482f6-2bc3-44cf-aeab-b665caed0042",
           "width": 480,
           "x": 400,
           "y": 584,
@@ -28428,7 +28595,7 @@
           "keepRatio": true,
           "layer": "Menu",
           "name": "TextoBoton",
-          "persistentUuid": "60ebf26e-3a71-424a-afe0-f677cc38c325",
+          "persistentUuid": "6121f177-7303-40dc-a87a-4da995072c14",
           "width": 0,
           "x": 640,
           "y": 595,
@@ -28989,6 +29156,87 @@
             "lineHeight": 0,
             "color": "255;150;90"
           }
+        },
+        {
+          "adaptCollisionMaskAutomatically": false,
+          "assetStoreId": "",
+          "name": "BotonAuto",
+          "type": "Sprite",
+          "updateIfNotVisible": false,
+          "variables": [],
+          "effects": [],
+          "behaviors": [
+            {
+              "name": "Ancla",
+              "type": "AnchorBehavior::AnchorBehavior",
+              "bottomEdgeAnchor": 0,
+              "leftEdgeAnchor": 2,
+              "relativeToOriginalWindowSize": true,
+              "rightEdgeAnchor": 0,
+              "topEdgeAnchor": 1,
+              "useLegacyBottomAndRightAnchors": false
+            }
+          ],
+          "animations": [
+            {
+              "name": "Off",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 1,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": false,
+                      "image": "assets/ui/botonauto_off_0.png",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 69,
+                        "y": 27
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "On",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 1,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": false,
+                      "image": "assets/ui/botonauto_on_0.png",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 69,
+                        "y": 27
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
       "objectsFolderStructure": {
@@ -29032,6 +29280,9 @@
           },
           {
             "objectName": "TextoJefe"
+          },
+          {
+            "objectName": "BotonAuto"
           }
         ]
       },
@@ -29564,6 +29815,897 @@
                     "IconoCalavera",
                     "=",
                     "CameraX(\"HUD\") - 280"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": []
+        },
+        {
+          "type": "BuiltinCommonInstructions::Link",
+          "include": {
+            "includeConfig": 0
+          },
+          "target": "EV_Entrada"
+        },
+        {
+          "colorB": 228,
+          "colorG": 176,
+          "colorR": 74,
+          "creationTime": 0,
+          "name": "Combate automático (AUTO)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Comment",
+              "color": {
+                "b": 109,
+                "g": 230,
+                "r": 255,
+                "textB": 0,
+                "textG": 0,
+                "textR": 0
+              },
+              "comment": "Como en los ARPG móviles: con AUTO activo el héroe avanza, elige al enemigo más cercano, ataca, usa habilidades y bebe pociones. Sólo escribe en las variables In.* (las mismas que los botones)."
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::Or"
+                  },
+                  "parameters": [],
+                  "subInstructions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::And"
+                      },
+                      "parameters": [],
+                      "subInstructions": [
+                        {
+                          "type": {
+                            "value": "IsCursorOnObject"
+                          },
+                          "parameters": [
+                            "BotonAuto",
+                            "",
+                            "",
+                            ""
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "MouseButtonFromTextReleased"
+                          },
+                          "parameters": [
+                            "",
+                            "\"Left\""
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "KeyFromTextJustPressed"
+                      },
+                      "parameters": [
+                        "",
+                        "\"t\""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "StringVariable"
+                  },
+                  "parameters": [
+                    "Menu",
+                    "=",
+                    "\"\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "Save.Auto",
+                    "=",
+                    "1 - Save.Auto"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "Guardar",
+                    "=",
+                    "1"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "PlaySound"
+                  },
+                  "parameters": [
+                    "",
+                    "assets/audio/click.wav",
+                    "no",
+                    "60",
+                    "1"
+                  ]
+                }
+              ],
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "NumberVariable"
+                      },
+                      "parameters": [
+                        "Save.Auto",
+                        "=",
+                        "1"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "TextContainerCapability::TextContainerBehavior::SetValue"
+                      },
+                      "parameters": [
+                        "TextoAviso",
+                        "Text",
+                        "=",
+                        "\"Combate automático: ACTIVADO\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "TextObject::ChangeColor"
+                      },
+                      "parameters": [
+                        "TextoAviso",
+                        "\"255;214;90\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberObjectVariable"
+                      },
+                      "parameters": [
+                        "TextoAviso",
+                        "Vida",
+                        "=",
+                        "1.4"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Else",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "TextContainerCapability::TextContainerBehavior::SetValue"
+                      },
+                      "parameters": [
+                        "TextoAviso",
+                        "Text",
+                        "=",
+                        "\"Combate automático: desactivado\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "TextObject::ChangeColor"
+                      },
+                      "parameters": [
+                        "TextoAviso",
+                        "\"200;200;200\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberObjectVariable"
+                      },
+                      "parameters": [
+                        "TextoAviso",
+                        "Vida",
+                        "=",
+                        "1.4"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "NumberVariable"
+                  },
+                  "parameters": [
+                    "Save.Auto",
+                    "=",
+                    "1"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                  },
+                  "parameters": [
+                    "BotonAuto",
+                    "Animation",
+                    "=",
+                    "\"On\""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Else",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                  },
+                  "parameters": [
+                    "BotonAuto",
+                    "Animation",
+                    "=",
+                    "\"Off\""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "NumberVariable"
+                  },
+                  "parameters": [
+                    "Save.Auto",
+                    "=",
+                    "1"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "StringVariable"
+                  },
+                  "parameters": [
+                    "Menu",
+                    "=",
+                    "\"\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "StringObjectVariable"
+                  },
+                  "parameters": [
+                    "Jugador",
+                    "Estado",
+                    "!=",
+                    "\"muerto\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "Auto.Hay",
+                    "=",
+                    "0"
+                  ]
+                }
+              ],
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "StringObjectVariable"
+                      },
+                      "parameters": [
+                        "Enemigo",
+                        "Estado",
+                        "!=",
+                        "\"muerto\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "StringObjectVariable"
+                      },
+                      "parameters": [
+                        "Enemigo",
+                        "Estado",
+                        "!=",
+                        "\"aparecer\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "PickNearest"
+                      },
+                      "parameters": [
+                        "Enemigo",
+                        "Jugador.X()",
+                        "Jugador.Y() - 40",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Auto.Hay",
+                        "=",
+                        "1"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Auto.Dx",
+                        "=",
+                        "Enemigo.X() - Jugador.X()"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Auto.Dy",
+                        "=",
+                        "Enemigo.Y() - Jugador.Y()"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareNumbers"
+                      },
+                      "parameters": [
+                        "Jugador.HP",
+                        "<",
+                        "Stat.VidaMax * 0.35"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "In.Pot",
+                        "=",
+                        "1"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "NumberVariable"
+                      },
+                      "parameters": [
+                        "Auto.Hay",
+                        "=",
+                        "1"
+                      ]
+                    }
+                  ],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "BuiltinCommonInstructions::CompareNumbers"
+                          },
+                          "parameters": [
+                            "abs(Auto.Dx)",
+                            ">",
+                            "Stat.AutoRango"
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareNumbers"
+                              },
+                              "parameters": [
+                                "Auto.Dx",
+                                ">",
+                                "0"
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "PlatformBehavior::SimulateRightKey"
+                              },
+                              "parameters": [
+                                "Jugador",
+                                "PlatformerObject"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "BuiltinCommonInstructions::Else",
+                          "conditions": [],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "PlatformBehavior::SimulateLeftKey"
+                              },
+                              "parameters": [
+                                "Jugador",
+                                "PlatformerObject"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Else",
+                      "conditions": [],
+                      "actions": [],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareNumbers"
+                              },
+                              "parameters": [
+                                "Auto.Dx * Jugador.Dir",
+                                "<",
+                                "0"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "StringObjectVariable"
+                              },
+                              "parameters": [
+                                "Jugador",
+                                "Estado",
+                                "=",
+                                "\"libre\""
+                              ]
+                            }
+                          ],
+                          "actions": [],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                                  },
+                                  "parameters": [
+                                    "Auto.Dx",
+                                    ">",
+                                    "0"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "PlatformBehavior::SimulateRightKey"
+                                  },
+                                  "parameters": [
+                                    "Jugador",
+                                    "PlatformerObject"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Else",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "PlatformBehavior::SimulateLeftKey"
+                                  },
+                                  "parameters": [
+                                    "Jugador",
+                                    "PlatformerObject"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareNumbers"
+                              },
+                              "parameters": [
+                                "abs(Auto.Dy)",
+                                "<",
+                                "170"
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "SetNumberVariable"
+                              },
+                              "parameters": [
+                                "In.Atk",
+                                "=",
+                                "1"
+                              ]
+                            }
+                          ],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "NumberObjectVariable"
+                                  },
+                                  "parameters": [
+                                    "Jugador",
+                                    "Cd2",
+                                    "<=",
+                                    "0"
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                                  },
+                                  "parameters": [
+                                    "Jugador.MP",
+                                    ">=",
+                                    "Stat.Costo2"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "SetNumberVariable"
+                                  },
+                                  "parameters": [
+                                    "In.S2",
+                                    "=",
+                                    "1"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Else",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "NumberObjectVariable"
+                                  },
+                                  "parameters": [
+                                    "Jugador",
+                                    "Cd1",
+                                    "<=",
+                                    "0"
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                                  },
+                                  "parameters": [
+                                    "Jugador.MP",
+                                    ">=",
+                                    "Stat.Costo1"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "SetNumberVariable"
+                                  },
+                                  "parameters": [
+                                    "In.S1",
+                                    "=",
+                                    "1"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Else",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "NumberObjectVariable"
+                                  },
+                                  "parameters": [
+                                    "Jugador",
+                                    "Cd3",
+                                    "<=",
+                                    "0"
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                                  },
+                                  "parameters": [
+                                    "Jugador.MP",
+                                    ">=",
+                                    "Stat.Costo3"
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                                  },
+                                  "parameters": [
+                                    "Jugador.HP",
+                                    "<",
+                                    "Stat.VidaMax * 0.65"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "SetNumberVariable"
+                                  },
+                                  "parameters": [
+                                    "In.S3",
+                                    "=",
+                                    "1"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "StringVariable"
+                          },
+                          "parameters": [
+                            "Save.Clase",
+                            "!=",
+                            "\"Guerrero\""
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "BuiltinCommonInstructions::CompareNumbers"
+                          },
+                          "parameters": [
+                            "abs(Auto.Dx)",
+                            "<",
+                            "110"
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareNumbers"
+                              },
+                              "parameters": [
+                                "Auto.Dx",
+                                ">",
+                                "0"
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "PlatformBehavior::SimulateLeftKey"
+                              },
+                              "parameters": [
+                                "Jugador",
+                                "PlatformerObject"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "BuiltinCommonInstructions::Else",
+                          "conditions": [],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "PlatformBehavior::SimulateRightKey"
+                              },
+                              "parameters": [
+                                "Jugador",
+                                "PlatformerObject"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "NumberVariable"
+                      },
+                      "parameters": [
+                        "Auto.Hay",
+                        "=",
+                        "0"
+                      ]
+                    }
+                  ],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "NumberVariable"
+                          },
+                          "parameters": [
+                            "JefeMuerto",
+                            "=",
+                            "2"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "Visible"
+                          },
+                          "parameters": [
+                            "Portal"
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "BuiltinCommonInstructions::CompareNumbers"
+                              },
+                              "parameters": [
+                                "Portal.X() - Jugador.X()",
+                                ">",
+                                "0"
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "PlatformBehavior::SimulateRightKey"
+                              },
+                              "parameters": [
+                                "Jugador",
+                                "PlatformerObject"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "BuiltinCommonInstructions::Else",
+                          "conditions": [],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "PlatformBehavior::SimulateLeftKey"
+                              },
+                              "parameters": [
+                                "Jugador",
+                                "PlatformerObject"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Else",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "StringVariable"
+                          },
+                          "parameters": [
+                            "SalaEstado",
+                            "!=",
+                            "\"combate\""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "PlatformBehavior::SimulateRightKey"
+                          },
+                          "parameters": [
+                            "Jugador",
+                            "PlatformerObject"
+                          ]
+                        }
+                      ]
+                    }
                   ]
                 }
               ]
@@ -31798,6 +32940,51 @@
                 },
                 {
                   "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "SceneJustBegins"
+                      },
+                      "parameters": [
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "NumberObjectVariable"
+                          },
+                          "parameters": [
+                            "Flecha",
+                            "Paso",
+                            "=",
+                            "1"
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                          },
+                          "parameters": [
+                            "Flecha",
+                            "Animation",
+                            "=",
+                            "\"Der\""
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [],
                   "actions": [
                     {
@@ -33481,7 +34668,7 @@
   "externalEvents": [
     {
       "associatedLayout": "Mazmorra",
-      "name": "EV_Jugador",
+      "name": "EV_Entrada",
       "events": [
         {
           "type": "BuiltinCommonInstructions::Comment",
@@ -33493,7 +34680,7 @@
             "textG": 0,
             "textR": 0
           },
-          "comment": "EV_Jugador — eventos compartidos por Pueblo y Mazmorra (enlazados con un evento 'Enlace')."
+          "comment": "EV_Entrada — estadísticas y lectura de controles (táctil y teclado). Se enlaza antes de EV_Jugador."
         },
         {
           "colorB": 228,
@@ -33721,6 +34908,16 @@
                         "=",
                         "20"
                       ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Stat.AutoRango",
+                        "=",
+                        "85"
+                      ]
                     }
                   ]
                 },
@@ -33878,6 +35075,16 @@
                         "=",
                         "20"
                       ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Stat.AutoRango",
+                        "=",
+                        "330"
+                      ]
                     }
                   ]
                 },
@@ -34034,6 +35241,16 @@
                         "Stat.Costo3",
                         "=",
                         "12"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Stat.AutoRango",
+                        "=",
+                        "380"
                       ]
                     }
                   ]
@@ -34918,6 +36135,24 @@
             }
           ],
           "parameters": []
+        }
+      ]
+    },
+    {
+      "associatedLayout": "Mazmorra",
+      "name": "EV_Jugador",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Comment",
+          "color": {
+            "b": 109,
+            "g": 230,
+            "r": 255,
+            "textB": 0,
+            "textG": 0,
+            "textR": 0
+          },
+          "comment": "EV_Jugador — movimiento, ataques, habilidades y poción. Compartido por Pueblo y Mazmorra (evento 'Enlace')."
         },
         {
           "colorB": 228,

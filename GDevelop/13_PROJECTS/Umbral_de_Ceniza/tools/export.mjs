@@ -29,6 +29,17 @@ const known = logs.filter((l) => /error/i.test(l) && l.includes('in: "" (number)
 const errors = logs.filter((l) => /error/i.test(l) && !l.includes('in: "" (number)'));
 if (known.length > 2) errors.push(...known.slice(2));
 logs.forEach((l) => console.log("[gd]", l));
+if (target === "cordova") {
+  // Lock landscape from the very first frame on Android (standard Cordova preference; GDevelop's own
+  // screen-orientation plugin also locks it at runtime).
+  const cfgPath = path.join(out, "config.xml");
+  let cfg = fs.readFileSync(cfgPath, "utf8");
+  if (!cfg.includes('name="Orientation"')) {
+    cfg = cfg.replace("<preference name=\"Fullscreen\" value=\"true\" />",
+      "<preference name=\"Fullscreen\" value=\"true\" />\n    <preference name=\"Orientation\" value=\"landscape\" />");
+    fs.writeFileSync(cfgPath, cfg);
+  }
+}
 const files = fs.readdirSync(out).length;
 console.log(`[export] ${target} -> ${path.relative(ROOT, out)} (${files} entries)`);
 if (errors.length) {

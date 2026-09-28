@@ -53,6 +53,10 @@ function start() {
     E([JUST_BEGINS()], [
       SET("MundoAncho", "=", ANCHO), MUSIC("assets/audio/musica_pueblo.wav", 45), A("SceneBackground", q("12;10;30")),
       ANIM("Portal", q("Mazmorra")), HIDE("BotonAccion"), SET("Guardar", "=", 1),
+      // Suelo/Relleno/Plataforma are global objects: give them the town textures (resource names, no quotes)
+      A("TiledSpriteObject::SetImageFromResource", "Suelo", "assets/entorno/suelo_pueblo.png"),
+      A("TiledSpriteObject::SetImageFromResource", "Relleno", "assets/entorno/relleno_pueblo.png"),
+      A("TiledSpriteObject::SetImageFromResource", "Plataforma", "assets/entorno/plataforma_pueblo.png"),
     ], [
       E([OIFS("NPC", "Rol", "=", q("herrera"))], [ANIM("NPC", q("Herrera_Idle"))]),
       E([OIFS("NPC", "Rol", "=", q("alquimista"))], [ANIM("NPC", q("Alquimista_Idle")), A("FlippableCapability::FlippableBehavior::FlipX", "NPC", "Flippable", "yes")]),
@@ -164,6 +168,7 @@ export function puebloScene() {
     events: [
       COMMENT("PUEBLO — zona segura: herrera, alquimista, portal a las mazmorras y maniquí de práctica."),
       start(),
+      LINK("EV_Entrada"),
       LINK("EV_Jugador"),
       LINK("EV_Combate"),
       interaction(),

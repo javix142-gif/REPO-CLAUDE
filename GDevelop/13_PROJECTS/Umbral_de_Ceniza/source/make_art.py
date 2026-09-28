@@ -209,6 +209,9 @@ def main():
     sprite("BotonPausa", "Normal", [ui.simple_button("pause", 22, "#d8b04a")], "ui", 1, False, center=True)
     sprite("BotonAccion", "Normal", [ui.simple_button("talk", 32, "#ffd35a")], "ui", 1, False, center=True)
     sprite("MascaraCD", "Ciclo", ui.cooldown_frames(36, 16), "ui", 10, False, center=True)
+    font_ui = str(HERE / "fonts" / "PixelifySans-SemiBold.ttf")
+    sprite("BotonAuto", "Off", [ui.auto_button(False, font_ui)], "ui", 1, False, center=True)
+    sprite("BotonAuto", "On", [ui.auto_button(True, font_ui)], "ui", 1, False, center=True)
     manifest["images"]["joystick_borde"] = save(ui.joystick_border(), "ui/joystick_borde.png")
     manifest["images"]["joystick_pulgar"] = save(ui.joystick_thumb(), "ui/joystick_pulgar.png")
     sprite("MarcoHUD", "Quieto", [ui.hud_frame()], "ui", 1, False)
@@ -217,16 +220,13 @@ def main():
     sprite("BarraExp", "Quieto", [ui.bar_fill(100, 3, "#ffe07a", "#c08a1a")], "ui", 1, False)
     sprite("BarraJefeMarco", "Quieto", [ui.boss_bar_frame()], "ui", 1, False)
     sprite("BarraJefe", "Quieto", [ui.bar_fill(166, 7, "#ff8a3a", "#a8201c")], "ui", 1, False)
-    for kind, obj in (("coin", "IconoMoneda"), ("potion", "IconoPocion"), ("lock", "IconoCandado"),
-                      ("skull", "IconoCalavera"), ("star", "IconoEstrella")):
+    for kind, obj in (("coin", "IconoMoneda"), ("skull", "IconoCalavera")):
         sprite(obj, "Quieto", [ui.icon(kind, size=18)], "ui", 1, False, center=True)
     sprite("Flecha", "Izq", [ui.simple_button("left", 26, "#d8b04a")], "ui", 1, False, center=True)
     sprite("Flecha", "Der", [ui.simple_button("right", 26, "#d8b04a")], "ui", 1, False, center=True)
-    sprite("BotonCerrar", "Normal", [ui.simple_button("close", 22, "#d8b04a")], "ui", 1, False, center=True)
+    sprite("BotonCerrar", "Normal", [ui.simple_button("close", 24, "#d8b04a", pad=5)], "ui", 1, False, center=True)
     manifest["images"]["panel"] = save(ui.panel_texture(), "ui/panel.png")
     manifest["images"]["boton_menu"] = save(ui.menu_button_texture(), "ui/boton_menu.png")
-    manifest["images"]["boton_menu_rojo"] = save(ui.menu_button_texture("#5a1a22", "#e07a5a"), "ui/boton_menu_rojo.png")
-    manifest["images"]["boton_menu_verde"] = save(ui.menu_button_texture("#1a4a32", "#8ae8a0"), "ui/boton_menu_verde.png")
     if FONT_TITLE.exists():
         sprite("Logo", "Quieto", [ui.logo(str(FONT_TITLE))], "ui", 1, False, center=True)
 

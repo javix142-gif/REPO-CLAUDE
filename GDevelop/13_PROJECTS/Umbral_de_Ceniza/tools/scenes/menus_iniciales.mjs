@@ -62,6 +62,8 @@ export function tituloScene() {
       ]),
       E([], [
         SETS("Accion", "=", q("")),
+        A("ScalableCapability::ScalableBehavior::SetValue", "FondoTitulo", "Scale", "=", "max(1, (CameraWidth() + 8) / 1290)"),
+        SETX("FondoTitulo", "=", "CameraX() - FondoTitulo.Width() / 2"), A("SetY", "FondoTitulo", "=", "CameraY() - FondoTitulo.Height() / 2"),
         SETX("TextoBoton", "=", "TextoBoton.CX - TextoBoton.Width() / 2"),
         SETX("TextoLema", "=", "640 - TextoLema.Width() / 2"), SETX("TextoVersion", "=", "640 - TextoVersion.Width() / 2"),
         SCALE("Logo", "1 + 0.015 * sin(TimeFromStart() * 2)"),
@@ -127,6 +129,8 @@ export function claseScene() {
         A("ScalableCapability::ScalableBehavior::SetValue", "HeroePreview", "Scale", "=", 2), TEXT("TextoBoton", q("ELEGIR"))], perClass),
       E([], [
         SETS("Accion", "=", q("")),
+        A("ScalableCapability::ScalableBehavior::SetValue", "FondoTitulo", "Scale", "=", "max(1, (CameraWidth() + 8) / 1290)"),
+        SETX("FondoTitulo", "=", "CameraX() - FondoTitulo.Width() / 2"), A("SetY", "FondoTitulo", "=", "CameraY() - FondoTitulo.Height() / 2"),
         SETX("TextoTitulo", "=", "640 - TextoTitulo.Width() / 2"),
         SETX("TextoClase", "=", "TextoClase.CX - TextoClase.Width() / 2"),
         SETX("TextoDesc", "=", "TextoDesc.CX - TextoDesc.Width() / 2"),

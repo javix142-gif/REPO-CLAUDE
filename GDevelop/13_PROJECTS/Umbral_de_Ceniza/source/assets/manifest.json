@@ -3811,6 +3811,44 @@
     }
    ]
   },
+  "BotonAuto": {
+   "anims": [
+    {
+     "name": "Off",
+     "frames": [
+      "assets/ui/botonauto_off_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      69,
+      27
+     ],
+     "mask": null,
+     "size": [
+      138,
+      54
+     ]
+    },
+    {
+     "name": "On",
+     "frames": [
+      "assets/ui/botonauto_on_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      69,
+      27
+     ],
+     "mask": null,
+     "size": [
+      138,
+      54
+     ]
+    }
+   ]
+  },
   "MarcoHUD": {
    "anims": [
     {
@@ -3958,75 +3996,12 @@
     }
    ]
   },
-  "IconoPocion": {
-   "anims": [
-    {
-     "name": "Quieto",
-     "frames": [
-      "assets/ui/iconopocion_quieto_0.png"
-     ],
-     "dt": 1,
-     "loop": false,
-     "origin": [
-      27,
-      27
-     ],
-     "mask": null,
-     "size": [
-      54,
-      54
-     ]
-    }
-   ]
-  },
-  "IconoCandado": {
-   "anims": [
-    {
-     "name": "Quieto",
-     "frames": [
-      "assets/ui/iconocandado_quieto_0.png"
-     ],
-     "dt": 1,
-     "loop": false,
-     "origin": [
-      27,
-      27
-     ],
-     "mask": null,
-     "size": [
-      54,
-      54
-     ]
-    }
-   ]
-  },
   "IconoCalavera": {
    "anims": [
     {
      "name": "Quieto",
      "frames": [
       "assets/ui/iconocalavera_quieto_0.png"
-     ],
-     "dt": 1,
-     "loop": false,
-     "origin": [
-      27,
-      27
-     ],
-     "mask": null,
-     "size": [
-      54,
-      54
-     ]
-    }
-   ]
-  },
-  "IconoEstrella": {
-   "anims": [
-    {
-     "name": "Quieto",
-     "frames": [
-      "assets/ui/iconoestrella_quieto_0.png"
      ],
      "dt": 1,
      "loop": false,
@@ -4090,13 +4065,13 @@
      "dt": 1,
      "loop": false,
      "origin": [
-      33,
-      33
+      36,
+      36
      ],
      "mask": null,
      "size": [
-      66,
-      66
+      72,
+      72
      ]
     }
    ]
@@ -4151,8 +4126,6 @@
   "joystick_borde": "assets/ui/joystick_borde.png",
   "joystick_pulgar": "assets/ui/joystick_pulgar.png",
   "panel": "assets/ui/panel.png",
-  "boton_menu": "assets/ui/boton_menu.png",
-  "boton_menu_rojo": "assets/ui/boton_menu_rojo.png",
-  "boton_menu_verde": "assets/ui/boton_menu_verde.png"
+  "boton_menu": "assets/ui/boton_menu.png"
  }
 }

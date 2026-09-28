@@ -20,10 +20,13 @@ No se usa ningún asset, captura ni texto del juego de referencia.
 - UI: iconos 16×16 de arte ×3 (48 px); botones táctiles 96–150 px de diámetro.
 
 ## Pivotes
-- Origen de todos los sprites en (0,0) (esquina sup-izq), cuerpo centrado horizontalmente en el frame
-  para que el volteo (`FlipX`) no desplace al personaje.
-- Máscara de colisión personalizada idéntica en todos los frames de cada personaje (caja del cuerpo)
-  para que el `PlatformerObject` no se "enganche" al cambiar de animación.
+- Personajes (jugador, enemigos, NPC), puertas y portales: origen en **los pies, centro horizontal**
+  (p. ej. jugador 144×132 → origen 72,126). Crear un enemigo en `(x, SueloY)` lo deja apoyado en el suelo.
+- El cuerpo está centrado horizontalmente en el frame, así el volteo (`FlipX`) no desplaza al personaje.
+- FX, proyectiles, monedas, botones y retratos: origen en el **centro**. Botín: origen en la base del haz de luz.
+- Tiles, paneles y barras del HUD: origen (0,0).
+- Máscara de colisión personalizada idéntica en todos los frames de cada personaje/tipo de enemigo (caja del
+  cuerpo) para que el `PlatformerObject` no se "enganche" al cambiar de animación (ver `ASSET_MANIFEST.json`).
 
 ## Profundidad/z-order
 | Capa | Contenido |
@@ -31,14 +34,16 @@ No se usa ningún asset, captura ni texto del juego de referencia.
 | `Fondo` | cielo/muros lejanos (parallax 0.25) |
 | `Medio` | pilares/casas (parallax 0.55) |
 | base `""` | suelo, plataformas, props (z 0–9), enemigos (z 10), jugador (z 20), FX (z 30), números (z 40) |
-| `HUD` | barras, textos, botones táctiles, paneles |
-| `Menu` | pausa / victoria / derrota / diálogos de tienda |
+| `HUD` | barras, textos, botones táctiles, AUTO, aviso central, barra del jefe |
+| `Menu` | pausa / victoria / derrota / tiendas / portal / ficha (cámara centrada en x=640 para cualquier ancho) |
 
 ## HUD
-- Anclas con `AnchorBehavior`: bloque de estado arriba-izquierda; oro/pausa arriba-derecha;
-  joystick abajo-izquierda; botones abajo-derecha.
+- Anclas con `AnchorBehavior`: bloque de estado arriba-izquierda; oro/AUTO/pausa arriba-derecha;
+  joystick abajo-izquierda; botones abajo-derecha. Textos centrados (etapa, jefe, avisos) se recolocan
+  cada frame con `CameraX("HUD")`.
 - Márgenes mínimos: 40 px laterales (notch), 24 px superior/inferior.
-- Aspect ratios a validar: 16:9 (1280×720), 19.5:9 (1560×720), 4:3 (960×720 no soportado: se ve igual en ancho mínimo 1280).
+- Aspect ratios validados con capturas: 16:9 (1280×720) y 19.5:9 (1560×720, `evidence/screenshots/23_fortaleza_19-5x9.png`).
+  Pantallas más estrechas que 16:9 (tablets 4:3) no se validaron.
 
 ## Tiles/seams
 - Suelo `TiledSprite` 96×96 sin costuras (borde superior con piedras, relleno oscuro).

@@ -1,0 +1,56 @@
+# Builds a debug APK of "Umbral de Ceniza" on GitHub's runners (they ship the Android SDK).
+# Steps validated locally up to `cordova prepare` (same versions); the Gradle step needs the Android SDK,
+# which the runner provides. Download the APK from the run's "Artifacts" section.
+name: Android APK (Cordova)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "GDevelop/13_PROJECTS/Umbral_de_Ceniza/source/**"
+      - "GDevelop/13_PROJECTS/Umbral_de_Ceniza/tools/**"
+      - ".github/workflows/android-apk.yml"
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: GDevelop/13_PROJECTS/Umbral_de_Ceniza
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Android SDK packages for cordova-android 14
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Export the GDevelop project to Cordova (official exporter, libGD 5.6.269)
+        working-directory: GDevelop/13_PROJECTS/Umbral_de_Ceniza/tools
+        run: |
+          npm ci
+          node export.mjs cordova
+
+      - name: Build debug APK
+        working-directory: GDevelop/13_PROJECTS/Umbral_de_Ceniza/builds/android-cordova
+        env:
+          CI: "true"
+        run: |
+          npx --yes cordova@13.0.0 platform add android@14 --no-telemetry
+          npx --yes cordova@13.0.0 build android --debug --no-telemetry
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: umbral-de-ceniza-debug-apk
+          path: GDevelop/13_PROJECTS/Umbral_de_Ceniza/builds/android-cordova/platforms/android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
