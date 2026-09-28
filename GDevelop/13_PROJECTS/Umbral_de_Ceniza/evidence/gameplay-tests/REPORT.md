@@ -1,10 +1,10 @@
-# Gameplay tests — 2026-09-28T22:25:39.384Z
+# Gameplay tests — 2026-09-28T22:43:40.398Z
 
 Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headless (Playwright)
 
 **9/9 PASS**
 
-## ✅ 01 flujo título → clase → pueblo → tiendas → portal (22s)
+## ✅ 01 flujo título → clase → pueblo → tiendas → portal (26s)
 
 - PASS arranca en la escena Titulo
 - PASS la clase elegida se guarda en Save.Clase
@@ -21,6 +21,7 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS la herrería se abre con la tecla E
 - PASS sin oro no se puede forjar ("No tienes suficiente oro")
 - PASS forjar sube Forja a 1 y ATQ de 12 a 15
+- PASS la ficha del personaje se abre (retrato / tecla C)
 - PASS el portal abre el selector de etapa
 - PASS se entra a la etapa 1
 - PASS no JavaScript errors in the page ()
@@ -28,23 +29,26 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 ## ✅ 02 Guerrero completa la etapa 1 (bot): salas, puertas, jefe, botín, victoria, guardado (128s)
 
 - INFO t=0s sala 1 (nivel 1)
-- INFO t=9s sala 2 (nivel 1)
-- INFO t=41s sala 3 (nivel 2)
-- INFO t=62s sala 4 (nivel 2)
-- INFO t=80s sala 5 (nivel 3)
+- INFO t=11s sala 2 (nivel 1)
+- INFO t=35s sala 3 (nivel 2)
+- INFO t=59s sala 4 (nivel 2)
+- INFO t=82s sala 5 (nivel 3)
 - PASS la etapa termina con el menú de victoria (menú="victoria", estado=libre)
 - PASS enemigos derrotados: 27
 - PASS se desbloquea la etapa 2 (Save.EtapaMax = 2)
 - PASS el personaje sube de nivel (nivel 4)
-- PASS se obtiene oro (241)
+- PASS se obtiene oro (206)
 - PASS las 4 puertas de sala se abrieron
+- PASS el botín recogido se equipa (2 objetos; bonus de equipo 36)
 - PASS al volver, el jugador aparece junto al portal
+- PASS la flecha derecha del portal apunta a la derecha
+- PASS con la etapa 2 desbloqueada, la flecha selecciona la etapa 2
 - PASS la partida está guardada en localStorage (GDJS_UmbralSave: clase Guerrero, nivel 4, etapa máx. 2)
 - PASS tras recargar, el título ofrece "CONTINUAR  (Guerrero nv. 4)"
 - PASS Continuar carga la partida guardada en el pueblo
 - PASS no JavaScript errors in the page ()
 
-## ✅ 03 Maga: bola de fuego, nova (congela), meteoro (explosión) y barrera (15s)
+## ✅ 03 Maga: bola de fuego, nova (congela), meteoro (explosión) y barrera (16s)
 
 - PASS el ataque básico lanza una bola de fuego
 - PASS la bola de fuego impacta al esqueleto
@@ -64,7 +68,7 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS el disparo triple lanza 3 flechas (3)
 - PASS las 3 flechas salen en abanico (velocidades verticales distintas)
 - PASS la lluvia de flechas genera flechas desde el cielo (3 en vuelo)
-- PASS el paso sombrío retrocede 236 px con invulnerabilidad
+- PASS el paso sombrío retrocede 237 px con invulnerabilidad
 - PASS no JavaScript errors in the page ()
 
 ## ✅ 05 Controles táctiles multitouch (joystick + botones a la vez) (13s)
@@ -72,7 +76,7 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS arrastrar el joystick a la derecha mueve al jugador (220 → 402)
 - PASS con el joystick pulsado, un segundo dedo en ATACAR ataca (estado="ataque")
 - PASS el botón de habilidad 1 lanza Torbellino y muestra el enfriamiento (cd 4.5 s, máscara 14/16)
-- PASS el botón de salto hace saltar (600 → 500)
+- PASS el botón de salto hace saltar (600 → 496)
 - PASS no JavaScript errors in the page ()
 
 ## ✅ 06 Pausa, derrota y reintento (15s)
@@ -85,11 +89,11 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS Reintentar reinicia la etapa con vida completa
 - PASS no JavaScript errors in the page ()
 
-## ✅ 07 Jefe: Caballero de Ceniza (barra de vida, ataques y furia) (33s)
+## ✅ 07 Jefe: Caballero de Ceniza (barra de vida, ataques y furia) (24s)
 
 - PASS aparece la barra de vida del jefe
 - INFO t=0s sala 5 (nivel 1)
-- PASS el jefe usa sus ataques (mover, carga, golpe, tajo, muerto)
+- PASS el jefe usa sus ataques (mover, carga, tajo, golpe, muerto)
 - PASS derrotar al jefe y entrar al portal lleva a la victoria
 - PASS no JavaScript errors in the page ()
 
@@ -101,15 +105,15 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS la etapa 6 usa el capítulo Fortaleza Carmesí
 - PASS no JavaScript errors in the page ()
 
-## ✅ 09 Combate automático (AUTO): la Maga completa la etapa 1 sin tocar nada más (92s)
+## ✅ 09 Combate automático (AUTO): la Maga completa la etapa 1 sin tocar nada más (106s)
 
 - PASS AUTO empieza desactivado
 - PASS tocar AUTO lo activa (botón dorado)
-- INFO t=0s sala 2 (nivel 1, vida 100/100)
-- INFO t=19s sala 3 (nivel 2, vida 106/111)
-- INFO t=38s sala 4 (nivel 3, vida 122/147)
-- INFO t=53s sala 5 (nivel 3, vida 131/147)
+- INFO t=0s sala 2 (nivel 1, vida 94/100)
+- INFO t=15s sala 3 (nivel 2, vida 100/111)
+- INFO t=36s sala 4 (nivel 3, vida 122/122)
+- INFO t=60s sala 5 (nivel 3, vida 95/122)
 - PASS AUTO avanza, combate, vence al jefe y entra al portal (menú="victoria")
-- PASS AUTO usa habilidades (19)
+- PASS AUTO usa habilidades (26)
 - PASS la etapa 2 queda desbloqueada
 - PASS no JavaScript errors in the page ()

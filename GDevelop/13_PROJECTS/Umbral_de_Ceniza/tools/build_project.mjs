@@ -105,7 +105,7 @@ function layoutJson(scene, objects, allObjectsForShared) {
   const [r, v, b] = scene.background;
   return {
     b, disableInputWhenNotFocused: true, mangledName: scene.name, name: scene.name, r, standardSortMethod: true,
-    stopSoundsOnStartup: true, title: "", v,
+    stopSoundsOnStartup: true, title: "Umbral de Ceniza", v, // window/tab title while the scene runs
     uiSettings: { grid: false, gridType: "rectangular", gridWidth: 32, gridHeight: 32, gridDepth: 32, gridOffsetX: 0, gridOffsetY: 0,
       gridOffsetZ: 0, gridColor: 10401023, gridAlpha: 0.8, snap: false, zoomFactor: 0.5, windowMask: false, selectedLayer: "",
       gameEditorMode: "instances-editor" },

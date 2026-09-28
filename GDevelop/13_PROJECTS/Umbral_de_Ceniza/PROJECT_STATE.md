@@ -57,7 +57,7 @@ Abiertos: ninguno conocido.
 - Release: BLOCKED — APK/AAB no compilado aquí (SDK no descargable); pasos documentados en `README.md`.
 
 ## Evidencia
-`evidence/screenshots/*.png` (24 capturas del juego exportado), `evidence/gameplay-tests/REPORT.md` y `report.json`.
+`evidence/screenshots/*.png` (26 capturas del juego exportado), `evidence/gameplay-tests/REPORT.md` y `report.json`.
 
 ## Próximo paso
 1. Compilar el APK (GDevelop *Exportar → Android* o el workflow de GitHub) e instalarlo en un teléfono.
