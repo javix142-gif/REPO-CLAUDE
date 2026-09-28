@@ -1,170 +1,239 @@
-"""Generate original pixel art for Umbral de Ceniza. Requires Pillow."""
+"""Generate ALL original pixel art for Umbral de Ceniza + assets/manifest.json.
+
+Requires Pillow. Run from anywhere:  python make_art.py
+Every image is drawn at art resolution and upscaled x3 (nearest) so the whole
+game shares one pixel density (see VISUAL_CONTRACT.md). The manifest describes
+sprite objects (animations, frame timing, origin, collision mask) and is read
+by tools/build_project.mjs to create the GDevelop project.
+"""
+from __future__ import annotations
+
+import json
+import shutil
 from pathlib import Path
-from PIL import Image, ImageDraw
-import math
-import random
 
-OUT = Path(__file__).resolve().parent / "assets"
-OUT.mkdir(parents=True, exist_ok=True)
-R = Image.Resampling.NEAREST
-random.seed(17)
+from art.pixel import scale
+from art import figures, creatures, fx, env, ui
 
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "assets"
+K = 3
+FONT_TITLE = HERE / "fonts" / "Jersey10-Regular.ttf"
 
-def save_scaled(im, name, factor=2):
-    im.resize((im.width * factor, im.height * factor), R).save(OUT / name)
+manifest = {"scale": K, "sprites": {}, "images": {}}
 
 
-def hero(name, stride=0, sword=False):
-    im = Image.new("RGBA", (48, 48))
-    d = ImageDraw.Draw(im)
-    # Deep teal cloak, brass trim, bone mask and a copper blade.
-    d.polygon([(15, 14), (31, 14), (35, 37), (29, 43), (12, 42), (11, 34)], fill="#102e3b")
-    d.polygon([(17, 14), (31, 14), (33, 34), (29, 40), (15, 39)], fill="#176072")
-    d.rectangle((17, 32, 29, 36), fill="#bb7e38")
-    d.rectangle((17, 35, 24, 41), fill="#173641")
-    d.rectangle((27, 35, 33, 41), fill="#173641")
-    d.rectangle((16 + stride, 40, 22 + stride, 45), fill="#15202c")
-    d.rectangle((26 - stride, 40, 33 - stride, 45), fill="#15202c")
-    d.rectangle((14, 13, 34, 28), fill="#10252f")
-    d.polygon([(14, 15), (17, 7), (30, 5), (36, 14), (32, 19), (17, 19)], fill="#1e6572")
-    d.polygon([(19, 17), (30, 17), (29, 27), (21, 28), (17, 24)], fill="#c2c9b5")
-    d.rectangle((21, 19, 28, 21), fill="#1c2b30")
-    d.rectangle((25, 19, 27, 20), fill="#f5be6c")
-    d.rectangle((13, 28, 18, 36), fill="#bb7e38")
-    d.rectangle((32, 28, 37, 36), fill="#bb7e38")
-    if sword:
-        d.polygon([(35, 29), (45, 9), (47, 9), (40, 31)], fill="#e9d9a5")
-        d.line([(33, 30), (41, 34)], fill="#f0a64f", width=3)
-    else:
-        d.polygon([(36, 32), (39, 11), (42, 10), (40, 34)], fill="#d6dde0")
-        d.line([(33, 32), (42, 33)], fill="#f0b357", width=2)
-    save_scaled(im, name)
+def save(img, rel, k=K):
+    p = OUT / rel
+    p.parent.mkdir(parents=True, exist_ok=True)
+    (scale(img, k) if k != 1 else img).save(p, optimize=True)
+    return "assets/" + rel
 
 
-hero("hero_idle.png")
-hero("hero_run_1.png", 2)
-hero("hero_run_2.png", -2)
-hero("hero_attack.png", sword=True)
+def add_anim(obj, name, frames, dt, loop, origin=None, mask=None, center_origin=False):
+    entry = manifest["sprites"].setdefault(obj, {"anims": []})
+    w, h = frames[0].width * K, frames[0].height * K
+    if center_origin:
+        origin = (w // 2, h // 2)
+    entry["anims"].append({"name": name, "frames": frames_paths[obj + ":" + name], "dt": dt, "loop": loop,
+                           "origin": list(origin) if origin else [0, 0],
+                           "mask": [list(p) for p in mask] if mask else None, "size": [w, h]})
 
 
-def shadow_enemy(name, horn=0):
-    im = Image.new("RGBA", (44, 44))
-    d = ImageDraw.Draw(im)
-    d.ellipse((6, 9, 39, 42), fill="#221c35")
-    d.polygon([(10, 17), (9, 3), (19, 12), (26, 12), (36, 3), (34, 18)], fill="#322740")
-    d.polygon([(12, 8), (17, 13), (13, 15)], fill="#6b4468")
-    d.polygon([(34, 8), (28, 13), (34, 15)], fill="#6b4468")
-    d.rectangle((13, 23, 18, 26), fill="#ed6774")
-    d.rectangle((27, 23, 32, 26), fill="#ed6774")
-    d.rectangle((11, 32, 36, 39), fill="#181c2b")
-    for x in (10, 19, 29):
-        d.polygon([(x, 37), (x+5, 37), (x+3, 44)], fill="#687184")
-    if horn:
-        d.polygon([(17, 14), (20, 0), (25, 13)], fill="#6d7891")
-    save_scaled(im, name, 2)
+frames_paths: dict[str, list[str]] = {}
 
 
-shadow_enemy("enemy.png")
-shadow_enemy("enemy_elite.png", 1)
+def sprite(obj, name, frames, folder, dt=0.1, loop=True, origin=None, mask=None, center=False, prefix=None):
+    base = (prefix or f"{obj}_{name}").lower()
+    paths = [save(im, f"{folder}/{base}_{i}.png") for i, im in enumerate(frames)]
+    frames_paths[obj + ":" + name] = paths
+    add_anim(obj, name, frames, dt, loop, origin, mask, center)
 
-boss = Image.new("RGBA", (72, 72))
-d = ImageDraw.Draw(boss)
-d.ellipse((10, 11, 62, 67), fill="#1a2034")
-d.polygon([(14, 22), (13, 2), (29, 18), (43, 17), (58, 2), (59, 24)], fill="#4b385a")
-d.polygon([(19, 22), (52, 22), (56, 51), (46, 63), (25, 63), (16, 50)], fill="#40304f")
-d.polygon([(23, 25), (49, 25), (47, 43), (26, 43)], fill="#222339")
-d.rectangle((25, 30, 32, 34), fill="#ff8b80")
-d.rectangle((41, 30, 48, 34), fill="#ff8b80")
-d.polygon([(28, 45), (44, 45), (36, 51)], fill="#b8a3b0")
-for x in (15, 26, 43, 54):
-    d.polygon([(x, 57), (x+6, 57), (x+3, 69)], fill="#687184")
-save_scaled(boss, "boss.png", 2)
 
-slash = Image.new("RGBA", (72, 56))
-d = ImageDraw.Draw(slash)
-d.arc((1, 1, 69, 55), 295, 72, fill="#fbe3a4", width=5)
-d.arc((7, 7, 67, 53), 295, 70, fill="#ef9c52", width=3)
-d.polygon([(54, 3), (70, 7), (65, 21)], fill="#fff1c9")
-save_scaled(slash, "slash.png", 2)
+def box(x0, y0, x1, y1):
+    return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
 
-orb = Image.new("RGBA", (24, 24))
-d = ImageDraw.Draw(orb)
-d.ellipse((1, 1, 22, 22), fill="#32767b")
-d.ellipse((4, 4, 19, 19), fill="#65d3ba")
-d.rectangle((10, 5, 13, 18), fill="#e0fff2")
-d.rectangle((5, 10, 18, 13), fill="#e0fff2")
-save_scaled(orb, "heal_orb.png", 2)
 
-gate = Image.new("RGBA", (96, 144))
-d = ImageDraw.Draw(gate)
-d.polygon([(11, 137), (11, 35), (25, 13), (71, 13), (85, 35), (85, 137)], fill="#343143")
-d.polygon([(26, 137), (26, 42), (35, 29), (61, 29), (70, 42), (70, 137)], fill="#0d2534")
-d.ellipse((30, 47, 66, 107), fill="#206879")
-d.ellipse((37, 52, 59, 103), fill="#6ac8b4")
-d.rectangle((8, 129, 88, 142), fill="#786269")
-for x in (16, 76):
-    d.rectangle((x, 35, x+4, 122), fill="#967577")
-save_scaled(gate, "gate.png", 1)
+def main():
+    OUT.mkdir(parents=True, exist_ok=True)
+    for child in OUT.iterdir():  # keep assets/audio (written by make_audio.py)
+        if child.is_dir() and child.name != "audio":
+            shutil.rmtree(child)
 
-# Landscape at 1/4 logical resolution. It repeats seamlessly under the static sky camera.
-bg = Image.new("RGB", (320, 180), "#101a2d")
-d = ImageDraw.Draw(bg)
-for y in range(180):
-    t = y / 180
-    d.line((0, y, 319, y), fill=(int(14+20*t), int(25+20*t), int(42+27*t)))
-d.ellipse((236, 18, 268, 50), fill="#c7c0ab")
-d.ellipse((244, 13, 274, 46), fill="#142033")
-for x,y,r in [(19,24,1),(62,45,1),(92,18,1),(121,37,1),(182,26,1),(301,38,1),(284,20,1)]:
-    d.rectangle((x,y,x+r,y+r), fill="#adbcc2")
-d.polygon([(0,108),(35,66),(70,107),(109,61),(157,106),(200,74),(250,108),(294,67),(320,106),(320,180),(0,180)], fill="#253449")
-d.polygon([(0,132),(50,93),(97,132),(146,87),(201,131),(266,89),(320,130),(320,180),(0,180)], fill="#1c2f3d")
-for x in range(-12, 340, 28):
-    height = 17 + ((x*7) % 15)
-    d.rectangle((x, 128-height, x+5, 155), fill="#142733")
-    d.polygon([(x-7,135-height),(x+2,108-height),(x+12,135-height)], fill="#1a333a")
-    d.polygon([(x-5,123-height),(x+2,100-height),(x+10,123-height)], fill="#21413f")
-for x in (39, 175, 292):
-    d.rectangle((x, 86, x+12, 151), fill="#1e2735")
-    d.rectangle((x-4, 83, x+16, 89), fill="#394150")
-    d.polygon([(x-2,84),(x+6,72),(x+14,84)], fill="#384157")
-    d.rectangle((x+5,101,x+7,114), fill="#d08565")
-save_scaled(bg, "background.png", 4)
+    # ---------------------------------------------------------------- heroes
+    timing = {"Idle": (0.14, True), "Run": (0.08, True), "Jump": (0.1, True), "Fall": (0.1, True),
+              "Attack": (0.06, False), "Cast": (0.09, False), "Hurt": (0.1, False), "Dead": (0.16, False)}
+    hero_mask = box(60, 45, 87, 126)
+    portraits = {}
+    for cls in ("Guerrero", "Maga", "Arquera"):
+        anims = figures.hero_poses(cls)
+        for an, poses in anims.items():
+            imgs = []
+            for p in poses:
+                if p == "LYING":
+                    imgs.append(figures.finish(figures.draw_hero(cls, anims["Dead"][1]), lying=True, ground=41))
+                else:
+                    imgs.append(figures.finish(figures.draw_hero(cls, p)))
+            dt, loop = timing[an]
+            sprite("Jugador", f"{cls}_{an}", imgs, "jugador", dt, loop, origin=(72, 126), mask=hero_mask)
+            if an == "Idle":
+                portraits[cls] = imgs[0]
+    # preview for class selection (same resources, no behaviours)
+    for cls in ("Guerrero", "Maga", "Arquera"):
+        for an in ("Idle", "Attack", "Cast"):
+            frames_paths[f"HeroePreview:{cls}_{an}"] = frames_paths[f"Jugador:{cls}_{an}"]
+            src = next(a for a in manifest["sprites"]["Jugador"]["anims"] if a["name"] == f"{cls}_{an}")
+            manifest["sprites"].setdefault("HeroePreview", {"anims": []})["anims"].append(
+                dict(src, loop=(an == "Idle"), mask=None, dt=src["dt"] * (2 if an != "Idle" else 1)))
+    for cls, im in portraits.items():
+        sprite("Retrato", cls, [ui.portrait(im)], "ui", 1, False, center=True)
 
-ground = Image.new("RGBA", (32, 32), "#443e45")
-d = ImageDraw.Draw(ground)
-d.rectangle((0, 0, 31, 4), fill="#52746b")
-d.rectangle((0, 4, 31, 7), fill="#827465")
-for i in range(42):
-    x=random.randrange(32);y=random.randrange(9,32)
-    d.rectangle((x,y,x+random.randrange(1,4),y+1), fill=random.choice(["#5d5153","#2e3039","#6d5b5b"]))
-save_scaled(ground, "ground.png", 2)
+    # ---------------------------------------------------------------- enemies
+    E = "Enemigo"
+    ct = {"Idle": (0.3, True), "Walk": (0.14, True), "Attack": (0.11, False), "Cast": (0.13, False),
+          "Hurt": (0.12, False), "Dead": (0.12, False), "Fly": (0.08, True), "Slash": (0.1, False),
+          "Charge": (0.07, True), "Slam": (0.11, False), "Summon": (0.16, False)}
+    geo = {"Esqueleto": ((60, 126), box(48, 45, 75, 126)),
+           "Cultista": ((60, 126), box(45, 45, 78, 126)),
+           "Bruto": ((90, 162), box(60, 57, 117, 162)),
+           "Jefe": ((165, 354), box(129, 171, 201, 354))}
+    for name in ("Esqueleto", "Cultista", "Bruto", "Jefe"):
+        A = creatures.creature_frames(name)
+        origin, mask = geo[name]
+        for an, imgs in A.items():
+            dt, loop = ct[an]
+            if name == "Jefe" and an == "Idle":
+                dt = 0.18
+            sprite(E, f"{name}_{an}", imgs, "enemigos", dt, loop, origin=origin, mask=mask)
+    for an, imgs in creatures.bat_frames().items():
+        dt, loop = ct[an]
+        sprite(E, f"Murcielago_{an}", imgs, "enemigos", dt if an != "Attack" else 0.06, loop if an != "Attack" else True,
+               origin=(54, 42), mask=box(27, 21, 81, 63))
+    for an, imgs in creatures.dummy_frames().items():
+        sprite(E, f"Maniqui_{an}", imgs, "enemigos", 0.07, an == "Idle", origin=(48, 126), mask=box(27, 36, 69, 126))
 
-def button(name, symbol, color):
-    im=Image.new("RGBA", (52,52));d=ImageDraw.Draw(im)
-    d.ellipse((1,1,50,50), fill="#142638", outline="#5b6973", width=2)
-    d.ellipse((6,6,45,45), fill="#283e4d", outline=color, width=2)
-    if symbol=="up":
-        d.polygon([(26,10),(38,30),(30,30),(30,39),(22,39),(22,30),(14,30)], fill=color)
-    elif symbol=="sword":
-        d.polygon([(15,33),(33,12),(39,11),(37,17),(19,37)], fill=color)
-        d.line((13,28,24,39), fill="#efe1bf", width=4)
-    elif symbol=="dash":
-        d.polygon([(17,13),(36,26),(17,39),(21,28),(9,28),(9,24),(21,24)], fill=color)
-    save_scaled(im,name,2)
+    # ---------------------------------------------------------------- NPCs
+    for name in ("Herrera", "Alquimista"):
+        A = creatures.creature_frames(name)
+        sprite("NPC", f"{name}_Idle", A["Idle"], "npc", 0.22 if name == "Herrera" else 0.35, True, origin=(66, 126))
 
-button("jump_button.png","up","#6ad6c0")
-button("attack_button.png","sword","#f6b065")
-button("dash_button.png","dash","#c28bd4")
+    # ---------------------------------------------------------------- projectiles
+    PJ = "ProyectilJugador"
+    sprite(PJ, "Fuego", fx.fireball_frames(), "proyectiles", 0.06, True, center=True)
+    sprite(PJ, "Flecha", fx.arrow_frame(), "proyectiles", 1, True, center=True)
+    sprite(PJ, "Meteoro", fx.meteor_frames(), "proyectiles", 0.06, True, center=True)
+    sprite(PJ, "Hielo", fx.ice_shard_frame(), "proyectiles", 1, True, center=True)
+    PE = "ProyectilEnemigo"
+    sprite(PE, "Orbe", fx.orb_frames(), "proyectiles", 0.1, True, center=True)
+    sprite(PE, "Onda", fx.shockwave_frames(), "proyectiles", 0.08, True, center=True)
 
-joy=Image.new("RGBA",(70,70));d=ImageDraw.Draw(joy)
-d.ellipse((2,2,67,67),fill="#142638",outline="#6d7e83",width=3)
-d.ellipse((12,12,57,57),outline="#4b8d8e",width=2)
-save_scaled(joy,"joystick_border.png",2)
-thumb=Image.new("RGBA",(32,32));d=ImageDraw.Draw(thumb)
-d.ellipse((1,1,30,30),fill="#567f86",outline="#93d0c5",width=2)
-save_scaled(thumb,"joystick_thumb.png",2)
+    # ---------------------------------------------------------------- effects
+    F = "Efecto"
+    sprite(F, "Tajo", fx.slash_frames(), "fx", 0.05, False, center=True)
+    sprite(F, "Torbellino", fx.whirl_frames(), "fx", 0.05, True, center=True)
+    sprite(F, "Nova", fx.nova_frames(), "fx", 0.06, False, center=True)
+    sprite(F, "Explosion", fx.explosion_frames(), "fx", 0.06, False, center=True)
+    sprite(F, "Impacto", fx.meteor_impact_frames(), "fx", 0.06, False, center=True)
+    sprite(F, "Chispa", fx.spark_frames(), "fx", 0.04, False, center=True)
+    sprite(F, "ChispaHielo", fx.spark_frames("#e0f8ff", "#6ac8ff"), "fx", 0.04, False, center=True)
+    sprite(F, "ChispaRoja", fx.spark_frames("#ffd0d0", "#ff4a4a"), "fx", 0.04, False, center=True)
+    sprite(F, "Curacion", fx.heal_frames(), "fx", 0.1, False, center=True)
+    sprite(F, "Nivel", fx.levelup_frames(), "fx", 0.1, False, center=True)
+    sprite(F, "Escudo", fx.shield_frames(), "fx", 0.2, True, center=True)
+    sprite(F, "Portal", fx.portal_frames(), "fx", 0.08, False, center=True)
+    sprite(F, "PortalFuego", fx.portal_frames("#ff8a3a", "#3a1008"), "fx", 0.08, False, center=True)
+    sprite(F, "Polvo", fx.dust_frames(), "fx", 0.06, False, center=True)
+    sprite(F, "Humo", fx.smoke_frames(), "fx", 0.08, False, center=True)
+    sprite(F, "Grito", fx.warcry_frames(), "fx", 0.07, False, center=True)
+    sprite(F, "Destello", fx.flash_frames(), "fx", 0.04, False, center=True)
 
-bar=Image.new("RGBA",(220,18),"#b84f5d")
-d=ImageDraw.Draw(bar);d.rectangle((0,0,219,3),fill="#e1887b")
-bar.save(OUT/"health_fill.png")
-print("Generated", len(list(OUT.glob('*.png'))), "assets in",OUT)
+    # ---------------------------------------------------------------- pickups
+    sprite("Moneda", "Gira", fx.coin_frames(), "botin", 0.09, True, center=True)
+    sprite("OrbeVida", "Brilla", fx.life_orb_frames(), "botin", 0.2, True, center=True)
+    rar_col = ["#ffffff", "#e1e1e1", "#5aaaff", "#ffd746", "#c46eff", "#ff912d"]
+    for kind in ("Espada", "Baculo", "Arco", "Armadura"):
+        for r in range(1, 6):
+            img = fx.loot_with_beam(kind, rar_col[r], r)
+            sprite("Botin", f"{kind}_{r}", [img], "botin", 1, False, origin=(img.width * K // 2, img.height * K))
+    # invisible hitbox texture (semi-transparent red if ever shown for debugging)
+    from PIL import Image
+    box_img = Image.new("RGBA", (16, 16), (255, 40, 40, 90))
+    (OUT / "sistema").mkdir(parents=True, exist_ok=True)
+    box_img.save(OUT / "sistema" / "caja.png")
+    # app icons (Android / desktop)
+    for size in (36, 48, 72, 96, 144, 192, 512):
+        p = OUT / "icono" / f"icono_{size}.png"
+        p.parent.mkdir(parents=True, exist_ok=True)
+        ui.app_icon(size).save(p)
+        manifest["images"][f"icono_{size}"] = f"assets/icono/icono_{size}.png"
+
+    # ---------------------------------------------------------------- environment
+    for theme in ("mazmorra", "fortaleza"):
+        manifest["images"][f"fondo_{theme}_lejos"] = save(env.dungeon_far(theme), f"entorno/fondo_{theme}_lejos.png")
+        manifest["images"][f"fondo_{theme}_medio"] = save(env.dungeon_mid(theme), f"entorno/fondo_{theme}_medio.png")
+        manifest["images"][f"muro_{theme}"] = save(env.wall_tile(theme), f"entorno/muro_{theme}.png")
+    for theme in ("mazmorra", "fortaleza", "pueblo"):
+        manifest["images"][f"suelo_{theme}"] = save(env.ground_tile(theme), f"entorno/suelo_{theme}.png")
+        manifest["images"][f"relleno_{theme}"] = save(env.fill_tile(theme), f"entorno/relleno_{theme}.png")
+        manifest["images"][f"plataforma_{theme}"] = save(env.platform_tile(theme), f"entorno/plataforma_{theme}.png")
+    manifest["images"]["cielo_pueblo"] = save(env.town_sky(), "entorno/cielo_pueblo.png")
+    manifest["images"]["casas_pueblo"] = save(env.town_houses(), "entorno/casas_pueblo.png")
+
+    for an, imgs in env.gate_frames("mazmorra").items():
+        sprite("Puerta", an, imgs, "entorno", 0.25 if an == "Cerrada" else 0.1, an == "Cerrada", origin=(42, 276))
+    sprite("Antorcha", "Arde", env.torch_frames(), "entorno", 0.12, True, origin=(60, 144))
+    sprite("Estandarte", "Ondea", env.banner_frames(), "entorno", 0.45, True)
+    sprite("Calaveras", "Quieto", [env.skull_pile()], "entorno", 1, False)
+    sprite("Velas", "Arde", env.candles_frames(), "entorno", 0.3, True)
+    sprite("Barril", "Quieto", [env.barrel()], "entorno", 1, False)
+    sprite("Caja", "Quieto", [env.crate()], "entorno", 1, False)
+    sprite("Farol", "Arde", env.lamp_frames(), "entorno", 0.35, True)
+    sprite("Forja", "Arde", env.forge_frames(), "entorno", 0.12, True)
+    sprite("Puesto", "Quieto", [env.potion_stand()], "entorno", 1, False)
+    sprite("Pozo", "Quieto", [env.well()], "entorno", 1, False)
+    sprite("Letrero", "Quieto", [env.signpost()], "entorno", 1, False)
+    sprite("Arbol", "Quieto", [env.dead_tree()], "entorno", 1, False)
+    sprite("Portal", "Mazmorra", env.portal_arch_frames("mazmorra"), "entorno", 0.1, True, origin=(78, 228),
+           mask=box(40, 90, 116, 228))
+    sprite("Portal", "Salida", env.portal_arch_frames("salida"), "entorno", 0.1, True, origin=(78, 228),
+           mask=box(40, 90, 116, 228))
+    sprite("FondoTitulo", "Quieto", [env.title_background()], "entorno", 1, False)
+
+    # ---------------------------------------------------------------- UI
+    for cls in ("Guerrero", "Maga", "Arquera"):
+        sprite("BotonAtaque", cls, [ui.attack_button(cls)], "ui", 1, False, center=True)
+        for s in range(3):
+            sprite(f"BotonHab{s + 1}", cls, [ui.skill_button(cls, s)], "ui", 1, False, center=True)
+    sprite("BotonSalto", "Normal", [ui.simple_button("jump", 32, "#8ae8d0")], "ui", 1, False, center=True)
+    sprite("BotonPocion", "Normal", [ui.simple_button("potion", 32, "#ff6a7a")], "ui", 1, False, center=True)
+    sprite("BotonPausa", "Normal", [ui.simple_button("pause", 22, "#d8b04a")], "ui", 1, False, center=True)
+    sprite("BotonAccion", "Normal", [ui.simple_button("talk", 32, "#ffd35a")], "ui", 1, False, center=True)
+    sprite("MascaraCD", "Ciclo", ui.cooldown_frames(36, 16), "ui", 10, False, center=True)
+    manifest["images"]["joystick_borde"] = save(ui.joystick_border(), "ui/joystick_borde.png")
+    manifest["images"]["joystick_pulgar"] = save(ui.joystick_thumb(), "ui/joystick_pulgar.png")
+    sprite("MarcoHUD", "Quieto", [ui.hud_frame()], "ui", 1, False)
+    sprite("BarraVida", "Quieto", [ui.bar_fill(100, 7, "#ff5a5a", "#a81c2c")], "ui", 1, False)
+    sprite("BarraMana", "Quieto", [ui.bar_fill(100, 5, "#6ab0ff", "#2a4aa8")], "ui", 1, False)
+    sprite("BarraExp", "Quieto", [ui.bar_fill(100, 3, "#ffe07a", "#c08a1a")], "ui", 1, False)
+    sprite("BarraJefeMarco", "Quieto", [ui.boss_bar_frame()], "ui", 1, False)
+    sprite("BarraJefe", "Quieto", [ui.bar_fill(166, 7, "#ff8a3a", "#a8201c")], "ui", 1, False)
+    for kind, obj in (("coin", "IconoMoneda"), ("potion", "IconoPocion"), ("lock", "IconoCandado"),
+                      ("skull", "IconoCalavera"), ("star", "IconoEstrella")):
+        sprite(obj, "Quieto", [ui.icon(kind, size=18)], "ui", 1, False, center=True)
+    sprite("Flecha", "Izq", [ui.simple_button("left", 26, "#d8b04a")], "ui", 1, False, center=True)
+    sprite("Flecha", "Der", [ui.simple_button("right", 26, "#d8b04a")], "ui", 1, False, center=True)
+    sprite("BotonCerrar", "Normal", [ui.simple_button("close", 22, "#d8b04a")], "ui", 1, False, center=True)
+    manifest["images"]["panel"] = save(ui.panel_texture(), "ui/panel.png")
+    manifest["images"]["boton_menu"] = save(ui.menu_button_texture(), "ui/boton_menu.png")
+    manifest["images"]["boton_menu_rojo"] = save(ui.menu_button_texture("#5a1a22", "#e07a5a"), "ui/boton_menu_rojo.png")
+    manifest["images"]["boton_menu_verde"] = save(ui.menu_button_texture("#1a4a32", "#8ae8a0"), "ui/boton_menu_verde.png")
+    if FONT_TITLE.exists():
+        sprite("Logo", "Quieto", [ui.logo(str(FONT_TITLE))], "ui", 1, False, center=True)
+
+    (OUT / "manifest.json").write_text(json.dumps(manifest, indent=1, ensure_ascii=False))
+    n = sum(1 for _ in OUT.rglob("*.png"))
+    print(f"Generated {n} PNG files in {OUT}")
+
+
+if __name__ == "__main__":
+    main()

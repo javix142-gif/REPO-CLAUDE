@@ -1,0 +1,16 @@
+{
+  "name": "umbral-de-ceniza-tools",
+  "private": true,
+  "type": "module",
+  "description": "Genera, valida, exporta y prueba el proyecto GDevelop de Umbral de Ceniza.",
+  "scripts": {
+    "art": "cd ../source && python3 make_art.py && python3 make_audio.py",
+    "build": "node build_project.mjs",
+    "export:web": "node export.mjs web",
+    "export:android": "node export.mjs cordova",
+    "test": "node test/run_tests.mjs"
+  },
+  "dependencies": {
+    "gdcore-tools": "2.0.0-gd-v5.6.269-autobuild"
+  }
+}
