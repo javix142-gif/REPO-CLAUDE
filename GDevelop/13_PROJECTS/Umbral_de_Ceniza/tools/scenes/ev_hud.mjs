@@ -23,6 +23,14 @@ function bars() {
       E([CMP("Jugador.MP", "<", `Stat.Costo${n}`)], [OPACITY(`BotonHab${n}`, 110)]),
       ELSE([], [OPACITY(`BotonHab${n}`, 255)]),
     ]),
+    COMMENT("El icono de cada ranura muestra la habilidad equipada (variante 1 o 2 de la clase)."),
+    ...[1, 2, 3].flatMap((n) => [
+      E([IFN(`Save.Hab${n}`, "=", 2)], [ANIM(`BotonHab${n}`, "Save.Clase + \"2\"")]),
+      ELSE([], [ANIM(`BotonHab${n}`, "Save.Clase")]),
+    ]),
+    COMMENT("Puntos de atributo sin repartir: aviso verde bajo el retrato."),
+    E([IFN("Save.Puntos", ">", 0)], [TEXT("TextoPuntos", "\"+\" + ToString(Save.Puntos) + \" PUNTOS\""), OPACITY("TextoPuntos", "170 + 85 * sin(TimeFromStart() * 5)")]),
+    ELSE([], [TEXT("TextoPuntos", q(""))]),
     E([OR(IFN("Save.Pociones", "<=", 0), IFN("CdPot", ">", 0))], [OPACITY("BotonPocion", 110)]),
     ELSE([], [OPACITY("BotonPocion", 255)]),
     COMMENT("Aviso central (equipo, nivel, salas)."),
@@ -53,9 +61,10 @@ export function menuSystem(menus) {
       m.arrows ? SHOW("Flecha") : HIDE("Flecha"),
       HIDE("BotonMenu"), HIDE("TextoBoton"),
     ];
+    const rows = m.slotsY || [448, 516, 584, 380, 312];
     const subs = m.buttons.map((b, i) => [
-      E([OIFN("BotonMenu", "Slot", "=", i + 1)], [SHOW("BotonMenu"), OSETS("BotonMenu", "Accion", "=", q(b.action))]),
-      E([OIFN("TextoBoton", "Slot", "=", i + 1)], [SHOW("TextoBoton")]),
+      E([OIFN("BotonMenu", "Slot", "=", i + 1)], [SHOW("BotonMenu"), OSETS("BotonMenu", "Accion", "=", q(b.action)), SETY("BotonMenu", "=", rows[i])]),
+      E([OIFN("TextoBoton", "Slot", "=", i + 1)], [SHOW("TextoBoton"), SETY("TextoBoton", "=", rows[i] + 11)]),
     ]).flat();
     ev.push(E([IFS("MenuAbrir", "=", q(id))], open, subs));
     // live refresh of texts while open

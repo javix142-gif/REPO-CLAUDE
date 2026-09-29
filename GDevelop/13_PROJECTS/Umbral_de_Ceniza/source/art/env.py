@@ -21,7 +21,7 @@ def dungeon_far(theme):
     T = THEMES[theme]
     W, H = 256, 240
     c = Canvas(W, H)
-    rnd = random.Random(11 if theme == "mazmorra" else 12)
+    rnd = random.Random({"mazmorra": 11, "fortaleza": 12}.get(theme, 13))
     dither_gradient(c, 0, 0, W - 1, H - 1, T["sky_top"], T["sky_bot"], 10)
     # bricks
     for row in range(0, H // 8):
@@ -512,3 +512,42 @@ def title_background():
         x, y = rnd.randint(0, W - 1), rnd.randint(60, 214)
         c.px(x, y, rnd.choice(["#ff7a2a", "#ffc06a", "#ff4a1a"]))
     return c.im
+
+
+# ---------------------------------------------------------------------------
+# v2: treasure chest, floor spikes
+
+def chest(open_=False):
+    c = Canvas(28, 22)
+    wood, wood_d, band = "#7a4f2a", "#4d3018", "#d8b04a"
+    c.rect(2, 9, 25, 20, wood)
+    c.rect(2, 9, 25, 10, shade(wood, 1.25))
+    c.rect(2, 18, 25, 20, wood_d)
+    c.rect(2, 9, 3, 20, band)
+    c.rect(24, 9, 25, 20, band)
+    c.rect(12, 9, 15, 20, band)
+    if open_:
+        c.poly([(3, 9), (25, 9), (23, 1), (5, 1)], wood_d)
+        c.rect(5, 1, 23, 2, band)
+        c.rect(4, 8, 23, 9, "#ffdc70")
+        for x, y in ((7, 6), (12, 5), (17, 6), (20, 4)):
+            c.px(x, y, "#fff6c0")
+            c.px(x + 1, y + 1, "#ffcc3a")
+    else:
+        c.poly([(2, 9), (25, 9), (23, 3), (4, 3)], wood)
+        c.rect(4, 3, 23, 4, shade(wood, 1.3))
+        c.rect(2, 8, 25, 9, band)
+        c.rect(13, 10, 14, 13, "#2a2030")
+        c.rect(12, 9, 15, 10, band)
+    return outline(c.im)
+
+
+def spikes():
+    c = Canvas(48, 16)
+    c.rect(0, 13, 47, 15, "#2d323f")
+    for i in range(6):
+        x = 2 + i * 8
+        c.poly([(x, 13), (x + 3, 1), (x + 6, 13)], "#aab4c4")
+        c.poly([(x + 3, 1), (x + 6, 13), (x + 3, 13)], "#6c7688")
+        c.px(x + 3, 2, "#ffffff")
+    return outline(c.im)

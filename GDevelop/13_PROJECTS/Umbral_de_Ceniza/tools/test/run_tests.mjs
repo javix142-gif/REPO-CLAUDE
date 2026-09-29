@@ -63,7 +63,7 @@ async function clickMenuSlot(g, slot) {
   await g.clickObject("BotonMenu", idx);
 }
 
-async function newGame(g, cls, shotName = "") {
+async function newGame(g, cls, shotName = "", prologueShot = "") {
   await g.wait(2500);
   await g.setV("Save.Clase", "", true);
   if ((await g.scene()) !== "Titulo") throw new Error("not on title");
@@ -75,6 +75,13 @@ async function newGame(g, cls, shotName = "") {
   const idx = ["Guerrero", "Maga", "Arquera"].indexOf(cls);
   await g.clickObject("BotonMenu", idx);
   await g.waitScene("Pueblo");
+  // a new game opens the story prologue: read it (screenshot) and continue
+  await waitFor(g, () => window.__game.getSceneStack().getCurrentScene().getVariables().get("Menu").getAsString() === "prologo", 3000);
+  if ((await g.v("Menu")) === "prologo") {
+    if (prologueShot) { await g.wait(400); await shot(g, prologueShot); }
+    await clickMenuSlot(g, 1);
+    await g.wait(300);
+  }
 }
 
 async function enterDungeon(g, etapa = 1) {
@@ -190,7 +197,7 @@ await test("01 flujo título → clase → pueblo → tiendas → portal", async
   await g.wait(2500);
   check((await g.scene()) === "Titulo", "arranca en la escena Titulo", log);
   await shot(g, "01_titulo.png");
-  await newGame(g, "Guerrero", "02_seleccion_clase.png");
+  await newGame(g, "Guerrero", "02_seleccion_clase.png", "02b_prologo.png");
   check((await g.v("Save.Clase", true)) === "Guerrero", "la clase elegida se guarda en Save.Clase", log);
   await g.wait(600);
   const p = await player(g);
@@ -302,7 +309,7 @@ async function spawnEnemy(g, tipo, x) {
 }
 const setMP = (g) => g.eval((G, S) => { S.getObjects("Jugador")[0].getVariables().get("MP").setNumber(999); });
 const facingRight = async (g) => { await g.hold("ArrowRight", 50); await g.wait(120); };
-const waitFor = (g, fnSrc, timeout = 1500) => g.page.waitForFunction(fnSrc, null, { timeout, polling: "raf" }).then(() => true, () => false);
+function waitFor(g, fnSrc, timeout = 1500) { return g.page.waitForFunction(fnSrc, null, { timeout, polling: "raf" }).then(() => true, () => false); }
 
 await test("03 Maga: bola de fuego, nova (congela), meteoro (explosión) y barrera", async (g, log) => {
   await newGame(g, "Maga");
@@ -536,6 +543,496 @@ for (const [cls, etapa, nivel] of [["Guerrero", 5, 9], ["Arquera", 10, 19]]) {
     check(s.menu === "victoria", `el personaje del nivel recomendado supera la etapa ${etapa}`, log);
   });
 }
+
+await test("10 Doble salto, ataque hacia arriba/diagonal y combo de tres golpes", async (g, log) => {
+  await newGame(g, "Guerrero");
+  await g.wait(700);
+  const ground = (await player(g)).y;
+  const varOf = (name) => g.eval((G, S, n) => S.getObjects("Jugador")[0].getVariables().get(n).getAsNumber(), name);
+  let saltosAfter2 = -1;
+  const peak = async (presses) => {
+    let min = 1e9;
+    for (let i = 0; i < presses.length; i++) {
+      await g.page.keyboard.press("Space");
+      if (i === 1) { await g.wait(60); saltosAfter2 = await varOf("Saltos"); }
+      const until = Date.now() + presses[i];
+      while (Date.now() < until) { min = Math.min(min, (await player(g)).y); await g.wait(16); }
+    }
+    return min;
+  };
+  // ---- single jump vs double jump
+  const single = await peak([900]);
+  await g.wait(900);
+  check(single < ground - 60, `un salto normal despega (altura ${Math.round(ground - single)} px)`, log);
+  const double = await peak([260, 800]);
+  check(saltosAfter2 === 1, `el segundo toque en el aire consume el doble salto (Saltos=${saltosAfter2})`, log);
+  check(double < single - 45, `el doble salto llega más alto (${Math.round(ground - double)} px frente a ${Math.round(ground - single)} px)`, log);
+  await g.wait(1200);
+  check((await varOf("Saltos")) === 0, "al aterrizar se recupera el doble salto", log);
+  await g.page.keyboard.press("Space"); await g.wait(200);
+  await g.page.keyboard.press("Space"); await g.wait(120);
+  const y3 = (await player(g)).y;
+  await g.page.keyboard.press("Space"); await g.wait(180);
+  const y4 = (await player(g)).y;
+  check(y4 > y3 - 30, "no hay triple salto (un tercer toque no vuelve a impulsar)", log);
+  await g.wait(1300);
+
+  // ---- aimed melee attacks (keyboard: Up arrow)
+  const hitPos = async () => {
+    const seen = await waitFor(g, () => window.__game.getSceneStack().getCurrentScene().getObjects("GolpeJugador").length > 0, 1200);
+    return seen ? g.eval((G, S) => { const J = S.getObjects("Jugador")[0]; const h = S.getObjects("GolpeJugador")[0];
+      return { dx: h.getCenterXInScene() - J.getX(), dy: h.getCenterYInScene() - J.getY(), dano: h.getVariables().get("Dano").getAsNumber(),
+        fuerte: h.getVariables().get("Fuerte").getAsNumber(), anim: J.getAnimationName(), dir: J.getVariables().get("Dir").getAsNumber(),
+        aim: J.getVariables().get("Aim").getAsNumber() }; }) : null;
+  };
+  await g.page.keyboard.down("ArrowUp");
+  let fired = hitPos();
+  await g.page.keyboard.press("j");
+  let h = await fired;
+  await g.page.keyboard.up("ArrowUp");
+  check(h && h.aim === 2 && h.dy < -110 && Math.abs(h.dx) < 30, `Arriba + atacar: el golpe aparece sobre la cabeza (dx ${Math.round(h?.dx)}, dy ${Math.round(h?.dy)}, anim ${h?.anim})`, log);
+  check(h && h.anim === "Guerrero_AttackUp", "usa la animación de ataque hacia arriba", log);
+  await g.wait(900);
+  await g.page.keyboard.down("ArrowUp"); await g.page.keyboard.down("ArrowRight");
+  fired = hitPos();
+  await g.page.keyboard.press("j");
+  h = await fired;
+  await g.page.keyboard.up("ArrowUp"); await g.page.keyboard.up("ArrowRight");
+  check(h && h.aim === 1 && h.dy < -70 && h.dx > 30, `Arriba + derecha + atacar: golpe en diagonal (dx ${Math.round(h?.dx)}, dy ${Math.round(h?.dy)})`, log);
+  check(h && h.anim === "Guerrero_AttackDiag", "usa la animación de ataque en diagonal", log);
+  await g.wait(1000);
+
+  // ---- combo: hold attack, watch the sequence of Combo / damage
+  const seq = [];
+  await g.page.keyboard.down("j");
+  const t0 = Date.now();
+  let last = 0;
+  while (Date.now() - t0 < 2300) {
+    const c = await varOf("Combo");
+    const cd = await varOf("CdAtk");
+    if (c !== last && cd > 0.2) { const d = await g.eval((G, S) => { const a = S.getObjects("GolpeJugador").map((o) => [o.getVariables().get("Dano").getAsNumber(), o.getVariables().get("Fuerte").getAsNumber()]);
+      return a[0] || null; }); seq.push({ c, d }); last = c; }
+    await g.wait(20);
+  }
+  await g.page.keyboard.up("j");
+  log.push(`INFO secuencia de combo observada: ${seq.map((x) => `${x.c}${x.d ? ` (daño x${x.d[0]}${x.d[1] ? ", fuerte" : ""})` : ""}`).join(" → ")}`);
+  const finals = seq.filter((x) => x.c === 3);
+  check(seq.some((x) => x.c === 1) && seq.some((x) => x.c === 2) && finals.length >= 1, "atacar seguido recorre el combo 1 → 2 → 3", log);
+  check(finals.some((x) => x.d && x.d[0] >= 1.8 && x.d[1] === 1), "el tercer golpe es potenciado (daño x1,9 y empuje fuerte)", log);
+  check(seq.filter((x) => x.c === 1 || x.c === 2).every((x) => !x.d || x.d[0] === 1), "los dos primeros golpes son normales", log);
+  await shot(g, "26_combo_final.png");
+});
+
+await test("11 Ataque hacia arriba con proyectiles (Maga/Arquera) y apuntado con el joystick táctil", async (g, log) => {
+  await newGame(g, "Maga");
+  await g.wait(700);
+  // touch joystick pushed UP + attack button: fireball must fly upwards
+  const joy = await g.screenPos("Joystick");
+  const atk = await g.screenPos("BotonAtaque");
+  await g.touch("touchStart", [{ x: joy.x, y: joy.y, id: 1 }]);
+  for (let i = 1; i <= 6; i++) { await g.touch("touchMove", [{ x: joy.x, y: joy.y - i * 14, id: 1 }]); await g.wait(30); }
+  await g.wait(150);
+  const ay = await g.v("In.AY");
+  check(ay < -0.5, `empujar el joystick hacia arriba da In.AY negativo (${ay.toFixed(2)})`, log);
+  const fired = waitFor(g, () => window.__game.getSceneStack().getCurrentScene().getObjects("ProyectilJugador").length > 0, 1500);
+  await g.touch("touchMove", [{ x: joy.x, y: joy.y - 84, id: 1 }, { x: atk.x, y: atk.y, id: 2 }]);
+  check(await fired, "con el joystick arriba, ATACAR lanza un proyectil", log);
+  await g.wait(120);
+  const pr = await g.eval((G, S) => { const p = S.getObjects("ProyectilJugador")[0]; if (!p) return null;
+    return { vx: p.getVariables().get("VX").getAsNumber(), vy: p.getVariables().get("VY").getAsNumber(), angle: p.getAngle() }; });
+  check(pr && pr.vy < -500 && Math.abs(pr.vx) < 80, `la bola de fuego sube (vx ${Math.round(pr?.vx)}, vy ${Math.round(pr?.vy)}, ángulo ${Math.round(pr?.angle)}°)`, log);
+  await g.touch("touchMove", [{ x: joy.x, y: joy.y - 84, id: 1 }]);
+  await g.touch("touchEnd", []);
+  await g.wait(1200);
+  // diagonal with the keyboard, facing left
+  await g.page.keyboard.down("ArrowUp"); await g.page.keyboard.down("ArrowLeft");
+  await g.wait(100);
+  const fired2 = waitFor(g, () => window.__game.getSceneStack().getCurrentScene().getObjects("ProyectilJugador").length > 0, 1500);
+  await g.page.keyboard.press("j");
+  await fired2; await g.wait(100);
+  const pd = await g.eval((G, S) => { const p = S.getObjects("ProyectilJugador")[0]; return p ? { vx: p.getVariables().get("VX").getAsNumber(), vy: p.getVariables().get("VY").getAsNumber() } : null; });
+  await g.page.keyboard.up("ArrowUp"); await g.page.keyboard.up("ArrowLeft");
+  check(pd && pd.vx < -350 && pd.vy < -350, `diagonal hacia arriba-izquierda (vx ${Math.round(pd?.vx)}, vy ${Math.round(pd?.vy)})`, log);
+  await shot(g, "27_ataque_diagonal.png");
+});
+
+await test("12 Murciélagos: vuelo con inercia, siguen tu salto y pican con aviso", async (g, log) => {
+  await newGame(g, "Guerrero");
+  await enterDungeon(g, 1);
+  await g.setV("Sala", 0);
+  // no other enemies: spawn a single bat above the hero (the room is still in "espera" so no wave appears)
+  await g.eval((G, S) => { S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()); });
+  await g.eval((G, S) => { const J = S.getObjects("Jugador")[0]; const e = S.createObject("Enemigo"); e.setPosition(J.getX() + 200, J.getY() - 230);
+    e.getVariables().get("Tipo").setString("Murcielago"); e.getVariables().get("Lado").setNumber(1); });
+  await g.wait(800);
+  const bat = () => g.eval((G, S) => { const b = S.getObjects("Enemigo").find((o) => o.getVariables().get("Tipo").getAsString() === "Murcielago"); const J = S.getObjects("Jugador")[0];
+    return b ? { x: b.getX(), y: b.getY(), dx: b.getX() - J.getX(), dy: b.getY() - J.getY(), vx: b.getVariables().get("VX").getAsNumber(), vy: b.getVariables().get("VY").getAsNumber(),
+      est: b.getVariables().get("Estado").getAsString(), ang: b.getAngle() } : null; });
+  // 1) natural hover: smooth velocity, vertical wobble
+  const samples = [];
+  for (let i = 0; i < 40; i++) { samples.push(await bat()); await g.wait(50); if (samples[i].est === "atacar") break; }
+  const moving = samples.filter((b) => b.est === "mover");
+  let maxJump = 0;
+  for (let i = 1; i < moving.length; i++) maxJump = Math.max(maxJump, Math.hypot(moving[i].x - moving[i - 1].x, moving[i].y - moving[i - 1].y));
+  const ys = moving.map((b) => b.dy);
+  check(moving.length >= 10 && maxJump < 40, `el murciélago se mueve sin saltos bruscos (máx ${maxJump.toFixed(1)} px por muestra de 50 ms)`, log);
+  check(Math.max(...ys) - Math.min(...ys) > 6, `ondula al volar (altura relativa ${Math.round(Math.min(...ys))}…${Math.round(Math.max(...ys))})`, log);
+  check(moving.some((b) => Math.abs(b.vx) > 20 || Math.abs(b.vy) > 20), "tiene velocidad e inercia (VX/VY)", log);
+  // 2) it follows the hero's jump: hold jump + double jump and compare its height relative to the hero
+  await g.eval((G, S) => { const b = S.getObjects("Enemigo").find((o) => o.getVariables().get("Tipo").getAsString() === "Murcielago"); b.getVariables().get("Cd").setNumber(-20); });
+  const base = (await bat()).dy;
+  await g.page.keyboard.down("Space"); await g.wait(320); await g.page.keyboard.up("Space");
+  await g.wait(60); await g.page.keyboard.down("Space"); await g.wait(400); await g.page.keyboard.up("Space");
+  let lowest = -1e9;
+  for (let i = 0; i < 12; i++) { const b = await bat(); if (b.est === "mover") lowest = Math.max(lowest, b.dy); await g.wait(60); }
+  check(lowest > base + 45, `al saltar cerca de él, el murciélago baja a tu altura (dy ${Math.round(base)} → ${Math.round(lowest)})`, log);
+  await g.wait(1500);
+  // 3) telegraphed swoop: it must enter "atacar", slow down first, then cross the hero's position
+  await g.eval((G, S) => { const b = S.getObjects("Enemigo").find((o) => o.getVariables().get("Tipo").getAsString() === "Murcielago"); b.getVariables().get("Cd").setNumber(99); });
+  const path = [];
+  const t0 = Date.now();
+  while (Date.now() - t0 < 3000) { const b = await bat(); path.push({ ...b, t: Date.now() - t0 }); await g.wait(30); if (path.length > 12 && b.est === "mover" && path.some((p) => p.est === "atacar")) break; }
+  const atk = path.filter((p) => p.est === "atacar");
+  check(atk.length > 8, `el murciélago ataca (estado "atacar" durante ${atk.length} muestras)`, log);
+  const tele = atk.slice(0, 4);
+  const dive = atk.slice(-8);
+  const vTele = Math.max(...tele.map((p) => Math.hypot(p.vx, p.vy)));
+  const vDive = Math.max(...dive.map((p) => Math.hypot(p.vx, p.vy)));
+  check(vDive > 350 && vDive > vTele * 1.5, `aviso lento y picado rápido (${Math.round(vTele)} → ${Math.round(vDive)} px/s)`, log);
+  const minDist = Math.min(...atk.map((p) => Math.hypot(p.dx, p.dy + 48)));
+  const sideStart = Math.sign(atk[0].dx), sideEnd = Math.sign(atk[atk.length - 1].dx);
+  check(minDist < 120 && sideStart !== sideEnd, `pica atravesando la posición del héroe y sigue de largo (dist. mín. ${Math.round(minDist)} px)`, log);
+  await shot(g, "28_murcielago_pica.png");
+});
+
+await test("13 Plataformas con propósito: salas generadas, cofres alcanzables, pinchos y cultistas apostados", async (g, log) => {
+  await newGame(g, "Arquera");
+  await enterDungeon(g, 1);
+  const layout = () => g.eval((G, S) => ({
+    cofres: S.getObjects("Cofre").map((c) => ({ x: c.getX(), y: c.getY() })), pinchos: S.getObjects("Pinchos").map((c) => c.getX()),
+    plat: S.getObjects("Plataforma").map((p) => ({ x: p.getX(), y: p.getY(), w: p.getWidth() })).sort((a, b) => a.x - b.x) }));
+  // ---- the generated layout follows the reachability rules (check several fresh runs)
+  const problems = [];
+  let cofresRuns = 0;
+  for (let run = 0; run < 4; run++) {
+    if (run > 0) { await g.eval((G) => { G.getSceneStack().replace("Mazmorra", true); }); await g.waitScene("Mazmorra"); await g.wait(500); }
+    const L = await layout();
+    cofresRuns += L.cofres.length;
+    for (let room = 0; room < 5; room++) {
+      const list = L.plat.filter((p) => p.x >= room * 1800 && p.x < (room + 1) * 1800);
+      if (list.length < 3) problems.push(`sala ${room + 1}: sólo ${list.length} plataformas`);
+      if (list[0] && 600 - list[0].y > 145) problems.push(`sala ${room + 1}: primera plataforma demasiado alta (${600 - list[0].y} px)`);
+      for (let i = 1; i < list.length; i++) {
+        const gap = list[i].x - (list[i - 1].x + list[i - 1].w);
+        const rise = list[i - 1].y - list[i].y;
+        if (gap > 155 || rise > 105) problems.push(`sala ${room + 1}: salto de ${Math.round(gap)} px de hueco y ${Math.round(rise)} px de subida`);
+      }
+      const top = list.reduce((a, b) => (b.y < a.y ? b : a), list[0]);
+      const ch = L.cofres.find((c) => c.x >= room * 1800 && c.x < (room + 1) * 1800);
+      if (!ch || Math.abs(ch.y - top.y) > 1 || ch.x < top.x || ch.x > top.x + top.w) problems.push(`sala ${room + 1}: el cofre no está en la plataforma más alta`);
+    }
+    if (L.pinchos.length !== 3) problems.push(`hay ${L.pinchos.length} tramos de pinchos (se esperaban 3)`);
+  }
+  check(problems.length === 0, `4 salas generadas distintas cumplen las reglas de alcance (${problems.slice(0, 3).join("; ") || "sin problemas"}; ${cofresRuns} cofres)`, log);
+  // ---- physics check: take the worst step of room 1 (largest gap + rise) and cross it with jump + double jump
+  const L = await layout();
+  const room0 = L.plat.filter((p) => p.x < 1800);
+  let worst = 1;
+  for (let i = 1; i < room0.length; i++) {
+    const cost = (room0[i].x - (room0[i - 1].x + room0[i - 1].w)) + (room0[i - 1].y - room0[i].y);
+    if (cost > (room0[worst].x - (room0[worst - 1].x + room0[worst - 1].w)) + (room0[worst - 1].y - room0[worst].y)) worst = i;
+  }
+  const from = room0[worst - 1], to = room0[worst];
+  log.push(`INFO paso más difícil de la sala 1: hueco ${Math.round(to.x - (from.x + from.w))} px, subida ${Math.round(from.y - to.y)} px`);
+  await g.setPos("Jugador", from.x + from.w - 35, from.y - 4);
+  await g.wait(600);
+  let landed = false;
+  await g.page.keyboard.down("ArrowRight");
+  await g.page.keyboard.down("Space");
+  const t0 = Date.now();
+  let phase = 0, tHold = 0, prevY = 1e9;
+  while (Date.now() - t0 < 2600 && !landed) {
+    const st = await g.eval((G, S) => { const J = S.getObjects("Jugador")[0]; return { x: J.getX(), y: J.getY() }; });
+    if (phase === 0 && Date.now() - t0 > 260) { await g.page.keyboard.up("Space"); phase = 1; }
+    if (phase === 1 && st.y >= prevY && Date.now() - t0 > 320) { await g.page.keyboard.down("Space"); phase = 2; tHold = Date.now(); }
+    if (phase === 2 && Date.now() - tHold > 320) { await g.page.keyboard.up("Space"); phase = 3; }
+    if (phase === 3 && Math.abs(st.y - (to.y)) < 6 && st.x >= to.x && st.x <= to.x + to.w) landed = true;
+    prevY = st.y;
+    await g.wait(30);
+  }
+  await g.page.keyboard.up("Space"); await g.page.keyboard.up("ArrowRight");
+  check(landed, "el paso más difícil se supera con salto + doble salto y se aterriza en la plataforma siguiente", log);
+  // ---- the chest of the room opens on touch
+  const chest = L.cofres[0];
+  const oro0 = await g.v("Save.Oro", true);
+  await g.setPos("Jugador", chest.x, chest.y - 5);
+  const opened = await waitFor(g, () => window.__game.getSceneStack().getCurrentScene().getObjects("Cofre").some((c) => c.getVariables().get("Abierto").getAsNumber() === 1), 2500);
+  check(opened, "al tocar el cofre se abre", log);
+  await g.wait(2600);
+  const cofres = await g.v("Stats.Cofres");
+  const oro1 = await g.v("Save.Oro", true);
+  check(cofres === 1 && oro1 - oro0 >= 18, `el cofre da oro (+${oro1 - oro0}) y cuenta en las estadísticas (${cofres})`, log);
+  await shot(g, "29_cofre_plataforma.png");
+  // ---- spikes hurt and bounce
+  await g.eval((G, S) => { const J = S.getObjects("Jugador")[0]; J.getVariables().get("HP").setNumber(J.getVariables().get("HP").getAsNumber()); J.getVariables().get("Inv").setNumber(0); });
+  await g.wait(1200); // let the coins and enemies settle
+  const hp0 = (await player(g)).vars.HP;
+  await g.setPos("Jugador", L.pinchos[0], 570);
+  await g.wait(500);
+  const p1 = await player(g);
+  check(p1.vars.HP < hp0 - 4, `los pinchos hacen daño (${Math.round(hp0)} → ${Math.round(p1.vars.HP)})`, log);
+  // ---- perched cultists: force waves until one stands on a platform
+  await g.setPos("Jugador", 1 * 1800 + 330, 560);
+  await g.setV("Sala", 1);
+  await g.setV("PEsq", 0); await g.setV("PMur", 0); await g.setV("PCul", 1);
+  await g.setV("SpawnPend", 1);
+  await g.wait(1600);
+  await g.setV("SpawnPend", 0);
+  const perched = await g.eval((G, S) => S.getObjects("Enemigo").filter((e) => e.getVariables().get("Percha").getAsNumber() === 1)
+    .map((e) => ({ y: e.getY(), x: e.getX(), x0: e.getVariables().get("PX0").getAsNumber(), x1: e.getVariables().get("PX1").getAsNumber() })));
+  const total = await g.eval((G, S) => S.getObjects("Enemigo").filter((e) => e.getVariables().get("Tipo").getAsString() === "Cultista").length);
+  check(total >= 3, `la oleada trae cultistas (${total})`, log);
+  if (perched.length) {
+    await g.wait(1800);
+    const again = await g.eval((G, S) => S.getObjects("Enemigo").filter((e) => e.getVariables().get("Percha").getAsNumber() === 1)
+      .map((e) => ({ y: e.getY(), x: e.getX(), x0: e.getVariables().get("PX0").getAsNumber(), x1: e.getVariables().get("PX1").getAsNumber() })));
+    check(again.length > 0 && again.every((c) => c.y < 590 && c.x >= c.x0 - 3 && c.x <= c.x1 + 3), `los cultistas apostados (${again.length}) se quedan sobre su plataforma`, log);
+  } else {
+    log.push("INFO en esta oleada ningún cultista se apostó (60% de probabilidad cada uno)");
+  }
+});
+
+await test("14 RPG: reparto de puntos de atributo, habilidades nuevas y menú de habilidades", async (g, log) => {
+  await newGame(g, "Guerrero");
+  await g.wait(600);
+  const sv = (n) => g.v(n, true);
+  const stat = (n) => g.v("Stat." + n, true);
+  check((await sv("Save.Puntos")) === 0, "en el nivel 1 no hay puntos que repartir", log);
+  // level 5 -> 12 points
+  await g.setV("Save.Nivel", 5, true); await g.setV("Save.Exp", 0, true); await g.setV("RecalcStats", 1);
+  await g.wait(300);
+  check((await sv("Save.Puntos")) === 12, `nivel 5 = 12 puntos de atributo (${await sv("Save.Puntos")})`, log);
+  const label = await g.eval((G, S) => S.getObjects("TextoPuntos")[0].getText());
+  check(/12/.test(label), `el HUD avisa de los puntos (“${label}”)`, log);
+  const atq0 = await stat("Atq"), vida0 = await stat("VidaMax"), crit0 = await stat("Crit"), mana0 = await stat("ManaMax"), cd0 = await stat("Cd1Max");
+  // open the sheet with C, go to Attributes
+  await g.tap("c"); await g.wait(500);
+  check((await g.v("Menu")) === "personaje", "la tecla C abre la ficha del personaje", log);
+  await shot(g, "30_ficha_botones.png");
+  await clickMenuSlot(g, 1); await g.wait(500);
+  check((await g.v("Menu")) === "atributos", "el botón Atributos abre el reparto de puntos", log);
+  await clickMenuSlot(g, 1); await clickMenuSlot(g, 1); await clickMenuSlot(g, 1);   // 3 x Fuerza
+  await clickMenuSlot(g, 2); await clickMenuSlot(g, 2);                               // 2 x Vitalidad
+  await clickMenuSlot(g, 3);                                                          // 1 x Destreza
+  await clickMenuSlot(g, 4); await clickMenuSlot(g, 4);                               // 2 x Espíritu
+  await g.wait(400);
+  const atr = { fue: await sv("Save.AtFue"), vit: await sv("Save.AtVit"), des: await sv("Save.AtDes"), esp: await sv("Save.AtEsp"), pts: await sv("Save.Puntos") };
+  check(atr.fue === 3 && atr.vit === 2 && atr.des === 1 && atr.esp === 2 && atr.pts === 4, `los botones reparten los puntos (F${atr.fue} V${atr.vit} D${atr.des} E${atr.esp}, quedan ${atr.pts})`, log);
+  check((await stat("Atq")) === atq0 + 3, `Fuerza: +1 ATQ por punto (${atq0} → ${await stat("Atq")})`, log);
+  check((await stat("VidaMax")) === vida0 + 16, `Vitalidad: +8 vida por punto (${vida0} → ${await stat("VidaMax")})`, log);
+  check(Math.abs((await stat("Crit")) - (crit0 + 0.005)) < 1e-6, `Destreza: +0,5% crítico (${crit0} → ${await stat("Crit")})`, log);
+  check((await stat("ManaMax")) === mana0 + 6 && (await stat("Cd1Max")) < cd0, `Espíritu: +3 maná y menos enfriamiento (maná ${mana0} → ${await stat("ManaMax")}, cd ${cd0} → ${(await stat("Cd1Max")).toFixed(2)})`, log);
+  await shot(g, "31_atributos.png");
+  // spend the rest and try one more (must not go negative)
+  for (let i = 0; i < 6; i++) await clickMenuSlot(g, 1);
+  await g.wait(300);
+  check((await sv("Save.Puntos")) === 0 && (await sv("Save.AtFue")) === 7, `sin puntos no se puede seguir subiendo (Fuerza ${await sv("Save.AtFue")}, puntos ${await sv("Save.Puntos")})`, log);
+  // reset costs gold
+  const oroAntes = await sv("Save.Oro");
+  await g.setV("Save.Oro", 500, true);
+  await clickMenuSlot(g, 5); await g.wait(400);
+  check((await sv("Save.AtFue")) === 0 && (await sv("Save.Puntos")) === 12 && (await sv("Save.Oro")) === 500 - (60 + 20 * 5), "reiniciar puntos los devuelve y cuesta oro", log);
+  // level 4 unlocks slot 2 (Salto sísmico)
+  await g.tap("Escape"); await g.wait(300);
+  await g.setV("Save.Nivel", 3, true); await g.setV("Save.Hab2", 1, true); await g.setV("RecalcStats", 1); await g.wait(200);
+  await g.setV("Save.Exp", 100000, true);
+  await g.wait(700);
+  check((await sv("Save.Nivel")) >= 4 && (await sv("Save.Hab2")) === 2, `al llegar al nivel 4 se equipa la habilidad nueva de la ranura 2 (nivel ${await sv("Save.Nivel")})`, log);
+  const anim2 = await g.eval((G, S) => S.getObjects("BotonHab2")[0].getAnimationName());
+  check(anim2 === "Guerrero2", `el icono de la ranura 2 cambia (${anim2})`, log);
+  await g.setV("Save.Exp", 0, true);
+  check((await stat("Costo2")) === 18 && Math.abs((await stat("Cd2Max")) - 8 * (1 - Math.min(0.4, 0.006 * (await sv("Save.AtEsp"))))) < 0.01, `coste y enfriamiento de Salto sísmico (${await stat("Costo2")} maná, ${(await stat("Cd2Max")).toFixed(1)} s)`, log);
+  // loadout menu: swap slot 1 (needs level 8)
+  await g.setV("Save.Nivel", 6, true); await g.setV("RecalcStats", 1); await g.wait(200);
+  await g.tap("c"); await g.wait(400); await clickMenuSlot(g, 2); await g.wait(500);
+  check((await g.v("Menu")) === "habilidades", "la ficha abre el menú de habilidades", log);
+  await shot(g, "32_habilidades.png");
+  await clickMenuSlot(g, 1); await g.wait(300);
+  check((await sv("Save.Hab1")) === 1, "la ranura 1 sigue con la habilidad inicial antes del nivel 8", log);
+  await clickMenuSlot(g, 2); await g.wait(300);
+  check((await sv("Save.Hab2")) === 1, "la ranura 2 vuelve a la habilidad inicial si se cambia", log);
+  await clickMenuSlot(g, 2); await g.wait(300);
+  check((await sv("Save.Hab2")) === 2, "y se puede volver a equipar la nueva", log);
+  await g.tap("Escape"); await g.wait(300);
+  await g.setV("Save.Nivel", 8, true); await g.setV("RecalcStats", 1); await g.wait(200);
+  await g.tap("c"); await g.wait(400); await clickMenuSlot(g, 2); await g.wait(400);
+  await clickMenuSlot(g, 1); await g.wait(300);
+  check((await sv("Save.Hab1")) === 2 && (await stat("Costo1")) === 22, `en el nivel 8 se puede equipar el Ciclón de acero (coste ${await stat("Costo1")})`, log);
+});
+
+// ---- helpers for the skill tests
+async function classAtLevel(g, cls, hab = [2, 2, 2]) {
+  await newGame(g, cls);
+  await g.setV("Save.Nivel", 20, true);
+  hab.forEach((v, i) => g.setV(`Save.Hab${i + 1}`, v, true));
+  await g.setV("RecalcStats", 1);
+  await g.wait(300);
+  await g.setV("CurarTodo", 1);
+  await enterDungeon(g, 1);
+  await g.wait(400);
+  await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()));
+}
+async function spawnMany(g, tipo, xs, tank = true) {
+  await g.eval((G, S, a) => { for (const x of a.xs) { const e = S.createObject("Enemigo"); e.setPosition(x, 600); e.getVariables().get("Tipo").setString(a.tipo); } }, { tipo, xs });
+  await g.wait(800);
+  // tanky, harmless dummies so damage can be measured (they are still hit, knocked back and frozen normally)
+  if (tank) await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => { if (e.getVariables().get("HPMax").getAsNumber() < 90000) { e.getVariables().get("HPMax").setNumber(90000); e.getVariables().get("HP").setNumber(90000); e.getVariables().get("Atq").setNumber(1); } }));
+}
+const enemyHP = (g) => g.eval((G, S) => S.getObjects("Enemigo").filter((e) => e.getVariables().get("Estado").getAsString() !== "muerto").map((e) => [Math.round(e.getX()), e.getVariables().get("HP").getAsNumber(), e.getVariables().get("HPMax").getAsNumber()]).sort((a, b) => a[0] - b[0]));
+async function watch(g, ms, fn) { const out = []; const t0 = Date.now(); while (Date.now() - t0 < ms) { out.push(await g.eval(fn)); await g.wait(20); } return out; }
+const refill = (g) => g.eval((G, S) => { const J = S.getObjects("Jugador")[0]; J.getVariables().get("MP").setNumber(9999); J.getVariables().get("HP").setNumber(9999); J.getVariables().get("Cd1").setNumber(0); J.getVariables().get("Cd2").setNumber(0); J.getVariables().get("Cd3").setNumber(0); });
+const damaged = (before, after) => after.filter((e) => before.some((b) => Math.abs(b[0] - e[0]) < 400 && false) || true).length; // (not used)
+
+await test("15 Guerrero: Ciclón de acero, Salto sísmico y Espada giratoria", async (g, log) => {
+  await classAtLevel(g, "Guerrero");
+  // -- Ciclón (slot 1)
+  await spawnMany(g, "Esqueleto", [330, 420, 120]);
+  await refill(g);
+  let before = await enemyHP(g);
+  const hits = watch(g, 1500, (G, S) => S.getObjects("GolpeJugador").length);
+  await g.tap("k");
+  const counts = await hits;
+  await g.wait(300);
+  let after = await enemyHP(g);
+  log.push(`INFO tajos simultáneos máx ${Math.max(...counts)}; vida enemigos ${JSON.stringify(before.map((e) => e[1]))} → ${JSON.stringify(after.map((e) => e[1]))}`);
+  const drops = after.filter((e, i) => e[1] < before[i][1]).length;
+  check(drops >= 3, `el Ciclón de acero daña a los 3 enemigos alrededor (${drops}/3)`, log);
+  check(counts.some((c) => c >= 1), "genera golpes giratorios", log);
+  await g.wait(1200);
+  await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()));
+  // -- Salto sísmico (slot 2)
+  await spawnMany(g, "Esqueleto", [420]);
+  await refill(g);
+  before = await enemyHP(g);
+  const ground = (await player(g)).y;
+  const seen = watch(g, 1900, (G, S) => { const J = S.getObjects("Jugador")[0]; const h = S.getObjects("GolpeJugador").map((o) => [o.getWidth(), o.getVariables().get("Fuerte").getAsNumber()]);
+    return { y: J.getY(), est: J.getVariables().get("Estado").getAsString(), hits: h }; });
+  await g.tap("l");
+  const trace = await seen;
+  const apex = Math.min(...trace.map((t) => t.y));
+  const slam = trace.some((t) => t.hits.some((h) => h[0] >= 400 && h[1] === 1));
+  after = await enemyHP(g);
+  check(apex < ground - 120, `el Salto sísmico eleva al héroe (${Math.round(ground - apex)} px)`, log);
+  check(slam, "al caer crea una onda de choque ancha y fuerte (>= 400 px)", log);
+  check(after.length === 0 || after[0][1] < before[0][1], `la onda daña al enemigo cercano (${before[0][1]} → ${after[0] ? after[0][1] : "muerto"})`, log);
+  check(trace[trace.length - 1].est === "libre", "el héroe vuelve a estar libre tras el aterrizaje", log);
+  await shot(g, "33_salto_sismico.png");
+  await g.wait(600);
+  await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()));
+  // -- Espada giratoria (slot 3): pierces a line of enemies
+  await spawnMany(g, "Esqueleto", [420, 620, 820]);
+  await refill(g);
+  before = await enemyHP(g);
+  const proj = watch(g, 900, (G, S) => S.getObjects("ProyectilJugador").map((p) => [p.getVariables().get("Tipo").getAsString(), p.getVariables().get("Perfora").getAsNumber(), p.getX()]));
+  await g.tap("i");
+  const pr = await proj;
+  await g.wait(300);
+  after = await enemyHP(g);
+  check(pr.some((l) => l.some((p) => p[0] === "Espada" && p[1] === 1)), "lanza una espada que perfora", log);
+  const dd = after.filter((e, i) => before[i] && e[1] < before[i][1]).length;
+  check(dd >= 3, `la espada atraviesa y daña a los 3 enemigos en línea (${dd}/3)`, log);
+});
+
+await test("16 Maga: Tormenta de rayos, Aura ígnea y Cataclismo", async (g, log) => {
+  await classAtLevel(g, "Maga");
+  // -- Tormenta de rayos (slot 1)
+  await spawnMany(g, "Esqueleto", [300, 500, 700]);
+  await refill(g);
+  let before = await enemyHP(g);
+  const bolts = watch(g, 900, (G, S) => S.getObjects("Efecto").filter((e) => e.getAnimationName() === "Rayo").length);
+  await g.tap("k");
+  const b = await bolts;
+  await g.wait(400);
+  let after = await enemyHP(g);
+  check(Math.max(...b) >= 2, `caen varios rayos a la vez (${Math.max(...b)})`, log);
+  const dd = after.filter((e, i) => before[i] && e[1] < before[i][1]).length;
+  check(dd >= 3, `los tres enemigos reciben un rayo (${dd}/3)`, log);
+  await shot(g, "34_tormenta_rayos.png");
+  await g.wait(800);
+  await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()));
+  // -- Aura ígnea (slot 2): repeated damage around the caster
+  await spawnMany(g, "Bruto", [330]);
+  await refill(g);
+  before = await enemyHP(g);
+  await g.tap("l");
+  await g.wait(200);
+  const aura = await g.eval((G, S) => S.getObjects("Jugador")[0].getVariables().get("Aura").getAsNumber());
+  check(aura > 3, `el Aura ígnea queda activa durante ${aura.toFixed(1)} s`, log);
+  const hpSeries = [];
+  for (let i = 0; i < 12; i++) { hpSeries.push((await enemyHP(g))[0][1]); await g.wait(200); }
+  const ticks = hpSeries.filter((v, i) => i > 0 && v < hpSeries[i - 1]).length;
+  check(ticks >= 3, `quema al enemigo cercano varias veces (${ticks} golpes en 2,4 s)`, log);
+  await shot(g, "35_aura_ignea.png");
+  await g.wait(2500);
+  await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()));
+  // -- Cataclismo (slot 3): screen-wide
+  await spawnMany(g, "Esqueleto", [640, 800]);
+  await spawnMany(g, "Bruto", [500]);
+  await refill(g);
+  before = await enemyHP(g);
+  const wide = watch(g, 1400, (G, S) => Math.max(0, ...S.getObjects("GolpeJugador").map((o) => o.getWidth())));
+  await g.tap("i");
+  const w = await wide;
+  await g.wait(300);
+  after = await enemyHP(g);
+  check(Math.max(...w) >= 1000, `el Cataclismo crea una explosión de ${Math.round(Math.max(...w))} px`, log);
+  const hit = after.filter((e, i) => before[i] && e[1] < before[i][1]).length;
+  check(hit === after.length && after.length >= 2, `daña a todos los enemigos de la pantalla (${hit}/${after.length})`, log);
+});
+
+await test("17 Arquera: Flecha explosiva, Ráfaga y Disparo celestial", async (g, log) => {
+  await classAtLevel(g, "Arquera");
+  // -- Flecha explosiva (slot 1): the arrow hits the first enemy, the explosion also hurts the one next to it
+  await spawnMany(g, "Bruto", [560, 640]);
+  await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.getVariables().get("Vel").setNumber(0)));
+  await refill(g);
+  let before = await enemyHP(g);
+  const expl = watch(g, 1200, (G, S) => S.getObjects("Efecto").filter((e) => e.getAnimationName() === "Explosion").length);
+  await g.tap("k");
+  const ex = await expl;
+  await g.wait(300);
+  let after = await enemyHP(g);
+  check(Math.max(...ex) >= 1, "la flecha explota al impactar", log);
+  check(after[0][1] < before[0][1] && after[1][1] < before[1][1], `la explosión daña a los dos enemigos juntos (${before.map((e) => e[1])} → ${after.map((e) => e[1])})`, log);
+  await shot(g, "36_flecha_explosiva.png");
+  await g.wait(800);
+  await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()));
+  // -- Ráfaga (slot 2) aimed up with the keyboard
+  await refill(g);
+  await g.page.keyboard.down("ArrowUp");
+  await g.wait(80);
+  const arrows = watch(g, 1100, (G, S) => S.getObjects("ProyectilJugador").map((p) => [p.getVariables().get("VY").getAsNumber(), p.getVariables().get("Id").getAsNumber()]));
+  await g.tap("l");
+  const ar = await arrows;
+  await g.page.keyboard.up("ArrowUp");
+  const ids = new Set(ar.flat().filter((x) => Array.isArray(x)).map((x) => x[1]));
+  const up = ar.flat().filter((x) => x[0] < -800).length;
+  check(ids.size >= 7, `la Ráfaga dispara 8 flechas (${ids.size} detectadas)`, log);
+  check(up > 0, "y salen hacia arriba cuando se apunta arriba", log);
+  await g.wait(900);
+  // -- Disparo celestial (slot 3): huge piercing arrow
+  await spawnMany(g, "Esqueleto", [420, 700, 980]);
+  await refill(g);
+  before = await enemyHP(g);
+  const big = watch(g, 900, (G, S) => S.getObjects("ProyectilJugador").map((p) => [p.getVariables().get("Perfora").getAsNumber(), p.getWidth()]));
+  await g.tap("i");
+  const bg = await big;
+  await g.wait(400);
+  after = await enemyHP(g);
+  check(bg.flat().some((p) => p[0] === 1 && p[1] > 90), "la flecha celestial es enorme y perfora", log);
+  const dd = after.filter((e, i) => before[i] && e[1] < before[i][1]).length;
+  check(dd >= 3, `atraviesa a los tres enemigos alineados (${dd}/3)`, log);
+});
 
 // ------------------------------------------------------------------ report
 const pass = results.filter((r) => r.status === "PASS").length;

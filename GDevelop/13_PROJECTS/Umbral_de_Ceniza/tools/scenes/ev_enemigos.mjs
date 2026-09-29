@@ -1,6 +1,6 @@
 // External events "EV_Enemigos": enemy initialisation (stats per type/stage) and AI. Linked from Mazmorra.
 import { q, C, A, NOT, OR, AND, E, ELSE, FOREACH, COMMENT, GROUP, SET, SETS, IFN, IFS, OSET, OSETS, OIFN, OIFS, CMP, ANIM,
-  ANIM_END, FLIPX, OPACITY, SIZE, CREATE, DEL, SETX, SETY, HIDE, SOUND, DT, COLLIDE, PLAT, SPEED, MAXSPEED } from "../lib/dsl.mjs";
+  ANIM_END, FLIPX, OPACITY, SIZE, CREATE, DEL, SETX, SETY, HIDE, SOUND, DT, COLLIDE, PLAT, SPEED, MAXSPEED, ON_FLOOR } from "../lib/dsl.mjs";
 import { fx, fxE } from "./ev_jugador.mjs";
 import { toast } from "./ev_combate.mjs";
 
@@ -71,8 +71,12 @@ function ai() {
         OSETS(EN, "Estado", "=", q("mover")), MAXSPEED(EN, PL, "Enemigo.Vel")]),
 
       // ---------------- melee: Esqueleto / Bruto
+      E([], [OSET(EN, "SaltoT", "=", "max(0, Enemigo.SaltoT - TimeDelta())")]),
       E([OR(tipo("Esqueleto"), tipo("Bruto")), est("mover")], [], [
         ...face(),
+        COMMENT("Los esqueletos saltan tras el jugador cuando está en una plataforma por encima de ellos."),
+        E([tipo("Esqueleto"), CMP("Jugador.Y()", "<", "Enemigo.Y() - 110"), CMP(dx, "<", 260), C("PlatformBehavior::IsOnFloor", EN, PL),
+          OIFN(EN, "SaltoT", "<=", 0), playerAlive()], [A("PlatformBehavior::SimulateJumpKey", EN, PL), OSET(EN, "SaltoT", "=", 1.6)]),
         E([CMP(dx, ">", "Enemigo.Rango")], [ANIM(EN, "Enemigo.Tipo + \"_Walk\"")], walkToward()),
         ELSE([], [ANIM(EN, "Enemigo.Tipo + \"_Idle\"")], [
           E([CMP("Enemigo.Cd", ">=", "Enemigo.CdAtk"), CMP("abs(Jugador.Y() - Enemigo.Y())", "<", 150), playerAlive()], [
@@ -111,31 +115,60 @@ function ai() {
         E([ANIM_END(EN)], [OSETS(EN, "Estado", "=", q("mover")), OSET(EN, "Cd", "=", 0)]),
       ]),
 
-      // ---------------- Murcielago (volador)
+      // ---------------- Murcielago (volador): vuelo con inercia, ondulación y picado con aviso
+      COMMENT("Murciélago: vuela hacia un punto de espera con velocidad e inercia (VX/VY) y ondulación en ocho. Si el jugador está en el aire y cerca, baja a su altura y ataca antes."),
       E([tipo("Murcielago"), est("mover")], [
-        OSET(EN, "TX", "=", "Jugador.X() + Enemigo.Lado * 170"),
-        OSET(EN, "TY", "=", "Jugador.Y() - 210 + sin(TimeFromStart() * 3 + Enemigo.Fase) * 28"),
-        SETX(EN, "+", "clamp(Enemigo.TX - Enemigo.X(), -Enemigo.Vel * TimeDelta(), Enemigo.Vel * TimeDelta())"),
-        SETY(EN, "+", "clamp(Enemigo.TY - Enemigo.Y(), -Enemigo.Vel * TimeDelta(), Enemigo.Vel * TimeDelta())"),
-        ANIM(EN, q("Murcielago_Fly")),
+        OSET(EN, "TX", "=", "Jugador.X() + Enemigo.Lado * (170 + 60 * sin(TimeFromStart() * 1.3 + Enemigo.Fase))"),
+        OSET(EN, "TY", "=", "Jugador.Y() - 210 + sin(TimeFromStart() * 3 + Enemigo.Fase) * 26 + cos(TimeFromStart() * 1.7 + Enemigo.Fase * 2) * 18"),
+        OSET(EN, "Fase2", "=", 1),
       ], [
+        E([IFN("JugAire", "=", 1), CMP("Enemigo.Distance(Jugador)", "<", 640)], [
+          OSET(EN, "TX", "=", "Jugador.X() + Enemigo.Lado * 130"),
+          OSET(EN, "TY", "=", "Jugador.Y() - 100 + sin(TimeFromStart() * 4 + Enemigo.Fase) * 22"),
+          OSET(EN, "Fase2", "=", 1.5), OSET(EN, "Cd", "+", "TimeDelta() * 0.9"),
+        ]),
+        E([], [OSET(EN, "TY", "=", "min(Enemigo.TY, Jugador.Y() - 70)")]),
+        E([], [
+          OSET(EN, "VX", "+", "(clamp((Enemigo.TX - Enemigo.X()) * 2.2, -Enemigo.Vel * Enemigo.Fase2, Enemigo.Vel * Enemigo.Fase2) - Enemigo.VX) * min(1, 4.5 * TimeDelta())"),
+          OSET(EN, "VY", "+", "(clamp((Enemigo.TY - Enemigo.Y()) * 2.2, -Enemigo.Vel * Enemigo.Fase2, Enemigo.Vel * Enemigo.Fase2) - Enemigo.VY) * min(1, 4.5 * TimeDelta())"),
+          SETX(EN, "+", "Enemigo.VX * TimeDelta()"), SETY(EN, "+", "Enemigo.VY * TimeDelta()"),
+          A("SetAngle", EN, "=", "clamp(Enemigo.VX * 0.04, -12, 12)"), ANIM(EN, q("Murcielago_Fly")),
+        ]),
         E([CMP("Jugador.X()", "<", "Enemigo.X()")], [FLIPX(EN, true)]), ELSE([], [FLIPX(EN, false)]),
-        E([CMP("Enemigo.Cd", ">=", "Enemigo.CdAtk"), CMP("Enemigo.Distance(Jugador)", "<", 480), playerAlive()], [
-          OSETS(EN, "Estado", "=", q("atacar")), OSET(EN, "Accion", "=", 0), OSET(EN, "Golpeo", "=", 0),
-          OSET(EN, "TX", "=", "Jugador.X()"), OSET(EN, "TY", "=", "Jugador.Y() - 48"), ANIM(EN, q("Murcielago_Attack"))]),
+        E([CMP("Enemigo.Cd", ">=", "Enemigo.CdAtk"), CMP("Enemigo.Distance(Jugador)", "<", 520), playerAlive()], [
+          OSETS(EN, "Estado", "=", q("atacar")), OSET(EN, "Accion", "=", 0), OSET(EN, "Golpeo", "=", 0), ANIM(EN, q("Murcielago_Attack"))]),
       ]),
-      E([tipo("Murcielago"), est("atacar")], [
-        SETX(EN, "+", "clamp(Enemigo.TX - Enemigo.X(), -540 * TimeDelta(), 540 * TimeDelta())"),
-        SETY(EN, "+", "clamp(Enemigo.TY - Enemigo.Y(), -540 * TimeDelta(), 540 * TimeDelta())"),
+      E([tipo("Murcielago"), est("atacar")], [], [
+        COMMENT("Aviso (0,32 s): frena y se eleva apuntando; luego pica atravesando la posición del jugador y sigue de largo."),
+        E([CMP("Enemigo.Accion", "<", 0.32)], [
+          OSET(EN, "VX", "=", "Enemigo.VX * max(0, 1 - 9 * TimeDelta())"), OSET(EN, "VY", "=", -90),
+          SETX(EN, "+", "Enemigo.VX * TimeDelta()"), SETY(EN, "+", "Enemigo.VY * TimeDelta()"),
+          OSET(EN, "TX", "=", "Jugador.X() + sign(Jugador.X() - Enemigo.X() + 0.01) * 240"), OSET(EN, "TY", "=", "Jugador.Y() - 40"),
+          A("SetAngle", EN, "=", 0),
+        ]),
+        E([CMP("Enemigo.Accion", ">=", 0.32)], [
+          OSET(EN, "VX", "+", "((Enemigo.TX - Enemigo.X()) / max(1, Enemigo.DistanceToPosition(Enemigo.TX, Enemigo.TY)) * 650 - Enemigo.VX) * min(1, 12 * TimeDelta())"),
+          OSET(EN, "VY", "+", "((Enemigo.TY - Enemigo.Y()) / max(1, Enemigo.DistanceToPosition(Enemigo.TX, Enemigo.TY)) * 650 - Enemigo.VY) * min(1, 12 * TimeDelta())"),
+          SETX(EN, "+", "Enemigo.VX * TimeDelta()"), SETY(EN, "+", "Enemigo.VY * TimeDelta()"),
+          A("SetAngle", EN, "=", "ToDeg(atan2(Enemigo.VY, max(1, abs(Enemigo.VX)))) * sign(Enemigo.VX + 0.001) * 0.6"),
+        ], [
+          E([CMP("Enemigo.VX", ">", 20)], [FLIPX(EN, false)]),
+          E([CMP("Enemigo.VX", "<", -20)], [FLIPX(EN, true)]),
+          E([COLLIDE(EN, "Jugador"), OIFN(EN, "Golpeo", "=", 0), OIFN("Jugador", "Inv", "<=", 0)], [OSET(EN, "Golpeo", "=", 1)], [
+            enemyHit("Jugador.X()", "Jugador.Y() - 48", 60, 60, "Enemigo.Atq", 0.05)]),
+          E([OR(CMP("Enemigo.Accion", ">=", 1.3), CMP("Enemigo.DistanceToPosition(Enemigo.TX, Enemigo.TY)", "<", 30))], [
+            OSETS(EN, "Estado", "=", q("mover")), OSET(EN, "Cd", "=", 0), OSET(EN, "Lado", "=", "-Enemigo.Lado")]),
+        ]),
+      ]),
+      E([tipo("Murcielago"), est("herido")], [
+        SETX(EN, "+", "Enemigo.VX * TimeDelta()"), SETY(EN, "+", "Enemigo.VY * TimeDelta()"),
+        OSET(EN, "VX", "=", "Enemigo.VX * max(0, 1 - 5 * TimeDelta())"), OSET(EN, "VY", "=", "Enemigo.VY * max(0, 1 - 5 * TimeDelta())"),
+        A("SetAngle", EN, "=", 0),
       ], [
-        E([COLLIDE(EN, "Jugador"), OIFN(EN, "Golpeo", "=", 0), OIFN("Jugador", "Inv", "<=", 0)], [OSET(EN, "Golpeo", "=", 1)], [
-          enemyHit("Jugador.X()", "Jugador.Y() - 48", 60, 60, "Enemigo.Atq", 0.05)]),
-        E([OR(CMP("Enemigo.Accion", ">=", 1.2), CMP("Enemigo.DistanceToPosition(Enemigo.TX, Enemigo.TY)", "<", 14))], [
-          OSETS(EN, "Estado", "=", q("mover")), OSET(EN, "Cd", "=", 0), OSET(EN, "Lado", "=", "-Enemigo.Lado")]),
-      ]),
-      E([tipo("Murcielago"), est("herido")], [SETX(EN, "+", "Enemigo.KB * TimeDelta()"), OSET(EN, "KB", "=", "Enemigo.KB * max(0, 1 - 6 * TimeDelta())")], [
         E([CMP("Enemigo.Accion", ">=", 0.3)], [OSETS(EN, "Estado", "=", q("mover"))]),
       ]),
+      COMMENT("Los murciélagos no atraviesan el suelo."),
+      E([tipo("Murcielago"), OR(est("mover"), est("atacar"), est("herido")), CMP("Enemigo.Y()", ">", "SueloY - 40")], [SETY(EN, "=", "SueloY - 40")]),
 
       // ---------------- Jefe: Caballero de Ceniza
       E([tipo("Jefe")], [OSET(EN, "Invoc", "+", DT)]),
@@ -190,16 +223,30 @@ function ai() {
         OSET(EN, "Furia", "=", 1), OSET(EN, "CdAtk", "=", 1.0), OSET(EN, "Vel", "+", 40), MAXSPEED(EN, PL, "Enemigo.Vel"),
         SOUND("assets/audio/jefe_rugido.wav", 80), ...toast(q("¡El Caballero de Ceniza entra en furia!"), q("255;120;70"))]),
     ]),
+    COMMENT("Enemigos apostados en una plataforma (Percha = 1) no se salen de ella."),
+    E([OIFN(EN, "Percha", "=", 1), OIFS(EN, "Estado", "!=", q("muerto"))], [], [
+      E([CMP("Enemigo.X()", "<", "Enemigo.PX0")], [SETX(EN, "=", "Enemigo.PX0"), SPEED(EN, PL, 0)]),
+      E([CMP("Enemigo.X()", ">", "Enemigo.PX1")], [SETX(EN, "=", "Enemigo.PX1"), SPEED(EN, PL, 0)]),
+    ]),
     COMMENT("Invocación del jefe (fuera del 'Para cada' para no mezclar la selección de Enemigo)."),
     E([IFN("InvocarPend", ">", 0)], [SET("InvocarPend", "-", 1)], [
       E([], [CREATE(EN, "clamp(InvX + (InvocarPend * 2 - 1) * 260, SalaIni + 120, SalaIni + AnchoSala - 120)", "SueloY"),
         OSETS(EN, "Tipo", "=", q("Esqueleto")), OSET(EN, "Sala", "=", "Sala")]),
     ]),
     COMMENT("Los murciélagos muertos caen al suelo."),
+    E([tipo("Murcielago"), est("muerto")], [A("SetAngle", EN, "=", 0)]),
     E([tipo("Murcielago"), est("muerto"), C("PosY", EN, "<", "SueloY - 30")], [SETY(EN, "+", "520 * TimeDelta()")]),
   ]);
 }
 
+function playerAir() {
+  return GROUP("Jugador en el aire", [
+    COMMENT("JugAire = 1 cuando el jugador está saltando o cayendo: los murciélagos cercanos lo siguen en altura."),
+    E([], [SET("JugAire", "=", 0)]),
+    E([NOT(ON_FLOOR("Jugador"))], [SET("JugAire", "=", 1)]),
+  ]);
+}
+
 export function evEnemigos() {
-  return [COMMENT("EV_Enemigos — enemigos de la mazmorra."), init(), ai()];
+  return [COMMENT("EV_Enemigos — enemigos de la mazmorra."), playerAir(), init(), ai()];
 }

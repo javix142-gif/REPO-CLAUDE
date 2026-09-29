@@ -56,6 +56,8 @@ export const LINK = (target) => ({ type: "BuiltinCommonInstructions::Link", incl
 // ---------------------------------------------------------------------------
 // Frequent instructions (shortcuts). Parameter order follows the engine metadata.
 
+export const PLAT = "PlatformerObject";
+
 export const SET = (v, op, val) => A("SetNumberVariable", v, op, val);
 export const SETS = (v, op, val) => A("SetStringVariable", v, op, val);
 export const IFN = (v, op, val) => C("NumberVariable", v, op, val);
@@ -98,8 +100,9 @@ export const JUST_BEGINS = () => C("SceneJustBegins");
 export const KEY = (k) => C("KeyFromTextPressed", q(k));
 export const KEY_JUST = (k) => C("KeyFromTextJustPressed", q(k));
 export const TOUCH_BTN = (id) => C("SpriteMultitouchJoystick::IsButtonPressed", "1", q(id));
+export const TOUCH_BTN_JUST = (id) => C("SpriteMultitouchJoystick::IsButtonJustPressed", "1", q(id));
+export const ON_FLOOR = (o = "Jugador") => C("PlatformBehavior::IsOnFloor", o, PLAT);
 export const TAP_ON = (o) => [C("IsCursorOnObject", o), C("MouseButtonFromTextReleased", q("Left"))];
 export const GOTO = (scene) => A("Scene", q(scene), "no");
-export const PLAT = "PlatformerObject";
 export const SPEED = (o, beh, v) => A("PlatformBehavior::PlatformerObjectBehavior::SetCurrentSpeed", o, beh, "=", v);
 export const MAXSPEED = (o, beh, v) => A("PlatformBehavior::MaxSpeed", o, beh, "=", v);

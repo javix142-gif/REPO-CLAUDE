@@ -73,6 +73,53 @@ def icon(kind, cls=None, size=24):
     elif kind == "shadow":
         c.poly([(4, m), (m, 4), (m, 9), (size - 4, 9), (size - 4, size - 9), (m, size - 9), (m, size - 4)], "#9dfc7a")
         c.poly([(8, m), (m, 8), (m, size - 8)], "#e0ffd0")
+    elif kind == "cyclone":
+        c.arc((2, 4, size - 2, size - 4), 10, 330, "#ffd35a", 3)
+        c.arc((6, 7, size - 6, size - 7), 180, 500, "#fff4c8", 2)
+        c.arc((10, 10, size - 10, size - 10), 40, 340, "#ff8a3a", 2)
+        c.line([(m - 1, 5), (m + 3, size - 5)], "#e8eef4", 2)
+    elif kind == "quake":
+        c.poly([(m - 2, 2), (m + 2, 2), (m + 1, 12), (m + 5, 12), (m, 21), (m - 1, 14), (m - 5, 14)], "#e8eef4")
+        c.line([(2, size - 4), (size - 2, size - 4)], "#ffd35a", 3)
+        c.line([(4, size - 8), (8, size - 5)], "#c9a64a", 2)
+        c.line([(size - 4, size - 8), (size - 8, size - 5)], "#c9a64a", 2)
+    elif kind == "swordthrow":
+        c.poly([(m, 2), (m + 4, 8), (m + 4, 17), (m, 20), (m - 4, 17), (m - 4, 8)], "#dfe7ef")
+        c.line([(m, 4), (m, 18)], "#8f9aab")
+        c.line([(m - 6, 20), (m + 6, 20)], "#e0b24c", 3)
+        c.line([(m, 21), (m, size - 2)], "#7a4a24", 3)
+        c.line([(2, 6), (6, 6)], "#ffd35a")
+        c.line([(size - 7, 10), (size - 3, 10)], "#ffd35a")
+    elif kind == "lightning":
+        c.poly([(m + 3, 2), (m - 5, 13), (m, 13), (m - 3, size - 2), (m + 6, 10), (m + 1, 10)], "#ffe36a")
+        c.poly([(m + 2, 5), (m - 2, 12), (m + 1, 12), (m, 17), (m + 3, 11)], "#fff6c0")
+    elif kind == "aura":
+        for i in range(8):
+            a = i / 8 * 2 * math.pi
+            x, y = m + 8 * math.cos(a), m + 6 * math.sin(a)
+            c.poly([(x - 2, y + 2), (x + 2, y + 2), (x, y - 5)], "#ff7a2a")
+            c.px(x, y - 1, "#ffd06a")
+        c.ellipse(m - 3, m - 2, m + 3, m + 4, "#ffd06a")
+    elif kind == "cataclysm":
+        c.ellipse(4, 4, size - 4, size - 4, "#ff6a2a")
+        c.ellipse(7, 7, size - 7, size - 7, "#ffc04a")
+        c.ellipse(10, 10, size - 10, size - 10, "#fff6c0")
+        for i in range(8):
+            a = i / 8 * 2 * math.pi
+            c.line([(m + 9 * math.cos(a), m + 9 * math.sin(a)), (m + 12 * math.cos(a), m + 12 * math.sin(a))], "#ff8a3a", 2)
+    elif kind == "explosive":
+        c.line([(2, m + 3), (size - 8, m + 3)], "#d8c7a0", 2)
+        c.poly([(size - 9, m - 1), (size - 3, m + 3), (size - 9, m + 7)], "#e8eef4")
+        c.ellipse(size - 12, 2, size - 2, 12, "#ff7a2a")
+        c.ellipse(size - 10, 4, size - 4, 10, "#fff0a8")
+    elif kind == "rapid":
+        for dy in (-7, -2, 3, 8):
+            c.line([(3, m + dy), (size - 6, m + dy)], "#d8c7a0", 1)
+            c.poly([(size - 8, m + dy - 1), (size - 3, m + dy), (size - 8, m + dy + 1)], "#e8eef4")
+    elif kind == "beam":
+        c.line([(2, m), (size - 3, m)], "#9dfc7a", 4)
+        c.line([(2, m), (size - 3, m)], "#e0ffd0", 2)
+        c.poly([(size - 10, m - 6), (size - 2, m), (size - 10, m + 6)], "#e0ffd0")
     elif kind == "jump":
         c.poly([(m, 3), (size - 4, m + 2), (m + 4, m + 2), (m + 4, size - 3), (m - 4, size - 3), (m - 4, m + 2), (4, m + 2)], "#8ae8d0")
     elif kind == "potion":
@@ -124,6 +171,12 @@ CLASS_ICONS = {
     "Maga": ("staff", ["nova", "meteor", "barrier"], "#ff9a3c"),
     "Arquera": ("bow", ["triple", "rain", "shadow"], "#9dfc7a"),
 }
+# second skill of each slot (unlocked at levels 8 / 4 / 12)
+CLASS_ICONS_2 = {
+    "Guerrero": ["cyclone", "quake", "swordthrow"],
+    "Maga": ["lightning", "aura", "cataclysm"],
+    "Arquera": ["explosive", "rapid", "beam"],
+}
 
 
 def attack_button(cls):
@@ -134,10 +187,10 @@ def attack_button(cls):
     return b.im
 
 
-def skill_button(cls, slot):
+def skill_button(cls, slot, variant=1):
     _, skills, acc = CLASS_ICONS[cls]
     b = ring_button(36, acc)
-    ic = icon(skills[slot], size=24)
+    ic = icon((skills if variant == 1 else CLASS_ICONS_2[cls])[slot], size=24)
     b.paste(ic, 6, 6)
     return b.im
 

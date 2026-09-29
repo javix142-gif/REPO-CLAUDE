@@ -31,7 +31,7 @@ def limb(c, a, b, col, w, l1, l2, bend):
 
 
 DEFAULT_POSE = dict(bob=0, lean=0, ff=(2, 0), bf=(-2, 0), fh=(1, 6), bh=(-1, 6), wang=60,
-                    cape=0, eyes=1, glow=0, string=0, arrow=0, head_tilt=0, hat=0)
+                    cape=0, eyes=1, glow=0, string=0, arrow=0, head_tilt=0, hat=0, aim=None)
 
 
 def P(**kw):
@@ -260,7 +260,7 @@ def _draw_weapon(c, cls, pal, p, fhand, bhand):
             yy = i * 1.35
             xx = 3.2 - (i * i) * 0.085
             pts.append((bx + xx - 2, by + yy))
-        a = 0 if ang in (0, 60) else (ang + 90) * 0.5
+        a = p["aim"] if p.get("aim") is not None else (0 if ang in (0, 60) else (ang + 90) * 0.5)
         pts = rot(pts, a, bx, by)
         c.line(pts, pal["wood"], 2)
         c.px(pts[6][0], pts[6][1], pal["wood_d"])
@@ -320,6 +320,46 @@ def hero_poses(cls):
             P(lean=-1, fh=(5, -1), bh=(0, 0), wang=0, string=3, arrow=1, ff=(3, 0), bf=(-4, 0)),
             P(lean=0, fh=(5, -1), bh=(-2, 1), wang=0, string=0, arrow=0, ff=(3, 0), bf=(-4, 0)),
             P(lean=0, fh=(4, 1), bh=(-1, 4), wang=60, string=0),
+        ]
+    # aimed attacks: diagonal-up and straight-up (the hitbox / projectile follows the same direction)
+    if melee:
+        anims["AttackDiag"] = [
+            P(lean=-1, fh=(-1, 3), bh=(-2, 3), wang=40, ff=(2, 0), bf=(-3, 0), cape=0),
+            P(lean=2, fh=(4, -3), bh=(-3, 2), wang=-30, ff=(5, 0), bf=(-4, 0), cape=3),
+            P(lean=2, fh=(3, -5), bh=(-3, 1), wang=-58, ff=(5, 0), bf=(-4, 0), cape=3),
+            P(lean=1, fh=(3, 0), bh=(-2, 3), wang=-15, ff=(4, 0), bf=(-3, 0), cape=2),
+        ]
+        anims["AttackUp"] = [
+            P(lean=0, fh=(0, 3), bh=(-2, 3), wang=25, ff=(2, 0), bf=(-3, 0), cape=0),
+            P(lean=1, fh=(1, -6), bh=(-2, -2), wang=-72, ff=(3, 0), bf=(-3, 0), cape=3),
+            P(lean=1, fh=(1, -8), bh=(-2, -3), wang=-92, ff=(3, 0), bf=(-3, 0), cape=3),
+            P(lean=0, fh=(2, -2), bh=(-2, 3), wang=-60, cape=1),
+        ]
+    elif staff:
+        anims["AttackDiag"] = [
+            P(lean=-1, fh=(0, 1), bh=(-2, 3), wang=-95, cape=0),
+            P(lean=2, fh=(4, -3), bh=(-2, 2), wang=-50, ff=(4, 0), bf=(-3, 0), glow=2, cape=2),
+            P(lean=2, fh=(4, -3), bh=(-2, 2), wang=-48, ff=(4, 0), bf=(-3, 0), glow=3, cape=2),
+            P(lean=1, fh=(3, 0), bh=(-1, 4), wang=-75, ff=(3, 0), bf=(-2, 0), cape=1),
+        ]
+        anims["AttackUp"] = [
+            P(lean=-1, fh=(1, 0), bh=(-2, 3), wang=-100, cape=0),
+            P(lean=1, fh=(2, -6), bh=(-1, -2), wang=-88, ff=(3, 0), bf=(-2, 0), glow=2, cape=2, hat=1),
+            P(lean=1, fh=(2, -7), bh=(-1, -3), wang=-90, ff=(3, 0), bf=(-2, 0), glow=3, cape=2, hat=2),
+            P(lean=0, fh=(3, -1), bh=(-1, 4), wang=-85, cape=1),
+        ]
+    else:
+        anims["AttackDiag"] = [
+            P(lean=0, fh=(4, -3), bh=(2, -2), wang=0, string=0, arrow=1, aim=-38),
+            P(lean=-1, fh=(4, -3), bh=(0, -2), wang=0, string=3, arrow=1, aim=-38, ff=(3, 0), bf=(-4, 0)),
+            P(lean=0, fh=(4, -3), bh=(-2, -1), wang=0, string=0, arrow=0, aim=-38, ff=(3, 0), bf=(-4, 0)),
+            P(lean=0, fh=(4, 0), bh=(-1, 4), wang=60, string=0),
+        ]
+        anims["AttackUp"] = [
+            P(lean=0, fh=(2, -6), bh=(1, -5), wang=0, string=0, arrow=1, aim=-78),
+            P(lean=-1, fh=(2, -7), bh=(0, -5), wang=0, string=3, arrow=1, aim=-78, ff=(3, 0), bf=(-4, 0)),
+            P(lean=0, fh=(2, -7), bh=(-1, -4), wang=0, string=0, arrow=0, aim=-78, ff=(3, 0), bf=(-4, 0)),
+            P(lean=0, fh=(3, 0), bh=(-1, 4), wang=60, string=0),
         ]
     anims["Cast"] = [
         P(lean=0, fh=(2, -5), bh=(1, -5), wang=-90 if not staff else -85, glow=1, cape=1, hat=1),

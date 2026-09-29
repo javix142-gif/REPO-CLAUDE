@@ -4,6 +4,7 @@ import { q, C, A, NOT, OR, AND, E, ELSE, FOREACH, COMMENT, GROUP, LINK, SET, SET
 import { inst, layer, vnum, vstr, tiled, sprite, text } from "../lib/objects.mjs";
 import { gameplaySceneVariables, hudInstances, menuInstances, SUELO } from "./common.mjs";
 import { menuSystem } from "./ev_hud.mjs";
+import { characterMenus, characterEvents, storyMenus } from "./personaje.mjs";
 import { toast } from "./ev_combate.mjs";
 
 const ANCHO = 4200;
@@ -68,7 +69,7 @@ function start() {
       E([OIFS("TextoNombre", "Rol", "=", q("letrero"))], [TEXT("TextoNombre", q("Consejos"))]),
       E([OIFS("TextoNombre", "Rol", "=", q("maniqui"))], [TEXT("TextoNombre", q("Maniquí de práctica"))]),
       E([IFS("Juego.Origen", "=", q("mazmorra"))], [A("SetXY", "Jugador", "=", 3380, "=", SUELO - 4), OSET("Jugador", "Dir", "=", -1)]),
-      E([IFS("Juego.Origen", "=", q("nuevo"))], toast(q("¡Bienvenido a Villa Ceniza! Visita el portal para bajar a las mazmorras"), q("255;224;150"), 4)),
+      E([IFS("Juego.Origen", "=", q("nuevo"))], [SETS("MenuAbrir", "=", q("prologo"))]),
       E([], [SETS("Juego.Origen", "=", q(""))]),
     ]),
     E([], [SETX("TextoNombre", "=", "TextoNombre.CX - TextoNombre.Width() / 2")]),
@@ -125,9 +126,8 @@ function shops() {
       letrero: { title: q("CONSEJOS"),
         body: q("· Mantén pulsado ATACAR para encadenar golpes.\n· Las habilidades gastan maná, que se regenera solo.\n· Limpia cada sala para abrir la siguiente puerta.\n· El equipo mejor que el tuyo se equipa solo;\n   el peor se vende automáticamente.\n· Mejora tu arma y armadura en la herrería."),
         buttons: [], close: true },
-      personaje: { title: "ToUpperCase(Save.Clase) + \"  ·  NIVEL \" + ToString(Save.Nivel)",
-        body: "\"Vida: \" + ToString(Stat.VidaMax) + \"      Maná: \" + ToString(Stat.ManaMax) + \"\\nAtaque: \" + ToString(Stat.Atq) + \"      Defensa: \" + ToString(Stat.Def) + \"\\nCrítico: \" + ToString(round(Stat.Crit * 100)) + \"%\\n\\nArma: \" + Save.ArmaNombre + \"\\nArmadura: \" + Save.ArmaduraNombre + \"\\n\\nExperiencia: \" + ToString(Save.Exp) + \" / \" + ToString(Stat.ExpSig)",
-        buttons: [], close: true },
+      ...characterMenus(),
+      ...storyMenus(),
       pausa: { title: q("PAUSA"), body: q("Tu progreso se guarda automáticamente."),
         buttons: [{ label: q("Continuar"), action: "cerrar" }, { label: q("Salir al título"), action: "titulo" }], close: true },
     }),
@@ -151,8 +151,9 @@ function shops() {
         SOUND("assets/audio/pocion.wav", 60)]),
       ELSE([], noGold()),
     ]),
-    E([IFS("Accion", "=", q("flecha-1"))], [SET("Save.EtapaSel", "=", "clamp(Save.EtapaSel - 1, 1, Save.EtapaMax)")]),
-    E([IFS("Accion", "=", q("flecha1"))], [SET("Save.EtapaSel", "=", "clamp(Save.EtapaSel + 1, 1, Save.EtapaMax)")]),
+    ...characterEvents(),
+    E([IFS("Accion", "=", q("flecha-1")), IFS("Menu", "=", q("portal"))], [SET("Save.EtapaSel", "=", "clamp(Save.EtapaSel - 1, 1, Save.EtapaMax)")]),
+    E([IFS("Accion", "=", q("flecha1")), IFS("Menu", "=", q("portal"))], [SET("Save.EtapaSel", "=", "clamp(Save.EtapaSel + 1, 1, Save.EtapaMax)")]),
     E([IFS("Accion", "=", q("entrar"))], [SET("Guardar", "=", 1), SOUND("assets/audio/portal.wav", 80), GOTO("Mazmorra")]),
     E([IFS("Accion", "=", q("titulo"))], [SET("Guardar", "=", 1), GOTO("Titulo")]),
   ]);

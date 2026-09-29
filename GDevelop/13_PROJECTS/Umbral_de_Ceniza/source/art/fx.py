@@ -383,3 +383,87 @@ def loot_with_beam(kind, color, rarity):
         for (x, y) in ((3, h - 30), (15, h - 40), (6, h - 48)):
             c.px(x, y, "#ffffff")
     return c.im
+
+
+# ---------------------------------------------------------------------------
+# v2: double-jump ring, lightning, fire aura, thrown sword, explosive arrow
+
+def jump_ring_frames():
+    """Flat ring that expands under the feet (double jump)."""
+    out = []
+    for f in range(4):
+        c = Canvas(48, 18)
+        rx, ry = 7 + f * 5, 2 + f
+        a = [255, 220, 150, 80][f]
+        c.ellipse(24 - rx, 9 - ry, 24 + rx, 9 + ry, None, outline=rgba("#bff0ff", a), width=2)
+        c.ellipse(24 - rx + 2, 9 - ry + 1, 24 + rx - 2, 9 + ry - 1, None, outline=rgba("#ffffff", a // 2), width=1)
+        out.append(c.im)
+    return out
+
+
+def lightning_frames():
+    """Vertical bolt that strikes from the sky (origin = bottom centre)."""
+    out = []
+    for f in range(4):
+        rnd = random.Random(40 + f)
+        c = Canvas(34, 120)
+        x, y = 17, 0
+        pts = [(x, 0)]
+        while y < 108:
+            y += rnd.randint(10, 17)
+            x = max(7, min(27, x + rnd.randint(-9, 9)))
+            pts.append((x, y))
+        pts.append((17, 116))
+        c.line(pts, "#6fa8ff", 5)
+        c.line(pts, "#cfe6ff", 3)
+        c.line(pts, "#ffffff", 1)
+        bx, by = pts[len(pts) // 2]
+        c.line([(bx, by), (bx + rnd.choice((-9, 9)), by + 12)], "#9fc8ff", 2)
+        c.ellipse(9, 106, 25, 118, mix("#bfe0ff", "#ffffff", 0.4))
+        out.append(_glow(c.im, 2, 0.7))
+    return out
+
+
+def aura_frames():
+    """Ring of flames around the caster (loops)."""
+    out = []
+    for f in range(4):
+        c = Canvas(80, 60)
+        cx, cy = 40, 34
+        for i in range(14):
+            ang = i / 14 * 2 * math.pi + f * 0.28
+            rx, ry = 30, 22
+            bx, by = cx + rx * math.cos(ang), cy + ry * math.sin(ang)
+            h = 7 + 3 * ((i + f) % 3)
+            tip = (bx + 2 * math.sin(ang * 3), by - h)
+            c.poly([(bx - 3, by), (bx + 3, by), tip], "#ff7a2a")
+            c.poly([(bx - 1.5, by), (bx + 1.5, by), (tip[0], tip[1] + 3)], "#ffd06a")
+        c.ellipse(cx - 30, cy - 22, cx + 30, cy + 22, None, outline=rgba("#ff5a1a", 150), width=1)
+        out.append(_glow(c.im, 2, 0.6))
+    return out
+
+
+def sword_spin_frames():
+    """Thrown greatsword, spinning."""
+    out = []
+    for f in range(4):
+        c = Canvas(34, 34)
+        pts = [(17, 3), (20, 8), (20, 22), (17, 25), (14, 22), (14, 8)]
+        blade = rot(pts, f * 22.5, 17, 17)
+        c.poly(blade, "#dfe7ef")
+        c.line(rot([(17, 5), (17, 23)], f * 22.5, 17, 17), "#8f9aab")
+        c.line(rot([(11, 25), (23, 25)], f * 22.5, 17, 17), "#e0b24c", 2)
+        c.line(rot([(17, 25), (17, 31)], f * 22.5, 17, 17), "#7a4a24", 2)
+        out.append(_glow(outline(c.im), 2, 0.5))
+    return out
+
+
+def explosive_arrow_frame():
+    c = Canvas(28, 9)
+    c.line([(2, 4), (21, 4)], "#c8a060")
+    c.poly([(20, 1), (26, 4), (20, 7)], "#ff8a3a")
+    c.poly([(21, 3), (25, 4), (21, 5)], "#fff0a8")
+    c.rect(1, 2, 5, 2, "#f2efe6")
+    c.rect(1, 6, 5, 6, "#f2efe6")
+    c.rect(0, 3, 2, 5, "#c94f3a")
+    return [_glow(outline(c.im), 2, 0.6)]

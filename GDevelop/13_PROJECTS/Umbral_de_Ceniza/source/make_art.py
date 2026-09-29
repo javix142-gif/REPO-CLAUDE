@@ -62,7 +62,8 @@ def main():
 
     # ---------------------------------------------------------------- heroes
     timing = {"Idle": (0.14, True), "Run": (0.08, True), "Jump": (0.1, True), "Fall": (0.1, True),
-              "Attack": (0.06, False), "Cast": (0.09, False), "Hurt": (0.1, False), "Dead": (0.16, False)}
+              "Attack": (0.06, False), "AttackDiag": (0.06, False), "AttackUp": (0.06, False),
+              "Cast": (0.09, False), "Hurt": (0.1, False), "Dead": (0.16, False)}
     hero_mask = box(60, 45, 87, 126)
     portraits = {}
     for cls in ("Guerrero", "Maga", "Arquera"):
@@ -123,6 +124,8 @@ def main():
     sprite(PJ, "Flecha", fx.arrow_frame(), "proyectiles", 1, True, center=True)
     sprite(PJ, "Meteoro", fx.meteor_frames(), "proyectiles", 0.06, True, center=True)
     sprite(PJ, "Hielo", fx.ice_shard_frame(), "proyectiles", 1, True, center=True)
+    sprite(PJ, "Espada", fx.sword_spin_frames(), "proyectiles", 0.05, True, center=True)
+    sprite(PJ, "Explosiva", fx.explosive_arrow_frame(), "proyectiles", 1, True, center=True)
     PE = "ProyectilEnemigo"
     sprite(PE, "Orbe", fx.orb_frames(), "proyectiles", 0.1, True, center=True)
     sprite(PE, "Onda", fx.shockwave_frames(), "proyectiles", 0.08, True, center=True)
@@ -146,6 +149,9 @@ def main():
     sprite(F, "Humo", fx.smoke_frames(), "fx", 0.08, False, center=True)
     sprite(F, "Grito", fx.warcry_frames(), "fx", 0.07, False, center=True)
     sprite(F, "Destello", fx.flash_frames(), "fx", 0.04, False, center=True)
+    sprite(F, "Salto", fx.jump_ring_frames(), "fx", 0.05, False, center=True)
+    sprite(F, "Rayo", fx.lightning_frames(), "fx", 0.05, False, origin=(51, 348))
+    sprite(F, "Aura", fx.aura_frames(), "fx", 0.08, True, center=True)
 
     # ---------------------------------------------------------------- pickups
     sprite("Moneda", "Gira", fx.coin_frames(), "botin", 0.09, True, center=True)
@@ -187,6 +193,9 @@ def main():
     sprite("Velas", "Arde", env.candles_frames(), "entorno", 0.3, True)
     sprite("Barril", "Quieto", [env.barrel()], "entorno", 1, False)
     sprite("Caja", "Quieto", [env.crate()], "entorno", 1, False)
+    sprite("Cofre", "Cerrado", [env.chest(False)], "entorno", 1, False, origin=(42, 66))
+    sprite("Cofre", "Abierto", [env.chest(True)], "entorno", 1, False, origin=(42, 66))
+    sprite("Pinchos", "Quieto", [env.spikes()], "entorno", 1, False, origin=(72, 48), mask=box(6, 6, 138, 48))
     sprite("Farol", "Arde", env.lamp_frames(), "entorno", 0.35, True)
     sprite("Forja", "Arde", env.forge_frames(), "entorno", 0.12, True)
     sprite("Puesto", "Quieto", [env.potion_stand()], "entorno", 1, False)
@@ -204,6 +213,7 @@ def main():
         sprite("BotonAtaque", cls, [ui.attack_button(cls)], "ui", 1, False, center=True)
         for s in range(3):
             sprite(f"BotonHab{s + 1}", cls, [ui.skill_button(cls, s)], "ui", 1, False, center=True)
+            sprite(f"BotonHab{s + 1}", cls + "2", [ui.skill_button(cls, s, 2)], "ui", 1, False, center=True)
     sprite("BotonSalto", "Normal", [ui.simple_button("jump", 32, "#8ae8d0")], "ui", 1, False, center=True)
     sprite("BotonPocion", "Normal", [ui.simple_button("potion", 32, "#ff6a7a")], "ui", 1, False, center=True)
     sprite("BotonPausa", "Normal", [ui.simple_button("pause", 22, "#d8b04a")], "ui", 1, False, center=True)

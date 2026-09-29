@@ -185,6 +185,80 @@
      ]
     },
     {
+     "name": "Guerrero_AttackDiag",
+     "frames": [
+      "assets/jugador/jugador_guerrero_attackdiag_0.png",
+      "assets/jugador/jugador_guerrero_attackdiag_1.png",
+      "assets/jugador/jugador_guerrero_attackdiag_2.png",
+      "assets/jugador/jugador_guerrero_attackdiag_3.png"
+     ],
+     "dt": 0.06,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
+     "name": "Guerrero_AttackUp",
+     "frames": [
+      "assets/jugador/jugador_guerrero_attackup_0.png",
+      "assets/jugador/jugador_guerrero_attackup_1.png",
+      "assets/jugador/jugador_guerrero_attackup_2.png",
+      "assets/jugador/jugador_guerrero_attackup_3.png"
+     ],
+     "dt": 0.06,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
      "name": "Guerrero_Cast",
      "frames": [
       "assets/jugador/jugador_guerrero_cast_0.png",
@@ -472,6 +546,80 @@
      ]
     },
     {
+     "name": "Maga_AttackDiag",
+     "frames": [
+      "assets/jugador/jugador_maga_attackdiag_0.png",
+      "assets/jugador/jugador_maga_attackdiag_1.png",
+      "assets/jugador/jugador_maga_attackdiag_2.png",
+      "assets/jugador/jugador_maga_attackdiag_3.png"
+     ],
+     "dt": 0.06,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
+     "name": "Maga_AttackUp",
+     "frames": [
+      "assets/jugador/jugador_maga_attackup_0.png",
+      "assets/jugador/jugador_maga_attackup_1.png",
+      "assets/jugador/jugador_maga_attackup_2.png",
+      "assets/jugador/jugador_maga_attackup_3.png"
+     ],
+     "dt": 0.06,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
      "name": "Maga_Cast",
      "frames": [
       "assets/jugador/jugador_maga_cast_0.png",
@@ -728,6 +876,80 @@
       "assets/jugador/jugador_arquera_attack_1.png",
       "assets/jugador/jugador_arquera_attack_2.png",
       "assets/jugador/jugador_arquera_attack_3.png"
+     ],
+     "dt": 0.06,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
+     "name": "Arquera_AttackDiag",
+     "frames": [
+      "assets/jugador/jugador_arquera_attackdiag_0.png",
+      "assets/jugador/jugador_arquera_attackdiag_1.png",
+      "assets/jugador/jugador_arquera_attackdiag_2.png",
+      "assets/jugador/jugador_arquera_attackdiag_3.png"
+     ],
+     "dt": 0.06,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
+     "name": "Arquera_AttackUp",
+     "frames": [
+      "assets/jugador/jugador_arquera_attackup_0.png",
+      "assets/jugador/jugador_arquera_attackup_1.png",
+      "assets/jugador/jugador_arquera_attackup_2.png",
+      "assets/jugador/jugador_arquera_attackup_3.png"
      ],
      "dt": 0.06,
      "loop": false,
@@ -2270,6 +2492,43 @@
       54,
       30
      ]
+    },
+    {
+     "name": "Espada",
+     "frames": [
+      "assets/proyectiles/proyectiljugador_espada_0.png",
+      "assets/proyectiles/proyectiljugador_espada_1.png",
+      "assets/proyectiles/proyectiljugador_espada_2.png",
+      "assets/proyectiles/proyectiljugador_espada_3.png"
+     ],
+     "dt": 0.05,
+     "loop": true,
+     "origin": [
+      51,
+      51
+     ],
+     "mask": null,
+     "size": [
+      102,
+      102
+     ]
+    },
+    {
+     "name": "Explosiva",
+     "frames": [
+      "assets/proyectiles/proyectiljugador_explosiva_0.png"
+     ],
+     "dt": 1,
+     "loop": true,
+     "origin": [
+      42,
+      13
+     ],
+     "mask": null,
+     "size": [
+      84,
+      27
+     ]
     }
    ]
   },
@@ -2659,6 +2918,66 @@
      "size": [
       60,
       60
+     ]
+    },
+    {
+     "name": "Salto",
+     "frames": [
+      "assets/fx/efecto_salto_0.png",
+      "assets/fx/efecto_salto_1.png",
+      "assets/fx/efecto_salto_2.png",
+      "assets/fx/efecto_salto_3.png"
+     ],
+     "dt": 0.05,
+     "loop": false,
+     "origin": [
+      72,
+      27
+     ],
+     "mask": null,
+     "size": [
+      144,
+      54
+     ]
+    },
+    {
+     "name": "Rayo",
+     "frames": [
+      "assets/fx/efecto_rayo_0.png",
+      "assets/fx/efecto_rayo_1.png",
+      "assets/fx/efecto_rayo_2.png",
+      "assets/fx/efecto_rayo_3.png"
+     ],
+     "dt": 0.05,
+     "loop": false,
+     "origin": [
+      51,
+      348
+     ],
+     "mask": null,
+     "size": [
+      102,
+      360
+     ]
+    },
+    {
+     "name": "Aura",
+     "frames": [
+      "assets/fx/efecto_aura_0.png",
+      "assets/fx/efecto_aura_1.png",
+      "assets/fx/efecto_aura_2.png",
+      "assets/fx/efecto_aura_3.png"
+     ],
+     "dt": 0.08,
+     "loop": true,
+     "origin": [
+      120,
+      90
+     ],
+     "mask": null,
+     "size": [
+      240,
+      180
      ]
     }
    ]
@@ -3242,6 +3561,82 @@
     }
    ]
   },
+  "Cofre": {
+   "anims": [
+    {
+     "name": "Cerrado",
+     "frames": [
+      "assets/entorno/cofre_cerrado_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      42,
+      66
+     ],
+     "mask": null,
+     "size": [
+      84,
+      66
+     ]
+    },
+    {
+     "name": "Abierto",
+     "frames": [
+      "assets/entorno/cofre_abierto_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      42,
+      66
+     ],
+     "mask": null,
+     "size": [
+      84,
+      66
+     ]
+    }
+   ]
+  },
+  "Pinchos": {
+   "anims": [
+    {
+     "name": "Quieto",
+     "frames": [
+      "assets/entorno/pinchos_quieto_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      72,
+      48
+     ],
+     "mask": [
+      [
+       6,
+       6
+      ],
+      [
+       138,
+       6
+      ],
+      [
+       138,
+       48
+      ],
+      [
+       6,
+       48
+      ]
+     ],
+     "size": [
+      144,
+      48
+     ]
+    }
+   ]
+  },
   "Farol": {
    "anims": [
     {
@@ -3545,6 +3940,23 @@
      ]
     },
     {
+     "name": "Guerrero2",
+     "frames": [
+      "assets/ui/botonhab1_guerrero2_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      54,
+      54
+     ],
+     "mask": null,
+     "size": [
+      108,
+      108
+     ]
+    },
+    {
      "name": "Maga",
      "frames": [
       "assets/ui/botonhab1_maga_0.png"
@@ -3562,9 +3974,43 @@
      ]
     },
     {
+     "name": "Maga2",
+     "frames": [
+      "assets/ui/botonhab1_maga2_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      54,
+      54
+     ],
+     "mask": null,
+     "size": [
+      108,
+      108
+     ]
+    },
+    {
      "name": "Arquera",
      "frames": [
       "assets/ui/botonhab1_arquera_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      54,
+      54
+     ],
+     "mask": null,
+     "size": [
+      108,
+      108
+     ]
+    },
+    {
+     "name": "Arquera2",
+     "frames": [
+      "assets/ui/botonhab1_arquera2_0.png"
      ],
      "dt": 1,
      "loop": false,
@@ -3600,6 +4046,23 @@
      ]
     },
     {
+     "name": "Guerrero2",
+     "frames": [
+      "assets/ui/botonhab2_guerrero2_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      54,
+      54
+     ],
+     "mask": null,
+     "size": [
+      108,
+      108
+     ]
+    },
+    {
      "name": "Maga",
      "frames": [
       "assets/ui/botonhab2_maga_0.png"
@@ -3617,9 +4080,43 @@
      ]
     },
     {
+     "name": "Maga2",
+     "frames": [
+      "assets/ui/botonhab2_maga2_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      54,
+      54
+     ],
+     "mask": null,
+     "size": [
+      108,
+      108
+     ]
+    },
+    {
      "name": "Arquera",
      "frames": [
       "assets/ui/botonhab2_arquera_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      54,
+      54
+     ],
+     "mask": null,
+     "size": [
+      108,
+      108
+     ]
+    },
+    {
+     "name": "Arquera2",
+     "frames": [
+      "assets/ui/botonhab2_arquera2_0.png"
      ],
      "dt": 1,
      "loop": false,
@@ -3655,6 +4152,23 @@
      ]
     },
     {
+     "name": "Guerrero2",
+     "frames": [
+      "assets/ui/botonhab3_guerrero2_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      54,
+      54
+     ],
+     "mask": null,
+     "size": [
+      108,
+      108
+     ]
+    },
+    {
      "name": "Maga",
      "frames": [
       "assets/ui/botonhab3_maga_0.png"
@@ -3672,9 +4186,43 @@
      ]
     },
     {
+     "name": "Maga2",
+     "frames": [
+      "assets/ui/botonhab3_maga2_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      54,
+      54
+     ],
+     "mask": null,
+     "size": [
+      108,
+      108
+     ]
+    },
+    {
      "name": "Arquera",
      "frames": [
       "assets/ui/botonhab3_arquera_0.png"
+     ],
+     "dt": 1,
+     "loop": false,
+     "origin": [
+      54,
+      54
+     ],
+     "mask": null,
+     "size": [
+      108,
+      108
+     ]
+    },
+    {
+     "name": "Arquera2",
+     "frames": [
+      "assets/ui/botonhab3_arquera2_0.png"
      ],
      "dt": 1,
      "loop": false,

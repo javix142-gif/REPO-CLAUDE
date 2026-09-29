@@ -3,21 +3,12 @@ import { q, C, A, NOT, OR, E, ELSE, FOREACH, REPEAT, COMMENT, GROUP, SET, SETS, 
   ANIM, ANIM_END, FLIPX, OPACITY, TINT, TEXT, TCOLOR, TSIZE, CREATE, DEL, SETX, SETY, HIDE, SOUND, DT, COLLIDE, PLAT, SPEED,
   MAXSPEED } from "../lib/dsl.mjs";
 import { fx, fxE, hitE } from "./ev_jugador.mjs";
+import { toast, floatText } from "./util.mjs";
 
 const J = "Jugador";
 const EN = "Enemigo";
 
-export const toast = (textExpr, colorExpr = q("255;255;255"), dur = 2.4) => [
-  TEXT("TextoAviso", textExpr), A("TextObject::ChangeColor", "TextoAviso", colorExpr), OSET("TextoAviso", "Vida", "=", dur),
-];
-
-/** Floating combat text. */
-export const floatText = (x, y, textExpr, color, size = 30) => [
-  CREATE("TextoDano", x, y),
-  TEXT("TextoDano", textExpr), TCOLOR("TextoDano", color), TSIZE("TextoDano", size),
-  OSET("TextoDano", "VY", "=", -120), OSET("TextoDano", "Vida", "=", 0), A("SetZOrder", "TextoDano", "=", 40),
-  SETX("TextoDano", "-", "TextoDano.Width() / 2"),
-];
+export { toast, floatText };
 
 const alive = (o = EN) => [OIFS(o, "Estado", "!=", q("muerto")), OIFS(o, "Estado", "!=", q("aparecer"))];
 
@@ -31,7 +22,8 @@ function projectiles() {
     ]),
     E([OIFN(P, "Vida", "<=", 0)], [DEL(P)]),
     E([OIFN("ProyectilEnemigo", "Vida", "<=", 0)], [DEL("ProyectilEnemigo")]),
-    E([OR(COLLIDE(P, "Muro"), AND_PUERTA(P))], [DEL(P)]),
+    E([OR(COLLIDE(P, "Muro"), AND_PUERTA(P)), OIFS(P, "Tipo", "!=", q("Explosiva"))], [DEL(P)]),
+    E([OR(COLLIDE(P, "Muro"), AND_PUERTA(P)), OIFS(P, "Tipo", "=", q("Explosiva"))], [OSET(P, "Borrar", "=", 1)]),
     E([OIFS(P, "Tipo", "=", q("Lluvia")), C("PosY", P, ">=", "SueloY - 12")], [
       ...fx("Polvo", "ProyectilJugador.X()", "SueloY - 12"), DEL(P)]),
     COMMENT("El meteoro explota al tocar el suelo."),
@@ -60,6 +52,7 @@ function hitsOnEnemies() {
     OSET(EN, "DanoPend", "+", `${src}.Dano`),
     OSETS(EN, "Golpes", "=", `Enemigo.Golpes + ToString(${src}.Id) + ","`),
     OSET(EN, "KBDir", "=", "sign(Enemigo.X() - Jugador.X() + 0.01)"),
+    OSET(EN, "FuertePend", "=", `max(Enemigo.FuertePend, ${src}.Fuerte)`),
   ];
   const trim = (src) => E([CMP("StrLength(Enemigo.Golpes)", ">", 90)], [OSETS(EN, "Golpes", "=", `"," + ToString(${src}.Id) + ","`)]);
   return GROUP("Golpes del jugador sobre enemigos", [
@@ -74,6 +67,14 @@ function hitsOnEnemies() {
         trim("ProyectilJugador"),
         E([OIFN("ProyectilJugador", "Perfora", "=", 0)], [OSET("ProyectilJugador", "Borrar", "=", 1)]),
       ]),
+    ]),
+    COMMENT("La flecha explosiva detona donde impacta (enemigo o muro)."),
+    E([OIFN("ProyectilJugador", "Borrar", "=", 1), OIFS("ProyectilJugador", "Tipo", "=", q("Explosiva"))], [
+      SET("Tmp.X", "=", "ProyectilJugador.X()"), SET("Tmp.Y", "=", "ProyectilJugador.Y()"), SOUND("assets/audio/explosion.wav", 60, 1.3),
+      SET("Temblor", "=", "max(Temblor, 0.12)"), SET("FuerzaTemblor", "=", 4),
+    ], [
+      hitE({ x: "Tmp.X", y: "Tmp.Y", w: 300, h: 240, dano: 1.7, vida: 0.1, fuerte: 1 }),
+      fxE("Explosion", "Tmp.X", "Tmp.Y", { scale: 1.7 }),
     ]),
     E([OIFN("ProyectilJugador", "Borrar", "=", 1)], [...fx("Chispa", "ProyectilJugador.X()", "ProyectilJugador.Y()"), DEL("ProyectilJugador")]),
     COMMENT("Los golpes del jugador duran unas décimas de segundo."),
@@ -94,6 +95,8 @@ function hitsOnEnemies() {
           SETX("TextoDano", "=", "Enemigo.X() - TextoDano.Width() / 2"), SOUND("assets/audio/critico.wav", 70),
           SET("Temblor", "=", "max(Temblor, 0.12)"), SET("FuerzaTemblor", "=", 5)]),
         ELSE([], [SOUND("assets/audio/golpe.wav", 55, "RandomFloatInRange(0.85, 1.15)")]),
+        E([IFN("Tmp.Crit", "=", 0), OIFN(EN, "FuertePend", "=", 1)], [TCOLOR("TextoDano", "255;150;60"), TSIZE("TextoDano", 40),
+          SETX("TextoDano", "=", "Enemigo.X() - TextoDano.Width() / 2")]),
       ]),
       E([OIFN(EN, "CongelaPend", ">", 0)], [OSET(EN, "Congelado", "=", "max(Enemigo.Congelado, Enemigo.CongelaPend)"),
         ...fx("ChispaHielo", "Enemigo.CenterX()", "Enemigo.CenterY()")]),
@@ -101,15 +104,24 @@ function hitsOnEnemies() {
       E([OIFS(EN, "Tipo", "!=", q("Bruto")), OIFS(EN, "Tipo", "!=", q("Jefe")), OIFS(EN, "Tipo", "!=", q("Maniqui")),
         OIFS(EN, "Tipo", "!=", q("Murcielago")), CMP("Enemigo.HP", ">", 0)], [
         OSETS(EN, "Estado", "=", q("herido")), OSET(EN, "Accion", "=", 0), ANIM(EN, "Enemigo.Tipo + \"_Hurt\""),
-        MAXSPEED(EN, "Plataformero", 600), SPEED(EN, "Plataformero", "Enemigo.KBDir * 380"),
+        MAXSPEED(EN, "Plataformero", 900), SPEED(EN, "Plataformero", "Enemigo.KBDir * 380"),
+      ], [
+        E([OIFN(EN, "FuertePend", "=", 1)], [SPEED(EN, "Plataformero", "Enemigo.KBDir * 680")]),
       ]),
       E([OIFS(EN, "Tipo", "=", q("Murcielago")), CMP("Enemigo.HP", ">", 0)], [
-        OSETS(EN, "Estado", "=", q("herido")), OSET(EN, "Accion", "=", 0), ANIM(EN, q("Murcielago_Hurt")), OSET(EN, "KB", "=", "Enemigo.KBDir * 420")]),
-      E([OIFS(EN, "Tipo", "=", q("Bruto"))], [MAXSPEED(EN, "Plataformero", 400), SPEED(EN, "Plataformero", "Enemigo.KBDir * 140")]),
+        OSETS(EN, "Estado", "=", q("herido")), OSET(EN, "Accion", "=", 0), ANIM(EN, q("Murcielago_Hurt")),
+        OSET(EN, "VX", "=", "Enemigo.KBDir * 420"), OSET(EN, "VY", "=", -70)], [
+        E([OIFN(EN, "FuertePend", "=", 1)], [OSET(EN, "VX", "=", "Enemigo.KBDir * 760"), OSET(EN, "VY", "=", -140)]),
+      ]),
+      COMMENT("El golpe final del combo también hace tambalear a los Brutos (el jefe y los élites no se aturden)."),
+      E([OIFS(EN, "Tipo", "=", q("Bruto")), OIFN(EN, "FuertePend", "=", 1), CMP("Enemigo.HP", ">", 0)], [
+        OSETS(EN, "Estado", "=", q("herido")), OSET(EN, "Accion", "=", 0), ANIM(EN, q("Bruto_Hurt")),
+        MAXSPEED(EN, "Plataformero", 700), SPEED(EN, "Plataformero", "Enemigo.KBDir * 300")]),
+      E([OIFS(EN, "Tipo", "=", q("Bruto")), OIFN(EN, "FuertePend", "=", 0)], [MAXSPEED(EN, "Plataformero", 400), SPEED(EN, "Plataformero", "Enemigo.KBDir * 140")]),
       E([OIFS(EN, "Tipo", "=", q("Maniqui"))], [ANIM(EN, q("Maniqui_Hurt"))], [
         E([CMP("Enemigo.HP", "<", "Enemigo.HPMax * 0.5")], [OSET(EN, "HP", "=", "Enemigo.HPMax")]),
       ]),
-      E([], [OSET(EN, "DanoPend", "=", 0), OSET(EN, "CongelaPend", "=", 0)]),
+      E([], [OSET(EN, "DanoPend", "=", 0), OSET(EN, "CongelaPend", "=", 0), OSET(EN, "FuertePend", "=", 0)]),
     ]),
     E([OIFS(EN, "Tipo", "=", q("Maniqui")), ANIM_END(EN)], [ANIM(EN, q("Maniqui_Idle"))]),
   ]);
@@ -250,7 +262,13 @@ function progression() {
       SET("Save.Exp", "-", "Stat.ExpSig"), SET("Save.Nivel", "+", 1), SET("RecalcStats", "=", 1), SET("CurarTodo", "=", 1),
       SET("Guardar", "=", 1), SOUND("assets/audio/nivel.wav", 80),
       ...fx("Nivel", "Jugador.X()", "Jugador.Y() - 120", { follow: true, offY: "-120", z: 35 }),
-      ...toast("\"¡Nivel \" + ToString(Save.Nivel) + \"!  Vida y maná restaurados\"", q("255;220;110"), 2.6),
+      ...toast("\"¡Nivel \" + ToString(Save.Nivel) + \"!  +3 puntos de atributo (toca tu retrato)\"", q("255;220;110"), 3),
+    ], [
+      COMMENT("Cada 4 niveles se desbloquea y equipa una habilidad nueva (ranura 2 en el nivel 4, ranura 1 en el 8, ranura 3 en el 12)."),
+      ...[[4, 2], [8, 1], [12, 3]].map(([lvl, slot]) => E([IFN("Save.Nivel", "=", lvl)], [
+        SET(`Save.Hab${slot}`, "=", 2), SET("RecalcStats", "=", 1),
+        ...toast(`"¡Nivel ${lvl}!  Nueva habilidad: " + Skills.Nombre[Stat.Cls * 6 + ${(slot - 1) * 2 + 1}] + "  (ficha > Habilidades)"`, q("140;255;170"), 4.2),
+      ])),
     ]),
     E([IFN("Guardar", "=", 1)], [A("EcrireFichierTxt", q("UmbralSave"), q("datos"), "ToJSON(Save)"), SET("Guardar", "=", 0)]),
   ]);

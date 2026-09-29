@@ -84,7 +84,7 @@ const GLOBAL_FOLDERS = {
   Enemigos: ["Enemigo", "GolpeEnemigo", "ProyectilEnemigo", "PintorBarras"],
   Botin: ["Moneda", "OrbeVida", "Botin"],
   Nivel: ["Suelo", "Relleno", "Plataforma", "Muro", "Puerta", "Portal"],
-  HUD: ["MarcoHUD", "BarraVida", "BarraMana", "BarraExp", "Retrato", "TextoNivel", "TextoVida", "TextoOro", "IconoMoneda",
+  HUD: ["MarcoHUD", "BarraVida", "BarraMana", "BarraExp", "Retrato", "TextoNivel", "TextoPuntos", "TextoVida", "TextoOro", "IconoMoneda",
     "TextoAviso", "TextoPociones", "MascaraCD", "TextoCD"],
   "Controles táctiles": ["Joystick", "BotonAtaque", "BotonHab1", "BotonHab2", "BotonHab3", "BotonSalto", "BotonPocion", "BotonAccion", "BotonPausa"],
   Menus: ["Panel", "BotonMenu", "TextoBoton", "TextoTitulo", "TextoMenu", "BotonCerrar", "Flecha"],
