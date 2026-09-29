@@ -116,7 +116,7 @@ export function claseScene() {
     SET("Save.ArmaduraBonus", "=", 0), SET("Save.ArmaduraRareza", "=", 0), SETS("Save.ArmaduraNombre", "=", q("Ropa de viaje")),
     SET("Save.Forja", "=", 0), SET("Save.Refuerzo", "=", 0), SET("Save.EtapaMax", "=", 1), SET("Save.EtapaSel", "=", 1),
     SET("Save.Puntos", "=", 0), SET("Save.PuntosExtra", "=", 0), SET("Save.AtFue", "=", 0), SET("Save.AtVit", "=", 0), SET("Save.AtDes", "=", 0),
-    SET("Save.AtEsp", "=", 0), SET("Save.Hab1", "=", 1), SET("Save.Hab2", "=", 1), SET("Save.Hab3", "=", 1), SET("Save.Historia", "=", 0),
+    SET("Save.AtEsp", "=", 0), SET("Save.Hab1", "=", 1), SET("Save.Hab2", "=", 1), SET("Save.Hab3", "=", 1), SET("Save.Historia", "=", 0), SET("Save.ArenaMax", "=", 0), SET("Save.IntroVista", "=", 0), SETS("Juego.Modo", "=", q("campana")),
     A("EcrireFichierTxt", q("UmbralSave"), q("datos"), "ToJSON(Save)"), SETS("Juego.Origen", "=", q("nuevo")), GOTO("Pueblo"),
   ];
   return {

@@ -2865,6 +2865,1146 @@
    "origin": "source/make_art.py"
   },
   {
+   "asset_id": "Enemigo.Arquero_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Arquero_Idle",
+   "files": [
+    "assets/enemigos/enemigo_arquero_idle_0.png",
+    "assets/enemigos/enemigo_arquero_idle_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     48,
+     45
+    ],
+    [
+     75,
+     45
+    ],
+    [
+     75,
+     126
+    ],
+    [
+     48,
+     126
+    ]
+   ],
+   "frames": 2,
+   "frame_time_s": 0.3,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Arquero_Walk",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Arquero_Walk",
+   "files": [
+    "assets/enemigos/enemigo_arquero_walk_0.png",
+    "assets/enemigos/enemigo_arquero_walk_1.png",
+    "assets/enemigos/enemigo_arquero_walk_2.png",
+    "assets/enemigos/enemigo_arquero_walk_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     48,
+     45
+    ],
+    [
+     75,
+     45
+    ],
+    [
+     75,
+     126
+    ],
+    [
+     48,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Arquero_Attack",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Arquero_Attack",
+   "files": [
+    "assets/enemigos/enemigo_arquero_attack_0.png",
+    "assets/enemigos/enemigo_arquero_attack_1.png",
+    "assets/enemigos/enemigo_arquero_attack_2.png",
+    "assets/enemigos/enemigo_arquero_attack_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     48,
+     45
+    ],
+    [
+     75,
+     45
+    ],
+    [
+     75,
+     126
+    ],
+    [
+     48,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.11,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Arquero_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Arquero_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_arquero_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     48,
+     45
+    ],
+    [
+     75,
+     45
+    ],
+    [
+     75,
+     126
+    ],
+    [
+     48,
+     126
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Arquero_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Arquero_Dead",
+   "files": [
+    "assets/enemigos/enemigo_arquero_dead_0.png",
+    "assets/enemigos/enemigo_arquero_dead_1.png",
+    "assets/enemigos/enemigo_arquero_dead_2.png",
+    "assets/enemigos/enemigo_arquero_dead_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 126
+   },
+   "collision": [
+    [
+     48,
+     45
+    ],
+    [
+     75,
+     45
+    ],
+    [
+     75,
+     126
+    ],
+    [
+     48,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Golem_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Golem_Idle",
+   "files": [
+    "assets/enemigos/enemigo_golem_idle_0.png",
+    "assets/enemigos/enemigo_golem_idle_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 228,
+    "height": 216
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 114,
+    "y": 205
+   },
+   "collision": [
+    [
+     76,
+     72
+    ],
+    [
+     148,
+     72
+    ],
+    [
+     148,
+     205
+    ],
+    [
+     76,
+     205
+    ]
+   ],
+   "frames": 2,
+   "frame_time_s": 0.3,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Golem_Walk",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Golem_Walk",
+   "files": [
+    "assets/enemigos/enemigo_golem_walk_0.png",
+    "assets/enemigos/enemigo_golem_walk_1.png",
+    "assets/enemigos/enemigo_golem_walk_2.png",
+    "assets/enemigos/enemigo_golem_walk_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 228,
+    "height": 216
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 114,
+    "y": 205
+   },
+   "collision": [
+    [
+     76,
+     72
+    ],
+    [
+     148,
+     72
+    ],
+    [
+     148,
+     205
+    ],
+    [
+     76,
+     205
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Golem_Attack",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Golem_Attack",
+   "files": [
+    "assets/enemigos/enemigo_golem_attack_0.png",
+    "assets/enemigos/enemigo_golem_attack_1.png",
+    "assets/enemigos/enemigo_golem_attack_2.png",
+    "assets/enemigos/enemigo_golem_attack_3.png",
+    "assets/enemigos/enemigo_golem_attack_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 228,
+    "height": 216
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 114,
+    "y": 205
+   },
+   "collision": [
+    [
+     76,
+     72
+    ],
+    [
+     148,
+     72
+    ],
+    [
+     148,
+     205
+    ],
+    [
+     76,
+     205
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.11,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Golem_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Golem_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_golem_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 228,
+    "height": 216
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 114,
+    "y": 205
+   },
+   "collision": [
+    [
+     76,
+     72
+    ],
+    [
+     148,
+     72
+    ],
+    [
+     148,
+     205
+    ],
+    [
+     76,
+     205
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Golem_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Golem_Dead",
+   "files": [
+    "assets/enemigos/enemigo_golem_dead_0.png",
+    "assets/enemigos/enemigo_golem_dead_1.png",
+    "assets/enemigos/enemigo_golem_dead_2.png",
+    "assets/enemigos/enemigo_golem_dead_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 228,
+    "height": 216
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 114,
+    "y": 205
+   },
+   "collision": [
+    [
+     76,
+     72
+    ],
+    [
+     148,
+     72
+    ],
+    [
+     148,
+     205
+    ],
+    [
+     76,
+     205
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Coloso_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Coloso_Idle",
+   "files": [
+    "assets/enemigos/enemigo_coloso_idle_0.png",
+    "assets/enemigos/enemigo_coloso_idle_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 312,
+    "height": 300
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 156,
+    "y": 291
+   },
+   "collision": [
+    [
+     104,
+     109
+    ],
+    [
+     203,
+     109
+    ],
+    [
+     203,
+     291
+    ],
+    [
+     104,
+     291
+    ]
+   ],
+   "frames": 2,
+   "frame_time_s": 0.3,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Coloso_Walk",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Coloso_Walk",
+   "files": [
+    "assets/enemigos/enemigo_coloso_walk_0.png",
+    "assets/enemigos/enemigo_coloso_walk_1.png",
+    "assets/enemigos/enemigo_coloso_walk_2.png",
+    "assets/enemigos/enemigo_coloso_walk_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 312,
+    "height": 300
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 156,
+    "y": 291
+   },
+   "collision": [
+    [
+     104,
+     109
+    ],
+    [
+     203,
+     109
+    ],
+    [
+     203,
+     291
+    ],
+    [
+     104,
+     291
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Coloso_Attack",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Coloso_Attack",
+   "files": [
+    "assets/enemigos/enemigo_coloso_attack_0.png",
+    "assets/enemigos/enemigo_coloso_attack_1.png",
+    "assets/enemigos/enemigo_coloso_attack_2.png",
+    "assets/enemigos/enemigo_coloso_attack_3.png",
+    "assets/enemigos/enemigo_coloso_attack_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 312,
+    "height": 300
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 156,
+    "y": 291
+   },
+   "collision": [
+    [
+     104,
+     109
+    ],
+    [
+     203,
+     109
+    ],
+    [
+     203,
+     291
+    ],
+    [
+     104,
+     291
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.11,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Coloso_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Coloso_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_coloso_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 312,
+    "height": 300
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 156,
+    "y": 291
+   },
+   "collision": [
+    [
+     104,
+     109
+    ],
+    [
+     203,
+     109
+    ],
+    [
+     203,
+     291
+    ],
+    [
+     104,
+     291
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Coloso_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Coloso_Dead",
+   "files": [
+    "assets/enemigos/enemigo_coloso_dead_0.png",
+    "assets/enemigos/enemigo_coloso_dead_1.png",
+    "assets/enemigos/enemigo_coloso_dead_2.png",
+    "assets/enemigos/enemigo_coloso_dead_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 312,
+    "height": 300
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 156,
+    "y": 291
+   },
+   "collision": [
+    [
+     104,
+     109
+    ],
+    [
+     203,
+     109
+    ],
+    [
+     203,
+     291
+    ],
+    [
+     104,
+     291
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Coloso_Slam",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Coloso_Slam",
+   "files": [
+    "assets/enemigos/enemigo_coloso_slam_0.png",
+    "assets/enemigos/enemigo_coloso_slam_1.png",
+    "assets/enemigos/enemigo_coloso_slam_2.png",
+    "assets/enemigos/enemigo_coloso_slam_3.png",
+    "assets/enemigos/enemigo_coloso_slam_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 312,
+    "height": 300
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 156,
+    "y": 291
+   },
+   "collision": [
+    [
+     104,
+     109
+    ],
+    [
+     203,
+     109
+    ],
+    [
+     203,
+     291
+    ],
+    [
+     104,
+     291
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.11,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Coloso_Sweep",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Coloso_Sweep",
+   "files": [
+    "assets/enemigos/enemigo_coloso_sweep_0.png",
+    "assets/enemigos/enemigo_coloso_sweep_1.png",
+    "assets/enemigos/enemigo_coloso_sweep_2.png",
+    "assets/enemigos/enemigo_coloso_sweep_3.png",
+    "assets/enemigos/enemigo_coloso_sweep_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 312,
+    "height": 300
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 156,
+    "y": 291
+   },
+   "collision": [
+    [
+     104,
+     109
+    ],
+    [
+     203,
+     109
+    ],
+    [
+     203,
+     291
+    ],
+    [
+     104,
+     291
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.11,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Coloso_Cast",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Coloso_Cast",
+   "files": [
+    "assets/enemigos/enemigo_coloso_cast_0.png",
+    "assets/enemigos/enemigo_coloso_cast_1.png",
+    "assets/enemigos/enemigo_coloso_cast_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 312,
+    "height": 300
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 156,
+    "y": 291
+   },
+   "collision": [
+    [
+     104,
+     109
+    ],
+    [
+     203,
+     109
+    ],
+    [
+     203,
+     291
+    ],
+    [
+     104,
+     291
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.13,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Reina_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Reina_Idle",
+   "files": [
+    "assets/enemigos/enemigo_reina_idle_0.png",
+    "assets/enemigos/enemigo_reina_idle_1.png",
+    "assets/enemigos/enemigo_reina_idle_2.png",
+    "assets/enemigos/enemigo_reina_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.3,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Reina_Walk",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Reina_Walk",
+   "files": [
+    "assets/enemigos/enemigo_reina_walk_0.png",
+    "assets/enemigos/enemigo_reina_walk_1.png",
+    "assets/enemigos/enemigo_reina_walk_2.png",
+    "assets/enemigos/enemigo_reina_walk_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Reina_Cast",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Reina_Cast",
+   "files": [
+    "assets/enemigos/enemigo_reina_cast_0.png",
+    "assets/enemigos/enemigo_reina_cast_1.png",
+    "assets/enemigos/enemigo_reina_cast_2.png",
+    "assets/enemigos/enemigo_reina_cast_3.png",
+    "assets/enemigos/enemigo_reina_cast_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.13,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Reina_Slash",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Reina_Slash",
+   "files": [
+    "assets/enemigos/enemigo_reina_slash_0.png",
+    "assets/enemigos/enemigo_reina_slash_1.png",
+    "assets/enemigos/enemigo_reina_slash_2.png",
+    "assets/enemigos/enemigo_reina_slash_3.png",
+    "assets/enemigos/enemigo_reina_slash_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.1,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Reina_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Reina_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_reina_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Reina_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Reina_Dead",
+   "files": [
+    "assets/enemigos/enemigo_reina_dead_0.png",
+    "assets/enemigos/enemigo_reina_dead_1.png",
+    "assets/enemigos/enemigo_reina_dead_2.png",
+    "assets/enemigos/enemigo_reina_dead_3.png",
+    "assets/enemigos/enemigo_reina_dead_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 330,
+    "height": 360
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 165,
+    "y": 354
+   },
+   "collision": [
+    [
+     129,
+     171
+    ],
+    [
+     201,
+     171
+    ],
+    [
+     201,
+     354
+    ],
+    [
+     129,
+     354
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
    "asset_id": "Enemigo.Murcielago_Fly",
    "role": "character.enemy",
    "object": "Enemigo",
@@ -3051,6 +4191,560 @@
    "origin": "source/make_art.py"
   },
   {
+   "asset_id": "Enemigo.Espectro_Fly",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Espectro_Fly",
+   "files": [
+    "assets/enemigos/enemigo_espectro_fly_0.png",
+    "assets/enemigos/enemigo_espectro_fly_1.png",
+    "assets/enemigos/enemigo_espectro_fly_2.png",
+    "assets/enemigos/enemigo_espectro_fly_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 66
+   },
+   "collision": [
+    [
+     33,
+     30
+    ],
+    [
+     87,
+     30
+    ],
+    [
+     87,
+     120
+    ],
+    [
+     33,
+     120
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.14,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Espectro_Cast",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Espectro_Cast",
+   "files": [
+    "assets/enemigos/enemigo_espectro_cast_0.png",
+    "assets/enemigos/enemigo_espectro_cast_1.png",
+    "assets/enemigos/enemigo_espectro_cast_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 66
+   },
+   "collision": [
+    [
+     33,
+     30
+    ],
+    [
+     87,
+     30
+    ],
+    [
+     87,
+     120
+    ],
+    [
+     33,
+     120
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.13,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Espectro_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Espectro_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_espectro_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 66
+   },
+   "collision": [
+    [
+     33,
+     30
+    ],
+    [
+     87,
+     30
+    ],
+    [
+     87,
+     120
+    ],
+    [
+     33,
+     120
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Espectro_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Espectro_Dead",
+   "files": [
+    "assets/enemigos/enemigo_espectro_dead_0.png",
+    "assets/enemigos/enemigo_espectro_dead_1.png",
+    "assets/enemigos/enemigo_espectro_dead_2.png",
+    "assets/enemigos/enemigo_espectro_dead_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 66
+   },
+   "collision": [
+    [
+     33,
+     30
+    ],
+    [
+     87,
+     30
+    ],
+    [
+     87,
+     120
+    ],
+    [
+     33,
+     120
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Limo_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Limo_Idle",
+   "files": [
+    "assets/enemigos/enemigo_limo_idle_0.png",
+    "assets/enemigos/enemigo_limo_idle_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 96
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 93
+   },
+   "collision": [
+    [
+     24,
+     45
+    ],
+    [
+     96,
+     45
+    ],
+    [
+     96,
+     93
+    ],
+    [
+     24,
+     93
+    ]
+   ],
+   "frames": 2,
+   "frame_time_s": 0.35,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Limo_Walk",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Limo_Walk",
+   "files": [
+    "assets/enemigos/enemigo_limo_walk_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 96
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 93
+   },
+   "collision": [
+    [
+     24,
+     45
+    ],
+    [
+     96,
+     45
+    ],
+    [
+     96,
+     93
+    ],
+    [
+     24,
+     93
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Limo_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Limo_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_limo_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 96
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 93
+   },
+   "collision": [
+    [
+     24,
+     45
+    ],
+    [
+     96,
+     45
+    ],
+    [
+     96,
+     93
+    ],
+    [
+     24,
+     93
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.Limo_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "Limo_Dead",
+   "files": [
+    "assets/enemigos/enemigo_limo_dead_0.png",
+    "assets/enemigos/enemigo_limo_dead_1.png",
+    "assets/enemigos/enemigo_limo_dead_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 120,
+    "height": 96
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 60,
+    "y": 93
+   },
+   "collision": [
+    [
+     24,
+     45
+    ],
+    [
+     96,
+     45
+    ],
+    [
+     96,
+     93
+    ],
+    [
+     24,
+     93
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.LimoMini_Idle",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "LimoMini_Idle",
+   "files": [
+    "assets/enemigos/enemigo_limomini_idle_0.png",
+    "assets/enemigos/enemigo_limomini_idle_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 72,
+    "height": 57
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 36,
+    "y": 56
+   },
+   "collision": [
+    [
+     14,
+     27
+    ],
+    [
+     58,
+     27
+    ],
+    [
+     58,
+     56
+    ],
+    [
+     14,
+     56
+    ]
+   ],
+   "frames": 2,
+   "frame_time_s": 0.35,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.LimoMini_Walk",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "LimoMini_Walk",
+   "files": [
+    "assets/enemigos/enemigo_limomini_walk_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 72,
+    "height": 57
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 36,
+    "y": 56
+   },
+   "collision": [
+    [
+     14,
+     27
+    ],
+    [
+     58,
+     27
+    ],
+    [
+     58,
+     56
+    ],
+    [
+     14,
+     56
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.LimoMini_Hurt",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "LimoMini_Hurt",
+   "files": [
+    "assets/enemigos/enemigo_limomini_hurt_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 72,
+    "height": 57
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 36,
+    "y": 56
+   },
+   "collision": [
+    [
+     14,
+     27
+    ],
+    [
+     58,
+     27
+    ],
+    [
+     58,
+     56
+    ],
+    [
+     14,
+     56
+    ]
+   ],
+   "frames": 1,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Enemigo.LimoMini_Dead",
+   "role": "character.enemy",
+   "object": "Enemigo",
+   "animation": "LimoMini_Dead",
+   "files": [
+    "assets/enemigos/enemigo_limomini_dead_0.png",
+    "assets/enemigos/enemigo_limomini_dead_1.png",
+    "assets/enemigos/enemigo_limomini_dead_2.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 72,
+    "height": 57
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 36,
+    "y": 56
+   },
+   "collision": [
+    [
+     14,
+     27
+    ],
+    [
+     58,
+     27
+    ],
+    [
+     58,
+     56
+    ],
+    [
+     14,
+     56
+    ]
+   ],
+   "frames": 3,
+   "frame_time_s": 0.12,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
    "asset_id": "Enemigo.Maniqui_Idle",
    "role": "character.enemy",
    "object": "Enemigo",
@@ -3183,6 +4877,37 @@
     "assets/npc/npc_alquimista_idle_1.png",
     "assets/npc/npc_alquimista_idle_2.png",
     "assets/npc/npc_alquimista_idle_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 132,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 66,
+    "y": 126
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.35,
+   "loop": true,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "NPC.Archivista_Idle",
+   "role": "character.npc",
+   "object": "NPC",
+   "animation": "Archivista_Idle",
+   "files": [
+    "assets/npc/npc_archivista_idle_0.png",
+    "assets/npc/npc_archivista_idle_1.png",
+    "assets/npc/npc_archivista_idle_2.png",
+    "assets/npc/npc_archivista_idle_3.png"
    ],
    "type": "png",
    "size_px": {
@@ -3430,6 +5155,121 @@
    "collision": "bounding-box",
    "frames": 2,
    "frame_time_s": 0.08,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "ProyectilEnemigo.Flecha",
+   "role": "projectile",
+   "object": "ProyectilEnemigo",
+   "animation": "Flecha",
+   "files": [
+    "assets/proyectiles/proyectilenemigo_flecha_0.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 72,
+    "height": 21
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 36,
+    "y": 10
+   },
+   "collision": "bounding-box",
+   "frames": 1,
+   "frame_time_s": 1,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "ProyectilEnemigo.OrbeRojo",
+   "role": "projectile",
+   "object": "ProyectilEnemigo",
+   "animation": "OrbeRojo",
+   "files": [
+    "assets/proyectiles/proyectilenemigo_orberojo_0.png",
+    "assets/proyectiles/proyectilenemigo_orberojo_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 48,
+    "height": 48
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 24,
+    "y": 24
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "ProyectilEnemigo.Roca",
+   "role": "projectile",
+   "object": "ProyectilEnemigo",
+   "animation": "Roca",
+   "files": [
+    "assets/proyectiles/proyectilenemigo_roca_0.png",
+    "assets/proyectiles/proyectilenemigo_roca_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 66,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 33,
+    "y": 33
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.1,
+   "loop": true,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "ProyectilEnemigo.Cristal",
+   "role": "projectile",
+   "object": "ProyectilEnemigo",
+   "animation": "Cristal",
+   "files": [
+    "assets/proyectiles/proyectilenemigo_cristal_0.png",
+    "assets/proyectiles/proyectilenemigo_cristal_1.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 66,
+    "height": 66
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 33,
+    "y": 33
+   },
+   "collision": "bounding-box",
+   "frames": 2,
+   "frame_time_s": 0.1,
    "loop": true,
    "directions": "única",
    "pixel_scale": 3,
@@ -3995,6 +5835,37 @@
    "frames": 4,
    "frame_time_s": 0.05,
    "loop": false,
+   "directions": "única",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Efecto.Aviso",
+   "role": "fx",
+   "object": "Efecto",
+   "animation": "Aviso",
+   "files": [
+    "assets/fx/efecto_aviso_0.png",
+    "assets/fx/efecto_aviso_1.png",
+    "assets/fx/efecto_aviso_2.png",
+    "assets/fx/efecto_aviso_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 132,
+    "height": 42
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 66,
+    "y": 21
+   },
+   "collision": "bounding-box",
+   "frames": 4,
+   "frame_time_s": 0.12,
+   "loop": true,
    "directions": "única",
    "pixel_scale": 3,
    "variant": "",
@@ -6632,6 +8503,42 @@
    "origin": "source/make_art.py"
   },
   {
+   "asset_id": "imagen.fondo_abismo_lejos",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/fondo_abismo_lejos.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.fondo_abismo_medio",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/fondo_abismo_medio.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.muro_abismo",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/muro_abismo.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
    "asset_id": "imagen.suelo_mazmorra",
    "role": "environment.tile",
    "files": [
@@ -6696,6 +8603,42 @@
    "role": "environment.tile",
    "files": [
     "assets/entorno/plataforma_fortaleza.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.suelo_abismo",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/suelo_abismo.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.relleno_abismo",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/relleno_abismo.png"
+   ],
+   "type": "png",
+   "alpha": true,
+   "pixel_scale": 3,
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "imagen.plataforma_abismo",
+   "role": "environment.tile",
+   "files": [
+    "assets/entorno/plataforma_abismo.png"
    ],
    "type": "png",
    "alpha": true,

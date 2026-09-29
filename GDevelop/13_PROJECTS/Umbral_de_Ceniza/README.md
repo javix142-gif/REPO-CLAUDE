@@ -1,8 +1,9 @@
 # Umbral de Ceniza
 
 RPG de acción pixel-art 2D para Android hecho con **GDevelop 5**, en la línea de *Darkrise*: eliges clase,
-bajas a mazmorras sala por sala, limpias oleadas, recoges botín por rareza, subes de nivel, vences al jefe y
-vuelves al pueblo a mejorar tu equipo. Todo el arte, audio, textos y nombres son **originales**.
+bajas por el portal del Umbral —en una **campaña con historia** de 12 etapas, en **mazmorras** generadas al vuelo o en
+el **Coliseo** sin fin—, limpias oleadas, recoges botín por rareza, repartes tus puntos de atributo, vences a jefes
+únicos y vuelves al pueblo a mejorar tu equipo. Todo el arte, audio, textos y nombres son **originales**.
 
 ![Mazmorra](evidence/screenshots/08_mazmorra_inicio.png)
 
@@ -10,10 +11,14 @@ vuelves al pueblo a mejorar tu equipo. Todo el arte, audio, textos y nombres son
 
 | | |
 |---|---|
-| Escenas | `Titulo` · `SeleccionClase` · `Pueblo` (hub) · `Mazmorra` (etapa jugable) |
-| Clases | **Guerrero** (Torbellino, Embestida, Grito de guerra) · **Maga** (Nova de escarcha, Meteoro, Barrera arcana) · **Arquera** (Disparo triple, Lluvia de flechas, Paso sombrío) |
-| Enemigos | Esqueleto, Murciélago de ceniza, Cultista, Bruto y el jefe **Caballero de Ceniza** (tajo, embestida, onda de choque, invocación, furia) |
-| Progresión | 10 etapas en 2 capítulos (Catacumbas Olvidadas / Fortaleza Carmesí), EXP y niveles, botín Común → Legendario que se equipa o vende solo, Herrería (forja/refuerzo), Alquimista (pociones) |
+| Escenas | `Titulo` · `SeleccionClase` · `Pueblo` (hub) · `Mazmorra` (campaña, mazmorra y coliseo) |
+| Modos | **Campaña** (12 etapas en 3 capítulos con prólogo, página de historia en cada etapa, finales de capítulo y diario) · **Mazmorra** (repetir una etapa con un élite al azar del capítulo) · **Coliseo de la Ceniza** (rondas sin fin, jefe cada 5 rondas, récord guardado) |
+| Clases | **Guerrero** · **Maga** · **Arquera**: ataque básico con **combo** (el 3.er golpe seguido es potenciado), apuntado **arriba / en diagonal**, **doble salto** y 6 habilidades cada una (3 iniciales + 3 que se aprenden en los niveles **4, 8 y 12** y se equipan desde la ficha) |
+| RPG | 3 puntos de atributo por nivel para repartir a tu gusto (**Fuerza, Vitalidad, Destreza, Espíritu**; reinicio con oro), botín Común → Legendario que se equipa o vende solo, Herrería (forja/refuerzo), Alquimista (pociones) |
+| Enemigos | Esqueleto, Murciélago de ceniza (vuelo con inercia que te sigue si saltas), Cultista, Bruto, **Arquero** esquelético, **Espectro** (orbes y teletransporte), **Gólem** (onda de choque), **Limo** (se divide) y **élites** (un enemigo reforzado con refuerzos propios) |
+| Jefes | 12 jefes con nombre: 9 élites (Grom, Osvaldo, Hermana Vesper, La Dama de los Lamentos, Halcón Sangriento, Verdugo Carmesí, Rey Gelatina, Custodio de Piedra, Sombra del Umbral) y 3 jefes de capítulo con patrones propios: **Caballero de Ceniza**, **Reina Carmesí** y **Coloso del Umbral** |
+| Mazmorras | Salas con plataformas flotantes generadas en cada partida (siempre alcanzables con doble salto), **cofres** en las plataformas altas, **pinchos**, cultistas y arqueros apostados en plataformas, 3 temas (catacumbas, fortaleza, abismo de cristal) |
+| Pueblo | Herrera, Alquimista, **Archivista** (diario con la historia y los jefes vencidos), Portal, Consejos, maniquí de práctica |
 | Móvil | Joystick + botones multitouch, enfriamientos visibles, pausa, **combate automático (AUTO)**, HUD anclado a los bordes (probado en 16:9 y 19.5:9), orientación horizontal |
 | Guardado | Automático en el almacenamiento local de GDevelop (`UmbralSave`) |
 
@@ -35,14 +40,15 @@ Toda la lógica son **eventos nativos** editables:
 | Acción | Táctil | Teclado |
 |---|---|---|
 | Moverse / bajar de plataforma | joystick izquierdo | ← → / A D, ↓ / S |
-| Saltar | botón ↑ | Espacio / W |
-| Atacar (mantener) | botón grande | J |
+| Saltar · **doble salto** (toca otra vez en el aire) | botón ↑ | Espacio / W |
+| Atacar (mantener; 3 golpes seguidos = golpe potenciado) | botón grande | J |
+| Apuntar el ataque arriba / en diagonal | joystick hacia arriba / diagonal | ↑ / ↑ + ← → |
 | Habilidades 1 · 2 · 3 | botones de habilidad | K · L · I |
 | Poción | botón rojo | H |
 | Hablar / entrar | botón de diálogo (junto a NPC) | E |
 | Combate automático | botón AUTO | T |
 | Pausa | botón ‖ | Esc / P |
-| Ficha del personaje (pueblo) | tocar el retrato | C |
+| Ficha del personaje (atributos, habilidades, diario) | tocar el retrato | C |
 
 ## Android
 
@@ -100,7 +106,7 @@ cd source && python3 make_art.py && python3 make_audio.py   # arte y audio origi
 cd ../tools && npm ci
 node build_project.mjs      # genera y valida source/game.json con libGD 5.6.269
 node export.mjs web         # builds/web (HTML5)
-node test/run_tests.mjs     # 9 pruebas de gameplay en Chromium (Playwright) + capturas en evidence/
+node test/run_tests.mjs     # pruebas de gameplay en Chromium (Playwright) + capturas en evidence/
 ```
 
 > ⚠️ `build_project.mjs` **sobrescribe** `source/game.json`. Si editas el juego en GDevelop, `game.json` pasa a ser la

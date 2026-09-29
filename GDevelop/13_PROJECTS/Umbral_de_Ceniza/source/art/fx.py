@@ -467,3 +467,32 @@ def explosive_arrow_frame():
     c.rect(1, 6, 5, 6, "#f2efe6")
     c.rect(0, 3, 2, 5, "#c94f3a")
     return [_glow(outline(c.im), 2, 0.6)]
+
+
+# ---------------------------------------------------------------------------
+# v2: enemy projectiles (boulder / crystal shard) and ground warning marker
+
+def rock_frames(crystal=False):
+    out = []
+    base = ("#4fb8d8", "#9ff4ff", "#2a7a9a") if crystal else ("#7d6a58", "#a58d78", "#4a3d32")
+    for f in range(2):
+        c = Canvas(22, 22)
+        pts = [(4, 8), (9, 2), (16, 4), (19, 11), (15, 19), (7, 19), (3, 14)]
+        c.poly(pts if f == 0 else rot(pts, 30, 11, 11), base[0])
+        c.poly([(6, 8), (9, 4), (13, 5), (10, 10)], base[1])
+        c.poly([(10, 12), (18, 12), (15, 18), (8, 18)], base[2])
+        out.append(_glow(outline(c.im, (24, 18, 30, 255)), 1, 0.4 if crystal else 0.0))
+    return out
+
+
+def warning_frames():
+    """Pulsing red ring on the ground: a heavy attack will land here soon."""
+    out = []
+    for f in range(4):
+        c = Canvas(44, 14)
+        r = 10 + (f % 2) * 2
+        a = 200 - f * 20
+        c.ellipse(22 - r - 8, 7 - 5, 22 + r + 8, 7 + 5, None, outline=rgba("#ff4a4a", a), width=2)
+        c.ellipse(22 - 8, 7 - 3, 22 + 8, 7 + 3, rgba("#ff8a5a", 90))
+        out.append(c.im)
+    return out

@@ -38,8 +38,9 @@ function layout() {
   I.push(inst("Enemigo", 620, SUELO, { z: 8, vars: [vstr("Tipo", "Maniqui"), vnum("Init", 1)] }));
   I.push(inst("NPC", 1090, SUELO, { z: 9, vars: [vstr("Rol", "herrera")] }));
   I.push(inst("NPC", 2190, SUELO, { z: 9, vars: [vstr("Rol", "alquimista")] }));
+  I.push(inst("NPC", 3040, SUELO, { z: 9, vars: [vstr("Rol", "archivista")] }));
   I.push(inst("Portal", 3520, SUELO, { z: 3 }));
-  const names = [["herrera", 1090, 430], ["alquimista", 2190, 430], ["portal", 3520, 330], ["letrero", 236, 450], ["maniqui", 620, 420]];
+  const names = [["herrera", 1090, 430], ["alquimista", 2190, 430], ["archivista", 3040, 430], ["portal", 3520, 330], ["letrero", 236, 450], ["maniqui", 620, 420]];
   names.forEach(([rol, x, y]) => I.push(inst("TextoNombre", x, y, { z: 30, vars: [vstr("Rol", rol), vnum("CX", x)] })));
   I.push(inst("Jugador", 480, SUELO - 4, { z: 20 }));
   I.push(inst("PintorBarras", 0, 0, { z: 45 }));
@@ -61,11 +62,13 @@ function start() {
     ], [
       E([OIFS("NPC", "Rol", "=", q("herrera"))], [ANIM("NPC", q("Herrera_Idle"))]),
       E([OIFS("NPC", "Rol", "=", q("alquimista"))], [ANIM("NPC", q("Alquimista_Idle")), A("FlippableCapability::FlippableBehavior::FlipX", "NPC", "Flippable", "yes")]),
+      E([OIFS("NPC", "Rol", "=", q("archivista"))], [ANIM("NPC", q("Archivista_Idle"))]),
       E([OIFS("Enemigo", "Tipo", "=", q("Maniqui"))], [OSET("Enemigo", "HPMax", "=", 9999), OSET("Enemigo", "HP", "=", 9999), OSET("Enemigo", "Def", "=", 0),
         OSETS("Enemigo", "Estado", "=", q("maniqui")), ANIM("Enemigo", q("Maniqui_Idle")), A("ActivateBehavior", "Enemigo", "Plataformero", "no")]),
       E([OIFS("TextoNombre", "Rol", "=", q("herrera"))], [TEXT("TextoNombre", q("Herrera"))]),
       E([OIFS("TextoNombre", "Rol", "=", q("alquimista"))], [TEXT("TextoNombre", q("Alquimista"))]),
-      E([OIFS("TextoNombre", "Rol", "=", q("portal"))], [TEXT("TextoNombre", q("Portal a las mazmorras"))]),
+      E([OIFS("TextoNombre", "Rol", "=", q("archivista"))], [TEXT("TextoNombre", q("Archivista"))]),
+      E([OIFS("TextoNombre", "Rol", "=", q("portal"))], [TEXT("TextoNombre", q("Portal del Umbral"))]),
       E([OIFS("TextoNombre", "Rol", "=", q("letrero"))], [TEXT("TextoNombre", q("Consejos"))]),
       E([OIFS("TextoNombre", "Rol", "=", q("maniqui"))], [TEXT("TextoNombre", q("Maniquí de práctica"))]),
       E([IFS("Juego.Origen", "=", q("mazmorra"))], [A("SetXY", "Jugador", "=", 3380, "=", SUELO - 4), OSET("Jugador", "Dir", "=", -1)]),
@@ -110,8 +113,14 @@ const costRefuerzo = "round(50 * pow(1.55, Save.Refuerzo))";
 function shops() {
   const noGold = () => [SOUND("assets/audio/herido.wav", 40, 1.4), ...toast(q("No tienes suficiente oro"), q("255;120;120"), 1.6)];
   return GROUP("Tiendas y portal", [
-    E([IFN("Save.EtapaSel", "<=", 5)], [SETS("NombreEtapa", "=", q("Catacumbas Olvidadas"))]),
-    ELSE([], [SETS("NombreEtapa", "=", q("Fortaleza Carmesí"))]),
+    COMMENT("Nombre del capítulo de la etapa elegida (mazmorra) y de la etapa actual de la campaña; el coliseo se abre en la etapa 3."),
+    E([], [SETS("NombreEtapa", "=", q("Catacumbas Olvidadas")), SETS("NombreCamp", "=", q("Catacumbas Olvidadas")),
+      SETS("TextoColiseo", "=", q("COLISEO  ·  se abre al llegar a la etapa 3"))]),
+    E([IFN("Save.EtapaSel", ">=", 5)], [SETS("NombreEtapa", "=", q("Fortaleza Carmesí"))]),
+    E([IFN("Save.EtapaSel", ">=", 9)], [SETS("NombreEtapa", "=", q("Abismo de Cristal"))]),
+    E([IFN("Save.EtapaMax", ">=", 5)], [SETS("NombreCamp", "=", q("Fortaleza Carmesí"))]),
+    E([IFN("Save.EtapaMax", ">=", 9)], [SETS("NombreCamp", "=", q("Abismo de Cristal"))]),
+    E([IFN("Save.EtapaMax", ">=", 3)], [SETS("TextoColiseo", "=", "\"COLISEO  ·  récord: ronda \" + ToString(Save.ArenaMax)")]),
     menuSystem({
       herrera: { title: q("HERRERÍA"),
         body: "\"Arma: \" + Save.ArmaNombre + \"  (+\" + ToString(Save.ArmaBonus) + \" ATQ)\\nArmadura: \" + Save.ArmaduraNombre + \"  (+\" + ToString(Save.ArmaduraBonus) + \" VIDA)\\n\\nForja nivel \" + ToString(Save.Forja) + \":  +\" + ToString(Save.Forja * 3) + \" ATQ\\nRefuerzo nivel \" + ToString(Save.Refuerzo) + \":  +\" + ToString(Save.Refuerzo * 15) + \" VIDA  +\" + ToString(Save.Refuerzo) + \" DEF\\n\\nOro: \" + ToString(Save.Oro)",
@@ -120,11 +129,15 @@ function shops() {
       alquimista: { title: q("ALQUIMISTA"),
         body: "\"Pociones: \" + ToString(Save.Pociones) + \" / 20\\nCada poción restaura el 40% de la vida.\\n\\nOro: \" + ToString(Save.Oro)",
         buttons: [{ label: q("Comprar 1 poción  (30 oro)"), action: "pocion1" }, { label: q("Comprar 5 pociones  (140 oro)"), action: "pocion5" }], close: true },
-      portal: { title: q("PORTAL"),
-        body: "\"Etapa \" + ToString(Save.EtapaSel) + \" de 10\\n\" + NombreEtapa + \"\\n\\nNivel recomendado: \" + ToString(Save.EtapaSel * 2 - 1) + \"\\nTu nivel: \" + ToString(Save.Nivel) + \"\\n\\nEtapas desbloqueadas: \" + ToString(Save.EtapaMax)",
-        buttons: [{ label: q("Entrar a la mazmorra"), action: "entrar" }], close: true, arrows: true },
+      portal: { title: q("PORTAL DEL UMBRAL"),
+        body: "\"CAMPAÑA  ·  Etapa \" + ToString(Save.EtapaMax) + \" de 12\\n\" + NombreCamp + \"\\n\\nMAZMORRA  ·  Etapa \" + ToString(Save.EtapaSel) + \"  (flechas)\\n\" + NombreEtapa + \"\\nNivel recomendado: \" + ToString(Save.EtapaSel * 2 - 1) + \"     Tu nivel: \" + ToString(Save.Nivel) + \"\\n\\n\" + TextoColiseo",
+        buttons: [{ label: q("Campaña (historia)"), action: "campana" }, { label: q("Mazmorra (repetir etapa)"), action: "mazmorra" },
+          { label: q("Coliseo de la Ceniza (arena)"), action: "arena" }], close: true, arrows: true },
+      archivista: { title: q("ARCHIVISTA"),
+        body: "\"«Cada jefe que cae deja una página nueva\\nen mi diario. Lee y sabrás a qué te enfrentas.»\\n\\nEntradas del diario: \" + ToString(Save.EtapaMax + 1) + \" / 13\\nJefes derrotados: \" + ToString(max(0, Save.EtapaMax - 1 + Save.Historia)) + \" / 12\"",
+        buttons: [{ label: q("Leer el diario"), action: "abrirDiario" }], close: true },
       letrero: { title: q("CONSEJOS"),
-        body: q("· Mantén pulsado ATACAR para encadenar golpes.\n· Las habilidades gastan maná, que se regenera solo.\n· Limpia cada sala para abrir la siguiente puerta.\n· El equipo mejor que el tuyo se equipa solo;\n   el peor se vende automáticamente.\n· Mejora tu arma y armadura en la herrería."),
+        body: q("· Doble salto: toca SALTO otra vez en el aire.\n· Apunta arriba o en diagonal con el joystick.\n· Tres golpes seguidos: el tercero es potenciado.\n· Toca tu retrato: atributos y habilidades.\n· Cada 4 niveles aprendes una habilidad nueva.\n· Los cofres de las plataformas altas dan botín.\n· Campaña, mazmorras y coliseo: en el portal."),
         buttons: [], close: true },
       ...characterMenus(),
       ...storyMenus(),
@@ -154,7 +167,13 @@ function shops() {
     ...characterEvents(),
     E([IFS("Accion", "=", q("flecha-1")), IFS("Menu", "=", q("portal"))], [SET("Save.EtapaSel", "=", "clamp(Save.EtapaSel - 1, 1, Save.EtapaMax)")]),
     E([IFS("Accion", "=", q("flecha1")), IFS("Menu", "=", q("portal"))], [SET("Save.EtapaSel", "=", "clamp(Save.EtapaSel + 1, 1, Save.EtapaMax)")]),
-    E([IFS("Accion", "=", q("entrar"))], [SET("Guardar", "=", 1), SOUND("assets/audio/portal.wav", 80), GOTO("Mazmorra")]),
+    E([IFS("Accion", "=", q("campana"))], [SETS("Juego.Modo", "=", q("campana")), SET("Save.EtapaSel", "=", "Save.EtapaMax"), SET("Guardar", "=", 1),
+      SOUND("assets/audio/portal.wav", 80), GOTO("Mazmorra")]),
+    E([IFS("Accion", "=", q("mazmorra"))], [SETS("Juego.Modo", "=", q("mazmorra")), SET("Guardar", "=", 1), SOUND("assets/audio/portal.wav", 80), GOTO("Mazmorra")]),
+    E([IFS("Accion", "=", q("arena"))], [], [
+      E([IFN("Save.EtapaMax", ">=", 3)], [SETS("Juego.Modo", "=", q("arena")), SET("Guardar", "=", 1), SOUND("assets/audio/portal.wav", 80), GOTO("Mazmorra")]),
+      ELSE([], [SOUND("assets/audio/herido.wav", 40, 1.4), ...toast(q("El Coliseo se abre al llegar a la etapa 3"), q("255;120;120"), 2)]),
+    ]),
     E([IFS("Accion", "=", q("titulo"))], [SET("Guardar", "=", 1), GOTO("Titulo")]),
   ]);
 }
@@ -164,10 +183,10 @@ export function puebloScene() {
     name: "Pueblo",
     background: [12, 10, 30],
     layers: [layer("Fondo"), layer("Medio"), layer("", { base: true }), layer("HUD"), layer("Menu", { visible: false })],
-    variables: [...gameplaySceneVariables(), vstr("Cerca", ""), vstr("NombreEtapa", "")],
+    variables: [...gameplaySceneVariables(), vstr("Cerca", ""), vstr("NombreEtapa", ""), vstr("NombreCamp", ""), vstr("TextoColiseo", "")],
     instances: layout(),
     events: [
-      COMMENT("PUEBLO — zona segura: herrera, alquimista, portal a las mazmorras y maniquí de práctica."),
+      COMMENT("PUEBLO — zona segura: herrera, alquimista, archivista, portal del Umbral (campaña, mazmorra, coliseo) y maniquí de práctica."),
       start(),
       LINK("EV_Entrada"),
       LINK("EV_Jugador"),

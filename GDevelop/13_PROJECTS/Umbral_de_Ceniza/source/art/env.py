@@ -11,6 +11,9 @@ THEMES = {
     "mazmorra": dict(sky_top="#070a12", sky_bot="#141b2a", brick="#1c2434", brick_l="#27314a", mortar="#0d111b",
                      recess="#070910", glow="#3a6aa8", stone="#323c52", stone_l="#4d5a78", stone_d="#1d2332",
                      slab="#3d465c", slab_l="#65718f", fill="#10131b", moss="#2f4a3a", banner="#2c4f8a", lava=None),
+    "abismo": dict(sky_top="#050818", sky_bot="#0f2040", brick="#16264a", brick_l="#28468a", mortar="#080e22", recess="#040612",
+                   glow="#5ae8ff", stone="#2a3a68", stone_l="#5070b8", stone_d="#161e3c", slab="#34478a", slab_l="#6a8ae0",
+                   fill="#0a1024", moss="#1a5a6a", banner="#3a9ad8", lava="#4affe0"),
     "fortaleza": dict(sky_top="#0e0507", sky_bot="#2a0f10", brick="#2f1a1c", brick_l="#452629", mortar="#160a0b",
                       recess="#0c0506", glow="#ff6a2a", stone="#43302e", stone_l="#6a4a44", stone_d="#24191a",
                       slab="#4d3834", slab_l="#80605a", fill="#150c0c", moss="#5a2a1a", banner="#8a1e24", lava="#ff5a1a"),
@@ -47,11 +50,21 @@ def dungeon_far(theme):
         c.arc((ax - 3, top - 3, ax + w + 3, top + w + 3), 180, 360, T["stone_l"], 3)
         c.rect(ax - 4, top + w // 2, ax - 1, bot, T["stone"])
         c.rect(ax + w + 1, top + w // 2, ax + w + 4, bot, T["stone"])
-        # statue/skull silhouette in alcove
-        c.ellipse(ax + w // 2 - 7, bot - 44, ax + w // 2 + 7, bot - 30, mix(T["recess"], T["stone_d"], 0.8))
-        c.rect(ax + w // 2 - 9, bot - 30, ax + w // 2 + 9, bot - 4, mix(T["recess"], T["stone_d"], 0.7))
-        c.px(ax + w // 2 - 3, bot - 38, T["glow"])
-        c.px(ax + w // 2 + 2, bot - 38, T["glow"])
+        if theme == "abismo":
+            # glowing crystal cluster instead of a statue
+            mx = ax + w // 2
+            for dx, hh, ww in ((-12, 34, 6), (-4, 52, 8), (6, 40, 7), (14, 24, 5)):
+                x0 = mx + dx
+                pts = [(x0 - ww // 2, bot - 4), (x0, bot - 4 - hh), (x0 + ww // 2, bot - 4)]
+                c.poly(pts, mix(T["stone_l"], T["glow"], 0.35))
+                c.poly([(x0, bot - 4 - hh), (x0 + ww // 2, bot - 4), (x0, bot - 4)], mix(T["glow"], "#ffffff", 0.25))
+                c.px(x0, bot - 4 - hh + 3, "#ffffff")
+        else:
+            # statue/skull silhouette in alcove
+            c.ellipse(ax + w // 2 - 7, bot - 44, ax + w // 2 + 7, bot - 30, mix(T["recess"], T["stone_d"], 0.8))
+            c.rect(ax + w // 2 - 9, bot - 30, ax + w // 2 + 9, bot - 4, mix(T["recess"], T["stone_d"], 0.7))
+            c.px(ax + w // 2 - 3, bot - 38, T["glow"])
+            c.px(ax + w // 2 + 2, bot - 38, T["glow"])
     # chains
     for cx in (110, 236):
         for y in range(0, 70, 4):

@@ -2,7 +2,7 @@
 import { sprite, simpleSprite, text, tiled, panel, painter, joystick, platformer, platform, anchor,
   multitouchButton, platformerMapper, vnum, vstr, vstruct, varr, inst } from "../lib/objects.mjs";
 import { skillTables } from "./skills.mjs";
-import { PROLOGO, INTROS, FINALES, DIARIO, NUM_ETAPAS } from "./historia.mjs";
+import { PROLOGO, INTROS, FINALES, DIARIO, NUM_ETAPAS, JEFES, poolString } from "./historia.mjs";
 
 export const W = 1280;
 export const H = 720;
@@ -21,7 +21,7 @@ export const globalVariables = () => [
     vnum("ArmaduraBonus", 0), vnum("ArmaduraRareza", 0), vstr("ArmaduraNombre", "Ropa de viaje"),
     vnum("Forja", 0), vnum("Refuerzo", 0), vnum("EtapaMax", 1), vnum("EtapaSel", 1), vnum("Version", 1), vnum("Auto", 0),
     vnum("Puntos", 0), vnum("PuntosExtra", 0), vnum("AtFue", 0), vnum("AtVit", 0), vnum("AtDes", 0), vnum("AtEsp", 0),
-    vnum("Hab1", 1), vnum("Hab2", 1), vnum("Hab3", 1), vnum("Historia", 0),
+    vnum("Hab1", 1), vnum("Hab2", 1), vnum("Hab3", 1), vnum("Historia", 0), vnum("ArenaMax", 0), vnum("IntroVista", 0),
   ]),
   vstruct("Stat", [
     vnum("VidaMax", 100), vnum("ManaMax", 50), vnum("Atq", 10), vnum("Def", 2), vnum("Crit", 0.1),
@@ -34,10 +34,14 @@ export const globalVariables = () => [
     varr("M", ["", "Común", "Mágico", "Raro", "Épico", "Legendario"]),
     varr("Col", RAREZA_COL),
   ]),
-  vstruct("Juego", [vstr("Origen", ""), vnum("HayPartida", 0)]),
+  vstruct("Juego", [vstr("Origen", ""), vnum("HayPartida", 0), vstr("Modo", "campana")]),
   vstruct("Skills", [varr("Nombre", skillTables().names), varr("Desc", skillTables().descs), varr("Nivel", skillTables().levels)]),
   vstruct("Relato", [vstr("Prologo", PROLOGO), varr("Intro", INTROS),
-    varr("Final", Array.from({ length: NUM_ETAPAS + 1 }, (_, i) => FINALES[i] || ""))]),
+    varr("Final", Array.from({ length: NUM_ETAPAS + 1 }, (_, i) => FINALES[i] || "")),
+    varr("Pool", Array.from({ length: NUM_ETAPAS + 1 }, (_, i) => (i ? poolString(i) : ""))),
+    varr("Jefe", JEFES.map((j) => (j ? j.nombre : ""))), varr("JefeTipo", JEFES.map((j) => (j ? j.tipo : ""))),
+    varr("JefeElite", JEFES.map((j) => (j && j.elite ? 1 : 0))),
+  ]),
   vstruct("Diario", [varr("Titulo", DIARIO.map((e) => e[0])), varr("Texto", DIARIO.map((e) => e[1]))]),
 ];
 
@@ -47,7 +51,7 @@ export const gameplaySceneVariables = () => [
     vnum("Aim")]),
   vnum("RecalcStats", 1), vnum("Guardar", 0), vstr("Menu", ""), vnum("Temblor", 0), vnum("FuerzaTemblor", 0),
   vnum("SueloY", SUELO), vnum("NextId", 1), vnum("CdPot", 0), vnum("CamMin", 0), vnum("CamMax", 0),
-  vnum("MundoAncho", 4200), vnum("CurarTodo", 1), vnum("Vivos", 0), vnum("Mult", 1), vnum("Etapa", 1), vnum("JugAire", 0),
+  vnum("MundoAncho", 4200), vnum("CurarTodo", 1), vnum("Vivos", 0), vnum("Mult", 1), vnum("Etapa", 1), vnum("JugAire", 0), vnum("SplitPend", 0), vnum("SplitX", 0), vstr("InvTipo", "Esqueleto"),
   vstruct("Tmp", [vnum("Dano"), vnum("Crit"), vnum("Buff"), vnum("DanoJ"), vstr("Json"), vnum("Rareza"), vnum("Valor"),
     vnum("Oro"), vnum("Ang"), vnum("N"), vstr("Nombre"), vstr("Tipo"), vnum("X"), vnum("Y"), vnum("R"), vnum("Cuantos"),
     vnum("Coste"), vstr("Clase"), vnum("A"), vnum("DX"), vnum("DY"), vnum("Perch"), vnum("PX0"), vnum("PX1"), vnum("PY")]),
@@ -72,7 +76,7 @@ export function globalObjects(m) {
     simpleSprite("GolpeEnemigo", "assets/sistema/caja.png", { origin: [8, 8], variables: [vnum("Dano", 5), vnum("Vida", 0.12)] }),
     sprite(m, "ProyectilJugador", { variables: [vnum("VX"), vnum("VY"), vnum("Dano", 1), vnum("Vida", 1), vnum("Perfora"),
       vstr("Tipo", ""), vnum("Id"), vnum("Borrar"), vnum("Fuerte")] }),
-    sprite(m, "ProyectilEnemigo", { variables: [vnum("VX"), vnum("VY"), vnum("Dano", 5), vnum("Vida", 3)] }),
+    sprite(m, "ProyectilEnemigo", { variables: [vnum("VX"), vnum("VY"), vnum("Dano", 5), vnum("Vida", 3), vnum("Cae")] }),
     sprite(m, "Efecto", { variables: [vnum("Vida"), vnum("Sigue"), vnum("OffX"), vnum("OffY")] }),
     text("TextoDano", { size: 30, variables: [vnum("VY", -90), vnum("Vida")] }),
     sprite(m, "Enemigo", {
@@ -83,7 +87,7 @@ export function globalObjects(m) {
         vnum("Exp", 5), vnum("OroMin", 1), vnum("OroMax", 3), vnum("Sala"), vnum("TX"), vnum("TY"), vnum("Lado", 1), vnum("Fase"),
         vnum("Accion"), vnum("Cd"), vnum("CdAtk", 1.5), vnum("Rango", 80), vnum("Windup", 0.25), vnum("DanoPend"), vnum("KBDir"),
         vnum("CongelaPend"), vnum("KB"), vnum("Invoc"), vnum("Furia"), vnum("ProbBotin", 0.1), vnum("FuertePend"), vnum("VX"), vnum("VY"),
-        vnum("Fase2"), vnum("SaltoT"), vnum("Percha"), vnum("PX0"), vnum("PX1"), vnum("RayoT")],
+        vnum("Fase2"), vnum("SaltoT"), vnum("Percha"), vnum("PX0"), vnum("PX1"), vnum("RayoT"), vnum("Elite"), vnum("Boss"), vstr("Nombre", "")],
     }),
     sprite(m, "Moneda", { variables: [vnum("Valor", 1), vnum("VX"), vnum("VY", -300), vnum("Suelo"), vnum("Edad")] }),
     sprite(m, "OrbeVida", { variables: [vnum("VX"), vnum("VY", -300), vnum("Suelo"), vnum("Edad")] }),
@@ -171,8 +175,8 @@ export function menuInstances() {
     inst("TextoTitulo", 640, 84, { ...L, z: 2 }),
     inst("TextoMenu", 350, 158, { ...L, z: 2 }),
     inst("BotonCerrar", 950, 108, { ...L, z: 3 }),
-    inst("Flecha", 360, 250, { ...L, z: 3, vars: [vnum("Paso", -1)] }),
-    inst("Flecha", 920, 250, { ...L, z: 3, vars: [vnum("Paso", 1)] }),
+    inst("Flecha", 338, 250, { ...L, z: 3, vars: [vnum("Paso", -1)] }),
+    inst("Flecha", 942, 250, { ...L, z: 3, vars: [vnum("Paso", 1)] }),
   ];
   [448, 516, 584, 380, 312].forEach((y, i) => {
     out.push(inst("BotonMenu", 400, y, { ...L, z: 3, w: 480, h: 58, vars: [vnum("Slot", i + 1)] }));

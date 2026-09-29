@@ -24,6 +24,7 @@ const filter = process.argv[2] || "";
 class AssertionError extends Error {}
 function check(cond, msg, log) {
   log.push(`${cond ? "PASS" : "FAIL"} ${msg}`);
+  if (process.env.VERBOSE) console.log(`   ${cond ? "PASS" : "FAIL"} ${msg}`);
   if (!cond) throw new AssertionError(msg);
 }
 
@@ -84,14 +85,22 @@ async function newGame(g, cls, shotName = "", prologueShot = "") {
   }
 }
 
-async function enterDungeon(g, etapa = 1) {
+/**
+ * Goes through the town portal. modo: "campana" (slot 1: always the frontier stage), "mazmorra" (slot 2: the selected stage)
+ * or "arena" (slot 3). By default the mode is picked so that `etapa` is the stage played. The story page of the stage is
+ * skipped (Save.IntroVista) unless `intro` is true.
+ */
+async function enterDungeon(g, etapa = 1, { modo = null, intro = false } = {}) {
+  const max = Math.max(etapa, await g.v("Save.EtapaMax", true));
   await g.setV("Save.EtapaSel", etapa, true);
-  await g.setV("Save.EtapaMax", Math.max(etapa, await g.v("Save.EtapaMax", true)), true);
+  await g.setV("Save.EtapaMax", max, true);
+  if (!intro) await g.setV("Save.IntroVista", 12, true);
+  if (!modo) modo = etapa === max ? "campana" : "mazmorra";
   await g.setPos("Jugador", 3440);
   await g.wait(500);
   await g.tap("e");
   await g.wait(500);
-  await clickMenuSlot(g, 1);
+  await clickMenuSlot(g, { campana: 1, mazmorra: 2, arena: 3 }[modo]);
   await g.waitScene("Mazmorra");
   await g.wait(800);
 }
@@ -250,9 +259,16 @@ await test("01 flujo título → clase → pueblo → tiendas → portal", async
   await g.tap("e"); await g.wait(500);
   check((await g.v("Menu")) === "portal", "el portal abre el selector de etapa", log);
   await shot(g, "07_portal.png");
+  const botones = (await g.objects("TextoBoton")).filter((t) => t.visible).map((t) => t.text);
+  check(botones.length === 3 && /Campaña/.test(botones[0]) && /Mazmorra/.test(botones[1]) && /Coliseo/.test(botones[2]), `el portal ofrece campaña, mazmorra y coliseo (${botones.join(" | ")})`, log);
   await clickMenuSlot(g, 1);
   await g.waitScene("Mazmorra");
-  check((await g.v("Etapa")) === 1, "se entra a la etapa 1", log);
+  check((await g.v("Etapa")) === 1 && (await g.v("Juego.Modo", true)) === "campana", "la campaña entra a la etapa 1", log);
+  await g.wait(600);
+  check((await g.v("Menu")) === "intro", "la primera vez en cada etapa se lee la página de la historia", log);
+  await shot(g, "41_relato_etapa1.png");
+  await clickMenuSlot(g, 1); await g.wait(400);
+  check((await g.v("Menu")) === "" && (await g.v("Save.IntroVista", true)) === 1, "Continuar cierra la página y la etapa no vuelve a mostrarla", log);
 });
 
 await test("02 Guerrero completa la etapa 1 (bot): salas, puertas, jefe, botín, victoria, guardado", async (g, log) => {
@@ -456,7 +472,7 @@ await test("07 Jefe: Caballero de Ceniza (barra de vida, ataques y furia)", asyn
   await newGame(g, "Guerrero");
   await g.setV("Save.ArmaBonus", 40, true);
   await g.setV("Save.Refuerzo", 10, true);
-  await enterDungeon(g, 1);
+  await enterDungeon(g, 4);
   await g.eval((G, S) => {
     S.getVariables().get("Sala").setNumber(4);
     S.getObjects("Jugador")[0].setX(4 * 1800 + 200);
@@ -482,8 +498,10 @@ await test("07 Jefe: Caballero de Ceniza (barra de vida, ataques y furia)", asyn
   }
   const s = await done;
   check(seen.has("tajo") || seen.has("carga") || seen.has("golpe"), `el jefe usa sus ataques (${[...seen].join(", ")})`, log);
-  check(s.menu === "victoria", "derrotar al jefe y entrar al portal lleva a la victoria", log);
+  check(s.menu === "final", `derrotar al jefe de capítulo y entrar al portal abre la página final de la historia (menú="${s.menu}")`, log);
   await shot(g, "11_jefe_derrotado.png");
+  await clickMenuSlot(g, 1); await g.wait(1500);
+  check((await g.v("Menu")) === "victoria" && (await g.v("Save.EtapaMax", true)) === 5, "tras la historia llega la victoria y se desbloquea la etapa 5", log);
 });
 
 await test("08 Pantalla 19.5:9 (1560×720): HUD anclado y capítulo 2", async (g, log) => {
@@ -529,7 +547,7 @@ await test("09 Combate automático (AUTO): la Maga completa la etapa 1 sin tocar
   check((await g.v("Save.EtapaMax", true)) === 2, "la etapa 2 queda desbloqueada", log);
 });
 
-for (const [cls, etapa, nivel] of [["Guerrero", 5, 9], ["Arquera", 10, 19]]) {
+for (const [cls, etapa, nivel] of [["Guerrero", 5, 9], ["Maga", 8, 15], ["Arquera", 12, 23]]) {
   await test(`balance ${cls} nivel ${nivel} en etapa ${etapa} (AUTO)`, async (g, log) => {
     await newGame(g, cls);
     // equipment roughly expected at that point: forge/reinforce levels and rare gear of the previous stage
@@ -540,7 +558,8 @@ for (const [cls, etapa, nivel] of [["Guerrero", 5, 9], ["Arquera", 10, 19]]) {
     log.push(`INFO arma +${arma} ATQ, armadura +${armadura} VIDA, forja/refuerzo ${Math.floor(etapa / 2)}`);
     const s = await watchAuto(g, log, 600);
     log.push(`INFO resultado: menú="${s.menu}", vida ${Math.round(s.hp)}/${s.vidaMax}, pociones restantes ${s.pociones}`);
-    check(s.menu === "victoria", `el personaje del nivel recomendado supera la etapa ${etapa}`, log);
+    // the chapter bosses (stages 4, 8, 12) open their story page before the victory menu
+    check(s.menu === "victoria" || s.menu === "final", `el personaje del nivel recomendado supera la etapa ${etapa} (menú="${s.menu}")`, log);
   });
 }
 
@@ -1032,6 +1051,276 @@ await test("17 Arquera: Flecha explosiva, Ráfaga y Disparo celestial", async (g
   check(bg.flat().some((p) => p[0] === 1 && p[1] > 90), "la flecha celestial es enorme y perfora", log);
   const dd = after.filter((e, i) => before[i] && e[1] < before[i][1]).length;
   check(dd >= 3, `atraviesa a los tres enemigos alineados (${dd}/3)`, log);
+});
+
+// ------------------------------------------------------------------ phase 4: enemies, bosses, campaign, arena
+const clearEnemies = (g) => g.eval((G, S) => { S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()); S.getObjects("ProyectilEnemigo").forEach((e) => e.deleteFromScene()); });
+/** Creates an Enemigo with extra variables (numbers or strings); the game's own init events give it its stats. */
+async function spawnWith(g, tipo, x, y, vars = {}) {
+  await g.eval((G, S, a) => {
+    const e = S.createObject("Enemigo"); e.setPosition(a.x, a.y); e.getVariables().get("Tipo").setString(a.tipo);
+    for (const [k, v] of Object.entries(a.vars)) { if (typeof v === "string") e.getVariables().get(k).setString(v); else e.getVariables().get(k).setNumber(v); }
+  }, { tipo, x, y, vars });
+}
+const toughHero = async (g) => { await g.setV("Save.Refuerzo", 60, true); await g.setV("RecalcStats", 1); await g.wait(200); await g.setV("CurarTodo", 1); };
+
+await test("18 Enemigos nuevos: arquero, espectro, gólem y limo (se divide en dos)", async (g, log) => {
+  await newGame(g, "Guerrero");
+  await toughHero(g);
+  await enterDungeon(g, 6, { modo: "mazmorra" });
+  await clearEnemies(g);
+  const px = (await player(g)).x;
+  // -- Arquero: dispara flechas desde lejos
+  await spawnEnemy(g, "Arquero", px + 520);
+  const flecha = waitFor(g, () => window.__game.getSceneStack().getCurrentScene().getObjects("ProyectilEnemigo").some((p) => p.getAnimationName() === "Flecha"), 9000);
+  check(await flecha, "el arquero esquelético dispara flechas a distancia", log);
+  await shot(g, "42_arquero.png");
+  await clearEnemies(g);
+  // -- Espectro: vuela, dispara orbes y se desvanece para reaparecer al otro lado
+  await spawnEnemy(g, "Espectro", px + 350);
+  const seen = new Set();
+  const xs = [];
+  const t0 = Date.now();
+  let shotDone = false;
+  while (Date.now() - t0 < 16000 && !(seen.has("desvanecer") && seen.has("Orbe"))) {
+    const st = await g.eval((G, S) => {
+      const e = S.getObjects("Enemigo")[0];
+      return e ? { est: e.getVariables().get("Estado").getAsString(), y: e.getY(), fly: e.getVariables().get("Tipo").getAsString() === "Espectro",
+        orbs: S.getObjects("ProyectilEnemigo").some((p) => p.getAnimationName() === "Orbe") } : null;
+    });
+    if (st) { seen.add(st.est); if (st.orbs) seen.add("Orbe"); xs.push(st.y); }
+    if (st && st.est === "atacar" && !shotDone) { await shot(g, "43_espectro.png"); shotDone = true; }
+    await g.wait(60);
+  }
+  check(seen.has("Orbe"), "el espectro lanza orbes", log);
+  check(seen.has("desvanecer"), "el espectro se desvanece para teletransportarse", log);
+  check(Math.min(...xs) < 600 - 60, `vuela por encima del suelo (altura mínima y=${Math.round(Math.min(...xs))})`, log);
+  await clearEnemies(g);
+  // -- Gólem: onda de choque por el suelo y no se tambalea con golpes normales
+  await spawnEnemy(g, "Golem", px + 200);
+  await g.eval((G, S) => { S.getObjects("Enemigo")[0].getVariables().get("HPMax").setNumber(90000); S.getObjects("Enemigo")[0].getVariables().get("HP").setNumber(90000); });
+  const onda = waitFor(g, () => window.__game.getSceneStack().getCurrentScene().getObjects("ProyectilEnemigo").some((p) => p.getAnimationName() === "Onda"), 9000);
+  check(await onda, "el gólem lanza una onda de choque por el suelo", log);
+  await shot(g, "44_golem.png");
+  const golpeado = await g.eval((G, S) => S.getObjects("Enemigo")[0].getVariables().get("Estado").getAsString());
+  log.push(`INFO estado del gólem al atacar: ${golpeado}`);
+  await clearEnemies(g);
+  // -- Limo: al morir se divide en dos limos pequeños
+  await spawnEnemy(g, "Limo", px + 300);
+  await g.eval((G, S) => { const e = S.getObjects("Enemigo")[0]; e.getVariables().get("HP").setNumber(0); });
+  await g.wait(700);
+  const tipos = await g.eval((G, S) => S.getObjects("Enemigo").filter((e) => e.getVariables().get("Estado").getAsString() !== "muerto").map((e) => e.getVariables().get("Tipo").getAsString()));
+  check(tipos.filter((t) => t === "LimoMini").length === 2, `un limo grande se divide en dos pequeños (${tipos.join(", ")})`, log);
+  await shot(g, "45_limo_dividido.png");
+  const anims = await g.eval((G, S) => S.getObjects("Enemigo").filter((e) => e.getVariables().get("Estado").getAsString() !== "muerto").map((e) => e.getAnimationName()));
+  check(anims.every((a) => a.startsWith("LimoMini_")), `los limos pequeños usan su propia animación (${anims.join(", ")})`, log);
+});
+
+await test("19 Élites: un enemigo normal con más vida, más grande y con refuerzos", async (g, log) => {
+  await newGame(g, "Guerrero");
+  await toughHero(g);
+  await enterDungeon(g, 5, { modo: "mazmorra" });
+  await clearEnemies(g);
+  const px = (await player(g)).x;
+  await spawnWith(g, "Bruto", px + 500, 600);
+  await spawnWith(g, "Bruto", px + 900, 600, { Elite: 1, Boss: 1, Nombre: "Prueba" });
+  await g.wait(900);
+  const [normal, elite] = await g.eval((G, S) => S.getObjects("Enemigo").sort((a, b) => a.getX() - b.getX()).map((e) => ({
+    hpMax: e.getVariables().get("HPMax").getAsNumber(), atq: e.getVariables().get("Atq").getAsNumber(), w: e.getWidth() })));
+  const ratio = elite.hpMax / normal.hpMax;
+  check(ratio > 4.3 && ratio < 4.7, `el élite tiene ~4,5 veces la vida del enemigo base (${elite.hpMax} vs ${normal.hpMax})`, log);
+  check(elite.atq > normal.atq * 1.25, `y más daño (${elite.atq} vs ${normal.atq})`, log);
+  check(elite.w > normal.w * 1.3, `y es más grande (${Math.round(elite.w)} vs ${Math.round(normal.w)} px)`, log);
+  // refuerzos: tras ~11 s en combate invoca esqueletos
+  await g.eval((G, S) => { S.getObjects("Enemigo").filter((e) => e.getVariables().get("Elite").getAsNumber() === 1)[0].getVariables().get("Invoc").setNumber(10.5); });
+  const antes = await g.eval((G, S) => S.getObjects("Enemigo").length);
+  await g.wait(2500);
+  const despues = await g.eval((G, S) => S.getObjects("Enemigo").length);
+  check(despues >= antes + 2, `el élite invoca refuerzos (${antes} → ${despues} enemigos)`, log);
+  await shot(g, "46_elite.png");
+});
+
+/** Puts the hero in the boss room of the current stage and waits for the boss to appear. */
+async function toBossRoom(g) {
+  await g.eval((G, S) => {
+    S.getVariables().get("Sala").setNumber(4);
+    S.getObjects("Jugador")[0].setX(4 * 1800 + 200);
+    for (const p of S.getObjects("Puerta")) { p.getVariables().get("Abierta").setNumber(1); p.activateBehavior("Solido", false); }
+  });
+  await g.hold("ArrowRight", 700);
+  await g.page.waitForFunction(() => window.__game.getSceneStack().getCurrentScene().getObjects("Enemigo").some((e) => e.getVariables().get("Boss").getAsNumber() === 1), null, { timeout: 10000 });
+  await g.wait(1500);
+}
+const bossInfo = (g) => g.eval((G, S) => { const e = S.getObjects("Enemigo").find((x) => x.getVariables().get("Boss").getAsNumber() === 1);
+  return e ? { tipo: e.getVariables().get("Tipo").getAsString(), est: e.getVariables().get("Estado").getAsString(), hp: e.getVariables().get("HP").getAsNumber(),
+    hpMax: e.getVariables().get("HPMax").getAsNumber(), elite: e.getVariables().get("Elite").getAsNumber() } : null; });
+const bossName = (g) => g.eval((G, S) => S.getObjects("TextoJefe")[0].getText());
+
+/** Observes the boss for `ms` while the hero is invulnerable, collecting states and projectile animations. */
+async function observeBoss(g, ms, need) {
+  const seenStates = new Set(); const seenProj = new Set(); const t0 = Date.now(); let lastEst = "";
+  while (Date.now() - t0 < ms) {
+    await g.eval((G, S) => { const J = S.getObjects("Jugador")[0]; J.getVariables().get("HP").setNumber(99999); });
+    const st = await g.eval((G, S) => { const e = S.getObjects("Enemigo").find((x) => x.getVariables().get("Boss").getAsNumber() === 1);
+      return e ? { est: e.getVariables().get("Estado").getAsString(), proj: S.getObjects("ProyectilEnemigo").map((p) => p.getAnimationName()) } : null; });
+    if (!st) break;
+    if (process.env.VERBOSE && st.est !== lastEst) { console.log(`     boss ${((Date.now() - t0) / 1000).toFixed(1)}s ${st.est}`); lastEst = st.est; }
+    seenStates.add(st.est); st.proj.forEach((a) => seenProj.add(a));
+    if (need(seenStates, seenProj)) break;
+    await g.wait(80);
+  }
+  return { seenStates, seenProj };
+}
+
+await test("20 Jefe del capítulo 2: Reina Carmesí (orbes, lluvia de sangre, teletransporte y refuerzos)", async (g, log) => {
+  await newGame(g, "Guerrero");
+  await g.setV("Save.Nivel", 15, true); await g.setV("RecalcStats", 1); await g.wait(300); await g.setV("CurarTodo", 1);
+  await enterDungeon(g, 8);
+  await toBossRoom(g);
+  const b = await bossInfo(g);
+  check(b.tipo === "Reina" && b.elite === 0, `el jefe de la etapa 8 es la Reina (${b.tipo}, ${b.hpMax} de vida)`, log);
+  check((await bossName(g)) === "REINA CARMESÍ", `la barra muestra su nombre ("${await bossName(g)}")`, log);
+  check((await g.objects("BarraJefe"))[0].visible, "aparece la barra de vida del jefe", log);
+  await shot(g, "47_reina_aparece.png");
+  // make the queen weaker than half life so she can summon; observe her attack set
+  await g.eval((G, S) => { const e = S.getObjects("Enemigo").find((x) => x.getVariables().get("Boss").getAsNumber() === 1); e.getVariables().get("HP").setNumber(e.getVariables().get("HPMax").getAsNumber() * 0.5); e.getVariables().get("Invoc").setNumber(13); });
+  const { seenStates, seenProj } = await observeBoss(g, 80000, (st, pr) => st.has("orbes") && st.has("sangre") && st.has("corte") && st.has("invocar") && pr.has("OrbeRojo"));
+  check(seenStates.has("orbes") && seenProj.has("OrbeRojo"), `lanza orbes de sangre en abanico (estados: ${[...seenStates].join(", ")})`, log);
+  check(seenStates.has("sangre"), "invoca la lluvia de sangre (con aviso en el suelo)", log);
+  check(seenStates.has("desvanecer") && seenStates.has("corte"), "se desvanece y tajea por la espalda", log);
+  check(seenStates.has("invocar"), "herida, invoca murciélagos", log);
+  await shot(g, "48_reina_ataque.png");
+});
+
+await test("21 Jefe del capítulo 3: Coloso del Umbral (puñetazo, barrido, cristales y limos) y final de la historia", async (g, log) => {
+  await newGame(g, "Guerrero");
+  await g.setV("Save.Nivel", 22, true); await g.setV("RecalcStats", 1); await g.wait(300); await g.setV("CurarTodo", 1);
+  await enterDungeon(g, 12);
+  await toBossRoom(g);
+  const b = await bossInfo(g);
+  check(b.tipo === "Coloso" && b.elite === 0, `el jefe de la etapa 12 es el Coloso (${b.tipo}, ${b.hpMax} de vida)`, log);
+  check((await bossName(g)) === "COLOSO DEL UMBRAL", `la barra muestra su nombre ("${await bossName(g)}")`, log);
+  await shot(g, "49_coloso_aparece.png");
+  await g.eval((G, S) => { const e = S.getObjects("Enemigo").find((x) => x.getVariables().get("Boss").getAsNumber() === 1); e.getVariables().get("HP").setNumber(e.getVariables().get("HPMax").getAsNumber() * 0.45); e.getVariables().get("Invoc").setNumber(16); });
+  const { seenStates, seenProj } = await observeBoss(g, 90000, (st, pr) => st.has("golpe") && st.has("barrido") && st.has("rocas") && st.has("invocar") && pr.has("Cristal") && pr.has("Onda"));
+  check(seenStates.has("golpe") && seenProj.has("Onda"), `puñetazo con ondas de choque (estados: ${[...seenStates].join(", ")})`, log);
+  check(seenStates.has("barrido"), "barrido de área", log);
+  check(seenStates.has("rocas") && seenProj.has("Cristal"), "lluvia de cristales", log);
+  check(seenStates.has("invocar"), "a media vida invoca limos", log);
+  await shot(g, "50_coloso_ataque.png");
+  // kill it: final story page, victory of the whole campaign and Save.Historia
+  await g.eval((G, S) => { const e = S.getObjects("Enemigo").find((x) => x.getVariables().get("Boss").getAsNumber() === 1); e.getVariables().get("HP").setNumber(0); });
+  await g.page.waitForFunction(() => window.__game.getSceneStack().getCurrentScene().getVariables().get("JefeMuerto").getAsNumber() === 2, null, { timeout: 8000 });
+  check((await g.v("Save.Historia", true)) === 1, "derrotar al Coloso completa la historia (Save.Historia = 1)", log);
+  await g.eval((G, S) => { S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()); const P = S.getObjects("Portal")[0]; S.getObjects("Jugador")[0].setX(P.getX() + 40); });
+  await g.page.waitForFunction(() => window.__game.getSceneStack().getCurrentScene().getVariables().get("Menu").getAsString() === "final", null, { timeout: 6000 });
+  await g.wait(400);
+  await shot(g, "51_final_historia.png");
+  await clickMenuSlot(g, 1); await g.wait(700);
+  check((await g.v("Menu")) === "victoria_final", "tras el final de la historia llega la victoria de la campaña", log);
+  await shot(g, "52_victoria_campana.png");
+  const botones = (await g.objects("TextoBoton")).filter((t) => t.visible).map((t) => t.text);
+  check(botones.length === 1 && /pueblo/.test(botones[0]), `sólo ofrece volver al pueblo (${botones.join(" | ")})`, log);
+  check((await g.v("Save.EtapaMax", true)) === 12, "la etapa máxima queda en 12", log);
+});
+
+await test("22 Campaña: 3 capítulos con su tema, relato de cada etapa, diario y Archivista", async (g, log) => {
+  await newGame(g, "Arquera");
+  await g.setV("Save.IntroVista", 0, true);
+  for (const [etapa, cap, tex] of [[5, "Fortaleza Carmesí", "fortaleza"], [9, "Abismo de Cristal", "abismo"]]) {
+    await g.setV("Save.EtapaMax", etapa, true);
+    await enterDungeon(g, etapa, { intro: true });
+    await g.wait(700);
+    check((await g.v("Capitulo")) === cap, `la etapa ${etapa} pertenece al capítulo "${cap}"`, log);
+    check((await g.v("Menu")) === "intro", `la etapa ${etapa} abre su página de historia`, log);
+    await shot(g, `53_relato_etapa${etapa}.png`);
+    await clickMenuSlot(g, 1); await g.wait(500);
+    const tiles = await g.eval((G, S) => ["Suelo", "Plataforma", "Muro"].map((n) => S.getObjects(n)[0].getRendererObject().texture.baseTexture.cacheId));
+    check(tiles.every((t) => t.includes(tex)), `suelo, plataformas y muros usan el tema "${tex}" (${tiles.join(", ")})`, log);
+    await shot(g, `54_tema_${tex}.png`);
+    // back to town for the next chapter
+    await g.tap("Escape"); await g.wait(300);
+    await clickMenuSlot(g, 3); await g.waitScene("Pueblo");
+    await g.wait(500);
+  }
+  // diary: entries unlock with the stages reached
+  await g.setV("Save.EtapaMax", 9, true);
+  await g.setPos("Jugador", 3000); await g.wait(500);
+  check((await g.v("Cerca")) === "archivista", "cerca del Archivista aparece la interacción", log);
+  await g.tap("e"); await g.wait(500);
+  check((await g.v("Menu")) === "archivista", "el Archivista abre su menú", log);
+  await shot(g, "55_archivista.png");
+  await clickMenuSlot(g, 1); await g.wait(500);
+  check((await g.v("Menu")) === "diario", "'Leer el diario' abre el códice de historia", log);
+  await shot(g, "56_diario.png");
+  const pag0 = await g.v("DiarioPag");
+  const flechas = await g.objects("Flecha");
+  const der = flechas.findIndex((f) => f.vars.Paso === 1);
+  await g.clickObject("Flecha", der); await g.wait(300);
+  check((await g.v("DiarioPag")) === pag0 + 1, "las flechas pasan las páginas del diario", log);
+  await g.tap("Escape"); await g.wait(300);
+});
+
+await test("23 Coliseo: rondas sin fin, jefe cada 5 rondas, récord guardado y derrota", async (g, log) => {
+  await newGame(g, "Guerrero");
+  await g.setV("Save.Nivel", 12, true); await g.setV("Save.EtapaMax", 3, true); await g.setV("RecalcStats", 1); await g.wait(300); await g.setV("CurarTodo", 1);
+  await enterDungeon(g, 3, { modo: "arena" });
+  check((await g.v("Juego.Modo", true)) === "arena" && (await g.v("Capitulo")) === "Coliseo de la Ceniza", "el coliseo arranca como modo arena", log);
+  check((await g.v("Etapa")) >= 3 && (await g.v("Etapa")) <= 7, `la dificultad base sigue tu nivel (etapa ${await g.v("Etapa")})`, log);
+  check(await waitFor(g, () => window.__game.getSceneStack().getCurrentScene().getObjects("Enemigo").length >= 3, 6000), "la primera ronda genera enemigos sin abrir puertas", log);
+  await shot(g, "57_coliseo_ronda1.png");
+  // clear rounds 1-4 quickly, check gold, record and the boss on round 5
+  for (let r = 1; r <= 4; r++) {
+    const oro0 = await g.v("Save.Oro", true);
+    // wait for the wave to be on the field and fully spawned, then defeat it
+    await g.page.waitForFunction((n) => { const S = window.__game.getSceneStack().getCurrentScene(); const en = S.getObjects("Enemigo");
+      return S.getVariables().get("Ronda").getAsNumber() === n && en.length >= 3 && en.every((e) => e.getVariables().get("Estado").getAsString() === "mover"); }, r, { timeout: 12000 });
+    await g.eval((G, S) => { S.getObjects("Enemigo").forEach((e) => { e.getVariables().get("HP").setNumber(0); }); });
+    await g.page.waitForFunction((n) => window.__game.getSceneStack().getCurrentScene().getVariables().get("Ronda").getAsNumber() > n, r, { timeout: 8000 });
+    const oro1 = await g.v("Save.Oro", true);
+    if (r === 1) check(oro1 > oro0, `superar la ronda da oro (${oro0} → ${oro1})`, log);
+    check((await g.v("Save.ArenaMax", true)) === r, `el récord del coliseo sube a la ronda ${r}`, log);
+  }
+  await g.page.waitForFunction(() => window.__game.getSceneStack().getCurrentScene().getVariables().get("Ronda").getAsNumber() === 5, null, { timeout: 8000 });
+  await g.page.waitForFunction(() => window.__game.getSceneStack().getCurrentScene().getObjects("Enemigo").some((e) => e.getVariables().get("Boss").getAsNumber() === 1), null, { timeout: 8000 });
+  await g.wait(1200);
+  const b = await bossInfo(g);
+  check(b && b.elite === 1, `la ronda 5 trae un jefe (${b && b.tipo}, ${await bossName(g)})`, log);
+  await shot(g, "58_coliseo_jefe.png");
+  // die: dedicated menu with the round reached
+  await g.eval((G, S) => { S.getObjects("Jugador")[0].getVariables().get("HP").setNumber(0); });
+  await g.page.waitForFunction(() => window.__game.getSceneStack().getCurrentScene().getVariables().get("Menu").getAsString() === "arena_fin", null, { timeout: 8000 });
+  await g.wait(400);
+  await shot(g, "59_coliseo_fin.png");
+  check((await g.v("Save.ArenaMax", true)) === 4, "el récord conserva las rondas superadas (4)", log);
+  await clickMenuSlot(g, 1); await g.waitScene("Mazmorra");
+  await g.wait(800);
+  check((await g.v("Ronda")) === 1 && (await g.v("Juego.Modo", true)) === "arena", "'Otro combate' reinicia el coliseo en la ronda 1", log);
+});
+
+await test("24 Mazmorra: repite una etapa con un élite al azar del capítulo y no avanza la historia", async (g, log) => {
+  await newGame(g, "Guerrero");
+  await g.setV("Save.EtapaMax", 6, true);
+  await g.setV("Save.Nivel", 12, true); await g.setV("RecalcStats", 1); await g.wait(300); await g.setV("CurarTodo", 1);
+  const nombres = new Set();
+  for (let i = 0; i < 3; i++) {
+    await enterDungeon(g, 5, { modo: "mazmorra" });
+    check((await g.v("Juego.Modo", true)) === "mazmorra" && (await g.v("Menu")) === "", "la mazmorra no muestra páginas de historia", log);
+    const idx = await g.v("BossIdx");
+    nombres.add(idx);
+    check(idx >= 5 && idx <= 7, `el jefe sale del capítulo 2 (élite nº ${idx})`, log);
+    if (i === 0) {
+      await toBossRoom(g);
+      const b = await bossInfo(g);
+      check(b.elite === 1, `es un élite (${b.tipo}) con nombre en la barra ("${await bossName(g)}")`, log);
+      await shot(g, "60_mazmorra_elite.png");
+    }
+    await g.eval((G, S) => { S.getObjects("Jugador")[0].getVariables().get("HP").setNumber(0); });
+    await g.page.waitForFunction(() => window.__game.getSceneStack().getCurrentScene().getVariables().get("Menu").getAsString() === "derrota", null, { timeout: 8000 });
+    await clickMenuSlot(g, 2); await g.waitScene("Pueblo"); await g.wait(500);
+  }
+  log.push(`INFO élites vistos (índices): ${[...nombres].join(", ")}`);
+  check((await g.v("Save.EtapaMax", true)) === 6, "la mazmorra no cambia la etapa máxima de la campaña", log);
 });
 
 // ------------------------------------------------------------------ report

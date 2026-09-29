@@ -93,12 +93,16 @@ def main():
     E = "Enemigo"
     ct = {"Idle": (0.3, True), "Walk": (0.14, True), "Attack": (0.11, False), "Cast": (0.13, False),
           "Hurt": (0.12, False), "Dead": (0.12, False), "Fly": (0.08, True), "Slash": (0.1, False),
-          "Charge": (0.07, True), "Slam": (0.11, False), "Summon": (0.16, False)}
+          "Charge": (0.07, True), "Slam": (0.11, False), "Summon": (0.16, False), "Sweep": (0.11, False)}
     geo = {"Esqueleto": ((60, 126), box(48, 45, 75, 126)),
            "Cultista": ((60, 126), box(45, 45, 78, 126)),
            "Bruto": ((90, 162), box(60, 57, 117, 162)),
-           "Jefe": ((165, 354), box(129, 171, 201, 354))}
-    for name in ("Esqueleto", "Cultista", "Bruto", "Jefe"):
+           "Jefe": ((165, 354), box(129, 171, 201, 354)),
+           "Arquero": ((60, 126), box(48, 45, 75, 126)),
+           "Golem": ((114, 205), box(76, 72, 148, 205)),
+           "Coloso": ((156, 291), box(104, 109, 203, 291)),
+           "Reina": ((165, 354), box(129, 171, 201, 354))}
+    for name in ("Esqueleto", "Cultista", "Bruto", "Jefe", "Arquero", "Golem", "Coloso", "Reina"):
         A = creatures.creature_frames(name)
         origin, mask = geo[name]
         for an, imgs in A.items():
@@ -110,11 +114,18 @@ def main():
         dt, loop = ct[an]
         sprite(E, f"Murcielago_{an}", imgs, "enemigos", dt if an != "Attack" else 0.06, loop if an != "Attack" else True,
                origin=(54, 42), mask=box(27, 21, 81, 63))
+    for an, imgs in creatures.ghost_frames().items():
+        dt, loop = {"Fly": (0.14, True), "Cast": (0.13, False), "Hurt": (0.12, False), "Dead": (0.12, False)}[an]
+        sprite(E, f"Espectro_{an}", imgs, "enemigos", dt, loop, origin=(60, 66), mask=box(33, 30, 87, 120))
+    for nm, size, origin, mask in (("Limo", 1.0, (60, 93), box(24, 45, 96, 93)), ("LimoMini", 0.6, (36, 56), box(14, 27, 58, 56))):
+        for an, imgs in creatures.slime_frames(size).items():
+            dt, loop = {"Idle": (0.35, True), "Walk": (0.1, True), "Hurt": (0.12, False), "Dead": (0.12, False)}[an]
+            sprite(E, f"{nm}_{an}", imgs, "enemigos", dt, loop, origin=origin, mask=mask)
     for an, imgs in creatures.dummy_frames().items():
         sprite(E, f"Maniqui_{an}", imgs, "enemigos", 0.07, an == "Idle", origin=(48, 126), mask=box(27, 36, 69, 126))
 
     # ---------------------------------------------------------------- NPCs
-    for name in ("Herrera", "Alquimista"):
+    for name in ("Herrera", "Alquimista", "Archivista"):
         A = creatures.creature_frames(name)
         sprite("NPC", f"{name}_Idle", A["Idle"], "npc", 0.22 if name == "Herrera" else 0.35, True, origin=(66, 126))
 
@@ -129,6 +140,10 @@ def main():
     PE = "ProyectilEnemigo"
     sprite(PE, "Orbe", fx.orb_frames(), "proyectiles", 0.1, True, center=True)
     sprite(PE, "Onda", fx.shockwave_frames(), "proyectiles", 0.08, True, center=True)
+    sprite(PE, "Flecha", fx.arrow_frame(), "proyectiles", 1, True, center=True)
+    sprite(PE, "OrbeRojo", fx.orb_frames("#ff4a5a"), "proyectiles", 0.1, True, center=True)
+    sprite(PE, "Roca", fx.rock_frames(), "proyectiles", 0.1, True, center=True)
+    sprite(PE, "Cristal", fx.rock_frames(True), "proyectiles", 0.1, True, center=True)
 
     # ---------------------------------------------------------------- effects
     F = "Efecto"
@@ -150,6 +165,7 @@ def main():
     sprite(F, "Grito", fx.warcry_frames(), "fx", 0.07, False, center=True)
     sprite(F, "Destello", fx.flash_frames(), "fx", 0.04, False, center=True)
     sprite(F, "Salto", fx.jump_ring_frames(), "fx", 0.05, False, center=True)
+    sprite(F, "Aviso", fx.warning_frames(), "fx", 0.12, True, center=True)
     sprite(F, "Rayo", fx.lightning_frames(), "fx", 0.05, False, origin=(51, 348))
     sprite(F, "Aura", fx.aura_frames(), "fx", 0.08, True, center=True)
 
@@ -174,11 +190,11 @@ def main():
         manifest["images"][f"icono_{size}"] = f"assets/icono/icono_{size}.png"
 
     # ---------------------------------------------------------------- environment
-    for theme in ("mazmorra", "fortaleza"):
+    for theme in ("mazmorra", "fortaleza", "abismo"):
         manifest["images"][f"fondo_{theme}_lejos"] = save(env.dungeon_far(theme), f"entorno/fondo_{theme}_lejos.png")
         manifest["images"][f"fondo_{theme}_medio"] = save(env.dungeon_mid(theme), f"entorno/fondo_{theme}_medio.png")
         manifest["images"][f"muro_{theme}"] = save(env.wall_tile(theme), f"entorno/muro_{theme}.png")
-    for theme in ("mazmorra", "fortaleza", "pueblo"):
+    for theme in ("mazmorra", "fortaleza", "abismo", "pueblo"):
         manifest["images"][f"suelo_{theme}"] = save(env.ground_tile(theme), f"entorno/suelo_{theme}.png")
         manifest["images"][f"relleno_{theme}"] = save(env.fill_tile(theme), f"entorno/relleno_{theme}.png")
         manifest["images"][f"plataforma_{theme}"] = save(env.platform_tile(theme), f"entorno/plataforma_{theme}.png")

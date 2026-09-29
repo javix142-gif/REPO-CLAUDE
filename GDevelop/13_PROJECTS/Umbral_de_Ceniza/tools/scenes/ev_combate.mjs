@@ -22,6 +22,10 @@ function projectiles() {
     ]),
     E([OIFN(P, "Vida", "<=", 0)], [DEL(P)]),
     E([OIFN("ProyectilEnemigo", "Vida", "<=", 0)], [DEL("ProyectilEnemigo")]),
+    COMMENT("Proyectiles enemigos que caen del cielo (Cae = 1): al llegar al suelo estallan."),
+    E([OIFN("ProyectilEnemigo", "Cae", "=", 1), C("PosY", "ProyectilEnemigo", ">=", "SueloY - 24")], [
+      ...fx("Impacto", "ProyectilEnemigo.X()", "SueloY - 34", { scale: 0.9 }), SET("Temblor", "=", "max(Temblor, 0.1)"), SET("FuerzaTemblor", "=", 3),
+      SOUND("assets/audio/impacto_suelo.wav", 45, 1.3), DEL("ProyectilEnemigo")]),
     E([OR(COLLIDE(P, "Muro"), AND_PUERTA(P)), OIFS(P, "Tipo", "!=", q("Explosiva"))], [DEL(P)]),
     E([OR(COLLIDE(P, "Muro"), AND_PUERTA(P)), OIFS(P, "Tipo", "=", q("Explosiva"))], [OSET(P, "Borrar", "=", 1)]),
     E([OIFS(P, "Tipo", "=", q("Lluvia")), C("PosY", P, ">=", "SueloY - 12")], [
@@ -101,23 +105,24 @@ function hitsOnEnemies() {
       E([OIFN(EN, "CongelaPend", ">", 0)], [OSET(EN, "Congelado", "=", "max(Enemigo.Congelado, Enemigo.CongelaPend)"),
         ...fx("ChispaHielo", "Enemigo.CenterX()", "Enemigo.CenterY()")]),
       COMMENT("Retroceso y aturdimiento (los Brutos y el jefe no se aturden)."),
-      E([OIFS(EN, "Tipo", "!=", q("Bruto")), OIFS(EN, "Tipo", "!=", q("Jefe")), OIFS(EN, "Tipo", "!=", q("Maniqui")),
-        OIFS(EN, "Tipo", "!=", q("Murcielago")), CMP("Enemigo.HP", ">", 0)], [
+      E([OIFS(EN, "Tipo", "!=", q("Bruto")), OIFS(EN, "Tipo", "!=", q("Golem")), OIFS(EN, "Tipo", "!=", q("Jefe")), OIFS(EN, "Tipo", "!=", q("Maniqui")),
+        OIFS(EN, "Tipo", "!=", q("Murcielago")), OIFS(EN, "Tipo", "!=", q("Espectro")), OIFS(EN, "Tipo", "!=", q("Reina")), OIFS(EN, "Tipo", "!=", q("Coloso")),
+        OIFN(EN, "Boss", "=", 0), CMP("Enemigo.HP", ">", 0)], [
         OSETS(EN, "Estado", "=", q("herido")), OSET(EN, "Accion", "=", 0), ANIM(EN, "Enemigo.Tipo + \"_Hurt\""),
         MAXSPEED(EN, "Plataformero", 900), SPEED(EN, "Plataformero", "Enemigo.KBDir * 380"),
       ], [
         E([OIFN(EN, "FuertePend", "=", 1)], [SPEED(EN, "Plataformero", "Enemigo.KBDir * 680")]),
       ]),
-      E([OIFS(EN, "Tipo", "=", q("Murcielago")), CMP("Enemigo.HP", ">", 0)], [
-        OSETS(EN, "Estado", "=", q("herido")), OSET(EN, "Accion", "=", 0), ANIM(EN, q("Murcielago_Hurt")),
+      E([OR(OIFS(EN, "Tipo", "=", q("Murcielago")), OIFS(EN, "Tipo", "=", q("Espectro"))), OIFN(EN, "Boss", "=", 0), CMP("Enemigo.HP", ">", 0)], [
+        OSETS(EN, "Estado", "=", q("herido")), OSET(EN, "Accion", "=", 0), ANIM(EN, "Enemigo.Tipo + \"_Hurt\""),
         OSET(EN, "VX", "=", "Enemigo.KBDir * 420"), OSET(EN, "VY", "=", -70)], [
         E([OIFN(EN, "FuertePend", "=", 1)], [OSET(EN, "VX", "=", "Enemigo.KBDir * 760"), OSET(EN, "VY", "=", -140)]),
       ]),
       COMMENT("El golpe final del combo también hace tambalear a los Brutos (el jefe y los élites no se aturden)."),
-      E([OIFS(EN, "Tipo", "=", q("Bruto")), OIFN(EN, "FuertePend", "=", 1), CMP("Enemigo.HP", ">", 0)], [
-        OSETS(EN, "Estado", "=", q("herido")), OSET(EN, "Accion", "=", 0), ANIM(EN, q("Bruto_Hurt")),
+      E([OR(OIFS(EN, "Tipo", "=", q("Bruto")), OIFS(EN, "Tipo", "=", q("Golem"))), OIFN(EN, "Boss", "=", 0), OIFN(EN, "FuertePend", "=", 1), CMP("Enemigo.HP", ">", 0)], [
+        OSETS(EN, "Estado", "=", q("herido")), OSET(EN, "Accion", "=", 0), ANIM(EN, "Enemigo.Tipo + \"_Hurt\""),
         MAXSPEED(EN, "Plataformero", 700), SPEED(EN, "Plataformero", "Enemigo.KBDir * 300")]),
-      E([OIFS(EN, "Tipo", "=", q("Bruto")), OIFN(EN, "FuertePend", "=", 0)], [MAXSPEED(EN, "Plataformero", 400), SPEED(EN, "Plataformero", "Enemigo.KBDir * 140")]),
+      E([OR(OIFS(EN, "Tipo", "=", q("Bruto")), OIFS(EN, "Tipo", "=", q("Golem"))), OIFN(EN, "FuertePend", "=", 0)], [MAXSPEED(EN, "Plataformero", 400), SPEED(EN, "Plataformero", "Enemigo.KBDir * 140")]),
       E([OIFS(EN, "Tipo", "=", q("Maniqui"))], [ANIM(EN, q("Maniqui_Hurt"))], [
         E([CMP("Enemigo.HP", "<", "Enemigo.HPMax * 0.5")], [OSET(EN, "HP", "=", "Enemigo.HPMax")]),
       ]),
@@ -154,7 +159,9 @@ function deathAndLoot() {
       ...floatText("Enemigo.X()", "Enemigo.BoundingBoxTop() - 70", "\"+\" + ToString(round(Enemigo.Exp)) + \" EXP\"", "200;140;255", 24),
     ], [
       REPEAT(2, [], [], [E([], coin())]),
-      E([OIFS(EN, "Tipo", "=", q("Jefe"))], [], [REPEAT(6, [], [], [E([], coin())])]),
+      E([OIFN(EN, "Boss", "=", 1)], [], [REPEAT(6, [], [], [E([], coin())])]),
+      COMMENT("Un limo grande se divide en limos pequeños (los crea EV_Enemigos fuera del 'Para cada')."),
+      E([OIFS(EN, "Tipo", "=", q("Limo"))], [SET("SplitPend", "=", "2 + Enemigo.Elite * 2"), SET("SplitX", "=", "Enemigo.X()")]),
       E([CMP("RandomFloat(1)", "<", 0.12)], [CREATE("OrbeVida", "Tmp.X", "Tmp.Y"), OSET("OrbeVida", "VX", "=", "RandomInRange(-120, 120)"),
         OSET("OrbeVida", "VY", "=", -420), A("SetZOrder", "OrbeVida", "=", 15)]),
       E([CMP("RandomFloat(1)", "<", "Enemigo.ProbBotin")], [SET("Tmp.R", "=", "RandomFloat(1)"), SET("Tmp.Rareza", "=", 1)], [
@@ -162,7 +169,7 @@ function deathAndLoot() {
         E([CMP("Tmp.R", ">=", 0.78)], [SET("Tmp.Rareza", "=", 3)]),
         E([CMP("Tmp.R", ">=", 0.93)], [SET("Tmp.Rareza", "=", 4)]),
         E([CMP("Tmp.R", ">=", 0.99)], [SET("Tmp.Rareza", "=", 5)]),
-        E([OIFS(EN, "Tipo", "=", q("Jefe"))], [SET("Tmp.Rareza", "=", "min(5, max(3, Tmp.Rareza + 1))")]),
+        E([OIFN(EN, "Boss", "=", 1)], [SET("Tmp.Rareza", "=", "min(5, max(3, Tmp.Rareza + 1))")]),
         E([], [CREATE("Botin", "Tmp.X", "Tmp.Y"), OSET("Botin", "Rareza", "=", "Tmp.Rareza"), OSET("Botin", "VX", "=", "RandomInRange(-100, 100)"),
           OSET("Botin", "VY", "=", -480), A("SetZOrder", "Botin", "=", 14), SET("Tmp.R", "=", "RandomFloat(1)")], [
           E([CMP("Tmp.R", "<", 0.55)], [OSETS("Botin", "Tipo", "=", q("Arma")),
@@ -177,7 +184,7 @@ function deathAndLoot() {
         ]),
       ]),
     ]),
-    FOREACH(EN, [OIFS(EN, "Estado", "=", q("muerto")), OIFN(EN, "Accion", ">=", 1.2), OIFS(EN, "Tipo", "!=", q("Jefe"))], [], [
+    FOREACH(EN, [OIFS(EN, "Estado", "=", q("muerto")), OIFN(EN, "Accion", ">=", 1.2), OIFN(EN, "Boss", "=", 0)], [], [
       fxE("Humo", "Enemigo.CenterX()", "Enemigo.CenterY()"), E([], [DEL(EN)])]),
   ]);
 }
@@ -285,7 +292,7 @@ function effectsAndBars() {
 
 function A_PAINTER() {
   const P = "PintorBarras";
-  return FOREACH(EN, [OIFS(EN, "Estado", "!=", q("muerto")), OIFS(EN, "Tipo", "!=", q("Jefe")), OR(CMP("Enemigo.HP", "<", "Enemigo.HPMax"), OIFS(EN, "Tipo", "=", q("Maniqui")))], [
+  return FOREACH(EN, [OIFS(EN, "Estado", "!=", q("muerto")), OIFN(EN, "Boss", "=", 0), OR(CMP("Enemigo.HP", "<", "Enemigo.HPMax"), OIFS(EN, "Tipo", "=", q("Maniqui")))], [
     A("PrimitiveDrawing::FillColor", P, q("20;15;26")),
     A("PrimitiveDrawing::Rectangle", P, "Enemigo.X() - 33", "Enemigo.BoundingBoxTop() - 16", "Enemigo.X() + 33", "Enemigo.BoundingBoxTop() - 7"),
     A("PrimitiveDrawing::FillColor", P, q("222;58;70")),

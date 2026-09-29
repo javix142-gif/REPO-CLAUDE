@@ -424,7 +424,10 @@ def draw_generic(style, pal, p, w, h, hx, hy, ground, k=1.0):
         c.rect(hx1 - 3, hy1 - 1, hx1, hy1 - 1, "#140d14")
         c.px(hx1 - 2, hy1 - 1, bone)
         limb(c, fs, fhand, bone, aw, L(4), L(4), -1)
-        _blade(c, fhand, p["wang"], L(12), pal["blade"], pal["blade_d"], pal["hilt"], 2)
+        if pal.get("bow"):
+            _draw_weapon(c, "Arquera", pal, p, fhand, bhand)
+        else:
+            _blade(c, fhand, p["wang"], L(12), pal["blade"], pal["blade_d"], pal["hilt"], 2)
     elif style == "cultist":
         sway = p["cape"]
         robe, robe_d = pal["robe"], pal["robe_d"]
@@ -449,6 +452,42 @@ def draw_generic(style, pal, p, w, h, hx, hy, ground, k=1.0):
             c.px(fhand[0], fhand[1], "#ffffff")
             for gx, gy in [(-3, -3), (4, -2), (3, 4)][: p["glow"]]:
                 c.px(fhand[0] + gx, fhand[1] + gy, g)
+    elif style == "queen":
+        sway = p["cape"]
+        dress, dress_d = pal["dress"], pal["dress_d"]
+        # tall collar / cape behind
+        c.poly([(sx - L(3), sy - L(6)), (sx - L(8) - sway, sy - L(9)), (sx - L(8) - sway, sy + L(3)), (hx - L(9) - sway, ground - L(2)), (sx - L(2), sy + L(2))], pal["cape"])
+        limb(c, bs, bhand, dress_d, aw, L(4), L(4), -1)
+        # flowing gown
+        c.poly([(sx - L(4), sy), (sx + L(4), sy), (hip[0] + L(6), hip[1]), (hx + L(8) + sway, ground), (hx - L(9) - sway, ground), (hip[0] - L(6), hip[1])], dress)
+        c.poly([(sx - L(4), sy), (sx - L(1), sy), (hx - L(4) - sway, ground), (hx - L(9) - sway, ground), (hip[0] - L(6), hip[1])], dress_d)
+        c.rect(hip[0] - L(5), hip[1] - 1, hip[0] + L(5), hip[1] + L(1), pal["trim"])
+        c.line([(sx - L(2), sy + L(1)), (sx + L(2), sy + L(5)), (sx, sy + L(8))], pal["glow"])
+        for i in range(0, int(L(16)), 3):
+            c.px(hx - L(8) + i, ground, pal["trim"])
+        # head: pale face, long hair, crown
+        c.rect(hx0, hy0 + L(1), hx1, hy1, pal["skin"])
+        c.rect(hx0 - L(1), hy0, hx0 + L(2), hy1 + L(4), pal["hair"])
+        c.rect(hx0, hy0, hx1, hy0 + L(2), pal["hair"])
+        c.px(hx1 - L(3), hy0 + L(4), pal["eye"])
+        c.px(hx1 - L(1), hy0 + L(4), pal["eye"])
+        c.rect(hx1 - L(3), hy1 - L(1), hx1 - L(1), hy1 - L(1), pal["glow"])
+        c.rect(hx0, hy0 - L(1), hx1, hy0, pal["trim"])
+        for i in range(4):
+            tx = hx0 + L(1) + i * L(2.2)
+            c.poly([(tx, hy0 - L(1)), (tx + L(1.1), hy0 - L(4)), (tx + L(2.2), hy0 - L(1))], pal["trim"])
+        c.px(hx0 + L(3.3), hy0 - L(3), pal["glow"])
+        # scepter arm
+        limb(c, fs, fhand, dress, aw, L(4), L(4), -1)
+        c.rect(fhand[0], fhand[1], fhand[0] + 1, fhand[1] + 1, pal["skin"])
+        rod = rot([(fhand[0] + 0.5, fhand[1] + 0.5), (fhand[0] + 0.5 + L(13), fhand[1] + 0.5)], p["wang"] - 60, fhand[0] + 0.5, fhand[1] + 0.5)
+        c.line(rod, pal["trim"], max(1, round(L(1))))
+        tip = rod[1]
+        c.ellipse(tip[0] - L(2.2), tip[1] - L(2.2), tip[0] + L(2.2), tip[1] + L(2.2), pal["glow"])
+        c.px(tip[0], tip[1], "#ffffff")
+        if p["glow"]:
+            for gx, gy in [(-3, -4), (5, -2), (3, 4), (-4, 3)][: p["glow"] + 1]:
+                c.px(tip[0] + L(gx), tip[1] + L(gy), pal["glow"])
     elif style in ("brute",):
         skin, skin_d = pal["skin"], pal["skin_d"]
         limb(c, (hip[0] - L(1), hip[1]), bfoot, skin_d, lw, L(5), L(5), 1)
@@ -504,6 +543,11 @@ def draw_generic(style, pal, p, w, h, hx, hy, ground, k=1.0):
             hd = rot([(fhand[0] + 6, fhand[1] - 1.5), (fhand[0] + 9, fhand[1] - 1.5), (fhand[0] + 9, fhand[1] + 2.5), (fhand[0] + 6, fhand[1] + 2.5)],
                      p["wang"], fhand[0] + 0.5, fhand[1] + 0.5)
             c.poly(hd, "#6f7682")
+        elif pal.get("book"):
+            c.rect(fhand[0] - 1, fhand[1] - 5, fhand[0] + 4, fhand[1] + 1, pal["book"])
+            c.rect(fhand[0] - 1, fhand[1] - 5, fhand[0], fhand[1] + 1, shade(pal["book"], 0.6))
+            c.rect(fhand[0] + 1, fhand[1] - 4, fhand[0] + 3, fhand[1] - 4, "#f0e6c0")
+            c.rect(fhand[0] + 1, fhand[1] - 2, fhand[0] + 3, fhand[1] - 2, "#f0e6c0")
         else:
             c.rect(fhand[0] + 1, fhand[1] - 4, fhand[0] + 3, fhand[1], "#bfe8ff")
             c.rect(fhand[0] + 1, fhand[1] - 2, fhand[0] + 3, fhand[1], pal["potion"])

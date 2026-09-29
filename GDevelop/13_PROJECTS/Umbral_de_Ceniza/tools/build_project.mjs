@@ -160,7 +160,7 @@ async function main() {
     properties: {
       adaptGameResolutionAtRuntime: true, antialiasingMode: "none", antialisingEnabledOnMobile: false, folderProject: false,
       orientation: "landscape", packageName: "com.umbraldeceniza.juego", pixelsRounding: true, projectUuid: "6a1c5e0e-4d2b-4c55-9d8e-2f5b7c1a9e31",
-      scaleMode: "nearest", sizeOnStartupMode: "adaptWidth", templateSlug: "", version: "1.0.0", name: "Umbral de Ceniza",
+      scaleMode: "nearest", sizeOnStartupMode: "adaptWidth", templateSlug: "", version: "1.1.0", name: "Umbral de Ceniza",
       description: "RPG de acción pixel-art 2D para móvil: elige clase, limpia mazmorras sala por sala, consigue botín por rareza y derrota al Caballero de Ceniza.",
       author: "", windowWidth: 1280, windowHeight: 720, latestCompilationDirectory: "", maxFPS: 60, minFPS: 20, verticalSync: false,
       platformSpecificAssets: {

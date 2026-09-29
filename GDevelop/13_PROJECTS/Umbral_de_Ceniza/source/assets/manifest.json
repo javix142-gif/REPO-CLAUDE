@@ -2162,6 +2162,882 @@
      ]
     },
     {
+     "name": "Arquero_Idle",
+     "frames": [
+      "assets/enemigos/enemigo_arquero_idle_0.png",
+      "assets/enemigos/enemigo_arquero_idle_1.png"
+     ],
+     "dt": 0.3,
+     "loop": true,
+     "origin": [
+      60,
+      126
+     ],
+     "mask": [
+      [
+       48,
+       45
+      ],
+      [
+       75,
+       45
+      ],
+      [
+       75,
+       126
+      ],
+      [
+       48,
+       126
+      ]
+     ],
+     "size": [
+      120,
+      132
+     ]
+    },
+    {
+     "name": "Arquero_Walk",
+     "frames": [
+      "assets/enemigos/enemigo_arquero_walk_0.png",
+      "assets/enemigos/enemigo_arquero_walk_1.png",
+      "assets/enemigos/enemigo_arquero_walk_2.png",
+      "assets/enemigos/enemigo_arquero_walk_3.png"
+     ],
+     "dt": 0.14,
+     "loop": true,
+     "origin": [
+      60,
+      126
+     ],
+     "mask": [
+      [
+       48,
+       45
+      ],
+      [
+       75,
+       45
+      ],
+      [
+       75,
+       126
+      ],
+      [
+       48,
+       126
+      ]
+     ],
+     "size": [
+      120,
+      132
+     ]
+    },
+    {
+     "name": "Arquero_Attack",
+     "frames": [
+      "assets/enemigos/enemigo_arquero_attack_0.png",
+      "assets/enemigos/enemigo_arquero_attack_1.png",
+      "assets/enemigos/enemigo_arquero_attack_2.png",
+      "assets/enemigos/enemigo_arquero_attack_3.png"
+     ],
+     "dt": 0.11,
+     "loop": false,
+     "origin": [
+      60,
+      126
+     ],
+     "mask": [
+      [
+       48,
+       45
+      ],
+      [
+       75,
+       45
+      ],
+      [
+       75,
+       126
+      ],
+      [
+       48,
+       126
+      ]
+     ],
+     "size": [
+      120,
+      132
+     ]
+    },
+    {
+     "name": "Arquero_Hurt",
+     "frames": [
+      "assets/enemigos/enemigo_arquero_hurt_0.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      60,
+      126
+     ],
+     "mask": [
+      [
+       48,
+       45
+      ],
+      [
+       75,
+       45
+      ],
+      [
+       75,
+       126
+      ],
+      [
+       48,
+       126
+      ]
+     ],
+     "size": [
+      120,
+      132
+     ]
+    },
+    {
+     "name": "Arquero_Dead",
+     "frames": [
+      "assets/enemigos/enemigo_arquero_dead_0.png",
+      "assets/enemigos/enemigo_arquero_dead_1.png",
+      "assets/enemigos/enemigo_arquero_dead_2.png",
+      "assets/enemigos/enemigo_arquero_dead_3.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      60,
+      126
+     ],
+     "mask": [
+      [
+       48,
+       45
+      ],
+      [
+       75,
+       45
+      ],
+      [
+       75,
+       126
+      ],
+      [
+       48,
+       126
+      ]
+     ],
+     "size": [
+      120,
+      132
+     ]
+    },
+    {
+     "name": "Golem_Idle",
+     "frames": [
+      "assets/enemigos/enemigo_golem_idle_0.png",
+      "assets/enemigos/enemigo_golem_idle_1.png"
+     ],
+     "dt": 0.3,
+     "loop": true,
+     "origin": [
+      114,
+      205
+     ],
+     "mask": [
+      [
+       76,
+       72
+      ],
+      [
+       148,
+       72
+      ],
+      [
+       148,
+       205
+      ],
+      [
+       76,
+       205
+      ]
+     ],
+     "size": [
+      228,
+      216
+     ]
+    },
+    {
+     "name": "Golem_Walk",
+     "frames": [
+      "assets/enemigos/enemigo_golem_walk_0.png",
+      "assets/enemigos/enemigo_golem_walk_1.png",
+      "assets/enemigos/enemigo_golem_walk_2.png",
+      "assets/enemigos/enemigo_golem_walk_3.png"
+     ],
+     "dt": 0.14,
+     "loop": true,
+     "origin": [
+      114,
+      205
+     ],
+     "mask": [
+      [
+       76,
+       72
+      ],
+      [
+       148,
+       72
+      ],
+      [
+       148,
+       205
+      ],
+      [
+       76,
+       205
+      ]
+     ],
+     "size": [
+      228,
+      216
+     ]
+    },
+    {
+     "name": "Golem_Attack",
+     "frames": [
+      "assets/enemigos/enemigo_golem_attack_0.png",
+      "assets/enemigos/enemigo_golem_attack_1.png",
+      "assets/enemigos/enemigo_golem_attack_2.png",
+      "assets/enemigos/enemigo_golem_attack_3.png",
+      "assets/enemigos/enemigo_golem_attack_4.png"
+     ],
+     "dt": 0.11,
+     "loop": false,
+     "origin": [
+      114,
+      205
+     ],
+     "mask": [
+      [
+       76,
+       72
+      ],
+      [
+       148,
+       72
+      ],
+      [
+       148,
+       205
+      ],
+      [
+       76,
+       205
+      ]
+     ],
+     "size": [
+      228,
+      216
+     ]
+    },
+    {
+     "name": "Golem_Hurt",
+     "frames": [
+      "assets/enemigos/enemigo_golem_hurt_0.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      114,
+      205
+     ],
+     "mask": [
+      [
+       76,
+       72
+      ],
+      [
+       148,
+       72
+      ],
+      [
+       148,
+       205
+      ],
+      [
+       76,
+       205
+      ]
+     ],
+     "size": [
+      228,
+      216
+     ]
+    },
+    {
+     "name": "Golem_Dead",
+     "frames": [
+      "assets/enemigos/enemigo_golem_dead_0.png",
+      "assets/enemigos/enemigo_golem_dead_1.png",
+      "assets/enemigos/enemigo_golem_dead_2.png",
+      "assets/enemigos/enemigo_golem_dead_3.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      114,
+      205
+     ],
+     "mask": [
+      [
+       76,
+       72
+      ],
+      [
+       148,
+       72
+      ],
+      [
+       148,
+       205
+      ],
+      [
+       76,
+       205
+      ]
+     ],
+     "size": [
+      228,
+      216
+     ]
+    },
+    {
+     "name": "Coloso_Idle",
+     "frames": [
+      "assets/enemigos/enemigo_coloso_idle_0.png",
+      "assets/enemigos/enemigo_coloso_idle_1.png"
+     ],
+     "dt": 0.3,
+     "loop": true,
+     "origin": [
+      156,
+      291
+     ],
+     "mask": [
+      [
+       104,
+       109
+      ],
+      [
+       203,
+       109
+      ],
+      [
+       203,
+       291
+      ],
+      [
+       104,
+       291
+      ]
+     ],
+     "size": [
+      312,
+      300
+     ]
+    },
+    {
+     "name": "Coloso_Walk",
+     "frames": [
+      "assets/enemigos/enemigo_coloso_walk_0.png",
+      "assets/enemigos/enemigo_coloso_walk_1.png",
+      "assets/enemigos/enemigo_coloso_walk_2.png",
+      "assets/enemigos/enemigo_coloso_walk_3.png"
+     ],
+     "dt": 0.14,
+     "loop": true,
+     "origin": [
+      156,
+      291
+     ],
+     "mask": [
+      [
+       104,
+       109
+      ],
+      [
+       203,
+       109
+      ],
+      [
+       203,
+       291
+      ],
+      [
+       104,
+       291
+      ]
+     ],
+     "size": [
+      312,
+      300
+     ]
+    },
+    {
+     "name": "Coloso_Attack",
+     "frames": [
+      "assets/enemigos/enemigo_coloso_attack_0.png",
+      "assets/enemigos/enemigo_coloso_attack_1.png",
+      "assets/enemigos/enemigo_coloso_attack_2.png",
+      "assets/enemigos/enemigo_coloso_attack_3.png",
+      "assets/enemigos/enemigo_coloso_attack_4.png"
+     ],
+     "dt": 0.11,
+     "loop": false,
+     "origin": [
+      156,
+      291
+     ],
+     "mask": [
+      [
+       104,
+       109
+      ],
+      [
+       203,
+       109
+      ],
+      [
+       203,
+       291
+      ],
+      [
+       104,
+       291
+      ]
+     ],
+     "size": [
+      312,
+      300
+     ]
+    },
+    {
+     "name": "Coloso_Hurt",
+     "frames": [
+      "assets/enemigos/enemigo_coloso_hurt_0.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      156,
+      291
+     ],
+     "mask": [
+      [
+       104,
+       109
+      ],
+      [
+       203,
+       109
+      ],
+      [
+       203,
+       291
+      ],
+      [
+       104,
+       291
+      ]
+     ],
+     "size": [
+      312,
+      300
+     ]
+    },
+    {
+     "name": "Coloso_Dead",
+     "frames": [
+      "assets/enemigos/enemigo_coloso_dead_0.png",
+      "assets/enemigos/enemigo_coloso_dead_1.png",
+      "assets/enemigos/enemigo_coloso_dead_2.png",
+      "assets/enemigos/enemigo_coloso_dead_3.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      156,
+      291
+     ],
+     "mask": [
+      [
+       104,
+       109
+      ],
+      [
+       203,
+       109
+      ],
+      [
+       203,
+       291
+      ],
+      [
+       104,
+       291
+      ]
+     ],
+     "size": [
+      312,
+      300
+     ]
+    },
+    {
+     "name": "Coloso_Slam",
+     "frames": [
+      "assets/enemigos/enemigo_coloso_slam_0.png",
+      "assets/enemigos/enemigo_coloso_slam_1.png",
+      "assets/enemigos/enemigo_coloso_slam_2.png",
+      "assets/enemigos/enemigo_coloso_slam_3.png",
+      "assets/enemigos/enemigo_coloso_slam_4.png"
+     ],
+     "dt": 0.11,
+     "loop": false,
+     "origin": [
+      156,
+      291
+     ],
+     "mask": [
+      [
+       104,
+       109
+      ],
+      [
+       203,
+       109
+      ],
+      [
+       203,
+       291
+      ],
+      [
+       104,
+       291
+      ]
+     ],
+     "size": [
+      312,
+      300
+     ]
+    },
+    {
+     "name": "Coloso_Sweep",
+     "frames": [
+      "assets/enemigos/enemigo_coloso_sweep_0.png",
+      "assets/enemigos/enemigo_coloso_sweep_1.png",
+      "assets/enemigos/enemigo_coloso_sweep_2.png",
+      "assets/enemigos/enemigo_coloso_sweep_3.png",
+      "assets/enemigos/enemigo_coloso_sweep_4.png"
+     ],
+     "dt": 0.11,
+     "loop": false,
+     "origin": [
+      156,
+      291
+     ],
+     "mask": [
+      [
+       104,
+       109
+      ],
+      [
+       203,
+       109
+      ],
+      [
+       203,
+       291
+      ],
+      [
+       104,
+       291
+      ]
+     ],
+     "size": [
+      312,
+      300
+     ]
+    },
+    {
+     "name": "Coloso_Cast",
+     "frames": [
+      "assets/enemigos/enemigo_coloso_cast_0.png",
+      "assets/enemigos/enemigo_coloso_cast_1.png",
+      "assets/enemigos/enemigo_coloso_cast_2.png"
+     ],
+     "dt": 0.13,
+     "loop": false,
+     "origin": [
+      156,
+      291
+     ],
+     "mask": [
+      [
+       104,
+       109
+      ],
+      [
+       203,
+       109
+      ],
+      [
+       203,
+       291
+      ],
+      [
+       104,
+       291
+      ]
+     ],
+     "size": [
+      312,
+      300
+     ]
+    },
+    {
+     "name": "Reina_Idle",
+     "frames": [
+      "assets/enemigos/enemigo_reina_idle_0.png",
+      "assets/enemigos/enemigo_reina_idle_1.png",
+      "assets/enemigos/enemigo_reina_idle_2.png",
+      "assets/enemigos/enemigo_reina_idle_3.png"
+     ],
+     "dt": 0.3,
+     "loop": true,
+     "origin": [
+      165,
+      354
+     ],
+     "mask": [
+      [
+       129,
+       171
+      ],
+      [
+       201,
+       171
+      ],
+      [
+       201,
+       354
+      ],
+      [
+       129,
+       354
+      ]
+     ],
+     "size": [
+      330,
+      360
+     ]
+    },
+    {
+     "name": "Reina_Walk",
+     "frames": [
+      "assets/enemigos/enemigo_reina_walk_0.png",
+      "assets/enemigos/enemigo_reina_walk_1.png",
+      "assets/enemigos/enemigo_reina_walk_2.png",
+      "assets/enemigos/enemigo_reina_walk_3.png"
+     ],
+     "dt": 0.14,
+     "loop": true,
+     "origin": [
+      165,
+      354
+     ],
+     "mask": [
+      [
+       129,
+       171
+      ],
+      [
+       201,
+       171
+      ],
+      [
+       201,
+       354
+      ],
+      [
+       129,
+       354
+      ]
+     ],
+     "size": [
+      330,
+      360
+     ]
+    },
+    {
+     "name": "Reina_Cast",
+     "frames": [
+      "assets/enemigos/enemigo_reina_cast_0.png",
+      "assets/enemigos/enemigo_reina_cast_1.png",
+      "assets/enemigos/enemigo_reina_cast_2.png",
+      "assets/enemigos/enemigo_reina_cast_3.png",
+      "assets/enemigos/enemigo_reina_cast_4.png"
+     ],
+     "dt": 0.13,
+     "loop": false,
+     "origin": [
+      165,
+      354
+     ],
+     "mask": [
+      [
+       129,
+       171
+      ],
+      [
+       201,
+       171
+      ],
+      [
+       201,
+       354
+      ],
+      [
+       129,
+       354
+      ]
+     ],
+     "size": [
+      330,
+      360
+     ]
+    },
+    {
+     "name": "Reina_Slash",
+     "frames": [
+      "assets/enemigos/enemigo_reina_slash_0.png",
+      "assets/enemigos/enemigo_reina_slash_1.png",
+      "assets/enemigos/enemigo_reina_slash_2.png",
+      "assets/enemigos/enemigo_reina_slash_3.png",
+      "assets/enemigos/enemigo_reina_slash_4.png"
+     ],
+     "dt": 0.1,
+     "loop": false,
+     "origin": [
+      165,
+      354
+     ],
+     "mask": [
+      [
+       129,
+       171
+      ],
+      [
+       201,
+       171
+      ],
+      [
+       201,
+       354
+      ],
+      [
+       129,
+       354
+      ]
+     ],
+     "size": [
+      330,
+      360
+     ]
+    },
+    {
+     "name": "Reina_Hurt",
+     "frames": [
+      "assets/enemigos/enemigo_reina_hurt_0.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      165,
+      354
+     ],
+     "mask": [
+      [
+       129,
+       171
+      ],
+      [
+       201,
+       171
+      ],
+      [
+       201,
+       354
+      ],
+      [
+       129,
+       354
+      ]
+     ],
+     "size": [
+      330,
+      360
+     ]
+    },
+    {
+     "name": "Reina_Dead",
+     "frames": [
+      "assets/enemigos/enemigo_reina_dead_0.png",
+      "assets/enemigos/enemigo_reina_dead_1.png",
+      "assets/enemigos/enemigo_reina_dead_2.png",
+      "assets/enemigos/enemigo_reina_dead_3.png",
+      "assets/enemigos/enemigo_reina_dead_4.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      165,
+      354
+     ],
+     "mask": [
+      [
+       129,
+       171
+      ],
+      [
+       201,
+       171
+      ],
+      [
+       201,
+       354
+      ],
+      [
+       129,
+       354
+      ]
+     ],
+     "size": [
+      330,
+      360
+     ]
+    },
+    {
      "name": "Murcielago_Fly",
      "frames": [
       "assets/enemigos/enemigo_murcielago_fly_0.png",
@@ -2304,6 +3180,428 @@
      ]
     },
     {
+     "name": "Espectro_Fly",
+     "frames": [
+      "assets/enemigos/enemigo_espectro_fly_0.png",
+      "assets/enemigos/enemigo_espectro_fly_1.png",
+      "assets/enemigos/enemigo_espectro_fly_2.png",
+      "assets/enemigos/enemigo_espectro_fly_3.png"
+     ],
+     "dt": 0.14,
+     "loop": true,
+     "origin": [
+      60,
+      66
+     ],
+     "mask": [
+      [
+       33,
+       30
+      ],
+      [
+       87,
+       30
+      ],
+      [
+       87,
+       120
+      ],
+      [
+       33,
+       120
+      ]
+     ],
+     "size": [
+      120,
+      132
+     ]
+    },
+    {
+     "name": "Espectro_Cast",
+     "frames": [
+      "assets/enemigos/enemigo_espectro_cast_0.png",
+      "assets/enemigos/enemigo_espectro_cast_1.png",
+      "assets/enemigos/enemigo_espectro_cast_2.png"
+     ],
+     "dt": 0.13,
+     "loop": false,
+     "origin": [
+      60,
+      66
+     ],
+     "mask": [
+      [
+       33,
+       30
+      ],
+      [
+       87,
+       30
+      ],
+      [
+       87,
+       120
+      ],
+      [
+       33,
+       120
+      ]
+     ],
+     "size": [
+      120,
+      132
+     ]
+    },
+    {
+     "name": "Espectro_Hurt",
+     "frames": [
+      "assets/enemigos/enemigo_espectro_hurt_0.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      60,
+      66
+     ],
+     "mask": [
+      [
+       33,
+       30
+      ],
+      [
+       87,
+       30
+      ],
+      [
+       87,
+       120
+      ],
+      [
+       33,
+       120
+      ]
+     ],
+     "size": [
+      120,
+      132
+     ]
+    },
+    {
+     "name": "Espectro_Dead",
+     "frames": [
+      "assets/enemigos/enemigo_espectro_dead_0.png",
+      "assets/enemigos/enemigo_espectro_dead_1.png",
+      "assets/enemigos/enemigo_espectro_dead_2.png",
+      "assets/enemigos/enemigo_espectro_dead_3.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      60,
+      66
+     ],
+     "mask": [
+      [
+       33,
+       30
+      ],
+      [
+       87,
+       30
+      ],
+      [
+       87,
+       120
+      ],
+      [
+       33,
+       120
+      ]
+     ],
+     "size": [
+      120,
+      132
+     ]
+    },
+    {
+     "name": "Limo_Idle",
+     "frames": [
+      "assets/enemigos/enemigo_limo_idle_0.png",
+      "assets/enemigos/enemigo_limo_idle_1.png"
+     ],
+     "dt": 0.35,
+     "loop": true,
+     "origin": [
+      60,
+      93
+     ],
+     "mask": [
+      [
+       24,
+       45
+      ],
+      [
+       96,
+       45
+      ],
+      [
+       96,
+       93
+      ],
+      [
+       24,
+       93
+      ]
+     ],
+     "size": [
+      120,
+      96
+     ]
+    },
+    {
+     "name": "Limo_Walk",
+     "frames": [
+      "assets/enemigos/enemigo_limo_walk_0.png"
+     ],
+     "dt": 0.1,
+     "loop": true,
+     "origin": [
+      60,
+      93
+     ],
+     "mask": [
+      [
+       24,
+       45
+      ],
+      [
+       96,
+       45
+      ],
+      [
+       96,
+       93
+      ],
+      [
+       24,
+       93
+      ]
+     ],
+     "size": [
+      120,
+      96
+     ]
+    },
+    {
+     "name": "Limo_Hurt",
+     "frames": [
+      "assets/enemigos/enemigo_limo_hurt_0.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      60,
+      93
+     ],
+     "mask": [
+      [
+       24,
+       45
+      ],
+      [
+       96,
+       45
+      ],
+      [
+       96,
+       93
+      ],
+      [
+       24,
+       93
+      ]
+     ],
+     "size": [
+      120,
+      96
+     ]
+    },
+    {
+     "name": "Limo_Dead",
+     "frames": [
+      "assets/enemigos/enemigo_limo_dead_0.png",
+      "assets/enemigos/enemigo_limo_dead_1.png",
+      "assets/enemigos/enemigo_limo_dead_2.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      60,
+      93
+     ],
+     "mask": [
+      [
+       24,
+       45
+      ],
+      [
+       96,
+       45
+      ],
+      [
+       96,
+       93
+      ],
+      [
+       24,
+       93
+      ]
+     ],
+     "size": [
+      120,
+      96
+     ]
+    },
+    {
+     "name": "LimoMini_Idle",
+     "frames": [
+      "assets/enemigos/enemigo_limomini_idle_0.png",
+      "assets/enemigos/enemigo_limomini_idle_1.png"
+     ],
+     "dt": 0.35,
+     "loop": true,
+     "origin": [
+      36,
+      56
+     ],
+     "mask": [
+      [
+       14,
+       27
+      ],
+      [
+       58,
+       27
+      ],
+      [
+       58,
+       56
+      ],
+      [
+       14,
+       56
+      ]
+     ],
+     "size": [
+      72,
+      57
+     ]
+    },
+    {
+     "name": "LimoMini_Walk",
+     "frames": [
+      "assets/enemigos/enemigo_limomini_walk_0.png"
+     ],
+     "dt": 0.1,
+     "loop": true,
+     "origin": [
+      36,
+      56
+     ],
+     "mask": [
+      [
+       14,
+       27
+      ],
+      [
+       58,
+       27
+      ],
+      [
+       58,
+       56
+      ],
+      [
+       14,
+       56
+      ]
+     ],
+     "size": [
+      72,
+      57
+     ]
+    },
+    {
+     "name": "LimoMini_Hurt",
+     "frames": [
+      "assets/enemigos/enemigo_limomini_hurt_0.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      36,
+      56
+     ],
+     "mask": [
+      [
+       14,
+       27
+      ],
+      [
+       58,
+       27
+      ],
+      [
+       58,
+       56
+      ],
+      [
+       14,
+       56
+      ]
+     ],
+     "size": [
+      72,
+      57
+     ]
+    },
+    {
+     "name": "LimoMini_Dead",
+     "frames": [
+      "assets/enemigos/enemigo_limomini_dead_0.png",
+      "assets/enemigos/enemigo_limomini_dead_1.png",
+      "assets/enemigos/enemigo_limomini_dead_2.png"
+     ],
+     "dt": 0.12,
+     "loop": false,
+     "origin": [
+      36,
+      56
+     ],
+     "mask": [
+      [
+       14,
+       27
+      ],
+      [
+       58,
+       27
+      ],
+      [
+       58,
+       56
+      ],
+      [
+       14,
+       56
+      ]
+     ],
+     "size": [
+      72,
+      57
+     ]
+    },
+    {
      "name": "Maniqui_Idle",
      "frames": [
       "assets/enemigos/enemigo_maniqui_idle_0.png"
@@ -2404,6 +3702,26 @@
       "assets/npc/npc_alquimista_idle_1.png",
       "assets/npc/npc_alquimista_idle_2.png",
       "assets/npc/npc_alquimista_idle_3.png"
+     ],
+     "dt": 0.35,
+     "loop": true,
+     "origin": [
+      66,
+      126
+     ],
+     "mask": null,
+     "size": [
+      132,
+      132
+     ]
+    },
+    {
+     "name": "Archivista_Idle",
+     "frames": [
+      "assets/npc/npc_archivista_idle_0.png",
+      "assets/npc/npc_archivista_idle_1.png",
+      "assets/npc/npc_archivista_idle_2.png",
+      "assets/npc/npc_archivista_idle_3.png"
      ],
      "dt": 0.35,
      "loop": true,
@@ -2567,6 +3885,77 @@
      "mask": null,
      "size": [
       90,
+      66
+     ]
+    },
+    {
+     "name": "Flecha",
+     "frames": [
+      "assets/proyectiles/proyectilenemigo_flecha_0.png"
+     ],
+     "dt": 1,
+     "loop": true,
+     "origin": [
+      36,
+      10
+     ],
+     "mask": null,
+     "size": [
+      72,
+      21
+     ]
+    },
+    {
+     "name": "OrbeRojo",
+     "frames": [
+      "assets/proyectiles/proyectilenemigo_orberojo_0.png",
+      "assets/proyectiles/proyectilenemigo_orberojo_1.png"
+     ],
+     "dt": 0.1,
+     "loop": true,
+     "origin": [
+      24,
+      24
+     ],
+     "mask": null,
+     "size": [
+      48,
+      48
+     ]
+    },
+    {
+     "name": "Roca",
+     "frames": [
+      "assets/proyectiles/proyectilenemigo_roca_0.png",
+      "assets/proyectiles/proyectilenemigo_roca_1.png"
+     ],
+     "dt": 0.1,
+     "loop": true,
+     "origin": [
+      33,
+      33
+     ],
+     "mask": null,
+     "size": [
+      66,
+      66
+     ]
+    },
+    {
+     "name": "Cristal",
+     "frames": [
+      "assets/proyectiles/proyectilenemigo_cristal_0.png",
+      "assets/proyectiles/proyectilenemigo_cristal_1.png"
+     ],
+     "dt": 0.1,
+     "loop": true,
+     "origin": [
+      33,
+      33
+     ],
+     "mask": null,
+     "size": [
+      66,
       66
      ]
     }
@@ -2938,6 +4327,26 @@
      "size": [
       144,
       54
+     ]
+    },
+    {
+     "name": "Aviso",
+     "frames": [
+      "assets/fx/efecto_aviso_0.png",
+      "assets/fx/efecto_aviso_1.png",
+      "assets/fx/efecto_aviso_2.png",
+      "assets/fx/efecto_aviso_3.png"
+     ],
+     "dt": 0.12,
+     "loop": true,
+     "origin": [
+      66,
+      21
+     ],
+     "mask": null,
+     "size": [
+      132,
+      42
      ]
     },
     {
@@ -4660,12 +6069,18 @@
   "fondo_fortaleza_lejos": "assets/entorno/fondo_fortaleza_lejos.png",
   "fondo_fortaleza_medio": "assets/entorno/fondo_fortaleza_medio.png",
   "muro_fortaleza": "assets/entorno/muro_fortaleza.png",
+  "fondo_abismo_lejos": "assets/entorno/fondo_abismo_lejos.png",
+  "fondo_abismo_medio": "assets/entorno/fondo_abismo_medio.png",
+  "muro_abismo": "assets/entorno/muro_abismo.png",
   "suelo_mazmorra": "assets/entorno/suelo_mazmorra.png",
   "relleno_mazmorra": "assets/entorno/relleno_mazmorra.png",
   "plataforma_mazmorra": "assets/entorno/plataforma_mazmorra.png",
   "suelo_fortaleza": "assets/entorno/suelo_fortaleza.png",
   "relleno_fortaleza": "assets/entorno/relleno_fortaleza.png",
   "plataforma_fortaleza": "assets/entorno/plataforma_fortaleza.png",
+  "suelo_abismo": "assets/entorno/suelo_abismo.png",
+  "relleno_abismo": "assets/entorno/relleno_abismo.png",
+  "plataforma_abismo": "assets/entorno/plataforma_abismo.png",
   "suelo_pueblo": "assets/entorno/suelo_pueblo.png",
   "relleno_pueblo": "assets/entorno/relleno_pueblo.png",
   "plataforma_pueblo": "assets/entorno/plataforma_pueblo.png",

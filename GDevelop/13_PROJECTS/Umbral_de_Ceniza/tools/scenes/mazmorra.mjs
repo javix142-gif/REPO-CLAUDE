@@ -1,6 +1,6 @@
 // Scene "Mazmorra": 5 rooms (4 with waves + boss room), camera lock, gates, victory/defeat.
 import { q, C, A, NOT, OR, AND, E, ELSE, FOREACH, REPEAT, COMMENT, GROUP, LINK, SET, SETS, IFN, IFS, OSET, OSETS, OIFN, OIFS,
-  CMP, ANIM, HIDE, SHOW, WIDTH, TEXT, SETX, SETY, XY, SOUND, MUSIC, DT, JUST_BEGINS, KEY_JUST, TAP_ON, GOTO, CREATE, DEL,
+  CMP, CMPS, ANIM, HIDE, SHOW, WIDTH, TEXT, SETX, SETY, XY, SOUND, MUSIC, DT, JUST_BEGINS, KEY_JUST, TAP_ON, GOTO, CREATE, DEL,
   OPACITY, COLLIDE, ON_FLOOR, PLAT } from "../lib/dsl.mjs";
 import { inst, layer, vnum, vstr, vstruct, tiled, sprite, text, anchor } from "../lib/objects.mjs";
 import { gameplaySceneVariables, hudInstances, menuInstances, SUELO, FONT_TITLE } from "./common.mjs";
@@ -72,35 +72,55 @@ function sceneVariables() {
     vnum("SpawnPend", 0), vnum("AnchoSala", ANCHO_SALA), vnum("NumSalas", NUM_SALAS), vnum("SalaIni", 0), vnum("JefeVivo", 0),
     vnum("JefeMuerto", 0), vnum("TJefeMuerto", 0), vnum("PEsq", 0.65), vnum("PMur", 1), vnum("PCul", 1), vnum("Victoria", 0),
     vnum("TMuerte", 0), vnum("InvocarPend", 0), vnum("InvX", 0), vstr("Capitulo", ""),
+    vnum("BossIdx", 1), vstr("BossNombre", ""), vnum("Ronda", 1), vnum("PoolIdx", 1), vnum("FinalVisto", 0), vstr("Info", ""),
     vstruct("Auto", [vnum("Hay", 0), vnum("Dx", 0), vnum("Dy", 0), vnum("Ang", 0), vnum("CofreT", 0)]),
     vstruct("Gen", [vnum("Sala"), vnum("X"), vnum("Y"), vnum("W"), vnum("TopX"), vnum("TopY")]),
   ];
 }
+
+const TIPOS = [["E", "Esqueleto"], ["M", "Murcielago"], ["C", "Cultista"], ["A", "Arquero"], ["B", "Bruto"], ["S", "Espectro"], ["G", "Golem"], ["L", "Limo"]];
+const arena = () => IFS("Juego.Modo", "=", q("arena"));
+
+/** The boss (or elite) BossIdx appears at the end of the room: health bar, name and roar. */
+const bossActions = () => [
+  SET("JefeVivo", "=", 1), SET("OleadasSala", "=", 1), SET("Temblor", "=", 0.8), SET("FuerzaTemblor", "=", 8),
+  SETS("BossNombre", "=", "Relato.Jefe[BossIdx]"), TEXT("TextoJefe", "BossNombre"),
+  SOUND("assets/audio/jefe_rugido.wav", 90), MUSIC("assets/audio/musica_jefe.wav", 55),
+  SHOW("BarraJefeMarco"), SHOW("BarraJefe"), SHOW("TextoJefe"), SHOW("IconoCalavera"),
+  ...toast("\"¡\" + BossNombre + \" despierta!\"", q("255;130;80"), 2.5),
+];
+const bossCreate = () => E([], [CREATE("Enemigo", "SalaIni + AnchoSala - 420", "SueloY"), OSETS("Enemigo", "Tipo", "=", "Relato.JefeTipo[BossIdx]"),
+  OSET("Enemigo", "Boss", "=", 1), OSET("Enemigo", "Elite", "=", "Relato.JefeElite[BossIdx]"), OSET("Enemigo", "Sala", "=", "Sala")]);
 
 function flow() {
   const spawnWave = () => E([IFN("SpawnPend", "=", 1)], [
     SET("SpawnPend", "=", 0), SET("Tmp.Cuantos", "=", "min(7, 3 + floor(Etapa / 2) + (Oleada - 1))"),
     SOUND("assets/audio/portal.wav", 50),
   ], [
+    COMMENT("Coliseo: más enemigos cada ronda y un jefe cada 5 rondas (sale de la lista de jefes de la campaña)."),
+    E([arena()], [SET("Tmp.Cuantos", "=", "min(9, 3 + floor(Ronda / 2))"), ...toast("\"Ronda \" + ToString(Ronda)", q("255;190;120"), 1.4)]),
+    E([arena(), CMP("mod(Ronda, 5)", "=", 0)], [SET("Tmp.Cuantos", "=", 0), SET("BossIdx", "=", "mod(floor(Ronda / 5) - 1, 12) + 1"), ...bossActions()], [bossCreate()]),
+    COMMENT("Cada enemigo sale de la mezcla de la etapa: Relato.Pool[etapa] es una cadena de 20 letras (E, M, C, A, B, S, G, L)."),
     REPEAT("Tmp.Cuantos", [], [
-      SET("Tmp.R", "=", "RandomFloat(1)"),
+      SETS("Tmp.Clase", "=", "SubStr(Relato.Pool[PoolIdx], floor(RandomFloat(20)), 1)"),
       SET("Tmp.X", "=", "RandomInRange(SalaIni + 260, SalaIni + AnchoSala - 200)"),
     ], [
+      ...TIPOS.map(([c, t]) => E([CMPS("Tmp.Clase", "=", q(c))], [SETS("Tmp.Tipo", "=", q(t))])),
       E([CMP("abs(Tmp.X - Jugador.X())", "<", 240)], [SET("Tmp.X", "=", "clamp(Tmp.X + 480 * sign(Tmp.X - Jugador.X() + 0.1), SalaIni + 200, SalaIni + AnchoSala - 160)")]),
-      E([CMP("Tmp.R", "<", "PEsq")], [CREATE("Enemigo", "Tmp.X", "SueloY"), OSETS("Enemigo", "Tipo", "=", q("Esqueleto")), OSET("Enemigo", "Sala", "=", "Sala")]),
-      E([CMP("Tmp.R", ">=", "PEsq"), CMP("Tmp.R", "<", "PMur")], [CREATE("Enemigo", "Tmp.X", "SueloY - 230"), OSETS("Enemigo", "Tipo", "=", q("Murcielago")),
-        OSET("Enemigo", "Sala", "=", "Sala")]),
-      E([CMP("Tmp.R", ">=", "PMur"), CMP("Tmp.R", "<", "PCul")], [SET("Tmp.Perch", "=", 0)], [
-        COMMENT("Los cultistas se apostan el 60% de las veces en una plataforma de la sala (hay que subir a por ellos)."),
-        E([CMP("RandomFloat(1)", "<", 0.6), C("PosX", "Plataforma", ">=", "SalaIni + 200"), C("PosX", "Plataforma", "<", "SalaIni + AnchoSala - 300"),
+      E([IFS("Tmp.Tipo", "=", q("Murcielago"))], [CREATE("Enemigo", "Tmp.X", "SueloY - 230"), OSETS("Enemigo", "Tipo", "=", "Tmp.Tipo"), OSET("Enemigo", "Sala", "=", "Sala")]),
+      E([IFS("Tmp.Tipo", "=", q("Espectro"))], [CREATE("Enemigo", "Tmp.X", "SueloY - 200"), OSETS("Enemigo", "Tipo", "=", "Tmp.Tipo"), OSET("Enemigo", "Sala", "=", "Sala")]),
+      E([OR(IFS("Tmp.Tipo", "=", q("Cultista")), IFS("Tmp.Tipo", "=", q("Arquero")))], [SET("Tmp.Perch", "=", 0)], [
+        COMMENT("Cultistas y arqueros se apostan el 70% de las veces en una plataforma de la sala (hay que subir a por ellos)."),
+        E([CMP("RandomFloat(1)", "<", 0.7), C("PosX", "Plataforma", ">=", "SalaIni + 200"), C("PosX", "Plataforma", "<", "SalaIni + AnchoSala - 300"),
           C("PickRandomInstance", "Plataforma")], [
           SET("Tmp.Perch", "=", 1), SET("Tmp.PX0", "=", "Plataforma.X() + 40"), SET("Tmp.PX1", "=", "Plataforma.X() + Plataforma.Width() - 40"),
           SET("Tmp.PY", "=", "Plataforma.Y()")]),
-        E([IFN("Tmp.Perch", "=", 1)], [CREATE("Enemigo", "(Tmp.PX0 + Tmp.PX1) / 2", "Tmp.PY - 2"), OSETS("Enemigo", "Tipo", "=", q("Cultista")),
+        E([IFN("Tmp.Perch", "=", 1)], [CREATE("Enemigo", "(Tmp.PX0 + Tmp.PX1) / 2", "Tmp.PY - 2"), OSETS("Enemigo", "Tipo", "=", "Tmp.Tipo"),
           OSET("Enemigo", "Sala", "=", "Sala"), OSET("Enemigo", "Percha", "=", 1), OSET("Enemigo", "PX0", "=", "Tmp.PX0"), OSET("Enemigo", "PX1", "=", "Tmp.PX1")]),
-        ELSE([], [CREATE("Enemigo", "Tmp.X", "SueloY"), OSETS("Enemigo", "Tipo", "=", q("Cultista")), OSET("Enemigo", "Sala", "=", "Sala")]),
+        ELSE([], [CREATE("Enemigo", "Tmp.X", "SueloY"), OSETS("Enemigo", "Tipo", "=", "Tmp.Tipo"), OSET("Enemigo", "Sala", "=", "Sala")]),
       ]),
-      E([CMP("Tmp.R", ">=", "PCul")], [CREATE("Enemigo", "Tmp.X", "SueloY"), OSETS("Enemigo", "Tipo", "=", q("Bruto")), OSET("Enemigo", "Sala", "=", "Sala")]),
+      E([IFS("Tmp.Tipo", "!=", q("Murcielago")), IFS("Tmp.Tipo", "!=", q("Espectro")), IFS("Tmp.Tipo", "!=", q("Cultista")), IFS("Tmp.Tipo", "!=", q("Arquero"))],
+        [CREATE("Enemigo", "Tmp.X", "SueloY"), OSETS("Enemigo", "Tipo", "=", "Tmp.Tipo"), OSET("Enemigo", "Sala", "=", "Sala")]),
     ]),
   ]);
 
@@ -139,19 +159,18 @@ function flow() {
         E([IFN("Sala", "=", 0)], [SET("OleadasSala", "=", 1)]),
         E([], toast("\"Sala \" + ToString(Sala + 1) + \" / \" + ToString(NumSalas)", q("230;225;215"), 1.6)),
       ]),
-      ELSE([], [SET("JefeVivo", "=", 1), SET("OleadasSala", "=", 1), SET("Temblor", "=", 0.8), SET("FuerzaTemblor", "=", 8),
-        SOUND("assets/audio/jefe_rugido.wav", 90), MUSIC("assets/audio/musica_jefe.wav", 55),
-        SHOW("BarraJefeMarco"), SHOW("BarraJefe"), SHOW("TextoJefe"), SHOW("IconoCalavera"),
-        ...toast(q("¡El Caballero de Ceniza despierta!"), q("255;130;80"), 2.5)], [
-        E([], [CREATE("Enemigo", "SalaIni + AnchoSala - 420", "SueloY"), OSETS("Enemigo", "Tipo", "=", q("Jefe")), OSET("Enemigo", "Sala", "=", "Sala")]),
-      ]),
+      ELSE([], bossActions(), [bossCreate()]),
     ]),
     spawnWave(),
     COMMENT("Recuento de enemigos vivos DESPUÉS de generar la oleada (si no, la sala se daría por limpia en el mismo frame)."),
     E([], [SET("Vivos", "=", 0)]),
     E([OIFS("Enemigo", "Estado", "!=", q("muerto"))], [SET("Vivos", "=", "Count(Enemigo)")]),
     E([IFS("SalaEstado", "=", q("combate")), IFN("Vivos", "=", 0), IFN("SpawnPend", "=", 0), IFN("JefeVivo", "=", 0), IFN("EsperaOleada", "<=", 0)], [], [
-      E([CMP("Oleada", "<", "OleadasSala")], [SET("Oleada", "+", 1), SET("EsperaOleada", "=", 1.1),
+      E([arena()], [SET("Tmp.Oro", "=", "round(10 + Ronda * 6)"), SET("Save.Oro", "+", "Tmp.Oro"), SET("Stats.Oro", "+", "Tmp.Oro"),
+        SET("Save.ArenaMax", "=", "max(Save.ArenaMax, Ronda)"), OSET("Jugador", "HP", "=", "min(Stat.VidaMax, Jugador.HP + Stat.VidaMax * 0.15)"),
+        SET("Ronda", "+", 1), SET("EsperaOleada", "=", 2.2), SET("Guardar", "=", 1), SOUND("assets/audio/nivel.wav", 55),
+        ...toast("\"¡Ronda superada!  +\" + ToString(Tmp.Oro) + \" oro\"", q("255;220;110"), 1.8)]),
+      ELSE([CMP("Oleada", "<", "OleadasSala")], [SET("Oleada", "+", 1), SET("EsperaOleada", "=", 1.1),
         ...toast(q("¡Otra oleada!"), q("255;190;120"), 1.2)]),
       ELSE([CMP("Sala", "<", "NumSalas - 1")], [SETS("SalaEstado", "=", q("limpia")), SOUND("assets/audio/puerta.wav", 70),
         ...toast(q("¡Sala despejada!  Avanza →"), q("140;255;170"), 2)], [
@@ -166,27 +185,42 @@ function flow() {
     E([IFS("SalaEstado", "=", q("limpia")), CMP("Jugador.X()", ">", "SalaIni + AnchoSala + 60")], [SET("Sala", "+", 1), SETS("SalaEstado", "=", q("espera"))]),
     COMMENT("Durante el combate el jugador no puede salir por la izquierda de la sala."),
     E([IFS("SalaEstado", "=", q("combate")), CMP("Jugador.X()", "<", "SalaIni + 40")], [SETX("Jugador", "=", "SalaIni + 40")]),
-    COMMENT("Jefe: barra de vida y derrota."),
+    COMMENT("Jefe (o élite): barra de vida y derrota."),
     E([IFN("JefeVivo", "=", 1)], [], [
-      E([OIFS("Enemigo", "Tipo", "=", q("Jefe"))], [WIDTH("BarraJefe", "498 * clamp(Enemigo.HP / Enemigo.HPMax, 0, 1)")]),
-      E([OIFS("Enemigo", "Tipo", "=", q("Jefe")), OIFS("Enemigo", "Estado", "=", q("muerto"))], [SET("JefeVivo", "=", 0), SET("JefeMuerto", "=", 1),
+      E([OIFN("Enemigo", "Boss", "=", 1)], [WIDTH("BarraJefe", "498 * clamp(Enemigo.HP / Enemigo.HPMax, 0, 1)")]),
+      E([OIFN("Enemigo", "Boss", "=", 1), OIFS("Enemigo", "Estado", "=", q("muerto"))], [SET("JefeVivo", "=", 0), SET("JefeMuerto", "=", 1),
         SET("TJefeMuerto", "=", 0), A("ChangeTimeScale", 0.35), SOUND("assets/audio/jefe_rugido.wav", 80, 0.7), SET("Temblor", "=", 1), SET("FuerzaTemblor", "=", 10),
         HIDE("BarraJefeMarco"), HIDE("BarraJefe"), HIDE("TextoJefe"), HIDE("IconoCalavera")]),
     ]),
     E([IFN("JefeMuerto", "=", 1)], [SET("TJefeMuerto", "+", DT)], [
-      E([IFN("TJefeMuerto", ">=", 0.6), IFN("JefeMuerto", "=", 1)], [A("ChangeTimeScale", 1), SET("JefeMuerto", "=", 2),
-        SET("Save.EtapaMax", "=", "min(10, max(Save.EtapaMax, Etapa + 1))"), SET("Guardar", "=", 1),
-        SHOW("Portal"), SOUND("assets/audio/victoria.wav", 80), MUSIC("assets/audio/musica_mazmorra.wav", 45),
-        ...toast(q("¡Has derrotado al Caballero de Ceniza!  Recoge el botín y entra al portal"), q("255;220;110"), 4)]),
+      E([IFN("TJefeMuerto", ">=", 0.6), IFN("JefeMuerto", "=", 1)], [A("ChangeTimeScale", 1)], [
+        COMMENT("Coliseo: el combate sigue con la ronda siguiente. Campaña y mazmorra: sale el portal (sólo la campaña avanza la historia)."),
+        E([arena()], [SET("JefeMuerto", "=", 0), SOUND("assets/audio/victoria.wav", 70), MUSIC("assets/audio/musica_mazmorra.wav", 45),
+          ...toast("\"¡\" + BossNombre + \" derrotado!\"", q("255;220;110"), 2.4)]),
+        ELSE([], [SET("JefeMuerto", "=", 2), SHOW("Portal"), SOUND("assets/audio/victoria.wav", 80), MUSIC("assets/audio/musica_mazmorra.wav", 45),
+          ...toast("\"¡Has derrotado a \" + BossNombre + \"!  Recoge el botín y entra al portal\"", q("255;220;110"), 4)], [
+          E([IFS("Juego.Modo", "=", q("campana"))], [SET("Save.EtapaMax", "=", "min(12, max(Save.EtapaMax, Etapa + 1))"), SET("Guardar", "=", 1)]),
+          E([IFS("Juego.Modo", "=", q("campana")), CMP("Etapa", ">=", 12)], [SET("Save.Historia", "=", 1)]),
+        ]),
+      ]),
     ]),
-    E([OIFS("Enemigo", "Tipo", "=", q("Jefe")), OIFS("Enemigo", "Estado", "=", q("muerto")), OIFN("Enemigo", "Accion", ">=", 2.2)], [], [
+    E([OIFN("Enemigo", "Boss", "=", 1), OIFS("Enemigo", "Estado", "=", q("muerto")), OIFN("Enemigo", "Accion", ">=", 2.2)], [], [
       fxE("Humo", "Enemigo.CenterX()", "Enemigo.CenterY()", { scale: 4 }), E([], [A("Delete", "Enemigo")]),
     ]),
-    E([IFN("JefeMuerto", "=", 2), C("Visible", "Portal"), COLLIDE("Jugador", "Portal"), IFS("Menu", "=", q(""))], [
-      SETS("MenuAbrir", "=", q("victoria")), SET("Victoria", "=", 1), SOUND("assets/audio/portal.wav", 80)]),
+    COMMENT("Portal de salida: en la campaña, tras el jefe de capítulo (etapas 4, 8 y 12) se lee la página final de la historia antes de la victoria."),
+    E([IFN("JefeMuerto", "=", 2), C("Visible", "Portal"), COLLIDE("Jugador", "Portal"), IFS("Menu", "=", q("")), IFS("MenuAbrir", "=", q(""))],
+      [SOUND("assets/audio/portal.wav", 80)], [
+      E([IFS("Juego.Modo", "=", q("campana")), CMPS("Relato.Final[Etapa]", "!=", q("")), IFN("FinalVisto", "=", 0)], [SETS("MenuAbrir", "=", q("final")), SET("FinalVisto", "=", 1)]),
+      ELSE([], [SET("Victoria", "=", 1)], [
+        E([IFS("Juego.Modo", "=", q("mazmorra"))], [SETS("MenuAbrir", "=", q("victoria_m"))]),
+        ELSE([CMP("Etapa", ">=", 12)], [SETS("MenuAbrir", "=", q("victoria_final"))]),
+        ELSE([], [SETS("MenuAbrir", "=", q("victoria"))]),
+      ]),
+    ]),
     COMMENT("Derrota: menú tras la animación de muerte."),
     E([OIFS("Jugador", "Estado", "=", q("muerto"))], [SET("TMuerte", "+", DT)], [
-      E([IFN("TMuerte", ">=", 1.6), IFS("Menu", "=", q("")), IFS("MenuAbrir", "=", q(""))], [SETS("MenuAbrir", "=", q("derrota"))]),
+      E([IFN("TMuerte", ">=", 1.6), IFS("Menu", "=", q("")), IFS("MenuAbrir", "=", q("")), IFS("Juego.Modo", "!=", q("arena"))], [SETS("MenuAbrir", "=", q("derrota"))]),
+      E([IFN("TMuerte", ">=", 1.6), IFS("Menu", "=", q("")), IFS("MenuAbrir", "=", q("")), arena()], [SETS("MenuAbrir", "=", q("arena_fin"))]),
     ]),
   ]);
 }
@@ -236,6 +270,9 @@ function generateRooms() {
           E([], [SET("Gen.Sala", "+", 1)]),
         ]),
       ]),
+      COMMENT("Las plataformas se crean aquí (después de elegir el tema de la etapa): reciben la textura del capítulo."),
+      E([IFN("Etapa", ">=", 5)], [A("TiledSpriteObject::SetImageFromResource", "Plataforma", "assets/entorno/plataforma_fortaleza.png")]),
+      E([IFN("Etapa", ">=", 9)], [A("TiledSpriteObject::SetImageFromResource", "Plataforma", "assets/entorno/plataforma_abismo.png")]),
     ]),
   ]);
 }
@@ -251,21 +288,31 @@ function startEvents() {
     A("TiledSpriteObject::SetImageFromResource", "Muro", `assets/entorno/muro_${tex}.png`),
   ];
   return GROUP("Inicio de la etapa", [
+    COMMENT("Modo (Juego.Modo): 'campana' = historia (páginas de relato, un jefe por etapa, avanza EtapaMax); 'mazmorra' = rejugar una etapa desbloqueada con un élite al azar del capítulo; 'arena' = coliseo sin fin."),
     E([JUST_BEGINS()], [
-      SET("Etapa", "=", "clamp(Save.EtapaSel, 1, 10)"), SET("Mult", "=", "1 + 0.45 * (Etapa - 1)"), SET("MundoAncho", "=", MUNDO),
+      SET("Etapa", "=", "clamp(Save.EtapaSel, 1, 12)"), SET("MundoAncho", "=", MUNDO),
       SETS("Capitulo", "=", q("Catacumbas Olvidadas")),
       HIDE("BarraJefeMarco"), HIDE("BarraJefe"), HIDE("TextoJefe"), HIDE("IconoCalavera"), HIDE("Portal"), HIDE("BotonAccion"),
       ANIM("Portal", q("Salida")), ANIM("Puerta", q("Cerrada")), OSET("Puerta", "Abierta", "=", 0), ANIM("Cofre", q("Cerrado")), OSET("Cofre", "Abierto", "=", 0),
       MUSIC("assets/audio/musica_mazmorra.wav", 45), A("SceneBackground", q("7;9;16")),
-      TEXT("TextoJefe", q("CABALLERO DE CENIZA")),
     ], [
-      E([IFN("Etapa", "=", 1)], [SET("PEsq", "=", 0.65), SET("PMur", "=", 1), SET("PCul", "=", 1)]),
-      E([IFN("Etapa", "=", 2)], [SET("PEsq", "=", 0.5), SET("PMur", "=", 0.75), SET("PCul", "=", 1)]),
-      E([IFN("Etapa", ">=", 3)], [SET("PEsq", "=", 0.38), SET("PMur", "=", 0.58), SET("PCul", "=", 0.82)]),
-      E([IFN("Etapa", ">=", 6)], [SET("PEsq", "=", 0.3), SET("PMur", "=", 0.5), SET("PCul", "=", 0.75), SETS("Capitulo", "=", q("Fortaleza Carmesí")),
-        A("SceneBackground", q("16;6;7")), ...theme("fortaleza")]),
+      E([arena()], [SET("Etapa", "=", "clamp(floor((Save.Nivel + 1) / 2), 1, 12)")]),
+      E([], [SET("Mult", "=", "1 + 0.45 * (Etapa - 1)"), SET("PoolIdx", "=", "Etapa"), SET("BossIdx", "=", "Etapa")]),
+      E([IFN("Etapa", ">=", 5)], [SETS("Capitulo", "=", q("Fortaleza Carmesí")), A("SceneBackground", q("16;6;7")), ...theme("fortaleza")]),
+      E([IFN("Etapa", ">=", 9)], [SETS("Capitulo", "=", q("Abismo de Cristal")), A("SceneBackground", q("8;10;26")), ...theme("abismo")]),
+      E([IFS("Juego.Modo", "=", q("mazmorra"))], [SET("BossIdx", "=", "4 * floor((Etapa - 1) / 4) + 1 + floor(RandomFloat(3))")]),
+      E([IFS("Juego.Modo", "=", q("campana")), IFN("Etapa", ">", "Save.IntroVista")], [SETS("MenuAbrir", "=", q("intro")), SET("Save.IntroVista", "=", "Etapa"), SET("Guardar", "=", 1)]),
+      E([arena()], [SETS("Capitulo", "=", q("Coliseo de la Ceniza")), SETS("SalaEstado", "=", q("combate")), SET("Ronda", "=", 1), SET("Oleada", "=", 1),
+        SET("OleadasSala", "=", 1), SET("EsperaOleada", "=", 1.5)]),
       E([], [TEXT("TextoEtapa", "Capitulo + \"  ·  Etapa \" + ToString(Etapa)")]),
     ]),
+    COMMENT("Coliseo: la dificultad sube con cada ronda y la mezcla de enemigos avanza hacia etapas posteriores."),
+    E([arena()], [
+      SET("Mult", "=", "(1 + 0.45 * (Etapa - 1)) * (1 + 0.1 * (Ronda - 1))"), SET("PoolIdx", "=", "clamp(Etapa + floor(Ronda / 4), 1, 12)"),
+      SETS("Info", "=", "\"Ronda \" + ToString(Ronda) + \"   ·   Récord \" + ToString(Save.ArenaMax)"),
+      TEXT("TextoEtapa", "Capitulo + \"  ·  Ronda \" + ToString(Ronda)"),
+    ]),
+    ELSE([], [SETS("Info", "=", "\"Etapa \" + ToString(Etapa) + \"   ·   Sala \" + ToString(Sala + 1) + \" / 5\"")]),
     E([], [
       SETX("TextoEtapa", "=", "CameraX(\"HUD\") - TextoEtapa.Width() / 2"), SETX("TextoJefe", "=", "CameraX(\"HUD\") - TextoJefe.Width() / 2"),
       SETX("BarraJefeMarco", "=", "CameraX(\"HUD\") - 258"), SETX("BarraJefe", "=", "CameraX(\"HUD\") - 249"), SETX("IconoCalavera", "=", "CameraX(\"HUD\") - 280"),
@@ -273,19 +320,28 @@ function startEvents() {
   ]);
 }
 
+/** Victory summary: a header expression followed by the run statistics. */
+const stats = (head) => `${head} + "Enemigos derrotados: " + ToString(Stats.Muertes) + "\\nOro obtenido: " + ToString(Stats.Oro) + "\\nExperiencia: " + ToString(Stats.Exp) + "\\nObjetos recogidos: " + ToString(Stats.Botin)`;
+
 function menus() {
   const hudPause = E([OR(AND(...TAP_ON("BotonPausa")), KEY_JUST("Escape"), KEY_JUST("p")), IFS("Menu", "=", q("")), IFS("MenuAbrir", "=", q("")),
     OIFS("Jugador", "Estado", "!=", q("muerto"))], [SETS("MenuAbrir", "=", q("pausa"))]);
   return [
     hudPause,
     menuSystem({
-      pausa: { title: q("PAUSA"), body: "Capitulo + \"\\nEtapa \" + ToString(Etapa) + \"   ·   Sala \" + ToString(Sala + 1) + \" / 5\\n\\nNivel \" + ToString(Save.Nivel) + \"     Oro \" + ToString(Save.Oro)",
+      pausa: { title: q("PAUSA"), body: "Capitulo + \"\\n\" + Info + \"\\n\\nNivel \" + ToString(Save.Nivel) + \"     Oro \" + ToString(Save.Oro)",
         buttons: [{ label: q("Continuar"), action: "cerrar" }, { label: q("Personaje (atributos y habilidades)"), action: "abrirPersonaje" },
           { label: q("Volver al pueblo"), action: "pueblo" }], close: true },
-      victoria: { title: q("¡VICTORIA!"), body: "\"Etapa \" + ToString(Etapa) + \" completada\\n\\nEnemigos derrotados: \" + ToString(Stats.Muertes) + \"\\nOro obtenido: \" + ToString(Stats.Oro) + \"\\nExperiencia: \" + ToString(Stats.Exp) + \"\\nObjetos recogidos: \" + ToString(Stats.Botin)",
+      victoria: { title: q("¡VICTORIA!"), body: stats("\"Etapa \" + ToString(Etapa) + \" completada\\n\\n\""),
         buttons: [{ label: q("Siguiente etapa"), action: "siguiente" }, { label: q("Volver al pueblo"), action: "pueblo" }], close: false },
+      victoria_m: { title: q("MAZMORRA SUPERADA"), body: stats("BossNombre + \" ha caído\\n\\n\""),
+        buttons: [{ label: q("Repetir la mazmorra"), action: "reintentar" }, { label: q("Volver al pueblo"), action: "pueblo" }], close: false },
+      victoria_final: { title: q("¡LA LLAMA VUELVE!"), body: stats(q("Has completado la campaña.\nEl Coliseo de la Ceniza te espera en el portal.\n\n")),
+        buttons: [{ label: q("Volver al pueblo"), action: "pueblo" }], close: false },
       derrota: { title: q("HAS CAÍDO"), body: q("Conservas el oro, la experiencia\ny el equipo que obtuviste.\n\nMejora tu equipo en el pueblo."),
         buttons: [{ label: q("Reintentar etapa"), action: "reintentar" }, { label: q("Volver al pueblo"), action: "pueblo" }], close: false },
+      arena_fin: { title: q("FIN DEL COMBATE"), body: "\"Has caído en la ronda \" + ToString(Ronda) + \"\\nRécord del coliseo: ronda \" + ToString(Save.ArenaMax) + \"\\n\\nOro obtenido: \" + ToString(Stats.Oro) + \"\\nEnemigos derrotados: \" + ToString(Stats.Muertes)",
+        buttons: [{ label: q("Otro combate"), action: "reintentar" }, { label: q("Volver al pueblo"), action: "pueblo" }], close: false },
       ...characterMenus(),
       ...storyMenus(),
     }),
@@ -296,7 +352,7 @@ function menus() {
     ELSE([IFN("JefeMuerto", "!=", 1)], [A("ChangeTimeScale", 1)]),
     E([IFS("Accion", "=", q("pueblo"))], [A("ChangeTimeScale", 1), SET("Guardar", "=", 1), SETS("Juego.Origen", "=", q("mazmorra")), GOTO("Pueblo")]),
     E([IFS("Accion", "=", q("reintentar"))], [A("ChangeTimeScale", 1), GOTO("Mazmorra")]),
-    E([IFS("Accion", "=", q("siguiente"))], [A("ChangeTimeScale", 1), SET("Save.EtapaSel", "=", "min(10, Etapa + 1)"), SET("Guardar", "=", 1), GOTO("Mazmorra")]),
+    E([IFS("Accion", "=", q("siguiente"))], [A("ChangeTimeScale", 1), SET("Save.EtapaSel", "=", "min(12, Etapa + 1)"), SET("Guardar", "=", 1), GOTO("Mazmorra")]),
   ];
 }
 

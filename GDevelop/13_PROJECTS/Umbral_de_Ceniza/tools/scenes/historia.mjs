@@ -42,6 +42,10 @@ export function pool(etapa) {
   return mk(o);
 }
 
+/** One letter per enemy type: the pool of a stage is a 20-letter string (Relato.Pool[etapa]). */
+export const CODIGOS = { Esqueleto: "E", Murcielago: "M", Cultista: "C", Arquero: "A", Bruto: "B", Espectro: "S", Golem: "G", Limo: "L" };
+export const poolString = (etapa) => pool(etapa).map((t) => CODIGOS[t]).join("");
+
 export const PROLOGO = "Villa Ceniza se levanta sobre el Umbral,\nla puerta que separa este mundo del Abismo.\nLa Orden de la Brasa la mantuvo cerrada\ncon la Llama Eterna... hasta que se apagó.\n\nAhora la ceniza cae del cielo y los muertos\nsalen a caminar. Tú eres la última\nportadora de la Brasa: baja y vuelve\na encender la Llama.";
 
 /** Story page shown the first time you enter each stage (index = stage). */
