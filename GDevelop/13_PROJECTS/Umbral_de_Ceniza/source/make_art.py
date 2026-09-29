@@ -62,7 +62,8 @@ def main():
 
     # ---------------------------------------------------------------- heroes
     timing = {"Idle": (0.14, True), "Run": (0.08, True), "Jump": (0.1, True), "Fall": (0.1, True),
-              "Attack": (0.06, False), "AttackDiag": (0.06, False), "AttackUp": (0.06, False),
+              "Attack": (0.06, False), "Attack2": (0.06, False), "Attack3": (0.07, False),
+              "AttackDiag": (0.06, False), "AttackUp": (0.06, False),
               "Cast": (0.09, False), "Hurt": (0.1, False), "Dead": (0.16, False)}
     hero_mask = box(60, 45, 87, 126)
     portraits = {}

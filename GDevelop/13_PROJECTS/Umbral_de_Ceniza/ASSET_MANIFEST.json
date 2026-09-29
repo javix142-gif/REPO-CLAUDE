@@ -336,6 +336,103 @@
    "origin": "source/make_art.py"
   },
   {
+   "asset_id": "Jugador.Guerrero_Attack2",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Guerrero_Attack2",
+   "files": [
+    "assets/jugador/jugador_guerrero_attack2_0.png",
+    "assets/jugador/jugador_guerrero_attack2_1.png",
+    "assets/jugador/jugador_guerrero_attack2_2.png",
+    "assets/jugador/jugador_guerrero_attack2_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Guerrero_Attack3",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Guerrero_Attack3",
+   "files": [
+    "assets/jugador/jugador_guerrero_attack3_0.png",
+    "assets/jugador/jugador_guerrero_attack3_1.png",
+    "assets/jugador/jugador_guerrero_attack3_2.png",
+    "assets/jugador/jugador_guerrero_attack3_3.png",
+    "assets/jugador/jugador_guerrero_attack3_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.07,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
    "asset_id": "Jugador.Guerrero_Cast",
    "role": "character.player",
    "object": "Jugador",
@@ -807,6 +904,103 @@
    "origin": "source/make_art.py"
   },
   {
+   "asset_id": "Jugador.Maga_Attack2",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Maga_Attack2",
+   "files": [
+    "assets/jugador/jugador_maga_attack2_0.png",
+    "assets/jugador/jugador_maga_attack2_1.png",
+    "assets/jugador/jugador_maga_attack2_2.png",
+    "assets/jugador/jugador_maga_attack2_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Maga_Attack3",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Maga_Attack3",
+   "files": [
+    "assets/jugador/jugador_maga_attack3_0.png",
+    "assets/jugador/jugador_maga_attack3_1.png",
+    "assets/jugador/jugador_maga_attack3_2.png",
+    "assets/jugador/jugador_maga_attack3_3.png",
+    "assets/jugador/jugador_maga_attack3_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.07,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
    "asset_id": "Jugador.Maga_Cast",
    "role": "character.player",
    "object": "Jugador",
@@ -1270,6 +1464,103 @@
    ],
    "frames": 4,
    "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Arquera_Attack2",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Arquera_Attack2",
+   "files": [
+    "assets/jugador/jugador_arquera_attack2_0.png",
+    "assets/jugador/jugador_arquera_attack2_1.png",
+    "assets/jugador/jugador_arquera_attack2_2.png",
+    "assets/jugador/jugador_arquera_attack2_3.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 4,
+   "frame_time_s": 0.06,
+   "loop": false,
+   "directions": "derecha (FlipX para la izquierda)",
+   "pixel_scale": 3,
+   "variant": "",
+   "license": "Original del proyecto, generado por código (sin assets de terceros).",
+   "origin": "source/make_art.py"
+  },
+  {
+   "asset_id": "Jugador.Arquera_Attack3",
+   "role": "character.player",
+   "object": "Jugador",
+   "animation": "Arquera_Attack3",
+   "files": [
+    "assets/jugador/jugador_arquera_attack3_0.png",
+    "assets/jugador/jugador_arquera_attack3_1.png",
+    "assets/jugador/jugador_arquera_attack3_2.png",
+    "assets/jugador/jugador_arquera_attack3_3.png",
+    "assets/jugador/jugador_arquera_attack3_4.png"
+   ],
+   "type": "png",
+   "size_px": {
+    "width": 144,
+    "height": 132
+   },
+   "alpha": true,
+   "pivot": {
+    "x": 72,
+    "y": 126
+   },
+   "collision": [
+    [
+     60,
+     45
+    ],
+    [
+     87,
+     45
+    ],
+    [
+     87,
+     126
+    ],
+    [
+     60,
+     126
+    ]
+   ],
+   "frames": 5,
+   "frame_time_s": 0.07,
    "loop": false,
    "directions": "derecha (FlipX para la izquierda)",
    "pixel_scale": 3,

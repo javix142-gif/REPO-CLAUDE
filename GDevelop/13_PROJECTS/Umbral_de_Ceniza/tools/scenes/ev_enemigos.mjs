@@ -106,7 +106,8 @@ function ai() {
         E([OR(AND(NOT(isBoss()), CMP("Enemigo.Accion", ">=", 0.5)), AND(isBoss(), CMP("Enemigo.Accion", ">=", 1.4)))], [
           OSETS(EN, "Estado", "=", q("mover")), OSET(EN, "Cd", "=", "RandomFloat(0.8)"), OPACITY(EN, 255)]),
       ]),
-      E([est("herido"), NOT(flyer()), CMP("Enemigo.Accion", ">=", 0.32)], [
+      COMMENT("Recuperación del golpe (los voladores lo hacen en su propio bloque). Ojo: NOT(OR(...)) con condiciones de objeto no filtra bien, por eso son dos comparaciones."),
+      E([est("herido"), OIFS(EN, "Tipo", "!=", q("Murcielago")), OIFS(EN, "Tipo", "!=", q("Espectro")), CMP("Enemigo.Accion", ">=", 0.32)], [
         OSETS(EN, "Estado", "=", q("mover")), MAXSPEED(EN, PL, "Enemigo.Vel")]),
 
       // ---------------- melee: Esqueleto / Bruto

@@ -1,11 +1,11 @@
 {
   "structure": {
     "status": "PASS",
-    "evidence": "libGD 5.6.269 carga y re-guarda source/game.json; 0 errores de validación (6.861 instrucciones en 1.782 eventos) y 0 errores de generación de código (tools/build_project.mjs)"
+    "evidence": "libGD 5.6.269 carga y re-guarda source/game.json; 0 errores de validación (6.864 instrucciones en 1.791 eventos) y 0 errores de generación de código (tools/build_project.mjs)"
   },
   "functional": {
     "status": "PASS",
-    "evidence": "evidence/gameplay-tests/REPORT.md (28/28: pruebas 01-25 + 3 de balance, una sola ejecución con BALANCE=1)"
+    "evidence": "evidence/gameplay-tests/REPORT.md (30/30: pruebas 01-27 + 3 de balance, una sola ejecución con BALANCE=1)"
   },
   "gameplay_tests": {
     "status": "PASS",
@@ -19,7 +19,7 @@
   },
   "mobile": {
     "status": "PASS_WITH_WARNINGS",
-    "evidence": "multitouch por CDP (joystick + ataque simultáneos, apuntado arriba/diagonal con el joystick), anclajes en 1560x720, manifiesto Android con screenOrientation=landscape; APK 1.1.0: capa web verificada con el mismo origen que la app (evidence/gameplay-tests/APK_CHECK.md, 13/13, 20:9)",
+    "evidence": "multitouch por CDP (joystick + ataque simultáneos, apuntado arriba/diagonal con el joystick), anclajes en 1560x720, manifiesto Android con screenOrientation=landscape; APK 1.1.1: capa web verificada con el mismo origen que la app (evidence/gameplay-tests/APK_CHECK.md, 13/13, 20:9)",
     "warning": "DEVICE_PASS pendiente (notch real, rendimiento, pausa al minimizar)"
   },
   "performance": {
@@ -36,6 +36,6 @@
   },
   "release": {
     "status": "BLOCKED",
-    "reason": "APK de prueba 1.1.0 (sideload, clave de depuración; misma firma que el 1.0.0 para actualizarlo) generado con tools/build_apk.mjs y verificado: apksigner v2/v3, manifiesto (versionCode 10100, minSdk 24, targetSdk 34, sensorLandscape) y capa web; faltan prueba en dispositivo y AAB firmado para Google Play (export oficial de GDevelop)"
+    "reason": "APK de prueba 1.1.1 (sideload, clave de depuración; misma firma que el 1.0.0 para actualizarlo) generado con tools/build_apk.mjs y verificado: apksigner v2/v3, manifiesto (versionCode 10101, minSdk 24, targetSdk 34, sensorLandscape) y capa web; faltan prueba en dispositivo y AAB firmado para Google Play (export oficial de GDevelop)"
   }
 }

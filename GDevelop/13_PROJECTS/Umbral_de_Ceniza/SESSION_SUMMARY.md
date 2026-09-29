@@ -20,8 +20,8 @@ tu salto con vuelo natural y habilidades nuevas cada 4–5 niveles.
   (se divide), élites, 12 jefes con nombre (Caballero de Ceniza, Reina Carmesí y Coloso del Umbral con patrones propios).
 - **Campaña y actividades:** campaña de 12 etapas en 3 capítulos con prólogo, página de historia por etapa, finales de
   capítulo, diario de 13 entradas y Archivista; modo Mazmorra (élite al azar) y Coliseo de la Ceniza (rondas sin fin).
-- **Arte:** 577 PNG originales (nuevos: héroes con poses de apuntado, enemigos y jefes, efectos, cofres, pinchos, tema abismo).
-- **Versión 1.1.0** (versionCode 10100) para actualizar el APK 1.0.0; una partida guardada por la 1.0.0 se carga y se
+- **Arte:** 604 PNG originales (nuevos: héroes con poses de apuntado, enemigos y jefes, efectos, cofres, pinchos, tema abismo).
+- **Versión 1.1.1** (versionCode 10101) para actualizar el APK 1.0.0; una partida guardada por la 1.0.0 se carga y se
   puede jugar (prueba 25).
 
 ## Archivos
@@ -29,7 +29,7 @@ tu salto con vuelo natural y habilidades nuevas cada 4–5 niveles.
 `tools/scenes/{skills,personaje,historia,util}.mjs`, `source/art/*.py` ampliados.
 
 ## Pruebas
-`BALANCE=1 node tools/test/run_tests.mjs` → 28/28 PASS (25 pruebas de gameplay + 3 de balance) y 13/13 en la capa web del APK (`tools/test/apk_check.mjs`) (ver `evidence/gameplay-tests/REPORT.md`).
+`BALANCE=1 node tools/test/run_tests.mjs` → 30/30 PASS (27 pruebas de gameplay + 3 de balance) y 13/13 en la capa web del APK (`tools/test/apk_check.mjs`) (ver `evidence/gameplay-tests/REPORT.md`).
 Pruebas nuevas 10–25 (combo/salto/apuntado, murciélagos, plataformas y cofres, atributos, habilidades por clase,
 enemigos nuevos, élites, jefes de capítulo, campaña, coliseo, mazmorra, partida de la 1.0.0) y balance con AUTO en las
 etapas 5, 8 y 12.
@@ -47,8 +47,16 @@ plataformas generadas sin la textura del capítulo, voladores que salían por el
 se salían de su plataforma cuando había varios a la vez, y picado del murciélago que a veces pasaba a >100 px del héroe
 (ahora atraviesa su pecho). Detalle en `PROJECT_STATE.md > Bugs`.
 
+## Ajuste 1.1.1 (misma fecha, petición posterior)
+- **Enemigos «pasmados»:** los esqueletos (y cultistas, arqueros y limos) se quedaban en estado «herido» para siempre tras un golpe
+  por una condición de recuperación mal formada (`NOT(OR(...))` con condiciones de objeto). Corregido y probado (prueba 27).
+- **Combo con tres animaciones:** golpe 1 / 2 / 3 con animación propia en las tres clases (Guerrero: tajo abajo → tajo arriba →
+  golpe fuerte con la espada sobre la cabeza). El tercero ya no muestra texto, sólo las partículas del golpe fuerte, y golpea 0,1 s
+  más tarde para coincidir con su preparación. La ventana para encadenar no cambió (si tardas, vuelve al golpe 1). Prueba 26.
+- 27 PNG nuevos (`jugador_*_attack2_*`, `jugador_*_attack3_*`).
+
 ## Riesgos
-- APK 1.1.0 compilado pero **no probado en un dispositivo real** (no hay emulador en el entorno): tacto del apuntado
+- APK 1.1.1 compilado pero **no probado en un dispositivo real** (no hay emulador en el entorno): tacto del apuntado
   con el joystick, rendimiento con oleadas grandes y jefes, notch, audio y botón Atrás siguen sin validar.
 - El balance se ajustó con bot/AUTO, no con jugadores: con AUTO las clases a distancia superan las etapas 8 y 12 casi
   sin daño, así que las etapas altas pueden resultar fáciles; conviene retocar con partidas reales.
@@ -60,6 +68,6 @@ Abrir `source/game.json` en GDevelop. La lógica compartida está en los eventos
 globales. `README.md` del proyecto explica controles, modos, Android y pipeline; `tools/README.md` el generador y las reglas del motor.
 
 ## Próxima instrucción
-"Instala builds/UmbralDeCeniza-1.1.0.apk (encima de la 1.0.0 si la tienes) en un Android real y reporta tacto del
+"Instala builds/UmbralDeCeniza-1.1.1.apk (encima de la 1.0.0 si la tienes) en un Android real y reporta tacto del
 apuntado/doble salto, notch, rendimiento, audio y botón Atrás; dime también si las etapas altas resultan fáciles o
 difíciles para ajustar el balance."

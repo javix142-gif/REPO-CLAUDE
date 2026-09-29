@@ -51,7 +51,11 @@ T combate automático, C ficha del personaje, Esc pausa.
   nivel 1; una segunda habilidad por ranura se aprende en los niveles **4, 8 y 12** y se equipa desde la ficha.
 - **Combate:** hitboxes y proyectiles del jugador; daño = ATK×multiplicador ± 10 %, 10 % crítico ×1,8, reducido por DEF.
   **Combo:** tres ataques básicos seguidos (ventana de 0,75 s) → el tercero es potenciado (×1,9 de daño, más grande, con
-  retroceso fuerte). **Apuntado:** hacia delante, arriba o en diagonal (también en diagonal hacia abajo en el aire).
+  retroceso fuerte). Cada golpe de la cadena tiene **su propia animación** (Guerrero: tajo descendente que termina con la espada
+  abajo → tajo ascendente que la deja arriba → golpe fuerte con la espada alzada sobre la cabeza y golpe en picado; Maga: estocada
+  → giro ascendente del bastón → bastón en alto y lanzamiento; Arquera: disparo normal → disparo rápido agachada → disparo cargado
+  con flecha brillante); el 3.º no muestra texto, sólo las partículas del golpe fuerte, y golpea 0,1 s más tarde por su
+  preparación más larga. Si no se encadena a tiempo, el combo vuelve al golpe 1. **Apuntado:** hacia delante, arriba o en diagonal (también en diagonal hacia abajo en el aire).
   **Doble salto.** Números de daño flotantes, retroceso, parpadeo de invulnerabilidad.
 - **Atributos (RPG):** +3 puntos por nivel (`Save.Puntos`, derivados del nivel) para repartir en Fuerza (ataque), Vitalidad
   (vida y algo de defensa), Destreza (crítico y velocidad de ataque) y Espíritu (maná, regeneración y recarga de

@@ -259,6 +259,81 @@
      ]
     },
     {
+     "name": "Guerrero_Attack2",
+     "frames": [
+      "assets/jugador/jugador_guerrero_attack2_0.png",
+      "assets/jugador/jugador_guerrero_attack2_1.png",
+      "assets/jugador/jugador_guerrero_attack2_2.png",
+      "assets/jugador/jugador_guerrero_attack2_3.png"
+     ],
+     "dt": 0.06,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
+     "name": "Guerrero_Attack3",
+     "frames": [
+      "assets/jugador/jugador_guerrero_attack3_0.png",
+      "assets/jugador/jugador_guerrero_attack3_1.png",
+      "assets/jugador/jugador_guerrero_attack3_2.png",
+      "assets/jugador/jugador_guerrero_attack3_3.png",
+      "assets/jugador/jugador_guerrero_attack3_4.png"
+     ],
+     "dt": 0.07,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
      "name": "Guerrero_Cast",
      "frames": [
       "assets/jugador/jugador_guerrero_cast_0.png",
@@ -620,6 +695,81 @@
      ]
     },
     {
+     "name": "Maga_Attack2",
+     "frames": [
+      "assets/jugador/jugador_maga_attack2_0.png",
+      "assets/jugador/jugador_maga_attack2_1.png",
+      "assets/jugador/jugador_maga_attack2_2.png",
+      "assets/jugador/jugador_maga_attack2_3.png"
+     ],
+     "dt": 0.06,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
+     "name": "Maga_Attack3",
+     "frames": [
+      "assets/jugador/jugador_maga_attack3_0.png",
+      "assets/jugador/jugador_maga_attack3_1.png",
+      "assets/jugador/jugador_maga_attack3_2.png",
+      "assets/jugador/jugador_maga_attack3_3.png",
+      "assets/jugador/jugador_maga_attack3_4.png"
+     ],
+     "dt": 0.07,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
      "name": "Maga_Cast",
      "frames": [
       "assets/jugador/jugador_maga_cast_0.png",
@@ -952,6 +1102,81 @@
       "assets/jugador/jugador_arquera_attackup_3.png"
      ],
      "dt": 0.06,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
+     "name": "Arquera_Attack2",
+     "frames": [
+      "assets/jugador/jugador_arquera_attack2_0.png",
+      "assets/jugador/jugador_arquera_attack2_1.png",
+      "assets/jugador/jugador_arquera_attack2_2.png",
+      "assets/jugador/jugador_arquera_attack2_3.png"
+     ],
+     "dt": 0.06,
+     "loop": false,
+     "origin": [
+      72,
+      126
+     ],
+     "mask": [
+      [
+       60,
+       45
+      ],
+      [
+       87,
+       45
+      ],
+      [
+       87,
+       126
+      ],
+      [
+       60,
+       126
+      ]
+     ],
+     "size": [
+      144,
+      132
+     ]
+    },
+    {
+     "name": "Arquera_Attack3",
+     "frames": [
+      "assets/jugador/jugador_arquera_attack3_0.png",
+      "assets/jugador/jugador_arquera_attack3_1.png",
+      "assets/jugador/jugador_arquera_attack3_2.png",
+      "assets/jugador/jugador_arquera_attack3_3.png",
+      "assets/jugador/jugador_arquera_attack3_4.png"
+     ],
+     "dt": 0.07,
      "loop": false,
      "origin": [
       72,

@@ -237,11 +237,15 @@ function attackEvents() {
       E([], [OSET(J, "ComboT", "=", "Stat.CdAtk + 0.45")]),
       E([OIFN(J, "Combo", "=", 3)], [OSET(J, "PotF", "=", 1.9), OSET(J, "PotS", "=", 1.4), OSET(J, "Final", "=", 1),
         OSET(J, "CdAtk", "=", "Stat.CdAtk * 1.4")]),
+      COMMENT("Tres animaciones distintas del ataque de frente, una por golpe del combo: 1 = Attack, 2 = Attack2, 3 = Attack3 (el golpe fuerte). Apuntando en diagonal o hacia arriba se usan AttackDiag / AttackUp."),
       E([OR(IFN("In.Aim", "=", 0), IFN("In.Aim", "=", 3))], [clsAnim("Attack")]),
+      E([OR(IFN("In.Aim", "=", 0), IFN("In.Aim", "=", 3)), OIFN(J, "Combo", "=", 2)], [clsAnim("Attack2")]),
+      E([OR(IFN("In.Aim", "=", 0), IFN("In.Aim", "=", 3)), OIFN(J, "Combo", "=", 3)], [clsAnim("Attack3")]),
       E([IFN("In.Aim", "=", 1)], [clsAnim("AttackDiag")]),
       E([IFN("In.Aim", "=", 2)], [clsAnim("AttackUp")]),
     ]),
-    E([est("ataque"), OIFN(J, "Golpeo", "=", 0), CMP("Jugador.Accion", ">=", "Stat.HitT")], [OSET(J, "Golpeo", "=", 1)], [
+    COMMENT("El impacto llega en el momento del tajo/disparo de la animación; el golpe fuerte (Final = 1) tiene una preparación más larga y golpea 0,1 s más tarde."),
+    E([est("ataque"), OIFN(J, "Golpeo", "=", 0), CMP("Jugador.Accion", ">=", "Stat.HitT + 0.1 * Jugador.Final")], [OSET(J, "Golpeo", "=", 1)], [
       E([IFS("Save.Clase", "=", q(G))], [SOUND("assets/audio/tajo.wav", 55, "RandomFloatInRange(0.9, 1.1) - 0.25 * Jugador.Final")], [
         hitE({ x: `Jugador.X() + Jugador.Dir * ${ca} * 64`, y: `Jugador.Y() - 48 - ${sa} * 82`, w: "150 * Jugador.PotS", h: "112 * Jugador.PotS",
           dano: "Jugador.PotF", vida: 0.1, fuerte: "Jugador.Final" }),
@@ -254,10 +258,9 @@ function attackEvents() {
       ]),
       E([IFS("Save.Clase", "=", q(R))], shoot({ anim: "Flecha", ox: 44, oy: 58, speed: 1150, vida: 0.7, tipo: "Flecha",
         sound: "assets/audio/flecha.wav", vol: 50, pitch: "RandomFloatInRange(0.95, 1.1) - 0.2 * Jugador.Final" }), [flipFxByDir("ProyectilJugador")]),
-      COMMENT("Retroalimentación del combo: texto flotante y, en el golpe final, sacudida, destello y sonido."),
+      COMMENT("Retroalimentación del combo: texto en el 2.º golpe; el golpe final (3.º) no lleva texto, sólo sacudida, sonido y las partículas del golpe fuerte."),
       E([OIFN(J, "Combo", "=", 2)], floatText("Jugador.X()", "Jugador.Y() - 150", q("Combo x2"), "255;255;255", 22)),
-      E([OIFN(J, "Final", "=", 1)], [SET("Temblor", "=", "max(Temblor, 0.12)"), SET("FuerzaTemblor", "=", 4), SOUND("assets/audio/critico.wav", 60, 0.8),
-        ...floatText("Jugador.X()", "Jugador.Y() - 150", q("¡GOLPE FINAL!"), "255;190;60", 34)], [
+      E([OIFN(J, "Final", "=", 1)], [SET("Temblor", "=", "max(Temblor, 0.12)"), SET("FuerzaTemblor", "=", 4), SOUND("assets/audio/critico.wav", 60, 0.8)], [
         fxE("Impacto", `Jugador.X() + Jugador.Dir * ${ca} * 75`, `Jugador.Y() - 55 - ${sa} * 75`, { scale: 0.8 }),
       ]),
     ]),

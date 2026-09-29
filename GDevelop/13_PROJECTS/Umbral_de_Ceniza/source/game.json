@@ -18,7 +18,7 @@
     "scaleMode": "nearest",
     "sizeOnStartupMode": "adaptWidth",
     "templateSlug": "",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "name": "Umbral de Ceniza",
     "description": "RPG de acción pixel-art 2D para móvil: elige clase, limpia mazmorras sala por sala, consigue botín por rareza y derrota al Caballero de Ceniza.",
     "author": "",
@@ -3151,6 +3151,78 @@
         "userAdded": false
       },
       {
+        "file": "assets/jugador/jugador_arquera_attack2_0.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_arquera_attack2_0.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_arquera_attack2_1.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_arquera_attack2_1.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_arquera_attack2_2.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_arquera_attack2_2.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_arquera_attack2_3.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_arquera_attack2_3.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_arquera_attack3_0.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_arquera_attack3_0.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_arquera_attack3_1.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_arquera_attack3_1.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_arquera_attack3_2.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_arquera_attack3_2.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_arquera_attack3_3.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_arquera_attack3_3.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_arquera_attack3_4.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_arquera_attack3_4.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
         "file": "assets/jugador/jugador_arquera_attack_0.png",
         "kind": "image",
         "metadata": "",
@@ -3399,6 +3471,78 @@
         "userAdded": false
       },
       {
+        "file": "assets/jugador/jugador_guerrero_attack2_0.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_guerrero_attack2_0.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_guerrero_attack2_1.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_guerrero_attack2_1.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_guerrero_attack2_2.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_guerrero_attack2_2.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_guerrero_attack2_3.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_guerrero_attack2_3.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_guerrero_attack3_0.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_guerrero_attack3_0.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_guerrero_attack3_1.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_guerrero_attack3_1.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_guerrero_attack3_2.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_guerrero_attack3_2.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_guerrero_attack3_3.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_guerrero_attack3_3.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_guerrero_attack3_4.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_guerrero_attack3_4.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
         "file": "assets/jugador/jugador_guerrero_attack_0.png",
         "kind": "image",
         "metadata": "",
@@ -3643,6 +3787,78 @@
         "kind": "image",
         "metadata": "",
         "name": "assets/jugador/jugador_guerrero_run_5.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_maga_attack2_0.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_maga_attack2_0.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_maga_attack2_1.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_maga_attack2_1.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_maga_attack2_2.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_maga_attack2_2.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_maga_attack2_3.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_maga_attack2_3.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_maga_attack3_0.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_maga_attack3_0.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_maga_attack3_1.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_maga_attack3_1.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_maga_attack3_2.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_maga_attack3_2.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_maga_attack3_3.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_maga_attack3_3.png",
+        "smoothed": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/jugador/jugador_maga_attack3_4.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/jugador/jugador_maga_attack3_4.png",
         "smoothed": false,
         "userAdded": false
       },
@@ -6106,6 +6322,354 @@
           ]
         },
         {
+          "name": "Guerrero_Attack2",
+          "useMultipleDirections": false,
+          "directions": [
+            {
+              "looping": false,
+              "timeBetweenFrames": 0.06,
+              "sprites": [
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_guerrero_attack2_0.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_guerrero_attack2_1.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_guerrero_attack2_2.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_guerrero_attack2_3.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Guerrero_Attack3",
+          "useMultipleDirections": false,
+          "directions": [
+            {
+              "looping": false,
+              "timeBetweenFrames": 0.07,
+              "sprites": [
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_guerrero_attack3_0.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_guerrero_attack3_1.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_guerrero_attack3_2.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_guerrero_attack3_3.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_guerrero_attack3_4.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "Guerrero_Cast",
           "useMultipleDirections": false,
           "directions": [
@@ -7342,6 +7906,354 @@
           ]
         },
         {
+          "name": "Maga_Attack2",
+          "useMultipleDirections": false,
+          "directions": [
+            {
+              "looping": false,
+              "timeBetweenFrames": 0.06,
+              "sprites": [
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_maga_attack2_0.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_maga_attack2_1.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_maga_attack2_2.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_maga_attack2_3.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Maga_Attack3",
+          "useMultipleDirections": false,
+          "directions": [
+            {
+              "looping": false,
+              "timeBetweenFrames": 0.07,
+              "sprites": [
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_maga_attack3_0.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_maga_attack3_1.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_maga_attack3_2.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_maga_attack3_3.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_maga_attack3_4.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "Maga_Cast",
           "useMultipleDirections": false,
           "directions": [
@@ -8540,6 +9452,354 @@
                 {
                   "hasCustomCollisionMask": true,
                   "image": "assets/jugador/jugador_arquera_attackup_3.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Arquera_Attack2",
+          "useMultipleDirections": false,
+          "directions": [
+            {
+              "looping": false,
+              "timeBetweenFrames": 0.06,
+              "sprites": [
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_arquera_attack2_0.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_arquera_attack2_1.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_arquera_attack2_2.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_arquera_attack2_3.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Arquera_Attack3",
+          "useMultipleDirections": false,
+          "directions": [
+            {
+              "looping": false,
+              "timeBetweenFrames": 0.07,
+              "sprites": [
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_arquera_attack3_0.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_arquera_attack3_1.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_arquera_attack3_2.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_arquera_attack3_3.png",
+                  "points": [],
+                  "originPoint": {
+                    "name": "origine",
+                    "x": 72,
+                    "y": 126
+                  },
+                  "centerPoint": {
+                    "automatic": true,
+                    "name": "centre",
+                    "x": 0,
+                    "y": 0
+                  },
+                  "customCollisionMask": [
+                    [
+                      {
+                        "x": 60,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 45
+                      },
+                      {
+                        "x": 87,
+                        "y": 126
+                      },
+                      {
+                        "x": 60,
+                        "y": 126
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "hasCustomCollisionMask": true,
+                  "image": "assets/jugador/jugador_arquera_attack3_4.png",
                   "points": [],
                   "originPoint": {
                     "name": "origine",
@@ -61111,6 +62371,18 @@
                   ]
                 },
                 {
+                  "type": "BuiltinCommonInstructions::Comment",
+                  "color": {
+                    "b": 109,
+                    "g": 230,
+                    "r": 255,
+                    "textB": 0,
+                    "textG": 0,
+                    "textR": 0
+                  },
+                  "comment": "Tres animaciones distintas del ataque de frente, una por golpe del combo: 1 = Attack, 2 = Attack2, 3 = Attack3 (el golpe fuerte). Apuntando en diagonal o hacia arriba se usan AttackDiag / AttackUp."
+                },
+                {
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
@@ -61152,6 +62424,120 @@
                         "Animation",
                         "=",
                         "Save.Clase + \"_Attack\""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::Or"
+                      },
+                      "parameters": [],
+                      "subInstructions": [
+                        {
+                          "type": {
+                            "value": "NumberVariable"
+                          },
+                          "parameters": [
+                            "In.Aim",
+                            "=",
+                            "0"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "NumberVariable"
+                          },
+                          "parameters": [
+                            "In.Aim",
+                            "=",
+                            "3"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "NumberObjectVariable"
+                      },
+                      "parameters": [
+                        "Jugador",
+                        "Combo",
+                        "=",
+                        "2"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                      },
+                      "parameters": [
+                        "Jugador",
+                        "Animation",
+                        "=",
+                        "Save.Clase + \"_Attack2\""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::Or"
+                      },
+                      "parameters": [],
+                      "subInstructions": [
+                        {
+                          "type": {
+                            "value": "NumberVariable"
+                          },
+                          "parameters": [
+                            "In.Aim",
+                            "=",
+                            "0"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "NumberVariable"
+                          },
+                          "parameters": [
+                            "In.Aim",
+                            "=",
+                            "3"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "NumberObjectVariable"
+                      },
+                      "parameters": [
+                        "Jugador",
+                        "Combo",
+                        "=",
+                        "3"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                      },
+                      "parameters": [
+                        "Jugador",
+                        "Animation",
+                        "=",
+                        "Save.Clase + \"_Attack3\""
                       ]
                     }
                   ]
@@ -61215,6 +62601,18 @@
               ]
             },
             {
+              "type": "BuiltinCommonInstructions::Comment",
+              "color": {
+                "b": 109,
+                "g": 230,
+                "r": 255,
+                "textB": 0,
+                "textG": 0,
+                "textR": 0
+              },
+              "comment": "El impacto llega en el momento del tajo/disparo de la animación; el golpe fuerte (Final = 1) tiene una preparación más larga y golpea 0,1 s más tarde."
+            },
+            {
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
                 {
@@ -61246,7 +62644,7 @@
                   "parameters": [
                     "Jugador.Accion",
                     ">=",
-                    "Stat.HitT"
+                    "Stat.HitT + 0.1 * Jugador.Final"
                   ]
                 }
               ],
@@ -62070,7 +63468,7 @@
                     "textG": 0,
                     "textR": 0
                   },
-                  "comment": "Retroalimentación del combo: texto flotante y, en el golpe final, sacudida, destello y sonido."
+                  "comment": "Retroalimentación del combo: texto en el 2.º golpe; el golpe final (3.º) no lleva texto, sólo sacudida, sonido y las partículas del golpe fuerte."
                 },
                 {
                   "type": "BuiltinCommonInstructions::Standard",
@@ -62220,90 +63618,6 @@
                         "no",
                         "60",
                         "0.8"
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "Create"
-                      },
-                      "parameters": [
-                        "",
-                        "TextoDano",
-                        "Jugador.X()",
-                        "Jugador.Y() - 150",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "TextContainerCapability::TextContainerBehavior::SetValue"
-                      },
-                      "parameters": [
-                        "TextoDano",
-                        "Text",
-                        "=",
-                        "\"¡GOLPE FINAL!\""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "TextObject::ChangeColor"
-                      },
-                      "parameters": [
-                        "TextoDano",
-                        "\"255;190;60\""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "TextObject::Text::SetFontSize"
-                      },
-                      "parameters": [
-                        "TextoDano",
-                        "=",
-                        "34"
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "SetNumberObjectVariable"
-                      },
-                      "parameters": [
-                        "TextoDano",
-                        "VY",
-                        "=",
-                        "-120"
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "SetNumberObjectVariable"
-                      },
-                      "parameters": [
-                        "TextoDano",
-                        "Vida",
-                        "=",
-                        "0"
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "SetZOrder"
-                      },
-                      "parameters": [
-                        "TextoDano",
-                        "=",
-                        "40"
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "SetX"
-                      },
-                      "parameters": [
-                        "TextoDano",
-                        "-",
-                        "TextoDano.Width() / 2"
                       ]
                     }
                   ],
@@ -83444,6 +84758,18 @@
                   ]
                 },
                 {
+                  "type": "BuiltinCommonInstructions::Comment",
+                  "color": {
+                    "b": 109,
+                    "g": 230,
+                    "r": 255,
+                    "textB": 0,
+                    "textG": 0,
+                    "textR": 0
+                  },
+                  "comment": "Recuperación del golpe (los voladores lo hacen en su propio bloque). Ojo: NOT(OR(...)) con condiciones de objeto no filtra bien, por eso son dos comparaciones."
+                },
+                {
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
@@ -83459,33 +84785,24 @@
                     },
                     {
                       "type": {
-                        "inverted": true,
-                        "value": "BuiltinCommonInstructions::Or"
+                        "value": "StringObjectVariable"
                       },
-                      "parameters": [],
-                      "subInstructions": [
-                        {
-                          "type": {
-                            "value": "StringObjectVariable"
-                          },
-                          "parameters": [
-                            "Enemigo",
-                            "Tipo",
-                            "=",
-                            "\"Murcielago\""
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "StringObjectVariable"
-                          },
-                          "parameters": [
-                            "Enemigo",
-                            "Tipo",
-                            "=",
-                            "\"Espectro\""
-                          ]
-                        }
+                      "parameters": [
+                        "Enemigo",
+                        "Tipo",
+                        "!=",
+                        "\"Murcielago\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "StringObjectVariable"
+                      },
+                      "parameters": [
+                        "Enemigo",
+                        "Tipo",
+                        "!=",
+                        "\"Espectro\""
                       ]
                     },
                     {

@@ -275,6 +275,9 @@ def _draw_weapon(c, cls, pal, p, fhand, bhand):
             c.px(tip[0], tip[1], "#e8eef4")
             c.px(tail[0] - 1, tail[1] - 1, pal["feather"])
             c.px(tail[0] - 1, tail[1] + 1, pal["feather"])
+            if p["glow"]:  # charged arrow: glowing tip (only the heavy 3rd hit of the combo uses it)
+                c.ellipse(tip[0] - 2, tip[1] - 2, tip[0] + 2, tip[1] + 2, None, outline=mix(pal["magic"], "#ffffff", 0.3))
+                c.px(tip[0], tip[1], "#ffffff")
 
 
 # ---------------------------------------------------------------------------
@@ -360,6 +363,56 @@ def hero_poses(cls):
             P(lean=-1, fh=(2, -7), bh=(0, -5), wang=0, string=3, arrow=1, aim=-78, ff=(3, 0), bf=(-4, 0)),
             P(lean=0, fh=(2, -7), bh=(-1, -4), wang=0, string=0, arrow=0, aim=-78, ff=(3, 0), bf=(-4, 0)),
             P(lean=0, fh=(3, 0), bh=(-1, 4), wang=60, string=0),
+        ]
+    # Basic-attack chain. "Attack" (above) is hit 1; these are hit 2 and the heavy hit 3 of the combo (the events pick
+    # the animation from Jugador.Combo). The chain reads as one flow: each one ends where the next one starts.
+    if melee:
+        # 2: rising slash - starts with the blade low (where hit 1 ended) and sweeps up, ending high
+        anims["Attack2"] = [
+            P(lean=-1, fh=(-2, 4), bh=(-2, 4), wang=75, ff=(2, 0), bf=(-3, 0), cape=0),
+            P(lean=2, fh=(4, 1), bh=(-3, 2), wang=5, ff=(5, 0), bf=(-4, 0), cape=3),
+            P(lean=2, fh=(4, -4), bh=(-3, 0), wang=-65, ff=(5, 0), bf=(-4, 0), cape=3),
+            P(lean=1, fh=(3, -7), bh=(-2, -2), wang=-125, ff=(4, 0), bf=(-3, 0), cape=2),
+        ]
+        # 3: heavy hit - gathers, raises the blade overhead with the whole body, then slams it down
+        anims["Attack3"] = [
+            P(lean=-2, bob=1, fh=(-2, -4), bh=(-1, -4), wang=-130, ff=(2, 0), bf=(-4, 0), cape=-1),
+            P(lean=-3, fh=(0, -8), bh=(-1, -7), wang=-100, ff=(2, 0), bf=(-5, 0), cape=-2),
+            P(lean=3, bob=1, fh=(5, 0), bh=(-1, 1), wang=-20, ff=(6, 0), bf=(-5, 0), cape=5),
+            P(lean=3, bob=2, fh=(5, 5), bh=(-1, 4), wang=65, ff=(6, 0), bf=(-5, 0), cape=5),
+            P(lean=2, bob=1, fh=(4, 4), bh=(-2, 4), wang=50, ff=(5, 0), bf=(-4, 0), cape=3),
+        ]
+    elif staff:
+        # 2: upward flick of the staff, orb flaring
+        anims["Attack2"] = [
+            P(lean=-1, fh=(0, 3), bh=(-2, 3), wang=-20, cape=0),
+            P(lean=1, fh=(3, -1), bh=(-2, 1), wang=-60, ff=(3, 0), bf=(-3, 0), glow=2, cape=2),
+            P(lean=1, fh=(3, -5), bh=(-1, -2), wang=-105, ff=(3, 0), bf=(-2, 0), glow=3, cape=2, hat=1),
+            P(lean=0, fh=(2, -4), bh=(-1, -1), wang=-95, glow=2, cape=1),
+        ]
+        # 3: two hands raise the staff high, the orb blazes, then it is thrown forward
+        anims["Attack3"] = [
+            P(lean=-2, bob=1, fh=(1, -3), bh=(0, -3), wang=-100, glow=1, cape=-1, hat=1),
+            P(lean=-2, bob=-1, fh=(2, -8), bh=(1, -8), wang=-95, glow=3, cape=-2, hat=2),
+            P(lean=3, bob=1, fh=(5, 0), bh=(1, 0), wang=-15, ff=(5, 0), bf=(-4, 0), glow=3, cape=4),
+            P(lean=3, bob=1, fh=(5, 1), bh=(1, 1), wang=-10, ff=(5, 0), bf=(-4, 0), glow=3, cape=4),
+            P(lean=1, fh=(3, 1), bh=(-1, 4), wang=-60, ff=(3, 0), bf=(-2, 0), cape=2),
+        ]
+    else:
+        # 2: quick snap shot from a low, wide lunge (short draw)
+        anims["Attack2"] = [
+            P(lean=2, bob=3, fh=(5, -1), bh=(2, 0), wang=0, string=1, arrow=1, ff=(7, 0), bf=(-7, 0)),
+            P(lean=2, bob=3, fh=(5, -1), bh=(-1, 0), wang=0, string=3, arrow=1, ff=(7, 0), bf=(-7, 0)),
+            P(lean=3, bob=3, fh=(5, -1), bh=(-2, 1), wang=0, string=0, arrow=0, ff=(7, 0), bf=(-7, 0)),
+            P(lean=1, bob=1, fh=(4, 1), bh=(-1, 4), wang=60, string=0, ff=(4, 0), bf=(-4, 0)),
+        ]
+        # 3: full draw with a glowing arrow, then a recoil
+        anims["Attack3"] = [
+            P(lean=-1, fh=(5, -1), bh=(3, 0), wang=0, string=0, arrow=1, ff=(3, 0), bf=(-5, 0)),
+            P(lean=-2, fh=(6, -1), bh=(-1, 0), wang=0, string=4, arrow=1, ff=(3, 0), bf=(-5, 0), glow=1),
+            P(lean=-3, bob=1, fh=(6, -1), bh=(-3, 1), wang=0, string=6, arrow=1, ff=(3, 0), bf=(-6, 0), glow=3),
+            P(lean=-1, fh=(6, -1), bh=(-4, 2), wang=0, string=0, arrow=0, ff=(3, 0), bf=(-6, 0)),
+            P(lean=0, fh=(4, 1), bh=(-1, 4), wang=60, string=0),
         ]
     anims["Cast"] = [
         P(lean=0, fh=(2, -5), bh=(1, -5), wang=-90 if not staff else -85, glow=1, cape=1, hat=1),

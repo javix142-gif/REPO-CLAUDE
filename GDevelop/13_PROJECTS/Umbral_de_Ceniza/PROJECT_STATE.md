@@ -7,11 +7,11 @@ rareza, pueblo con herrería/alquimista, jefes), con arte/audio originales. Ver 
 ## Versión GDevelop
 Proyecto generado y validado con **libGD / GDJS 5.6.269** (`gdcore-tools@2.0.0-gd-v5.6.269-autobuild`).
 Abre en GDevelop 5.6.269 o posterior. Extensión incluida: *Multitouch joystick and buttons (sprite)* 1.9.0 (oficial).
-Versión del proyecto: **1.1.0** (versionCode 10100; actualiza el APK 1.0.0 si se firma con la misma clave).
+Versión del proyecto: **1.1.1** (versionCode 10101; actualiza el APK 1.0.0 si se firma con la misma clave).
 
 ## Estado
 Jugable completo en HTML5 (export oficial). **APK de prueba** instalable generado con `tools/build_apk.mjs`
-(`builds/UmbralDeCeniza-1.1.0.apk`, firmado con clave de depuración) y verificado en su capa web; el proyecto Cordova
+(`builds/UmbralDeCeniza-1.1.1.apk`, firmado con clave de depuración) y verificado en su capa web; el proyecto Cordova
 del export oficial también se genera. Sin prueba en dispositivo real todavía.
 
 Contenido de la versión 1.1.0 (segunda ronda de peticiones del usuario): combo de 3 golpes, doble salto, ataque hacia
@@ -40,7 +40,7 @@ enemigos nuevos (Arquero, Espectro, Gólem, Limo) + élites, modo mazmorra y Col
 
 ## Archivos importantes
 - `source/game.json` — proyecto GDevelop (fuente de verdad a partir de ahora).
-- `source/assets/`, `source/fonts/` — recursos (577 PNG, 28 WAV). `source/make_art.py` + `source/art/*.py`, `source/make_audio.py` — generadores.
+- `source/assets/`, `source/fonts/` — recursos (604 PNG, 28 WAV). `source/make_art.py` + `source/art/*.py`, `source/make_audio.py` — generadores.
 - `tools/` — generador/validador (`build_project.mjs`), export (`export.mjs`), pruebas (`test/`).
 - `tools/build_apk.mjs` + `tools/android/` — APK de prueba (actividad WebView propia) sin Android Studio.
 - `.github/workflows/android-apk.yml` — APK de depuración vía Cordova en GitHub Actions (no ejecutado aún).
@@ -70,11 +70,14 @@ disparaba (tiempo de preparación mayor que su animación de lanzar), invocació
 animación, plataformas generadas sin la textura del capítulo, espectros y murciélagos que salían de la sala por el
 lado, **enemigos apostados que se salían de su plataforma cuando había varios a la vez** (el límite comparaba sólo la
 primera instancia; ahora se procesa con «Para cada»).
+Ronda 3 (1.1.1): **esqueletos, cultistas, arqueros y limos se quedaban «pasmados» para siempre tras un golpe**: la
+condición de recuperación usaba `NOT(OR(...))` con condiciones de objeto, que no filtra bien y nunca se cumplía; ahora son
+dos comparaciones de tipo simples (prueba 27).
 Abiertos: ninguno conocido.
 
 ## Gates
 Ver `GATE_STATUS.json` y `evidence/gameplay-tests/REPORT.md`.
-- Functional: PASS — 28/28 pruebas de gameplay en una sola ejecución (25 de juego + 3 de balance; `evidence/gameplay-tests/REPORT.md`), más 13/13 comprobaciones de la capa web del APK.
+- Functional: PASS — 30/30 pruebas de gameplay en una sola ejecución (27 de juego + 3 de balance; `evidence/gameplay-tests/REPORT.md`), más 13/13 comprobaciones de la capa web del APK.
 - Gameplay: PASS — etapa 1 completa con bot y con AUTO; campaña, coliseo y mazmorra recorridos por prueba; balance con AUTO en las etapas 5 (Guerrero nv. 9), 8 (Maga nv. 15) y 12 (Arquera nv. 23) superado. Ojo: con AUTO las clases a distancia terminan las etapas 8 y 12 casi sin daño (posible dificultad baja; sin datos de jugadores reales).
 - Visual: PASS_WITH_WARNINGS — capturas reales 16:9 y 19.5:9; falta captura en dispositivo.
 - Mobile: PASS_WITH_WARNINGS — multitouch simulado (CDP), anclajes y orientación verificados; APK de prueba
@@ -88,7 +91,7 @@ Ver `GATE_STATUS.json` y `evidence/gameplay-tests/REPORT.md`.
 `APK_CHECK.md` (capa web del APK).
 
 ## Próximo paso
-1. Instalar `builds/UmbralDeCeniza-1.1.0.apk` en un teléfono (ver `README.md > Android`).
+1. Instalar `builds/UmbralDeCeniza-1.1.1.apk` en un teléfono (ver `README.md > Android`).
 2. Validar en dispositivo: tacto (apuntar arriba/diagonal con el joystick, doble salto), notch, rendimiento (60 FPS en
    gama media con oleadas grandes y jefes), pausa al minimizar, audio, botón Atrás.
 3. Ajustar balance con jugadores reales (élites, jefes de capítulo, coliseo); ideas: tablón de encargos, 4.ª clase.

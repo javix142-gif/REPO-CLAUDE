@@ -62,8 +62,8 @@ actividad a pantalla completa con un WebView que ejecuta el export HTML5 desde d
 1. Copia el APK al teléfono (o descárgalo desde donde te lo hayan enviado) y ábrelo.
 2. Android pedirá permitir **instalar apps desconocidas** para la app con la que lo abriste (Archivos, Chrome…).
    Si Play Protect dice que no reconoce al desarrollador, elige **Instalar de todas formas**.
-3. Si ya tenías la versión 1.0.0, instala la 1.1.0 **encima**: es el mismo paquete, con la misma clave de firma y un
-   código de versión mayor, y se conserva tu partida (la 1.1.0 lee el guardado de la 1.0.0).
+3. Si ya tenías la versión 1.0.0, instala la 1.1.1 **encima**: es el mismo paquete, con la misma clave de firma y un
+   código de versión mayor, y se conserva tu partida (la 1.1.1 lee el guardado de la 1.0.0).
 4. El juego va en horizontal y pantalla completa. Botón **Atrás** = pausa (o cerrar el menú abierto); dos veces
    seguidas = salir. La partida se guarda sola; se pierde si desinstalas la app.
 
@@ -73,7 +73,7 @@ en Ubuntu/Debian: `sudo apt install aapt apksigner zipalign dalvik-exchange`):
 ```bash
 cd tools
 node export.mjs web
-node build_apk.mjs          # builds/UmbralDeCeniza-1.1.0.apk, firmado con una clave de depuración
+node build_apk.mjs          # builds/UmbralDeCeniza-1.1.1.apk, firmado con una clave de depuración
 node test/apk_check.mjs     # arranca los archivos del APK en Chromium con el mismo origen que la app
 ```
 

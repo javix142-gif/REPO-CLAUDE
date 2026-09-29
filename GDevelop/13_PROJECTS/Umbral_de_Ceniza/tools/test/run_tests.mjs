@@ -621,17 +621,24 @@ await test("10 Doble salto, ataque hacia arriba/diagonal y combo de tres golpes"
   check(h && h.anim === "Guerrero_AttackDiag", "usa la animación de ataque en diagonal", log);
   await g.wait(1000);
 
-  // ---- combo: hold attack, watch the sequence of Combo / damage
-  const seq = [];
+  // ---- combo: hold attack, watch the sequence of Combo / damage. A recorder inside the page notes every frame (the hitbox
+  // lives only 0.1 s, too short to catch reliably by polling from outside).
+  await g.eval((G, S) => {
+    window.__combo = []; const tick = () => { const s = G.getSceneStack().getCurrentScene(); if (s && s.getObjects("Jugador").length) {
+      const J = s.getObjects("Jugador")[0]; const hit = s.getObjects("GolpeJugador").map((o) => [o.getVariables().get("Dano").getAsNumber(), o.getVariables().get("Fuerte").getAsNumber()])[0] || null;
+      window.__combo.push([J.getVariables().get("Combo").getAsNumber(), J.getVariables().get("CdAtk").getAsNumber(), hit]); }
+      if (!window.__comboStop) requestAnimationFrame(tick); };
+    window.__comboStop = false; requestAnimationFrame(tick);
+  });
   await g.page.keyboard.down("j");
-  const t0 = Date.now();
-  let last = 0;
-  while (Date.now() - t0 < 2300) {
-    const c = await varOf("Combo");
-    const cd = await varOf("CdAtk");
-    if (c !== last && cd > 0.2) { const d = await g.eval((G, S) => { const a = S.getObjects("GolpeJugador").map((o) => [o.getVariables().get("Dano").getAsNumber(), o.getVariables().get("Fuerte").getAsNumber()]);
-      return a[0] || null; }); seq.push({ c, d }); last = c; }
-    await g.wait(20);
+  await g.wait(2300);
+  await g.eval(() => { window.__comboStop = true; });
+  const frames = await g.eval(() => window.__combo);
+  const seq = [];
+  let last = 0; let cur = null;
+  for (const [c, cd, hit] of frames) {
+    if (c !== last && cd > 0.2) { cur = { c, d: null }; seq.push(cur); last = c; }
+    if (cur && !cur.d && hit) cur.d = hit; // first hitbox seen after the counter changed (the heavy 3rd one lands 0,1 s later)
   }
   await g.page.keyboard.up("j");
   log.push(`INFO secuencia de combo observada: ${seq.map((x) => `${x.c}${x.d ? ` (daño x${x.d[0]}${x.d[1] ? ", fuerte" : ""})` : ""}`).join(" → ")}`);
@@ -1369,6 +1376,73 @@ await test("25 Partida guardada por la versión 1.0.0: carga y usa lo nuevo con 
   const usadas0 = await g.v("Stats.Habilidades");
   await g.tap("k"); await g.wait(600);
   check((await g.v("Stats.Habilidades")) === usadas0 + 1, "la habilidad 1 de la Maga se lanza con normalidad", log);
+});
+
+await test("26 Combo: tres animaciones distintas por clase, el 3.º sin texto y se reinicia si tardas", async (g, log) => {
+  for (const [i, cls] of ["Guerrero", "Maga", "Arquera"].entries()) {
+    if (i > 0) {
+      await g.page.reload();
+      await g.page.waitForFunction(() => window.__game && window.__game.getSceneStack().getCurrentScene(), null, { timeout: 60000 });
+    }
+    await newGame(g, cls);
+    await enterDungeon(g, 1);
+    await g.setPos("Jugador", 250, 570); await g.wait(400);
+    await facingRight(g);
+    const texts = new Set(); const fxs = new Set(); const anims = []; let shots = 0;
+    const sampler = (async () => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < 2400) {
+        const s = await g.eval((G, S) => ({ a: S.getObjects("Jugador")[0].getAnimationName(), t: S.getObjects("TextoDano").map((o) => o.getText()),
+          f: S.getObjects("Efecto").map((o) => o.getAnimationName()) }));
+        anims.push(s.a); s.t.forEach((x) => texts.add(x)); s.f.forEach((x) => fxs.add(x));
+        if (cls === "Guerrero" && /_Attack[23]$/.test(s.a) && shots < 2 && !texts.has(`shot${s.a}`)) { texts.add(`shot${s.a}`); shots++; await shot(g, `61_combo_${s.a.endsWith("2") ? "2" : "3"}_${cls.toLowerCase()}.png`); }
+        await g.wait(25);
+      }
+    })();
+    // three quick attacks: presses 0,55 s apart (inside the combo window)
+    await g.hold("j", 80); await g.wait(470); await g.hold("j", 80); await g.wait(470); await g.hold("j", 80);
+    await sampler;
+    const seq = anims.filter((a) => new RegExp(`^${cls}_Attack\\d?$`).test(a)).filter((a, k, all) => k === 0 || a !== all[k - 1]);
+    check(JSON.stringify(seq) === JSON.stringify([`${cls}_Attack`, `${cls}_Attack2`, `${cls}_Attack3`]), `${cls}: los tres golpes usan tres animaciones distintas (${seq.join(" → ")})`, log);
+    check(texts.has("Combo x2") && ![...texts].some((x) => /GOLPE FINAL/i.test(x)), `${cls}: el 2.º golpe muestra "Combo x2" y el 3.º ya no dice ningún texto`, log);
+    check(fxs.has("Impacto"), `${cls}: el golpe fuerte lanza sus partículas de impacto`, log);
+    // too slow: the chain restarts at hit 1
+    const combo = () => g.eval((G, S) => S.getObjects("Jugador")[0].getVariables().get("Combo").getAsNumber());
+    await g.wait(1500);
+    await g.hold("j", 80); await g.wait(150);
+    check((await combo()) === 1, `${cls}: si pasa demasiado tiempo el combo vuelve al golpe 1`, log);
+    await g.wait(1300);
+    await g.hold("j", 80); await g.wait(150);
+    check((await combo()) === 1, `${cls}: un segundo ataque tardío tampoco enlaza (sigue en el golpe 1)`, log);
+  }
+});
+
+await test("27 Enemigos golpeados: se recuperan del golpe y vuelven a actuar", async (g, log) => {
+  await newGame(g, "Guerrero");
+  await g.setV("Save.Refuerzo", 30, true); await g.setV("RecalcStats", 1); await g.wait(300);
+  await enterDungeon(g, 5, { modo: "mazmorra" });
+  await g.setV("SalaEstado", "limpia");
+  await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()));
+  for (const tipo of ["Esqueleto", "Cultista", "Arquero", "Limo"]) {
+    await g.setPos("Jugador", 250, 570); await g.wait(300);
+    await facingRight(g);
+    await spawnEnemy(g, tipo, tipo === "Esqueleto" ? 400 : 310); // the ranged ones back away, so they start within reach
+    await g.eval((G, S) => { const e = S.getObjects("Enemigo")[0]; e.getVariables().get("HPMax").setNumber(90000); e.getVariables().get("HP").setNumber(90000); e.getVariables().get("Atq").setNumber(1); });
+    const est = () => g.eval((G, S) => S.getObjects("Enemigo")[0].getVariables().get("Estado").getAsString());
+    await g.hold("j", 80);
+    const herido = await waitFor(g, () => window.__game.getSceneStack().getCurrentScene().getObjects("Enemigo")[0].getVariables().get("Estado").getAsString() === "herido", 1500);
+    check(herido, `${tipo}: el golpe lo deja herido un momento`, log);
+    const libre = await waitFor(g, () => window.__game.getSceneStack().getCurrentScene().getObjects("Enemigo")[0].getVariables().get("Estado").getAsString() !== "herido", 1500);
+    check(libre, `${tipo}: se recupera solo en menos de 1,5 s (estado "${await est()}")`, log);
+    if (tipo === "Esqueleto") {
+      const x0 = await g.eval((G, S) => S.getObjects("Enemigo")[0].getX());
+      await g.wait(900);
+      const x1 = await g.eval((G, S) => S.getObjects("Enemigo")[0].getX());
+      check(x1 < x0 - 30, `el esqueleto vuelve a caminar hacia el héroe (${Math.round(x0)} → ${Math.round(x1)})`, log);
+    }
+    await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()));
+    await g.wait(200);
+  }
 });
 
 // ------------------------------------------------------------------ report

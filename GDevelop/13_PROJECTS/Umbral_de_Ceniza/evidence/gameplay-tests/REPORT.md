@@ -1,8 +1,8 @@
-# Gameplay tests — 2026-09-29T15:35:40.184Z
+# Gameplay tests — 2026-09-29T19:12:30.794Z
 
 Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headless (Playwright)
 
-**28/28 PASS**
+**30/30 PASS**
 
 ## ✅ 01 flujo título → clase → pueblo → tiendas → portal (28s)
 
@@ -10,7 +10,7 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS la clase elegida se guarda en Save.Clase
 - PASS vida inicial completa (160/160)
 - PASS animación de reposo por clase (Guerrero_Idle)
-- PASS el jugador se desplaza a la derecha (480 → 611)
+- PASS el jugador se desplaza a la derecha (480 → 607)
 - PASS el maniquí recibe un golpe por tajo (3 golpes en 1,3 s)
 - PASS aparecen números de daño
 - PASS cerca del alquimista aparece la interacción
@@ -29,20 +29,20 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS Continuar cierra la página y la etapa no vuelve a mostrarla
 - PASS no JavaScript errors in the page ()
 
-## ✅ 02 Guerrero completa la etapa 1 (bot): salas, puertas, jefe, botín, victoria, guardado (112s)
+## ✅ 02 Guerrero completa la etapa 1 (bot): salas, puertas, jefe, botín, victoria, guardado (109s)
 
 - INFO t=0s sala 1 (nivel 1)
 - INFO t=10s sala 2 (nivel 1)
-- INFO t=31s sala 3 (nivel 2)
-- INFO t=50s sala 4 (nivel 3)
-- INFO t=68s sala 5 (nivel 3)
+- INFO t=30s sala 3 (nivel 2)
+- INFO t=52s sala 4 (nivel 2)
+- INFO t=70s sala 5 (nivel 3)
 - PASS la etapa termina con el menú de victoria (menú="victoria", estado=libre)
 - PASS enemigos derrotados: 27
 - PASS se desbloquea la etapa 2 (Save.EtapaMax = 2)
 - PASS el personaje sube de nivel (nivel 4)
-- PASS se obtiene oro (248)
+- PASS se obtiene oro (196)
 - PASS las 4 puertas de sala se abrieron
-- PASS el botín recogido se equipa (1 objetos; bonus de equipo 48)
+- PASS el botín recogido se equipa (4 objetos; bonus de equipo 60)
 - PASS al volver, el jugador aparece junto al portal
 - PASS la flecha derecha del portal apunta a la derecha
 - PASS con la etapa 2 desbloqueada, la flecha selecciona la etapa 2
@@ -76,7 +76,7 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 
 ## ✅ 05 Controles táctiles multitouch (joystick + botones a la vez) (14s)
 
-- PASS arrastrar el joystick a la derecha mueve al jugador (220 → 393)
+- PASS arrastrar el joystick a la derecha mueve al jugador (220 → 406)
 - PASS con el joystick pulsado, un segundo dedo en ATACAR ataca (estado="ataque")
 - PASS el botón de habilidad 1 lanza Torbellino y muestra el enfriamiento (cd 4.5 s, máscara 14/16)
 - PASS el botón de salto hace saltar (600 → 498)
@@ -96,7 +96,7 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 
 - PASS aparece la barra de vida del jefe
 - INFO t=0s sala 5 (nivel 1)
-- PASS el jefe usa sus ataques (mover, golpe, carga, tajo, invocar, muerto)
+- PASS el jefe usa sus ataques (mover, golpe, carga, invocar, muerto)
 - PASS derrotar al jefe de capítulo y entrar al portal abre la página final de la historia (menú="final")
 - PASS tras la historia llega la victoria y se desbloquea la etapa 5
 - PASS no JavaScript errors in the page ()
@@ -109,68 +109,67 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS la etapa 6 usa el capítulo Fortaleza Carmesí
 - PASS no JavaScript errors in the page ()
 
-## ✅ 09 Combate automático (AUTO): la Maga completa la etapa 1 sin tocar nada más (103s)
+## ✅ 09 Combate automático (AUTO): la Maga completa la etapa 1 sin tocar nada más (91s)
 
 - PASS AUTO empieza desactivado
 - PASS tocar AUTO lo activa (botón dorado)
-- INFO t=0s sala 1 (nivel 1, vida 94/100)
-- INFO t=6s sala 2 (nivel 1, vida 94/100)
-- INFO t=22s sala 3 (nivel 2, vida 139/159)
-- INFO t=41s sala 4 (nivel 2, vida 141/159)
-- INFO t=56s sala 5 (nivel 3, vida 156/170)
+- INFO t=0s sala 2 (nivel 2, vida 100/100)
+- INFO t=12s sala 3 (nivel 2, vida 99/147)
+- INFO t=28s sala 4 (nivel 3, vida 145/158)
+- INFO t=42s sala 5 (nivel 3, vida 132/158)
 - PASS AUTO avanza, combate, vence al jefe y entra al portal (menú="victoria")
-- PASS AUTO usa habilidades (23)
+- PASS AUTO usa habilidades (21)
 - PASS la etapa 2 queda desbloqueada
 - PASS no JavaScript errors in the page ()
 
-## ✅ balance Guerrero nivel 9 en etapa 5 (AUTO) (118s)
+## ✅ balance Guerrero nivel 9 en etapa 5 (AUTO) (103s)
 
 - INFO arma +25 ATQ, armadura +80 VIDA, forja/refuerzo 2
 - INFO t=0s sala 1 (nivel 9, vida 414/414)
-- INFO t=9s sala 2 (nivel 9, vida 359/414)
-- INFO t=33s sala 3 (nivel 9, vida 357/431)
-- INFO t=54s sala 4 (nivel 9, vida 306/431)
-- INFO t=78s sala 5 (nivel 10, vida 282/449)
-- INFO resultado: menú="victoria", vida 394/451, pociones restantes 8
+- INFO t=10s sala 2 (nivel 9, vida 375/414)
+- INFO t=31s sala 3 (nivel 9, vida 285/414)
+- INFO t=52s sala 4 (nivel 9, vida 191/414)
+- INFO t=69s sala 5 (nivel 10, vida 309/432)
+- INFO resultado: menú="victoria", vida 386/432, pociones restantes 8
 - PASS el personaje del nivel recomendado supera la etapa 5 (menú="victoria")
 - PASS no JavaScript errors in the page ()
 
-## ✅ balance Maga nivel 15 en etapa 8 (AUTO) (133s)
+## ✅ balance Maga nivel 15 en etapa 8 (AUTO) (165s)
 
 - INFO arma +40 ATQ, armadura +125 VIDA, forja/refuerzo 4
 - INFO t=0s sala 1 (nivel 15, vida 439/439)
-- INFO t=13s sala 2 (nivel 15, vida 317/460)
-- INFO t=37s sala 3 (nivel 15, vida 258/460)
-- INFO t=78s sala 4 (nivel 15, vida 348/460)
-- INFO t=103s sala 5 (nivel 16, vida 440/557)
-- INFO resultado: menú="final", vida 568/568, pociones restantes 9
+- INFO t=19s sala 2 (nivel 15, vida 290/439)
+- INFO t=72s sala 3 (nivel 15, vida 262/439)
+- INFO t=108s sala 4 (nivel 15, vida 264/439)
+- INFO t=131s sala 5 (nivel 16, vida 391/450)
+- INFO resultado: menú="final", vida 461/522, pociones restantes 7
 - PASS el personaje del nivel recomendado supera la etapa 8 (menú="final")
 - PASS no JavaScript errors in the page ()
 
-## ✅ balance Arquera nivel 23 en etapa 12 (AUTO) (163s)
+## ✅ balance Arquera nivel 23 en etapa 12 (AUTO) (155s)
 
 - INFO arma +60 ATQ, armadura +186 VIDA, forja/refuerzo 6
 - INFO t=0s sala 1 (nivel 23, vida 704/704)
-- INFO t=18s sala 2 (nivel 23, vida 704/704)
-- INFO t=64s sala 3 (nivel 23, vida 439/704)
-- INFO t=94s sala 4 (nivel 24, vida 518/718)
-- INFO t=130s sala 5 (nivel 24, vida 369/739)
-- INFO resultado: menú="final", vida 767/767, pociones restantes 8
+- INFO t=19s sala 2 (nivel 23, vida 520/704)
+- INFO t=54s sala 3 (nivel 23, vida 368/704)
+- INFO t=85s sala 4 (nivel 24, vida 570/718)
+- INFO t=114s sala 5 (nivel 24, vida 691/718)
+- INFO resultado: menú="final", vida 732/732, pociones restantes 8
 - PASS el personaje del nivel recomendado supera la etapa 12 (menú="final")
 - PASS no JavaScript errors in the page ()
 
 ## ✅ 10 Doble salto, ataque hacia arriba/diagonal y combo de tres golpes (19s)
 
-- PASS un salto normal despega (altura 98 px)
+- PASS un salto normal despega (altura 108 px)
 - PASS el segundo toque en el aire consume el doble salto (Saltos=1)
-- PASS el doble salto llega más alto (197 px frente a 98 px)
+- PASS el doble salto llega más alto (190 px frente a 108 px)
 - PASS al aterrizar se recupera el doble salto
 - PASS no hay triple salto (un tercer toque no vuelve a impulsar)
 - PASS Arriba + atacar: el golpe aparece sobre la cabeza (dx 0, dy -130, anim Guerrero_AttackUp)
 - PASS usa la animación de ataque hacia arriba
-- PASS Arriba + derecha + atacar: golpe en diagonal (dx 42, dy -106)
+- PASS Arriba + derecha + atacar: golpe en diagonal (dx 45, dy -106)
 - PASS usa la animación de ataque en diagonal
-- INFO secuencia de combo observada: 1 (daño x1) → 2 (daño x1) → 3 (daño x1.9, fuerte) → 1 (daño x1) → 2 (daño x1)
+- INFO secuencia de combo observada: 1 (daño x1) → 2 (daño x1) → 3 (daño x1.9, fuerte) → 1 (daño x1) → 2 (daño x1) → 3
 - PASS atacar seguido recorre el combo 1 → 2 → 3
 - PASS el tercer golpe es potenciado (daño x1,9 y empuje fuerte)
 - PASS los dos primeros golpes son normales
@@ -186,26 +185,26 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 
 ## ✅ 12 Murciélagos: vuelo con inercia, siguen tu salto y pican con aviso (18s)
 
-- PASS el murciélago se mueve sin saltos bruscos (máx 15.6 px por muestra de 50 ms)
-- PASS ondula al volar (altura relativa -223…-180)
+- PASS el murciélago se mueve sin saltos bruscos (máx 8.0 px por muestra de 50 ms)
+- PASS ondula al volar (altura relativa -226…-181)
 - PASS tiene velocidad e inercia (VX/VY)
-- PASS al saltar cerca de él, el murciélago baja a tu altura (dy -234 → -40)
-- PASS el murciélago ataca (estado "atacar" durante 35 muestras)
-- PASS aviso lento y picado rápido (97 → 649 px/s)
-- PASS pica atravesando la posición del héroe y sigue de largo (dist. mín. 15 px)
+- PASS al saltar cerca de él, el murciélago baja a tu altura (dy -222 → 45)
+- PASS el murciélago ataca (estado "atacar" durante 36 muestras)
+- PASS aviso lento y picado rápido (90 → 649 px/s)
+- PASS pica atravesando la posición del héroe y sigue de largo (dist. mín. 10 px)
 - PASS no JavaScript errors in the page ()
 
 ## ✅ 13 Plataformas con propósito: salas generadas, cofres alcanzables, pinchos y cultistas apostados (23s)
 
 - PASS 4 salas generadas distintas cumplen las reglas de alcance (sin problemas; 20 cofres)
-- INFO paso más difícil de la sala 1: hueco 81 px, subida 39 px
+- INFO paso más difícil de la sala 1: hueco 136 px, subida 87 px
 - PASS el paso más difícil se supera con salto + doble salto y se aterriza en la plataforma siguiente
 - PASS al tocar el cofre se abre
-- PASS el cofre da oro (+18) y cuenta en las estadísticas (1)
-- PASS los pinchos hacen daño (102 → 92)
+- PASS el cofre da oro (+36) y cuenta en las estadísticas (1)
+- PASS los pinchos hacen daño (114 → 104)
 - PASS la oleada trae cultistas (3)
-- INFO cultistas apostados: [{"y":496,"x":2434,"x0":2322,"x1":2434,"tipo":"Cultista","est":"atacar","hp":48,"plat":[[2282,496,192]]},{"y":465,"x":2663,"x0":2607,"x1":2719,"tipo":"Cultista","est":"mover","hp":48,"plat":[[2567,465,192]]}]
-- PASS los cultistas apostados (2) se quedan sobre su plataforma
+- INFO cultistas apostados: [{"y":417,"x":2685.457632,"x0":2599,"x1":2807,"tipo":"Cultista","est":"mover","hp":48,"plat":[[2559,417,288]]},{"y":380,"x":3007,"x0":3007,"x1":3215,"tipo":"Cultista","est":"mover","hp":48,"plat":[[2967,380,288]]},{"y":417,"x":2685.457632,"x0":2599,"x1":2807,"tipo":"Cultista","est":"mover","hp":48,"plat":[[2559,417,288]]}]
+- PASS los cultistas apostados (3) se quedan sobre su plataforma
 - PASS no JavaScript errors in the page ()
 
 ## ✅ 14 RPG: reparto de puntos de atributo, habilidades nuevas y menú de habilidades (28s)
@@ -222,7 +221,7 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS Espíritu: +3 maná y menos enfriamiento (maná 52 → 58, cd 5 → 4.94)
 - PASS sin puntos no se puede seguir subiendo (Fuerza 7, puntos 0)
 - PASS reiniciar puntos los devuelve y cuesta oro
-- PASS al llegar al nivel 4 se equipa la habilidad nueva de la ranura 2 (nivel 21)
+- PASS al llegar al nivel 4 se equipa la habilidad nueva de la ranura 2 (nivel 22)
 - PASS el icono de la ranura 2 cambia (Guerrero2)
 - PASS coste y enfriamiento de Salto sísmico (18 maná, 8.0 s)
 - PASS la ficha abre el menú de habilidades
@@ -232,14 +231,14 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS en el nivel 8 se puede equipar el Ciclón de acero (coste 22)
 - PASS no JavaScript errors in the page ()
 
-## ✅ 15 Guerrero: Ciclón de acero, Salto sísmico y Espada giratoria (21s)
+## ✅ 15 Guerrero: Ciclón de acero, Salto sísmico y Espada giratoria (22s)
 
-- INFO tajos simultáneos máx 1; vida enemigos [90000,90000,90000] → [89726,89806,89878]
+- INFO tajos simultáneos máx 1; vida enemigos [90000,90000,90000] → [89716,89825,89855]
 - PASS el Ciclón de acero daña a los 3 enemigos alrededor (3/3)
 - PASS genera golpes giratorios
-- PASS el Salto sísmico eleva al héroe (184 px)
+- PASS el Salto sísmico eleva al héroe (191 px)
 - PASS al caer crea una onda de choque ancha y fuerte (>= 400 px)
-- PASS la onda daña al enemigo cercano (90000 → 89845)
+- PASS la onda daña al enemigo cercano (89855 → 89703)
 - PASS el héroe vuelve a estar libre tras el aterrizaje
 - PASS lanza una espada que perfora
 - PASS la espada atraviesa y daña a los 3 enemigos en línea (3/3)
@@ -250,7 +249,7 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS caen varios rayos a la vez (3)
 - PASS los tres enemigos reciben un rayo (3/3)
 - PASS el Aura ígnea queda activa durante 4.1 s
-- PASS quema al enemigo cercano varias veces (5 golpes en 2,4 s)
+- PASS quema al enemigo cercano varias veces (6 golpes en 2,4 s)
 - PASS el Cataclismo crea una explosión de 1100 px
 - PASS daña a todos los enemigos de la pantalla (4/4)
 - PASS no JavaScript errors in the page ()
@@ -258,19 +257,19 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 ## ✅ 17 Arquera: Flecha explosiva, Ráfaga y Disparo celestial (19s)
 
 - PASS la flecha explota al impactar
-- PASS la explosión daña a los dos enemigos juntos (90000,90000 → 89785,89894)
+- PASS la explosión daña a los dos enemigos juntos (90000,90000 → 89697,89806)
 - PASS la Ráfaga dispara 8 flechas (8 detectadas)
 - PASS y salen hacia arriba cuando se apunta arriba
 - PASS la flecha celestial es enorme y perfora
 - PASS atraviesa a los tres enemigos alineados (4/3)
 - PASS no JavaScript errors in the page ()
 
-## ✅ 18 Enemigos nuevos: arquero, espectro, gólem y limo (se divide en dos) (26s)
+## ✅ 18 Enemigos nuevos: arquero, espectro, gólem y limo (se divide en dos) (27s)
 
 - PASS el arquero esquelético dispara flechas a distancia
 - PASS el espectro lanza orbes
 - PASS el espectro se desvanece para teletransportarse
-- PASS vuela por encima del suelo (altura mínima y=427)
+- PASS vuela por encima del suelo (altura mínima y=428)
 - PASS el gólem lanza una onda de choque por el suelo
 - INFO estado del gólem al atacar: mover
 - PASS un limo grande se divide en dos pequeños (LimoMini, LimoMini)
@@ -285,22 +284,22 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS el élite invoca refuerzos (2 → 4 enemigos)
 - PASS no JavaScript errors in the page ()
 
-## ✅ 20 Jefe del capítulo 2: Reina Carmesí (orbes, lluvia de sangre, teletransporte y refuerzos) (25s)
+## ✅ 20 Jefe del capítulo 2: Reina Carmesí (orbes, lluvia de sangre, teletransporte y refuerzos) (53s)
 
 - PASS el jefe de la etapa 8 es la Reina (Reina, 3735 de vida)
 - PASS la barra muestra su nombre ("REINA CARMESÍ")
 - PASS aparece la barra de vida del jefe
-- PASS lanza orbes de sangre en abanico (estados: mover, invocar, orbes, sangre, desvanecer, corte)
+- PASS lanza orbes de sangre en abanico (estados: mover, invocar, desvanecer, corte, orbes, sangre)
 - PASS invoca la lluvia de sangre (con aviso en el suelo)
 - PASS se desvanece y tajea por la espalda
 - PASS herida, invoca murciélagos
 - PASS no JavaScript errors in the page ()
 
-## ✅ 21 Jefe del capítulo 3: Coloso del Umbral (puñetazo, barrido, cristales y limos) y final de la historia (43s)
+## ✅ 21 Jefe del capítulo 3: Coloso del Umbral (puñetazo, barrido, cristales y limos) y final de la historia (34s)
 
 - PASS el jefe de la etapa 12 es el Coloso (Coloso, 7140 de vida)
 - PASS la barra muestra su nombre ("COLOSO DEL UMBRAL")
-- PASS puñetazo con ondas de choque (estados: mover, invocar, barrido, rocas, golpe)
+- PASS puñetazo con ondas de choque (estados: mover, invocar, rocas, golpe, barrido)
 - PASS barrido de área
 - PASS lluvia de cristales
 - PASS a media vida invoca limos
@@ -342,13 +341,13 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 ## ✅ 24 Mazmorra: repite una etapa con un élite al azar del capítulo y no avanza la historia (28s)
 
 - PASS la mazmorra no muestra páginas de historia
-- PASS el jefe sale del capítulo 2 (élite nº 6)
-- PASS es un élite (Arquero) con nombre en la barra ("Halcón Sangriento")
-- PASS la mazmorra no muestra páginas de historia
-- PASS el jefe sale del capítulo 2 (élite nº 6)
-- PASS la mazmorra no muestra páginas de historia
 - PASS el jefe sale del capítulo 2 (élite nº 5)
-- INFO élites vistos (índices): 6, 5
+- PASS es un élite (Espectro) con nombre en la barra ("La Dama de los Lamentos")
+- PASS la mazmorra no muestra páginas de historia
+- PASS el jefe sale del capítulo 2 (élite nº 7)
+- PASS la mazmorra no muestra páginas de historia
+- PASS el jefe sale del capítulo 2 (élite nº 7)
+- INFO élites vistos (índices): 5, 7
 - PASS la mazmorra no cambia la etapa máxima de la campaña
 - PASS no JavaScript errors in the page ()
 
@@ -362,4 +361,36 @@ Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headl
 - PASS la ficha del personaje se abre con la partida antigua
 - PASS la campaña sigue en la etapa 4 y muestra su página de historia
 - PASS la habilidad 1 de la Maga se lanza con normalidad
+- PASS no JavaScript errors in the page ()
+
+## ✅ 26 Combo: tres animaciones distintas por clase, el 3.º sin texto y se reinicia si tardas (49s)
+
+- PASS Guerrero: los tres golpes usan tres animaciones distintas (Guerrero_Attack → Guerrero_Attack2 → Guerrero_Attack3)
+- PASS Guerrero: el 2.º golpe muestra "Combo x2" y el 3.º ya no dice ningún texto
+- PASS Guerrero: el golpe fuerte lanza sus partículas de impacto
+- PASS Guerrero: si pasa demasiado tiempo el combo vuelve al golpe 1
+- PASS Guerrero: un segundo ataque tardío tampoco enlaza (sigue en el golpe 1)
+- PASS Maga: los tres golpes usan tres animaciones distintas (Maga_Attack → Maga_Attack2 → Maga_Attack3)
+- PASS Maga: el 2.º golpe muestra "Combo x2" y el 3.º ya no dice ningún texto
+- PASS Maga: el golpe fuerte lanza sus partículas de impacto
+- PASS Maga: si pasa demasiado tiempo el combo vuelve al golpe 1
+- PASS Maga: un segundo ataque tardío tampoco enlaza (sigue en el golpe 1)
+- PASS Arquera: los tres golpes usan tres animaciones distintas (Arquera_Attack → Arquera_Attack2 → Arquera_Attack3)
+- PASS Arquera: el 2.º golpe muestra "Combo x2" y el 3.º ya no dice ningún texto
+- PASS Arquera: el golpe fuerte lanza sus partículas de impacto
+- PASS Arquera: si pasa demasiado tiempo el combo vuelve al golpe 1
+- PASS Arquera: un segundo ataque tardío tampoco enlaza (sigue en el golpe 1)
+- PASS no JavaScript errors in the page ()
+
+## ✅ 27 Enemigos golpeados: se recuperan del golpe y vuelven a actuar (19s)
+
+- PASS Esqueleto: el golpe lo deja herido un momento
+- PASS Esqueleto: se recupera solo en menos de 1,5 s (estado "mover")
+- PASS el esqueleto vuelve a caminar hacia el héroe (420 → 330)
+- PASS Cultista: el golpe lo deja herido un momento
+- PASS Cultista: se recupera solo en menos de 1,5 s (estado "mover")
+- PASS Arquero: el golpe lo deja herido un momento
+- PASS Arquero: se recupera solo en menos de 1,5 s (estado "mover")
+- PASS Limo: el golpe lo deja herido un momento
+- PASS Limo: se recupera solo en menos de 1,5 s (estado "mover")
 - PASS no JavaScript errors in the page ()
