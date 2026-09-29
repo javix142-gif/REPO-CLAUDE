@@ -249,11 +249,12 @@ function ai() {
           OSETS(EN, "Estado", "=", q("atacar")), OSET(EN, "Accion", "=", 0), OSET(EN, "Golpeo", "=", 0), ANIM(EN, q("Murcielago_Attack"))]),
       ]),
       E([tipo("Murcielago"), est("atacar")], [], [
-        COMMENT("Aviso (0,32 s): frena y se eleva apuntando; luego pica atravesando la posición del jugador y sigue de largo."),
+        COMMENT("Aviso (0,32 s): frena y se eleva apuntando; luego pica atravesando la posición del jugador y sigue de largo (el destino está en la recta murciélago → pecho del héroe, 260 px más allá)."),
         E([CMP("Enemigo.Accion", "<", 0.32)], [
           OSET(EN, "VX", "=", "Enemigo.VX * max(0, 1 - 9 * TimeDelta())"), OSET(EN, "VY", "=", -90),
           SETX(EN, "+", "Enemigo.VX * TimeDelta()"), SETY(EN, "+", "Enemigo.VY * TimeDelta()"),
-          OSET(EN, "TX", "=", "Jugador.X() + sign(Jugador.X() - Enemigo.X() + 0.01) * 240"), OSET(EN, "TY", "=", "Jugador.Y() - 40"),
+          OSET(EN, "TX", "=", "Jugador.X() + (Jugador.X() - Enemigo.X()) / max(1, Enemigo.DistanceToPosition(Jugador.X(), Jugador.Y() - 48)) * 260"),
+          OSET(EN, "TY", "=", "(Jugador.Y() - 48) + ((Jugador.Y() - 48) - Enemigo.Y()) / max(1, Enemigo.DistanceToPosition(Jugador.X(), Jugador.Y() - 48)) * 260"),
           A("SetAngle", EN, "=", 0),
         ]),
         E([CMP("Enemigo.Accion", ">=", 0.32)], [

@@ -87533,7 +87533,7 @@
                         "textG": 0,
                         "textR": 0
                       },
-                      "comment": "Aviso (0,32 s): frena y se eleva apuntando; luego pica atravesando la posición del jugador y sigue de largo."
+                      "comment": "Aviso (0,32 s): frena y se eleva apuntando; luego pica atravesando la posición del jugador y sigue de largo (el destino está en la recta murciélago → pecho del héroe, 260 px más allá)."
                     },
                     {
                       "type": "BuiltinCommonInstructions::Standard",
@@ -87600,7 +87600,7 @@
                             "Enemigo",
                             "TX",
                             "=",
-                            "Jugador.X() + sign(Jugador.X() - Enemigo.X() + 0.01) * 240"
+                            "Jugador.X() + (Jugador.X() - Enemigo.X()) / max(1, Enemigo.DistanceToPosition(Jugador.X(), Jugador.Y() - 48)) * 260"
                           ]
                         },
                         {
@@ -87611,7 +87611,7 @@
                             "Enemigo",
                             "TY",
                             "=",
-                            "Jugador.Y() - 40"
+                            "(Jugador.Y() - 48) + ((Jugador.Y() - 48) - Enemigo.Y()) / max(1, Enemigo.DistanceToPosition(Jugador.X(), Jugador.Y() - 48)) * 260"
                           ]
                         },
                         {

@@ -74,8 +74,8 @@ Abiertos: ninguno conocido.
 
 ## Gates
 Ver `GATE_STATUS.json` y `evidence/gameplay-tests/REPORT.md`.
-- Functional: {{FUNCIONAL}}
-- Gameplay: {{GAMEPLAY}}
+- Functional: PASS — 28/28 pruebas de gameplay en una sola ejecución (25 de juego + 3 de balance; `evidence/gameplay-tests/REPORT.md`), más 13/13 comprobaciones de la capa web del APK.
+- Gameplay: PASS — etapa 1 completa con bot y con AUTO; campaña, coliseo y mazmorra recorridos por prueba; balance con AUTO en las etapas 5 (Guerrero nv. 9), 8 (Maga nv. 15) y 12 (Arquera nv. 23) superado. Ojo: con AUTO las clases a distancia terminan las etapas 8 y 12 casi sin daño (posible dificultad baja; sin datos de jugadores reales).
 - Visual: PASS_WITH_WARNINGS — capturas reales 16:9 y 19.5:9; falta captura en dispositivo.
 - Mobile: PASS_WITH_WARNINGS — multitouch simulado (CDP), anclajes y orientación verificados; APK de prueba
   verificado en su capa web (`APK_CHECK.md`, 20:9); falta DEVICE_PASS.

@@ -55,7 +55,9 @@ Criterios:
 - [x] Jefes de capítulo Reina Carmesí y Coloso del Umbral con patrones propios y final de la historia (pruebas 20 y 21).
 - [x] Campaña de 12 etapas en 3 capítulos con tema propio, página de historia, diario y Archivista (prueba 22).
 - [x] Coliseo (rondas sin fin, jefe cada 5 rondas, récord) y modo mazmorra con élite al azar (pruebas 23 y 24).
-- [ ] Balance con AUTO en las etapas 5, 8 y 12 con personajes del nivel recomendado (pruebas `balance`; se marca al ver el resultado).
+- [x] Una partida guardada por la versión 1.0.0 se carga y se puede jugar (prueba 25).
+- [x] Balance con AUTO en las etapas 5, 8 y 12 con personajes del nivel recomendado (pruebas `balance`, 3/3).
+- [x] APK 1.1.0 generado, firmado con la misma clave que el 1.0.0 y verificado en su capa web (`test/apk_check.mjs`, 13/13).
 - [ ] APK 1.1.0 probado en un Android real (pendiente, fuera de este entorno).
 
 Casos borde añadidos: varias unidades apostadas a la vez en la misma sala; plataformas generadas con el tema del
@@ -63,7 +65,7 @@ capítulo; élite invocando refuerzos; jefe muerto durante el coliseo (no abre p
 de la victoria; partida guardada de la versión 1.0.0 (los campos nuevos toman sus valores por defecto).
 
 ## Pruebas
-`tools/test/run_tests.mjs` (24 pruebas) + `balance` (etapas 5, 8 y 12).
+`tools/test/run_tests.mjs` (25 pruebas) + `balance` (etapas 5, 8 y 12; `BALANCE=1` para todo en una ejecución).
 
 ## Evidencia
 `evidence/screenshots/`, `evidence/gameplay-tests/REPORT.md`.

@@ -30,7 +30,7 @@ function check(cond, msg, log) {
 
 async function test(name, fn, opts = {}) {
   if (filter && !name.includes(filter)) return;
-  if (!filter && name.startsWith("balance")) return; // slow: run with `node test/run_tests.mjs balance`
+  if (!filter && !process.env.BALANCE && name.startsWith("balance")) return; // slow: `node test/run_tests.mjs balance`, or BALANCE=1 for everything
   const log = [];
   const t0 = Date.now();
   let g;

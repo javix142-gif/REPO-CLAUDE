@@ -48,6 +48,11 @@ try {
   check((await g.v("Save.Clase", true)) === "Maga", "tocar Comenzar y elegir clase lleva al pueblo");
   const saved = await g.page.evaluate(() => localStorage.getItem("GDJS_UmbralSave"));
   check(!!saved && saved.includes("Maga"), "la partida se guarda en el localStorage del origen de la app");
+  // a new game opens the story prologue: read it and continue (its only button, slot 1)
+  await g.page.waitForFunction(() => window.__game.getSceneStack().getCurrentScene().getVariables().get("Menu").getAsString() === "prologo", null, { timeout: 5000 }).catch(() => {});
+  check((await g.v("Menu")) === "prologo", "un juego nuevo abre el prólogo de la historia");
+  const slot1 = await g.eval((G, S) => S.getObjects("BotonMenu").findIndex((o) => !o.isHidden() && o.getVariables().get("Slot").getAsNumber() === 1));
+  await g.clickObject("BotonMenu", slot1);
   await g.wait(800);
   await g.tap("Escape"); // Back button
   await g.wait(400);
