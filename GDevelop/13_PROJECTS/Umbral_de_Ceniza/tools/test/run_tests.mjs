@@ -815,7 +815,10 @@ await test("13 Plataformas con propósito: salas generadas, cofres alcanzables, 
   if (perched.length) {
     await g.wait(1800);
     const again = await g.eval((G, S) => S.getObjects("Enemigo").filter((e) => e.getVariables().get("Percha").getAsNumber() === 1)
-      .map((e) => ({ y: e.getY(), x: e.getX(), x0: e.getVariables().get("PX0").getAsNumber(), x1: e.getVariables().get("PX1").getAsNumber() })));
+      .map((e) => ({ y: e.getY(), x: e.getX(), x0: e.getVariables().get("PX0").getAsNumber(), x1: e.getVariables().get("PX1").getAsNumber(),
+        tipo: e.getVariables().get("Tipo").getAsString(), est: e.getVariables().get("Estado").getAsString(), hp: e.getVariables().get("HP").getAsNumber(),
+        plat: S.getObjects("Plataforma").filter((p) => p.getX() <= e.getX() + 8 && p.getX() + p.getWidth() >= e.getX() - 8).map((p) => [Math.round(p.getX()), Math.round(p.getY()), Math.round(p.getWidth())]) })));
+    log.push(`INFO cultistas apostados: ${JSON.stringify(again)}`);
     check(again.length > 0 && again.every((c) => c.y < 590 && c.x >= c.x0 - 3 && c.x <= c.x1 + 3), `los cultistas apostados (${again.length}) se quedan sobre su plataforma`, log);
   } else {
     log.push("INFO en esta oleada ningún cultista se apostó (70% de probabilidad cada uno)");
@@ -1330,6 +1333,42 @@ await test("24 Mazmorra: repite una etapa con un élite al azar del capítulo y 
   }
   log.push(`INFO élites vistos (índices): ${[...nombres].join(", ")}`);
   check((await g.v("Save.EtapaMax", true)) === 6, "la mazmorra no cambia la etapa máxima de la campaña", log);
+});
+
+await test("25 Partida guardada por la versión 1.0.0: carga y usa lo nuevo con valores por defecto", async (g, log) => {
+  await g.wait(2500);
+  // exactly the fields the 1.0.0 build stored (no attributes, skill variants, story or arena fields)
+  const old = { Clase: "Maga", Nivel: 7, Exp: 120, Oro: 340, Pociones: 5, ArmaBonus: 22, ArmaRareza: 3, ArmaNombre: "Bastón Raro", ArmaduraBonus: 60,
+    ArmaduraRareza: 2, ArmaduraNombre: "Túnica Mágica", Forja: 2, Refuerzo: 1, EtapaMax: 4, EtapaSel: 3, Version: 1, Auto: 0 };
+  // GDevelop storage: localStorage["GDJS_UmbralSave"] = {"datos":{"str":"<ToJSON(Save)>"}}
+  await g.page.evaluate((json) => localStorage.setItem("GDJS_UmbralSave", JSON.stringify({ datos: { str: json } })), JSON.stringify(old));
+  await g.page.reload();
+  await g.page.waitForFunction(() => window.__game && window.__game.getSceneStack().getCurrentScene(), null, { timeout: 60000 });
+  await g.wait(3000);
+  const label = (await g.objects("TextoBoton")).find((t) => t.vars.Slot === 1).text;
+  check(/CONTINUAR\s+\(Maga nv\. 7\)/.test(label), `el título ofrece "${label}"`, log);
+  await clickMenuSlot(g, 1);
+  await g.waitScene("Pueblo");
+  await g.wait(800);
+  const sv = (n) => g.v(n, true);
+  check((await sv("Save.Nivel")) === 7 && (await sv("Save.EtapaMax")) === 4 && (await sv("Save.Oro")) === 340, "se conservan nivel, etapa máxima y oro", log);
+  check((await sv("Save.Puntos")) === 18, `los puntos de atributo se derivan del nivel (${await sv("Save.Puntos")} = 3 × 6)`, log);
+  check((await sv("Save.Hab1")) === 1 && (await sv("Save.Hab2")) === 1 && (await sv("Save.Hab3")) === 1, "las habilidades equipadas son las iniciales (1, 1, 1)", log);
+  check((await sv("Stat.Cls")) === 1 && (await sv("Stat.Costo1")) > 0 && (await sv("Stat.Cd1Max")) > 0, `las habilidades de la Maga tienen coste y enfriamiento (${await sv("Stat.Costo1")} PM)`, log);
+  await g.tap("c"); await g.wait(400);
+  check((await g.v("Menu")) === "personaje", "la ficha del personaje se abre con la partida antigua", log);
+  await g.tap("Escape"); await g.wait(300);
+  // the campaign continues from stage 4 and reads its story page (never seen in the old save)
+  await g.setV("Save.Refuerzo", 30, true); await g.setV("RecalcStats", 1); await g.wait(300);
+  await enterDungeon(g, 4, { intro: true });
+  await g.wait(600);
+  check((await g.v("Menu")) === "intro" && (await g.v("Etapa")) === 4, "la campaña sigue en la etapa 4 y muestra su página de historia", log);
+  await clickMenuSlot(g, 1); await g.wait(500);
+  await spawnEnemy(g, "Esqueleto", (await player(g)).x + 300);
+  await setMP(g); await facingRight(g);
+  const usadas0 = await g.v("Stats.Habilidades");
+  await g.tap("k"); await g.wait(600);
+  check((await g.v("Stats.Habilidades")) === usadas0 + 1, "la habilidad 1 de la Maga se lanza con normalidad", log);
 });
 
 // ------------------------------------------------------------------ report

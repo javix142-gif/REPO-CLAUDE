@@ -95367,10 +95367,11 @@
                 "textG": 0,
                 "textR": 0
               },
-              "comment": "Enemigos apostados en una plataforma (Percha = 1) no se salen de ella."
+              "comment": "Enemigos apostados en una plataforma (Percha = 1) no se salen de ella. Un 'Para cada': una comparación con Enemigo.X() fuera de él sólo miraría la primera instancia."
             },
             {
-              "type": "BuiltinCommonInstructions::Standard",
+              "type": "BuiltinCommonInstructions::ForEach",
+              "object": "Enemigo",
               "conditions": [
                 {
                   "type": {

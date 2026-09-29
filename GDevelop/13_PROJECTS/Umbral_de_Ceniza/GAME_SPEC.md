@@ -116,7 +116,7 @@ una etapa, al comprar, al subir de nivel y al repartir puntos.
 60 FPS en gama media Android; ≤ 25 enemigos simultáneos; texturas ≤ 2048 px; sin física 2D.
 
 ## MVP
-Las 4 escenas, 3 clases (6 habilidades cada una), 9 tipos de enemigo + élites, 12 jefes, campaña de 12 etapas con
+Las 4 escenas, 3 clases (6 habilidades cada una), 8 tipos de enemigo (más el limo pequeño) + élites, 12 jefes, campaña de 12 etapas con
 historia, mazmorras y coliseo, atributos, botín por rareza, nivel/EXP, tiendas, guardado, controles táctiles + teclado,
 export HTML5 y Cordova/Android.
 

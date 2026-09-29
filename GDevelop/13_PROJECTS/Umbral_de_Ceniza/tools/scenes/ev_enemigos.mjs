@@ -424,8 +424,8 @@ function ai() {
         OSET(EN, "Furia", "=", 1), OSET(EN, "CdAtk", "=", "Enemigo.CdAtk * 0.65"), OSET(EN, "Vel", "+", 35), MAXSPEED(EN, PL, "Enemigo.Vel"),
         SOUND("assets/audio/jefe_rugido.wav", 80), ...toast("\"¡\" + BossNombre + \" entra en furia!\"", q("255;120;70"))]),
     ]),
-    COMMENT("Enemigos apostados en una plataforma (Percha = 1) no se salen de ella."),
-    E([OIFN(EN, "Percha", "=", 1), OIFS(EN, "Estado", "!=", q("muerto"))], [], [
+    COMMENT("Enemigos apostados en una plataforma (Percha = 1) no se salen de ella. Un 'Para cada': una comparación con Enemigo.X() fuera de él sólo miraría la primera instancia."),
+    FOREACH(EN, [OIFN(EN, "Percha", "=", 1), OIFS(EN, "Estado", "!=", q("muerto"))], [], [
       E([CMP("Enemigo.X()", "<", "Enemigo.PX0")], [SETX(EN, "=", "Enemigo.PX0"), SPEED(EN, PL, 0)]),
       E([CMP("Enemigo.X()", ">", "Enemigo.PX1")], [SETX(EN, "=", "Enemigo.PX1"), SPEED(EN, PL, 0)]),
     ]),

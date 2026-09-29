@@ -39,8 +39,31 @@ Imposible compilar APK aquí (SDK bloqueado) → export Cordova validado hasta `
 - [x] APK de prueba generado, firmado (v2/v3) y verificado en su capa web (`tools/build_apk.mjs`, `test/apk_check.mjs`).
 - [ ] APK instalado y probado en un Android real (pendiente, fuera de este entorno).
 
+## Ampliación 1.1.0 (petición posterior del usuario)
+Pedido: tercer golpe seguido potenciado; doble salto; uso de las plataformas flotantes; atributos repartibles tipo RPG;
+nuevas actividades, lore, jefes y enemigos distintos; mazmorras mejoradas y un modo campaña/historia además de las
+mazmorras; ataque en diagonal y hacia arriba; murciélagos que siguen tu salto con vuelo más natural; habilidades nuevas
+cada 4–5 niveles.
+
+Criterios:
+- [x] Combo: 3 ataques básicos seguidos → el tercero es potenciado (prueba 10).
+- [x] Doble salto; ataque hacia arriba y en diagonal con teclado y joystick táctil (pruebas 10 y 11).
+- [x] Murciélagos con inercia que bajan a tu altura si saltas cerca y pican con aviso (prueba 12).
+- [x] Salas con plataformas generadas siempre alcanzables, cofres, pinchos y enemigos apostados (prueba 13).
+- [x] Puntos de atributo (3 por nivel), reinicio y menú de habilidades; 9 habilidades nuevas en los niveles 4, 8 y 12 (pruebas 14–17).
+- [x] Enemigos nuevos (Arquero, Espectro, Gólem, Limo que se divide) y élites (pruebas 18 y 19).
+- [x] Jefes de capítulo Reina Carmesí y Coloso del Umbral con patrones propios y final de la historia (pruebas 20 y 21).
+- [x] Campaña de 12 etapas en 3 capítulos con tema propio, página de historia, diario y Archivista (prueba 22).
+- [x] Coliseo (rondas sin fin, jefe cada 5 rondas, récord) y modo mazmorra con élite al azar (pruebas 23 y 24).
+- [ ] Balance con AUTO en las etapas 5, 8 y 12 con personajes del nivel recomendado (pruebas `balance`; se marca al ver el resultado).
+- [ ] APK 1.1.0 probado en un Android real (pendiente, fuera de este entorno).
+
+Casos borde añadidos: varias unidades apostadas a la vez en la misma sala; plataformas generadas con el tema del
+capítulo; élite invocando refuerzos; jefe muerto durante el coliseo (no abre portal); página final de la historia antes
+de la victoria; partida guardada de la versión 1.0.0 (los campos nuevos toman sus valores por defecto).
+
 ## Pruebas
-`tools/test/run_tests.mjs` (9 pruebas) + `balance` (etapas 5 y 10).
+`tools/test/run_tests.mjs` (24 pruebas) + `balance` (etapas 5, 8 y 12).
 
 ## Evidencia
 `evidence/screenshots/`, `evidence/gameplay-tests/REPORT.md`.
