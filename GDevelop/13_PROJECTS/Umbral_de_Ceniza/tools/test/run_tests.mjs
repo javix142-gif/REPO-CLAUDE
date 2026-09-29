@@ -803,7 +803,8 @@ await test("13 Plataformas con propósito: salas generadas, cofres alcanzables, 
   // ---- perched cultists: force waves until one stands on a platform
   await g.setPos("Jugador", 1 * 1800 + 330, 560);
   await g.setV("Sala", 1);
-  await g.setV("PEsq", 0); await g.setV("PMur", 0); await g.setV("PCul", 1);
+  // force a pool of cultists only (Relato.Pool[etapa] is the 20-letter enemy mix of the stage)
+  await g.eval((G, S) => G.getVariables().get("Relato").getChild("Pool").getChildAt(S.getVariables().get("PoolIdx").getAsNumber()).setString("CCCCCCCCCCCCCCCCCCCC"));
   await g.setV("SpawnPend", 1);
   await g.wait(1600);
   await g.setV("SpawnPend", 0);
@@ -817,7 +818,7 @@ await test("13 Plataformas con propósito: salas generadas, cofres alcanzables, 
       .map((e) => ({ y: e.getY(), x: e.getX(), x0: e.getVariables().get("PX0").getAsNumber(), x1: e.getVariables().get("PX1").getAsNumber() })));
     check(again.length > 0 && again.every((c) => c.y < 590 && c.x >= c.x0 - 3 && c.x <= c.x1 + 3), `los cultistas apostados (${again.length}) se quedan sobre su plataforma`, log);
   } else {
-    log.push("INFO en esta oleada ningún cultista se apostó (60% de probabilidad cada uno)");
+    log.push("INFO en esta oleada ningún cultista se apostó (70% de probabilidad cada uno)");
   }
 });
 
@@ -899,6 +900,8 @@ async function classAtLevel(g, cls, hab = [2, 2, 2]) {
   await g.setV("CurarTodo", 1);
   await enterDungeon(g, 1);
   await g.wait(400);
+  // keep the room from starting its own waves (they would mix with the dummies): "limpia" = cleared room
+  await g.setV("SalaEstado", "limpia");
   await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()));
 }
 async function spawnMany(g, tipo, xs, tank = true) {
@@ -949,7 +952,11 @@ await test("15 Guerrero: Ciclón de acero, Salto sísmico y Espada giratoria", a
   await g.wait(600);
   await g.eval((G, S) => S.getObjects("Enemigo").forEach((e) => e.deleteFromScene()));
   // -- Espada giratoria (slot 3): pierces a line of enemies
-  await spawnMany(g, "Esqueleto", [420, 620, 820]);
+  // the slam may have landed the hero on one of the generated floating platforms: back to the ground, left of them
+  await g.setPos("Jugador", 250, 570); await g.wait(500);
+  await facingRight(g);
+  const hx = (await player(g)).x;
+  await spawnMany(g, "Esqueleto", [hx + 160, hx + 360, hx + 560]);
   await refill(g);
   before = await enemyHP(g);
   const proj = watch(g, 900, (G, S) => S.getObjects("ProyectilJugador").map((p) => [p.getVariables().get("Tipo").getAsString(), p.getVariables().get("Perfora").getAsNumber(), p.getX()]));
@@ -958,6 +965,8 @@ await test("15 Guerrero: Ciclón de acero, Salto sísmico y Espada giratoria", a
   await g.wait(300);
   after = await enemyHP(g);
   check(pr.some((l) => l.some((p) => p[0] === "Espada" && p[1] === 1)), "lanza una espada que perfora", log);
+  const ahead = (a) => a.filter((e) => e[0] > hx + 100); // only the three dummies in the line of fire
+  before = ahead(before); after = ahead(after);
   const dd = after.filter((e, i) => before[i] && e[1] < before[i][1]).length;
   check(dd >= 3, `la espada atraviesa y daña a los 3 enemigos en línea (${dd}/3)`, log);
 });

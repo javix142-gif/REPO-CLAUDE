@@ -1,20 +1,18 @@
-# Gameplay tests — 2026-09-29T13:38:58.639Z
+# Gameplay tests — 2026-09-29T13:58:07.717Z
 
 Build: `builds/web` · Motor: GDevelop GDJS 5.6.269 · Navegador: Chromium headless (Playwright)
 
 **1/1 PASS**
 
-## ✅ 23 Coliseo: rondas sin fin, jefe cada 5 rondas, récord guardado y derrota (28s)
+## ✅ 15 Guerrero: Ciclón de acero, Salto sísmico y Espada giratoria (22s)
 
-- PASS el coliseo arranca como modo arena
-- PASS la dificultad base sigue tu nivel (etapa 6)
-- PASS la primera ronda genera enemigos sin abrir puertas
-- PASS superar la ronda da oro (60 → 76)
-- PASS el récord del coliseo sube a la ronda 1
-- PASS el récord del coliseo sube a la ronda 2
-- PASS el récord del coliseo sube a la ronda 3
-- PASS el récord del coliseo sube a la ronda 4
-- PASS la ronda 5 trae un jefe (Bruto, Grom, el Devorador)
-- PASS el récord conserva las rondas superadas (4)
-- PASS 'Otro combate' reinicia el coliseo en la ronda 1
+- INFO tajos simultáneos máx 1; vida enemigos [90000,90000,90000] → [89712,89812,89900]
+- PASS el Ciclón de acero daña a los 3 enemigos alrededor (3/3)
+- PASS genera golpes giratorios
+- PASS el Salto sísmico eleva al héroe (191 px)
+- PASS al caer crea una onda de choque ancha y fuerte (>= 400 px)
+- PASS la onda daña al enemigo cercano (90000 → 89852)
+- PASS el héroe vuelve a estar libre tras el aterrizaje
+- PASS lanza una espada que perfora
+- PASS la espada atraviesa y daña a los 3 enemigos en línea (3/3)
 - PASS no JavaScript errors in the page ()

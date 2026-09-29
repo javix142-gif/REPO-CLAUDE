@@ -70,7 +70,7 @@ function sceneVariables() {
     ...gameplaySceneVariables(),
     vnum("Sala", 0), vstr("SalaEstado", "espera"), vnum("Oleada", 0), vnum("OleadasSala", 1), vnum("EsperaOleada", 0),
     vnum("SpawnPend", 0), vnum("AnchoSala", ANCHO_SALA), vnum("NumSalas", NUM_SALAS), vnum("SalaIni", 0), vnum("JefeVivo", 0),
-    vnum("JefeMuerto", 0), vnum("TJefeMuerto", 0), vnum("PEsq", 0.65), vnum("PMur", 1), vnum("PCul", 1), vnum("Victoria", 0),
+    vnum("JefeMuerto", 0), vnum("TJefeMuerto", 0), vnum("Victoria", 0),
     vnum("TMuerte", 0), vnum("InvocarPend", 0), vnum("InvX", 0), vstr("Capitulo", ""),
     vnum("BossIdx", 1), vstr("BossNombre", ""), vnum("Ronda", 1), vnum("PoolIdx", 1), vnum("FinalVisto", 0), vstr("Info", ""),
     vstruct("Auto", [vnum("Hay", 0), vnum("Dx", 0), vnum("Dy", 0), vnum("Ang", 0), vnum("CofreT", 0)]),

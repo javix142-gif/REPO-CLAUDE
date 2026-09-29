@@ -18,7 +18,7 @@
     "scaleMode": "nearest",
     "sizeOnStartupMode": "adaptWidth",
     "templateSlug": "",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "name": "Umbral de Ceniza",
     "description": "RPG de acción pixel-art 2D para móvil: elige clase, limpia mazmorras sala por sala, consigue botín por rareza y derrota al Caballero de Ceniza.",
     "author": "",
@@ -40927,21 +40927,6 @@
           "name": "TJefeMuerto",
           "type": "number",
           "value": 0
-        },
-        {
-          "name": "PEsq",
-          "type": "number",
-          "value": 0.65
-        },
-        {
-          "name": "PMur",
-          "type": "number",
-          "value": 1
-        },
-        {
-          "name": "PCul",
-          "type": "number",
-          "value": 1
         },
         {
           "name": "Victoria",
